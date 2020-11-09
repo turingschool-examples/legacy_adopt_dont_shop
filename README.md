@@ -25,43 +25,6 @@
 * Deploy an application to Heroku
 
 
-
-
-## Requirements
-
-- must use Rails 5.2.4.3
-- must use PostgreSQL
-- all controller and model code must be tested via feature tests and model tests, respectively
-- must use good GitHub branching, team code reviews via GitHub comments, and use of a project planning tool
-
-## Permitted
-
-- use FactoryBot to speed up your test development
-- use "rails generators" to speed up your app development
-
-## Not Permitted
-
-- do not use JavaScript for pagination or sorting controls
-
-## Permission
-
-- if there is a specific gem you'd like to use in the project, please get permission from your instructors first
-
-## Setup
-This project builds off of the solo project, Adopt Don't Shop. Between you and your partner, choose which one of your repos you'd like to use. If you choose to use Partner A's solo project, Partner A will clone their project into a new directory and push up to a new repo on github. Then, Partner A should add Partner B as a collaborator to that project.
-
-## Suggested Timeline
-- Monday: 1-4
-- Tuesday: 2-7
-- Wednesday: 8-11
-- Thursday: 9-10
-- Friday: 12-15
-- Weekend: 16-25
-- Monday: 26-30
-- Tuesday: 31-33
-- Wednesday: 34-36
-
-
 ## User Stories
 
 ```

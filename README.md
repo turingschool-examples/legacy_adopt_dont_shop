@@ -25,7 +25,10 @@
 * Deploy an application to Heroku
 
 
-## User Stories
+# User Stories
+
+
+## Deploy
 
 ```
 [ ] done
@@ -39,57 +42,9 @@ Localhost is fine for development, but
 the application must be hosted on Heroku.
 ```
 
-## Users
-
-Our Application is going to need to track who is using it. To that end, we are going to create a `users` table. A User should have a name, street address, city, state, and zip.
-
-In a fully functioning web application, users would normally need to log in with a password in order to do anything associated with that user's account. However, in this project we will not be adding any log in functionality.
-
-Also notice that all User stories start with "As a visitor". A "visitor" is someone who is not logged into a user account. Since we are not adding any log in functionality, anyone using our application is considered a "visitor".
-
-```
-User Show Page
-
-As a visitor
-When I visit a User's show page
-Then I see all of that User's information
-Including the User's
-  - Name
-  - Street Address
-  - City
-  - State
-  - Zip
-```
-
-```
-New User
-
-As a visitor
-When I visit '/users/new'
-I see a form to create a new user
-When I fill in the form with my
-  - Name
-  - Street Address
-  - City
-  - State
-  - Zip
-Then I am taken to my new user's show page
-And I see all of the information I entered in the form
-```
-
-```
-New User Name must be Unique
-
-As a visitor
-When I try to create a new user
-And I enter the name of a user that already exists in the database
-Then I am taken back to the new user page
-And I see a flash message that the user name has already been taken
-```
-
 ## Apply for Pet(s)
 
-Visitors to the site will be able to create applications to adopt pets. An application belongs to a user and has many pets. Pets can have many applications.
+Visitors to the site will be able to create applications to adopt pets. An application has many pets. Pets can have many applications.
 
 ```
 [ ] done
@@ -99,8 +54,8 @@ Application Show Page
 As a visitor
 When I visit an applications show page
 Then I can see the following:
-- Name of the User on the Application
-- Full Address of the User on the Application
+- Name of the Applicant
+- Full Address of the Applicant including street address, city, state, and zip code
 - Description of why the applicant says they'd be a good home for this pet(s)
 - names of all pets that this application is for (all names of pets should be links to their show page)
 - The Application's status, either "In Progress", "Pending", "Accepted", or "Rejected"
@@ -115,25 +70,31 @@ As a visitor
 When I visit the pet index page
 Then I see a link to "Start an Application"
 When I click this link
-Then I am taken to the new application page where I see a form to enter my user name
-When I fill in this form with my user name (assuming I have already created a user in the system)
+Then I am taken to the new application page where I see a form
+When I fill in this form with my:
+  - Name
+  - Street Address
+  - City
+  - State
+  - Zip Code
+  - Description of why I would make a good home for these pet(s)
 And I click submit
 Then I am taken to the new application's show page
-And I see my user listed along with all of my address information
+And I see my Name, address information, and description of why I would make a good home
 And I see an indicator that this application is "In Progress"
 ```
 
 ```
 [ ] done
 
-Starting an Application, User not found
+Starting an Application, Form not Completed
 
 As a visitor
 When I visit the new application page
-And I fill in the form with the name of a User that doesn't exist in the database
+And I fail to fill in any of the form fields
 And I click submit
 Then I am taken back to the new applications page
-And I see a message that the user could not be found.
+And I see a message that I must fill in those fields.
 ```
 
 ```
@@ -160,7 +121,7 @@ Add a Pet to an Application
 As a visitor
 When I visit an application's show page
 And I search for a Pet by name
-And I see the names Pets that matches my search
+And I see the names Pets that match my search
 Then next to each Pet's name I see a button to "Adopt this Pet"
 When I click one of these buttons
 Then I am taken back to the application show page
@@ -194,21 +155,6 @@ As a visitor
 When I visit an application's show page
 And I have not added any pets to the application
 Then I do not see a section to submit my application
-```
-
-
-```
-[ ] done
-
-Incomplete application for Pets
-
-As a visitor
-When I visit an application's show page
-And I have added one or more pets to the application
-And I fail to enter why I would make a good owner for these pet(s)
-Then I am taken back to the application's show page
-And I see a flash message that I need to fill out that field before I can submit the application
-And I see my application is still "In Progress"
 ```
 
 ```
@@ -324,7 +270,7 @@ Pets can only have one approved application on them at any time
 As a visitor
 When a pet has an "Approved" application on them
 And when the pet has a "Pending" application on them
-And I visit the admin application show page for pending application
+And I visit the admin application show page for the pending application
 Then next to the pet I do not see a button to approve them
 And instead I see a message that this pet has been approved for adoption
 And I do see a button to reject them
@@ -416,7 +362,7 @@ Then next to each pet's name I see a link to the admin application show page whe
 ```
 
 
-
+# Old Stuff
 
 ## Rubric
 Note: In order to get 4's criteria under 4's must be completed.
@@ -428,6 +374,55 @@ Note: In order to get 4's criteria under 4's must be completed.
 | **2: Passing with Concerns** | Students complete all but 1 - 3 User Stories | Students utilize MVC and POROs to organize code, but cannot defend some of their design decisions. Some routes and actions are not restful. | Ruby is used to process data that could use ActiveRecord instead. | Feature test coverage between 90% and 98%, or model test coverage below 100%, or tests are not meaningfully written or have an unclear objective. |
 | **1: Failing** | Students fail to complete 4 or more User Stories | Students do not effectively organize code using MVC and/or POROs | Ruby is used to process data more often than ActiveRecord | Below 90% coverage for either features or models. |
 
+
+
+## Users
+
+Our Application is going to need to track who is using it. To that end, we are going to create a `users` table. A User should have a name, street address, city, state, and zip.
+
+In a fully functioning web application, users would normally need to log in with a password in order to do anything associated with that user's account. However, in this project we will not be adding any log in functionality.
+
+Also notice that all User stories start with "As a visitor". A "visitor" is someone who is not logged into a user account. Since we are not adding any log in functionality, anyone using our application is considered a "visitor".
+
+```
+User Show Page
+
+As a visitor
+When I visit a User's show page
+Then I see all of that User's information
+Including the User's
+  - Name
+  - Street Address
+  - City
+  - State
+  - Zip
+```
+
+```
+New User
+
+As a visitor
+When I visit '/users/new'
+I see a form to create a new user
+When I fill in the form with my
+  - Name
+  - Street Address
+  - City
+  - State
+  - Zip
+Then I am taken to my new user's show page
+And I see all of the information I entered in the form
+```
+
+```
+New User Name must be Unique
+
+As a visitor
+When I try to create a new user
+And I enter the name of a user that already exists in the database
+Then I am taken back to the new user page
+And I see a flash message that the user name has already been taken
+```
 
 
 

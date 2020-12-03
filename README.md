@@ -21,7 +21,9 @@
 * Use MVC to organize code effectively, limiting the amount of logic included in views and controllers
 * Use partials in views
 * Use `within` and `before :each` blocks in tests
+### TIM COMMENT - Edge case example for them and an added requirement for an edge case test? 
 * Utilize a Project Management Tool
+### TIM COMMENT Do we care about a Project Management Tool on a solo project?
 * Deploy an application to Heroku
 
 
@@ -30,6 +32,7 @@
 
 ## Deploy
 
+### TIM COMMENT - do we want to give them any support on Heroku? Watch this helpful video, or do this deployment in pairs/groups?
 ```
 [ ] done
 
@@ -157,6 +160,8 @@ And I have not added any pets to the application
 Then I do not see a section to submit my application
 ```
 
+### TIM COMMENT This seems like a place we could add a find_or_create_by story for adding pets to an application?  
+
 ```
 [ ] done
 
@@ -278,6 +283,8 @@ And I do see a button to reject them
 
 ## Admin Shelter Views
 
+### TIM COMMENT -- What do we think about pushing them to use some scopes to dry up any repeat clauses? Could we also push them to do a find_or_create_by somewhere?
+
 ```
 Shelters with Pending Applications
 
@@ -342,6 +349,8 @@ And in that section I see the number of pets that have been adopted from that sh
 
 Note: A Pet has been adopted from a shelter if they are part of an approved application
 ```
+
+### TIM COMMENT Could we add a choose your own adventure for pets/applications filtering. Something like: filter by an attribute on a pet table and an attribute on an application with a single query and then display the number/name of results - This would force them to do a joins and then filter by attributes on the temporary join table. I would also be open to a story that explicitly states the conditions.
 
 ```
 Action Required

@@ -278,6 +278,24 @@ And I do see a button to reject them
 
 ## Admin Shelter Views
 
+These stories build out admin views for shelters. They will emphasize SQL and ActiveRecord concepts.
+
+### SQL Only
+
+For the following stories, you should write your queries in raw sql. You can use the [ActiveRecord find_by_sql](https://guides.rubyonrails.org/active_record_querying.html#finding-by-sql) method to execute raw sql queries.
+
+```
+Admin Shelters Index
+
+As a visitor
+When I visit the admin shelter index ('/admin/shelters')
+Then I see all Shelters in the system listed in reverse alphabetical order by name
+```
+
+### ActiveRecord
+
+For the following stories, you should fully leverage ActiveRecord methods in your queries.
+
 ```
 Shelters with Pending Applications
 
@@ -361,389 +379,27 @@ And I look in the "Action Required" section
 Then next to each pet's name I see a link to the admin application show page where I can accept or reject the pet.
 ```
 
-## Checkins
-
-# Old Stuff
-
-## Rubric
-Note: In order to get 4's criteria under 4's must be completed.
-
-| | **Feature Completeness** | **Rails** | **ActiveRecord** | **Testing and Debugging** |
-| --- | --- | --- | --- | --- |
-| **4: Exceptional**  | All User Stories 100% complete including all sad paths and edge cases, and some extension work completed | Students implement strategies not discussed in class to effectively organize code using POROs and adhere to MVC | Highly effective and efficient use of ActiveRecord beyond what we've taught in class. Even `.each` calls will not cause additional database lookups. | Very clear Test Driven Development. Test files are extremely well organized and nested. Students utilize `before :each` blocks. 100% coverage for features and models |
-| **3: Passing** | Students complete all User Stories. No more than 2 Stories fail to correctly implement sad path and edge case functionality. | Students use the principles of MVC and POROs vs. Models to effectively organize code. Students can defend any of their design decisions. Action View helpers are used. Routes and Actions are following RESTful conventions. | ActiveRecord is used in a clear and effective way to read/write data using no Ruby to process data. Project fully leverages AR associations and methods | 100% coverage for models. 98% coverage for features. Tests are well written and meaningful. Scored a 3 or higher in Feature Completeness |
-| **2: Passing with Concerns** | Students complete all but 1 - 3 User Stories | Students utilize MVC and POROs to organize code, but cannot defend some of their design decisions. Some routes and actions are not restful. | Ruby is used to process data that could use ActiveRecord instead. | Feature test coverage between 90% and 98%, or model test coverage below 100%, or tests are not meaningfully written or have an unclear objective. |
-| **1: Failing** | Students fail to complete 4 or more User Stories | Students do not effectively organize code using MVC and/or POROs | Ruby is used to process data more often than ActiveRecord | Below 90% coverage for either features or models. |
-
-
-
-## Users
-
-Our Application is going to need to track who is using it. To that end, we are going to create a `users` table. A User should have a name, street address, city, state, and zip.
-
-In a fully functioning web application, users would normally need to log in with a password in order to do anything associated with that user's account. However, in this project we will not be adding any log in functionality.
-
-Also notice that all User stories start with "As a visitor". A "visitor" is someone who is not logged into a user account. Since we are not adding any log in functionality, anyone using our application is considered a "visitor".
-
-```
-User Show Page
-
-As a visitor
-When I visit a User's show page
-Then I see all of that User's information
-Including the User's
-  - Name
-  - Street Address
-  - City
-  - State
-  - Zip
-```
-
-```
-New User
-
-As a visitor
-When I visit '/users/new'
-I see a form to create a new user
-When I fill in the form with my
-  - Name
-  - Street Address
-  - City
-  - State
-  - Zip
-Then I am taken to my new user's show page
-And I see all of the information I entered in the form
-```
-
-```
-New User Name must be Unique
-
-As a visitor
-When I try to create a new user
-And I enter the name of a user that already exists in the database
-Then I am taken back to the new user page
-And I see a flash message that the user name has already been taken
-```
-
-
-
 ## Extensions
 
-```
-List of Pets with Approved Applications
+### ActiveRecord Extensions
 
-[ ] done
+1. Refactor your code to make use of [ActiveRecord callbacks](https://guides.rubyonrails.org/active_record_callbacks.html)
+1. Refactor your code to make use of [ActiveRecord Scopes](https://guides.rubyonrails.org/active_record_querying.html#scopes)
 
-As a visitor
-After an application has been approved for one or more pets
-When I visit the favorites page
-I see a section on the page that has a list of all of the pets that have an approved application on them
-Each pet's name is a link to their show page
-```
+### Styling
 
-```
-[ ] done
+Implement a CSS Grid Framework to improve your styling, either [CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) or [Bootstrap](https://getbootstrap.com/)
 
-Reviews have a default picture
+## Check In
 
-As a visitor
-When I create a review for a shelter
-And do not fill in the field for an image
-A default image is used and displayed for that review upon submission
-```
+During your Check In, you should be prepared to review your database schema for the many to many relationship, your deployment to heroku, and your GitHub Projects board.
 
-```
-[ ] done
 
-Sortable Reviews
+## Rubric
 
-As a visitor,
-When I visit a shelter's show page to see their reviews,
-I see additional links to sort their reviews in the following ways:
-- sort reviews by highest rating, then by descending date
-- sort reviews by lowest rating, then by ascending date
-```
-
-```
-[ ] done
-
-More Shelter Statistics
-
-As a visitor,
-When I visit the shelter's index page
-I see the top 3 highest rated shelters highlighted on a specific part of the page
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Viewing Applications
-
-```
-[ ] done
-
-Pet Applications Index Page
-
-As a visitor
-When I visit a pets show page
-I see a link to view all applications for this pet
-When I click that link
-I can see a list of all the names of applicants for this pet
-Each applicants name is a link to the application's show page
-```
-
-
-```
-[ ] done
-
-Pet Applications Index Page When No Applications
-
-As a visitor
-When I visit a pet applications index page for a pet that has no applications on them
-I see a message saying that there are no applications for this pet yet
-```
-## Shelter Reviews
-
-Users will be able to share their experiences with a shelter through providing reviews. Users should be able to create a review with a title (Example: "Awesome place!"), a rating (out of 5), and content (Example: "Truly enjoyed our time working with this shelter. Staff was great, and we found our perfect pet!"). A user can also upload one picture (image url address) for their review as well, but this is optional.
-
-A review should belong to a Shelter, and belong to a User.
-
-```
-[ ] done
-
-helter Reviews
-
-As a visitor,
-When I visit a shelter's show page,
-I see a list of reviews for that shelter
-Each review will have:
-- title
-- rating
-- content
-- an optional picture
-- the name of the user that wrote the review
-```
-
-```
-[ ] done
-
-helter Review Creation
-
-As a visitor,
-When I visit a shelter's show page
-I see a link to add a new review for this shelter.
-When I click on this link, I am taken to a new review path
-On this new page, I see a form where I must enter:
-- title
-- rating
-- content
-- the name of a user that exists in the database
-I also see a field where I can enter an optional image (web address)
-When the form is submitted, I should return to that shelter's show page
-and I can see my new review
-```
-
-```
-[ ] done
-
-ser Reviews
-
-As a visitor
-When I visit a User's show page
-Then I see every review this User has written
-Including the review's title, rating, and content
-```
-
-
-```
-[ ] done
-
-dit a Shelter Review
-
-As a visitor,
-When I visit a shelter's show page
-I see a link to edit the shelter review next to each review.
-When I click on this link, I am taken to an edit shelter review path
-On this new page, I see a form that includes that review's pre populated data:
-- title
-- rating
-- content
-- image
-- the name of the user that wrote the review
-I can update any of these fields and submit the form.
-When the form is submitted, I should return to that shelter's show page
-And I can see my updated review
-```
-
-```
-[ ] done
-
-elete a Shelter Review
-
-As a visitor,
-When I visit a shelter's show page,
-Then I see a link next to each shelter review to delete the review.
-When I click this link
-Then I am returned to the shelter's show page
-And I no longer see that shelter review
-```
-
-
-```
-[ ] done
-
-Shelter Review Creation, Incomplete Form
-
-As a visitor,
-When I visit the new review page
-And I fail to enter a title, a rating, and/or content in the new shelter review form, but still try to submit the form
-I see a flash message indicating that I need to fill in a title, rating, and content in order to submit a shelter review
-And I'm returned to the new form to create a new review
-```
-
-```
-[ ] done
-
-Shelter Review Creation, User not Found
-
-As a visitor,
-When I visit the new review page
-And I enter the name of a User that doesn't exist in the database, but still try to submit the form
-I see a flash message indicating that the User couldn't be found
-And I'm returned to the new form to create a new review
-```
-
-```
-[ ] done
-
-Edit a Shelter Review, Incomplete Form
-
-As a visitor,
-When I visit the page to edit a review
-And I fail to enter a title, a rating, and/or content in the edit shelter review form, but still try to submit the form
-I see a flash message indicating that I need to fill in a title, rating, and content in order to edit a shelter review
-And I'm returned to the edit form to edit that review
-```
-
-```
-[ ] done
-
-Edit Shelter Review, User Not Found
-
-As a visitor,
-When I visit the page to edit a review
-And I enter the name of a User that doesn't exist in the database, but still try to submit the form
-I see a flash message indicating that the User couldn't be found
-And I'm returned to the edit form to edit the review
-```
-
-## User Review Statistics
-
-```
-[ ] done
-
-User Review Average Rating
-
-As a visitor
-When I visit a User's show page
-Then I see the average rating of all of their reviews
-```
-
-```
-[ ] done
-
-Highlighted User Reviews
-
-As a visitor
-When I visit a User's show page
-Then I see a section for "Highlighted Reviews"
-And I see the review with the best rating that this user has written
-And I see the review with the worst rating that this user has written
-```
-
-
-## Shelters
-Visitors will have additional constraints when manipulating shelter data in the database.
-
-```
-[ ] done
-
-Shelter Statistics
-
-As a visitor
-When I visit a shelter's show page
-I see statistics for that shelter, including:
-- count of pets that are at that shelter
-- average shelter review rating
-- number of applications on file for that shelter
-```
-
-
-```
-[ ] done
-
-Shelters with Pets that have pending status cannot be Deleted
-
-As a visitor
-If a shelter has approved applications for any of their pets
-I can not delete that shelter
-Either:
-- there is no button visible for me to delete the shelter
-- if I click on the delete link for deleting a shelter, I see a flash message indicating that the shelter can not be deleted.
-```
-
-```
-[ ] done
-
-Shelters can be Deleted as long as all pets do not have approved applications on them
-
-As a visitor
-If a shelter doesn't have any pets with an approved application
-I can delete that shelter
-When that shelter is deleted
-Then all of their pets are deleted as well
-```
-
-```
-[ ] done
-
-Deleting Shelters Deletes its Reviews
-
-As a visitor
-When I delete a shelter
-All reviews associated with that shelter are also deleted
-```
-
-## Pets
-
-```
-[ ] done
-
-Pets with approved applications cannot be deleted
-
-As a visitor
-If a pet has an approved application on them
-I can not delete that pet
-Either:
-- there is no button visible for me to delete the pet
-- if I click on the delete button, I see a flash message indicating that the pet can not be deleted.
-```
+| | **Feature Completeness** | **Rails** | **ActiveRecord** | **Testing and Debugging** | **Project Management** |
+| --- | --- | --- | --- | --- | --- |
+| **4: Exceptional**  | All User Stories 100% complete including all sad paths and edge cases, and some extension work completed | Students implement strategies not discussed in class and can defend their design decisions | At least one ActiveRecord extension is complete | 100% coverage for features and models. Either a gem that enhances testing effectiveness is implemented (orderly, factorybot, faker, etc). Students can point to multiple examples of edge case testing that are not included in the user stories | GitHub Project board is fully up to date in all checkins and the evaluation. Students create custom cards on the project board to track tasks in addition to user stories.
+| **3: Passing** | Students complete all User Stories. No more than 2 Stories fail to correctly implement sad path and edge case functionality. | Students use the principles of MVC to effectively organize code with only 1 - 2 infractions. Action View helpers are used to create forms, links, and buttons. Routes and Actions mostly follow RESTful conventions, and student can defend any non restful routes. At least one partial is created and included in at least two different views. Models include validations. Flash messages are used. | ActiveRecord helpers are utilized whenever possible. ActiveRecord is used in a clear and effective way to read/write data. No Ruby is used to process data. All queries functional and accurately implemented. | 100% coverage for models. 98% coverage for features. Tests are well written and meaningful. Tests utilize within blocks to target specific areas of a page | Student uses GitHub Project to track all user stories. Project board is mostly up to date in all checkins. Project board is fully up to date at the evaluation |
+| **2: Below Expectations** | Students complete all but 1 - 3 User Stories |  Students use the principles of MVC to effectively organize code, but may have more than 2 infractions. Some routes and actions are not restful, and student cannot defend those decisions. Project may fail to include one of the following: a partial that is included in at least two different views, model validations, or use of flash messages. | Ruby is used to process data that could use ActiveRecord instead. Some instances where ActiveRecord helpers are not utilized. Some queries not accurately implemented. | Feature test coverage between 90% and 98%, or model test coverage below 100%, or tests are not meaningfully written or have an unclear objective, or tests do not utilize within blocks | GitHub Project board is not utilized during one of the checkins. Project board is not fully up to date during evaluation.
+| **1: Failing** | Students fail to complete 4 or more User Stories | Project fails to include two out of the following: a partial that is included in at least two different views, model validations, or use of flash messages | Ruby is used to process data more often than ActiveRecord. Many cases where ActiveRecord helpers are not utilized. | Below 90% coverage for either features or models. | GitHub projects is not utilized

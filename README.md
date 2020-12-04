@@ -183,7 +183,7 @@ For example, if I search for "fluff", my search would match pets with names "Flu
 
 ## Approving Applications
 
-Pets on an application can either be accepted or rejected. Once all pets on an application have been marked either accepted or rejected, then the application is no longer "Pending". If all the pets were accepted, then the application is accepted. If one or more pets on the application is rejected, then the entire application is rejected.
+Pets on an application can either be accepted or rejected. Once all pets on an application have been marked either accepted or rejected, then the application is no longer "Pending". If all the pets were accepted, then the application is "Accepted". If one or more pets on the application is rejected, then the entire application is "Rejected".
 
 For this set of stories, we will be making routes that begin with '/admin'. This is to indicate that only a user with special privileges should be able to accept or reject pets on an application. Normally, we would want to make sure that a user is logged into an admin account before being able complete any of this workflow, but we will not add any log in or authorization functionality to this project.
 

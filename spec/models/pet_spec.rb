@@ -6,6 +6,9 @@ describe Pet, type: :model do
   end
 
   describe 'validations' do
+    it {should validate_presence_of :name}
+    it {should validate_presence_of :description}
+    it {should validate_presence_of :sex}
     it 'is created as adoptable by default' do
       shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
       pet = shelter.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')

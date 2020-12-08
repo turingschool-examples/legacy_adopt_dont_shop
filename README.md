@@ -1,8 +1,3 @@
-# TODO
-
-* Add enum for pet status
-* Validations
-
 # Adopt Don't Shop
 
 In this project, students will build upon the code in this repo to create a Pet Adoption Platform. Users will be able to apply to adopt pets, and Admins will be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
@@ -298,6 +293,16 @@ When I visit the admin shelter index ('/admin/shelters')
 Then I see all Shelters in the system listed in reverse alphabetical order by name
 ```
 
+```
+Admin Shelters Show Page
+
+As a visitor
+When I visit an admin shelter show page
+Then I see that shelter's name and full address
+
+NOTE: Your query should only return the necessary data to complete the story
+```
+
 ### ActiveRecord
 
 For the following stories, you should fully leverage ActiveRecord methods in your queries.
@@ -328,14 +333,6 @@ When I visit the admin shelter index ('/admin/shelters')
 Then I see that every shelter name is a link
 When I click one of these links
 Then I am taken to that shelter's admin show page
-```
-
-```
-Admin Shelters Show Page
-
-As a visitor
-When I visit an admin shelter show page
-Then I see that shelter's name and full address
 ```
 
 ```

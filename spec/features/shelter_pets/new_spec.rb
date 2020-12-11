@@ -13,8 +13,8 @@ RSpec.describe 'From shelter pets index page create new pet' do
   it "can create a new pet from Shelter Pet index page" do
 
     visit "/shelters/#{@shelter1.id}/pets"
-
-    click_link "Add Pet"
+    save_and_open_page
+    click_on "Add Pet"
 
     expect(current_path).to eq("/shelters/#{@shelter1.id}/pets/new")
 

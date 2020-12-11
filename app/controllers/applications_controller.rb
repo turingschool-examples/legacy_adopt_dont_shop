@@ -8,11 +8,11 @@ class ApplicationsController < ApplicationController
 
   def create
     @app = Application.new(application_params)
-
+    binding.pry
     if @app.save
       redirect_to application_path(@app.id)
     else
-      flash[:notice] = "Artist not created: Required information missing."
+      flash[:notice] = "Application not created: Required information missing."
       render :new
     end
   end

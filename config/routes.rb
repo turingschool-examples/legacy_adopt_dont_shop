@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   resources :applications, as: 'applications'
 
+  get '/admin', to: "admin#index", as: 'admin'
+
 end

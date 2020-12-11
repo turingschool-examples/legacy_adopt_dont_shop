@@ -60,12 +60,12 @@ RSpec.describe 'Pets index page' do
   end
 
   it 'has a link to start an application' do
-    visit '/pets'
+    visit pets_path
 
     expect(page).to have_link("Start an Application")
 
     click_link("Start an Application")
 
-    expect(page).to have_current_path("/applications/new")
+    expect(page).to have_current_path(applications_new_path)
   end
 end

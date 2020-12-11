@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_014002) do
+ActiveRecord::Schema.define(version: 2020_12_11_032450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "application_pets", id: false, force: :cascade do |t|
-    t.bigint "application_id", null: false
-    t.bigint "pet_id", null: false
+  create_table "application_pets", force: :cascade do |t|
+    t.bigint "pet_id"
+    t.bigint "application_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_application_pets_on_application_id"
+    t.index ["pet_id"], name: "index_application_pets_on_pet_id"
   end
 
   create_table "applications", force: :cascade do |t|
@@ -27,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_014002) do
     t.string "state"
     t.integer "zip_code"
     t.string "description"
-    t.string "application_status"
+    t.string "application_status", default: "In Progress"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -49,5 +53,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_014002) do
     t.integer "zip"
   end
 
+  add_foreign_key "application_pets", "applications"
+  add_foreign_key "application_pets", "pets"
   add_foreign_key "pets", "shelters"
 end

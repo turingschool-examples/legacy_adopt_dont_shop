@@ -7,6 +7,6 @@ class Pet < ApplicationRecord
   validates :approximate_age, numericality: {
               greater_than_or_equal_to: 0
             }
-
   enum sex: [:female, :male]
+  scope :adoptable, -> { where('adoptable = true')}
 end

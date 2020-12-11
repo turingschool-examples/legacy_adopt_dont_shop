@@ -4,7 +4,6 @@
     <title>AdoptDontShopM2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
@@ -14,9 +13,13 @@
         <p><%= link_to "Back to Home", "/" %>
           <%= link_to "Go to Shelters", "/shelters" %>
           <%= link_to 'Go to Pets', "/pets" %>
+
   </head><br>
 
   <body>
+    <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

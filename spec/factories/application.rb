@@ -1,9 +1,11 @@
 FactoryBot.define do
   factory :application do
-    name { "#{Faker::Company.industry} #{["Conference", "Convention","Symposium"].sample}" }
-    organization { Faker::Company.name }
-    size { rand(50..10000) }
-    start_date { Faker::Date.between(from: 1.year.ago, to: 1.year.from_now) }
-    end_date { Faker::Date.between(from: start_date, to: start_date + 10) }
+    applicant_name { Faker::Name.name}
+    applicant_address { Faker::Address.street_address}
+    state { Faker::Address.state}
+    city { Faker::Address.city}
+    zip { Faker::Address.zip}
+    description { Faker::Lorem.paragraph(sentence_count: 5)}
+    status { ['In Progress','Pending','Accepted','Rejected'].sample }
   end
 end

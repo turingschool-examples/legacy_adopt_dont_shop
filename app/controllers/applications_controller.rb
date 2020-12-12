@@ -14,6 +14,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @adoptable_pets = Pet.search(params[:search]) if params[:search]
   end
 
   private

@@ -19,8 +19,8 @@ RSpec.describe "Application Show Page" do
     pet_1 = create(:pet)
     pet_2 = create(:pet)
 
-    ApplicationPet.create(application, pet_1)
-    ApplicationPet.craete(application, pet_2)
+    ApplicationPet.create(application: application, pet: pet_1)
+    ApplicationPet.create(application: application, pet: pet_2)
 
     visit application_path(application)
 
@@ -42,22 +42,21 @@ RSpec.describe "Application Show Page" do
     visit application_path(application)
 
     expect(page).to have_content("Add a Pet to this Application")
-    expect(page).to have_field("Pet Name")
+    expect(page).to have_field(:search)
   end
-
 
   it 'can search for pets by name' do
     application = create(:application)
-    5.times do {create(:pet)}
+    5.times {create(:pet)}
 
     visit application_path(application)
 
     pet = Pet.all.sample
-    fill_in("Pet Name", with: pet.name)
+    fill_in(:search, with: pet.name)
     click_button("Search")
 
-    expect(page).to have_current_path(application_path(application))
-    within("#pet-#{pet.id}")
+    expect(current_path).to eq(application_path(application))
+    within("#pet-#{pet.id}") do
       expect(page).to have_content(pet.name)
       expect(page).to have_button("Adopt this Pet")
     end
@@ -72,28 +71,28 @@ RSpec.describe "Application Show Page" do
 
     visit application_path(application)
 
-    fill_in("Pet Name", with: "fluff")
+    fill_in(:search, with: "fluff")
     click_button("Search")
 
     expect(page).to have_content(fluff.name)
     expect(page).to have_content(fluffy.name)
     expect(page).to have_content(mrfluff.name)
-    expect(page).to have_content(spike.name)
+    expect(page).not_to have_content(spike.name)
   end
 
   it 'can add a pet to an application' do
     application = create(:application)
-    5.times do {create(:pet)}
+    5.times {create(:pet)}
 
     visit application_path(application)
 
     pet = Pet.all.sample
-    fill_in("Pet Name", with: pet.name)
+    fill_in(:search, with: pet.name)
     click_button("Search")
     click_button("Adopt this Pet")
 
     expect(page).to have_current_path(application_path(application))
-    within("#application_pets")
+    within("#application_pets") do
       expect(page).to have_content(pet.name)
     end
   end

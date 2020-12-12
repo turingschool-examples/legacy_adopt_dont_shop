@@ -15,4 +15,9 @@ class ApplicationsController < ApplicationController
     Application.create(application_params)
     redirect_to applications_path
   end
+
+  private
+  def application_params
+    params.permit(:name, :street_address, :city, :state, :zip, :description)
+  end
 end

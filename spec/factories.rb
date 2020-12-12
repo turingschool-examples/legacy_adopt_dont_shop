@@ -1,4 +1,20 @@
 FactoryBot.define do
+  factory :applicant_pet do
+    pet { nil }
+    applicant { nil }
+  end
+
+  factory :playlist_song do
+    id { "" }
+    applicant_id { "" }
+    pet_id { "MyString" }
+    bigint { "MyString" }
+  end
+
+  factory :applicant do
+    
+  end
+
     factory :shelter do
         name {Faker::Restaurant.name}
         address {Faker::Address.street_address}

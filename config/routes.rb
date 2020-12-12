@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   #Applications
   get "/applications", to: "applications#index", as: :applications
   get "/applications/:id", to: "applications#show", as: :applications_show
+  get "applications/new", to: "applications#new", as: :applications_new
 
   #PetApplications
 

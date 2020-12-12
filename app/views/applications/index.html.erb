@@ -1,4 +1,5 @@
 <h1>Applications</h1>
+<%= link_to 'Start an Application', applications_new_path%>
 
 <% @applications.each do |application| %>
 <%= link_to "#{application.name}", applications_show_path(application.id) %> <br>

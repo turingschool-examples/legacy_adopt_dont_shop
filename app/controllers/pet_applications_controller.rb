@@ -1,2 +1,2 @@
-class PetApplications < ActionController::Base
+class PetApplicationsController < ApplicationController
 end

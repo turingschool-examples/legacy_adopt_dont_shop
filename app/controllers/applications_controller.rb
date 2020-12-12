@@ -1,4 +1,4 @@
-class Applications < ActionController::Base
+class ApplicationsController < ApplicationController
     def index
       @applications = Application.all
     end
@@ -9,6 +9,11 @@ class Applications < ActionController::Base
 
     def edit
       @application = Application.find(params[:id])
+    end
+
+    def create
+      Application.create(applications_params)
+      redirect_to '/applications'
     end
 
     def update

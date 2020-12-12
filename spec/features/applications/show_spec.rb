@@ -11,11 +11,10 @@ RSpec.describe 'Application show page' do
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
   end
 
-  it "displays pet w/ corresponding id with attributes and adoptable status" do
+  it "displays applcation w/ corresponding id with attributes and application status" do
 
     visit "/applications/#{@application1.id}"
 
-    expect(page).to have_content(@application1.image)
     expect(page).to have_content("Name: #{@application1.name}")
     expect(page).to have_content("Address: #{@application1.street_address}")
     expect(page).to have_content("#{@application1.city}")

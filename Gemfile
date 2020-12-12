@@ -46,6 +46,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "ffaker"
   gem "orderly"
+  gem "city-state", "~> 0.0.13"
+  gem "validates_zipcode"
 end
 
 group :development do

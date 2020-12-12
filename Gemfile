@@ -44,7 +44,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem "nyan-cat-formatter"
   gem "factory_bot_rails"
-  gem "ffaker"
+  gem "faker"
   gem "orderly"
 end
 

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   resources :pets
+  resources :applications
   resources :shelters do
     resources :pets, controller: "shelter_pets", only: [:index, :new, :create]
   end

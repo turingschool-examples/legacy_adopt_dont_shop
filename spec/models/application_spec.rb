@@ -7,6 +7,11 @@ describe Application, type: :model do
   end
 
   describe "validations" do
+    it {validate_presence_of :name}
+    it {validate_presence_of :street}
+    it {validate_presence_of :city}
+    it {validate_presence_of :state}
+    it {validate_presence_of :zip_code}
   end
 
   describe "instance methods" do

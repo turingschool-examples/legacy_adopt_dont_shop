@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AdoptDontShopM2</title>
+    <title>Pet-Hub</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -17,6 +17,10 @@
   </head><br>
 
   <body>
+    <% flash.each do |type, message| %>
+    <p><%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

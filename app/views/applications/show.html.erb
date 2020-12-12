@@ -1,0 +1,42 @@
+<h1>Application</h1>
+<h2>Status: <%= @application.status %>
+
+<h2>Applicant name: <%= @application.applicant_name %></h2>
+<h3>Applicant address:<br>
+  <%= "#{@application.street_address}" %><br>
+  <%= "#{@application.city}, #{@application.state} #{@application.zip}" %></h3>
+
+<section style='<%='display:none' if @application.status=="In Progress"%>'>
+    <p>Why I would make a good home for this pet or pets:</p>
+    <p><%= @application.description %></p>
+</section>
+
+<section id="application_pets">
+  <h3>Pets</h3>
+  <% @application.pets.each do |pet| %>
+    <%= link_to pet.name, pet_path(pet) %>
+  <% end %>
+</section>
+
+<section id='add_pets' style='<%='display:none' if @application.status != "In Progress"%>'>
+  <h3>Add a Pet to this Application</h3>
+  <%= form_tag application_path(@application), method: :get do %>
+    <%= label_tag "Search for pets by name:" %>
+    <%= text_field_tag :search %>
+    <%= submit_tag "Search", name: nil %>
+  <% end %>
+  <% @adoptable_pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>"><%= link_to pet.name, pet_path(pet) %><br>
+    <%= button_to "Adopt this Pet", application_pets_path(pet: pet) %></section>
+  <% end unless @adoptable_pets == nil %>
+</section>
+
+<% if (@application.status == "In Progress") && (@application.pets != []) %>
+<section id='submit'>
+  <%= form_tag application_path(@application, status: "Pending"), method: :patch do %>
+    <%= label_tag "Describe why you would make a good home for this pet or pets:" %><br>
+    <%= text_area_tag :description %><br>
+    <%= submit_tag "Submit Application" %>
+  <% end %>
+</section>
+<% end %>

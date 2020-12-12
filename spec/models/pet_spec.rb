@@ -3,6 +3,8 @@ require 'rails_helper'
 describe Pet, type: :model do
   describe 'relationships' do
     it { should belong_to :shelter }
+    it { should have_many :application_pets }
+    it { should have_many(:applications).through(:application_pets) }
   end
 
   describe 'validations' do
@@ -37,6 +39,26 @@ describe Pet, type: :model do
       expect(pet.sex).to eq('female')
       expect(pet.female?).to be(true)
       expect(pet.male?).to be(false)
+    end
+  end
+
+  describe 'class methods' do
+    it 'can search for pets by exact pet name' do
+      fluff = create(:pet, name: "FLUFF")
+      fluffy = create(:pet, name: "Fluffy")
+      mrfluff = create(:pet, name: "Mr. Fluff")
+      spike = create(:pet, name: "Spike")
+
+      expect(Pet.search("Fluffy")).to eq([fluffy])
+    end
+
+    it 'can search for pets by partial pet name' do
+      fluff = create(:pet, name: "FLUFF")
+      fluffy = create(:pet, name: "Fluffy")
+      mrfluff = create(:pet, name: "Mr. Fluff")
+      spike = create(:pet, name: "Spike")
+
+      expect(Pet.search("fluff")).to eq([fluff, fluffy, mrfluff])
     end
   end
 end

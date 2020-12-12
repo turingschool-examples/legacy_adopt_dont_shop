@@ -10,6 +10,11 @@ RSpec.describe 'Pets index page' do
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
   end
 
+  it "links to new application page" do
+    visit "/pets"
+    expect(page).to have_link("Start an Application", href: "/applications/new")
+  end
+
   it "displays each pet in the system with attributes" do
 
     visit "/pets"

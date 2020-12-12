@@ -58,4 +58,42 @@ RSpec.describe 'Pets index page' do
     expect(page).to have_content("Calvin")
     expect(page).to_not have_content("Thor")
   end
+  describe 'As a visitor' do
+  before :each do
+    @shelter_1 = create(:shelter)
+    @shelter_2 = create(:shelter)
+    @shelter_3 = create(:shelter)
+    @pet_1 = create(:pet, shelter: @shelter_1)
+    @pet_2 = create(:pet, shelter: @shelter_2)
+    @pet_3 = create(:pet, shelter: @shelter_3)
+    @application_1 = create(:application)
+    @application_2 = create(:application)
+    @application_3 = create(:application)
+  end
+  it 'I see a link to start an application' do
+
+    visit '/pets'
+    expect(page).to have_link("Start Application")
+
+    click_on("Start Application")
+    visit "/applications/new"
+
+    fill_in(:applicant_name, with: "#{@application_1.applicant_name}")
+    fill_in(:applicant_address, with: "#{@application_1.applicant_address}")
+    fill_in(:city, with: "#{@application_1.city}")
+    fill_in(:state, with: "#{@application_1.state}")
+    fill_in(:zip, with: "#{@application_1.zip}")
+
+    click_on("Submit Application")
+
+    visit "/applications/#{@application_1.id}"
+    
+    expect(page).to have_content("#{@application_1.applicant_name}")
+    expect(page).to have_content("#{@application_1.applicant_address}")
+    expect(page).to have_content("#{@application_1.city}")
+    expect(page).to have_content("#{@application_1.state}")
+    expect(page).to have_content("#{@application_1.zip}")
+    expect(page).to have_content("In Progress")
+    end
+  end
 end

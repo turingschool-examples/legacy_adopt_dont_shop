@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Pets index page' do
   before :each do
+    @application1 = Application.create!(name: "Bercy Hamhands", street_address: "1234 hwat bobby Ave", city: "Denver", state: "CO", zip: 80011, description: "Responsible", status:"In Progress")
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
     @shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Longmont", state: "CO", zip: 80012)
     @shelter3 = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
@@ -57,5 +58,31 @@ RSpec.describe 'Pets index page' do
 
     expect(page).to have_content("Calvin")
     expect(page).to_not have_content("Thor")
+  end
+
+  it "has a link to start an application on the new application page" do
+    visit '/pets'
+
+    expect(page).to have_content("Start an Application")
+    click_link "Start an Application"
+
+    fill_in "name", with: "Bercy Hamhands"
+    fill_in "street_address", with: "1234 hwat bobby Ave"
+    fill_in "city", with: "Denver"
+    fill_in "state", with: "CO"
+    fill_in "zip", with: 80011
+    fill_in "description", with: "Responsible"
+
+    click_button "Submit Application"
+
+    expect(current_path).to eq("/applications/#{@application1.id}")
+
+    expect(page).to have_content("Name: #{@application1.name}")
+    expect(page).to have_content("Address: #{@application1.street_address}")
+    expect(page).to have_content("#{@application1.city}")
+    expect(page).to have_content("#{@application1.state}")
+    expect(page).to have_content("#{@application1.zip}")
+    expect(page).to have_content("Description: #{@application1.description}")
+    expect(page).to have_content("Status: #{@application1.status}")
   end
 end

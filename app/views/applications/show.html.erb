@@ -1,0 +1,13 @@
+<h1> Application <%= @application.id %> </h1>
+
+<h3>Details</h3> </h3>
+<p>Name: <%= @application.name %></p>
+<p>Address: <%= @application.address %></p>
+<p>Description: <%= @application.description %></p>
+<p>Status: <%= @application.status %></p>
+<h3>Pets applied for</h3>
+<ul>
+<% @application.pets.each do |pet| %>
+  <li><%= link_to "#{pet.name}", pets_show_path(id: pet.id) %></li>
+<% end %>
+</ul>

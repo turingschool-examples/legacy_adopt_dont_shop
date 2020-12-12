@@ -3,8 +3,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.create!(application_params)
-    redirect_to application_path(application)
+    application = Application.new(application_params)
+    if application.save
+      redirect_to application_path(application)
+    else
+      flash[:notice] = "#{application_params.keys.find {|k| application_params[k]==""}.humanize} is a required field."
+      render :new
+    end
   end
 
   def show

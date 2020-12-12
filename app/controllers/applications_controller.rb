@@ -17,6 +17,12 @@ class ApplicationsController < ApplicationController
     @adoptable_pets = Pet.search(params[:search]) if params[:search]
   end
 
+  def update
+    @application = Application.find(params[:id])
+    @application.update(status: params[:status], description: params[:description])
+    render :show
+  end
+
   private
   def application_params
     params[:application].permit(:applicant_name, :street_address, :city, :state, :zip)

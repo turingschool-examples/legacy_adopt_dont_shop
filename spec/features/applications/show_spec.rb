@@ -212,14 +212,13 @@ RSpec.describe "Application Show Page" do
 
       visit application_path(application)
 
-      expect(page).to have_button("Submit Application")
+      expect(page).not_to have_css('#submit')
 
       pet = create(:pet)
       ApplicationPet.create(application: application, pet: pet)
       refresh
 
-      expect(page).to have_button("Submit Application")
-      expect(page).to have_field(:description)
+      expect(page).to have_css('#submit')
     end
 
     it 'does not allow submitted applications to be submitted' do
@@ -228,13 +227,13 @@ RSpec.describe "Application Show Page" do
       application_3 = create(:application, status: "Rejected")
 
       visit application_path(application_1)
-      expect(page).not_to have_button("Submit Application")
+      expect(page).not_to have_css('#submit')
 
       visit application_path(application_2)
-      expect(page).not_to have_button("Submit Application")
+      expect(page).not_to have_css('#submit')
 
       visit application_path(application_3)
-      expect(page).not_to have_button("Submit Application")
+      expect(page).not_to have_css('#submit')
     end
 
     it 'changes the application status on submit' do
@@ -246,11 +245,10 @@ RSpec.describe "Application Show Page" do
       fill_in(:description, with: "they're good dogs Brent")
       click_button("Submit Application")
 
-      expect(page).to have_current_path(application_path(application))
+      expect(current_path).to eq(application_path(application))
       expect(page).to have_content("Pending")
       expect(page).to have_content(pet.name)
-      expect(page).not_to have_content("Add a Pet to this Application")
-      expect(page).not_to have_button("Adopt this Pet")
+      expect(page).not_to have_css('#add_pets')
     end
   end
 end

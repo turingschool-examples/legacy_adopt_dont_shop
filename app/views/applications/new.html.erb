@@ -1,0 +1,13 @@
+<%= form_tag applications_path, method: :post do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+  <%= label_tag :street %>
+  <%= text_field_tag :street %><br>
+  <%= label_tag :city %>
+  <%= text_field_tag :city %><br>
+  <%= label_tag :state %>
+  <%= select_tag :state, options_for_select(CS.states(:us)) %><br>
+  <%= label_tag :zip_code %>
+  <%= text_field_tag :zip_code %><br>
+  <%= submit_tag "Submit" %>
+<% end %>

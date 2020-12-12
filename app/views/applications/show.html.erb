@@ -1,0 +1,10 @@
+<h1><%= @application.name %></h1>
+<li> Status:   <%= "#{@application.status}"%></li>
+<li> Street:   <%= "#{@application.street}"%></li>
+<li> City:     <%= "#{@application.city}"%></li>
+<li> State:    <%= "#{@application.state}"%></li>
+<li> Zip Code: <%= "#{@application.zip}"%></li>
+<li> Why you're a good fit? <%= "#{@application.description}"%></li>
+<h4> Pets Applied For: <%= link_to "#{@application.pet_names}", "/applications/#{@application.id}/pets"%></h4>
+
+

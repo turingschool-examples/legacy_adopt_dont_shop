@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Application show page' do
   before :each do
+    @application1 = Application.create!(name: "Bercy Hamhands", street_address: "1234 hwat bobby Ave", city: "Denver", state: "CO", zip: 80011, description: "Responsible", status:"In Progress")
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
     @shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Longmont", state: "CO", zip: 80012)
     @shelter3 = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)

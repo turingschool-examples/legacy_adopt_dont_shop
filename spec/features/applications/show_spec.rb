@@ -102,7 +102,7 @@ RSpec.describe "Application Show Page" do
     end
   end
 
-  describe 'pets section' do
+  describe 'application pets section' do
     it 'does not have pets by default' do
       application = create(:application)
 
@@ -249,6 +249,78 @@ RSpec.describe "Application Show Page" do
       expect(page).to have_content("Pending")
       expect(page).to have_content(pet.name)
       expect(page).not_to have_css('#add_pets')
+    end
+  end
+
+  describe 'as an admin' do
+    it 'has a button to approve the application for each pet' do
+      pet_1 = create(:pet)
+      pet_2 = create(:pet)
+      application = create(:application, pets: [pet_1, pet_2], status: "Pending")
+
+      visit application_path(application)
+
+      expect(page).to have_button("Approve")
+    end
+
+    it 'returns to the application show page when a pet is approved' do
+      pet_1 = create(:pet)
+      pet_2 = create(:pet)
+      application = create(:application, pets: [pet_1, pet_2], status: "Pending")
+
+      visit application_path(application)
+      within("#pet-#{pet_1.id}") {click_on "Approve Pet"}
+
+      expect(current_path).to eq(application_path(application))
+    end
+
+    it 'shows if a pet has been approved' do
+      pet_1 = create(:pet)
+      pet_2 = create(:pet)
+      application = create(:application, pets: [pet_1, pet_2], status: "Pending")
+
+      visit application_path(application)
+      within("#pet-#{pet_1.id}") {click_on "Approve Pet"}
+
+      within("#pet-#{pet_1.id}") do
+        expect(page).not_to have_button("Approve Pet")
+        expect(page).to have_content("Approved")
+      end
+    end
+
+    it 'has a button to reject the application for each pet' do
+      pet_1 = create(:pet)
+      pet_2 = create(:pet)
+      application = create(:application, pets: [pet_1, pet_2], status: "Pending")
+
+      visit application_path(application)
+
+      expect(page).to have_button("Reject")
+    end
+
+    it 'returns to the application show page when a pet is rejected' do
+      pet_1 = create(:pet)
+      pet_2 = create(:pet)
+      application = create(:application, pets: [pet_1, pet_2], status: "Pending")
+
+      visit application_path(application)
+      within("#pet-#{pet_1.id}") {click_on "Reject Pet"}
+
+      expect(current_path).to eq(application_path(application))
+    end
+
+    it 'shows if a pet has been rejected' do
+      pet_1 = create(:pet)
+      pet_2 = create(:pet)
+      application = create(:application, pets: [pet_1, pet_2], status: "Pending")
+
+      visit application_path(application)
+      within("#pet-#{pet_1.id}") {click_on "Reject Pet"}
+
+      within("#pet-#{pet_1.id}") do
+        expect(page).not_to have_button("Reject Pet")
+        expect(page).to have_content("Rejected")
+      end
     end
   end
 end

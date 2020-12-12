@@ -13,16 +13,16 @@ describe 'As a visitor' do
       @application_2 = create(:application)
       @application_3 = create(:application)
     end
-    it 'I can see the application and its attributes ' do
-    visit "/applications/#{@application_1.id}"
-    save_and_open_page
-      expect(page).to have_content(@application_1.applicant_name)
-      expect(page).to have_content(@application_1.applicant_address)
-      expect(page).to have_content(@application_1.city)
-      expect(page).to have_content(@application_1.state)
-      expect(page).to have_content(@application_1.zip)
-      expect(page).to have_content(@application_1.description)
-      expect(page).to have_content(@application_1.status)
+      it 'I can see the application and its attributes ' do
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to have_content(@application_1.applicant_name)
+        expect(page).to have_content(@application_1.applicant_address)
+        expect(page).to have_content(@application_1.city)
+        expect(page).to have_content(@application_1.state)
+        expect(page).to have_content(@application_1.zip)
+        expect(page).to have_content(@application_1.description)
+        expect(page).to have_content(@application_1.status)
     end
   end
 end

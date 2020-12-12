@@ -1,4 +1,4 @@
-class ApplicationsController < ActionController::Base
+class ApplicationsController < ApplicationController
 
   def index
     @applications = Application.all

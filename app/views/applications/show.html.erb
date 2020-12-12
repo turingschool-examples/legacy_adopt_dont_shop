@@ -1,0 +1,15 @@
+<%# if @application.pending? %>
+  <%# render "description"  %>
+<%# else %>
+  <%# render "description"  %>
+<%# end %>
+
+
+<%= render "description"  %>
+<h3>Pets applied for:</h3>
+<% @application.pets.each do |pet| %>
+  <%= link_to "#{pet.name}", pet_path(pet) %>
+<% end %>
+
+
+

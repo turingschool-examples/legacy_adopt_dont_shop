@@ -1,0 +1,12 @@
+
+<h2>Application</h2>
+Name: <%= @application.name %><br>
+Street: <%= @application.street %><br>
+City: <%= @application.city %><br>
+State: <%= @application.state %><br>
+Zip-code: <%= @application.zip_code %><br>
+Application Status: <%= @application.application_status %><br>
+<% if local_assigns[:full] %>
+  Description: <%= @application.description %><br> 
+<% end %>
+

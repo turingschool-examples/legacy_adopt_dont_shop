@@ -18,13 +18,15 @@
     <section id="pet-<%= pet.name %>">
       <%= pet.name %>
       <% if pet.status == nil %>
-        <%= form_tag admin_app_path(@app.id), method: :get do %>
-          <%= hidden_field_tag :pet_id, "#{pet.id}" %>
-          <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
-          <%= hidden_field_tag :status, "true" %>
-          <div>
-            <%= submit_tag 'Approve' %>
-          </div>
+        <% if pet.adoptable == true %>
+          <%= form_tag admin_app_path(@app.id), method: :get do %>
+            <%= hidden_field_tag :pet_id, "#{pet.id}" %>
+            <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
+            <%= hidden_field_tag :status, "true" %>
+            <div>
+              <%= submit_tag 'Approve' %>
+            </div>
+          <% end %>
         <% end %>
         <%= form_tag admin_app_path(@app.id), method: :get do %>
           <%= hidden_field_tag :pet_id, "#{pet.id}" %>

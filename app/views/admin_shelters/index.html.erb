@@ -1,0 +1,5 @@
+<ul>
+<% @shelters.each do |shelter| %>
+  <li><%= link_to "#{shelter.name}", admin_shelter_path(shelter.id) %></li>
+<% end %>
+</ul>

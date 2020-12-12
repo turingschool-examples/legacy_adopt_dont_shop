@@ -59,6 +59,8 @@ end
 
 group :production do
   gem "rails_12factor", group: :production
+  gem "city-state", "~> 0.0.13"
+  gem "validates_zipcode"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

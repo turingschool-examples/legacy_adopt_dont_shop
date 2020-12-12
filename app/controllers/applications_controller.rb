@@ -5,7 +5,6 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    # require 'pry'; binding.pry
     @application = Application.find(params[:id])
   end
 

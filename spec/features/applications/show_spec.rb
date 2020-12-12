@@ -23,6 +23,15 @@ describe 'As a visitor' do
         expect(page).to have_content(@application_1.zip)
         expect(page).to have_content(@application_1.description)
         expect(page).to have_content("In Progress")
-    end
+      end
+      xit 'Has a section to add pet in case application not submitted' do
+
+        @application_1.status = nil
+        visit "/applications/#{@application_1.id}"
+        save_and_open_page
+        expect(@application_1.status).to eq(nil)
+        expect(page).to have_content("Add a pet to this application")
+      end
+
   end
 end

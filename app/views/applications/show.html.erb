@@ -4,4 +4,8 @@
 <h3><%= "#{@application.state}" %></h3>
 <h3><%= "#{@application.zip}" %></h3>
 <h3><%= "#{@application.description}" %></h3>
-<h3><%= "In Progress" %></h3>
+<% if @application.status == nil %>
+  <p><%= "Add a pet to this application" %></p>
+  <% else %>
+  <p><%= "In Progress"  %></p>
+<% end %>

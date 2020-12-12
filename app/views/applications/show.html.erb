@@ -3,14 +3,6 @@
   <% if @chosen_ones.count >= 1 && @app.application_status == "In Progress" %>
     <%= link_to "Submit Application", application_path(@app.id, :application_status => "Pending") %>
   <% end %>
-  <% if @selected %>
-    <h3>Want to adopt? </h3>
-    <%= @selected.name %>
-    <%= @selected.approximate_age %>
-    <%= @selected.sex %>
-    <%= @selected.adoptable %>
-    <%= link_to "Adopt this Pet?", application_path(@app.id, :pet_id => @selected.id, :adopt => "true") %>
-  <% end %>
   <% if @app.application_status == "Pending" %>
     <h3>Pets chosen for Adoption </h3>
     <% @chosen_ones.each do |pet| %>
@@ -25,9 +17,21 @@
   <% if @app.application_status == "In Progress" %>
     <h3> Add a Pet to this Application</h3>
     <%= form_tag application_path, method: :get do %>
-      <%= label_tag 'Select a Pet' %>
-      <%= select_tag 'pet_id', options_for_select(@pet = @pets.collect{ |u| [u.name, u.id] }), :onchange => "this.form.submit();" %>
+      <%= label_tag 'Search by Pet Name' %>
+      <%= text_field_tag 'search' %>
+      <div>
+        <%= submit_tag 'search' %>
+      </div>
     <% end %>
   <% end %>
-
+  <% if @selected %>
+    <% @selected.each do |selectee| %>
+      <h3>Want to adopt? </h3>
+      <%= selectee.name %>
+      <%= selectee.approximate_age %>
+      <%= selectee.sex %>
+      <%= selectee.adoptable %>
+      <%= link_to "Adopt this Pet?", application_path(@app.id, :pet_id => selectee.id, :adopt => "true") %>
+    <% end %>
+  <% end %>
 </body>

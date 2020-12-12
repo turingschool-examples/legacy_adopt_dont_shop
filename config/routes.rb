@@ -23,8 +23,9 @@ Rails.application.routes.draw do
     post "/shelters/:shelter_id/pets", to: "shelter_pets#create", as: 'create_shelter_pet'
     get "/shelters/:id/pets/:id", to: "pets#show", as: 'show_pet'
 
+
   resources :applications, as: 'applications'
 
   get '/admin', to: "admin#index", as: 'admin'
-
+  get '/admin/applications/:id', to: "admin_applications#show", as: 'admin_app'
 end

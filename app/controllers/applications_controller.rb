@@ -24,12 +24,15 @@ class ApplicationsController < ApplicationController
     if params[:application_status] == "Pending"
       @app.update({
         application_status: params[:application_status] })
+        binding.pry
     else
-      if params[:pet_id]
-        @selected = Pet.find(params[:pet_id])
+      if params[:search]
+        @selected = Pet.search_pets(params[:search])
+        binding.pry
       end
       if params[:adopt] && params[:pet_id]
-        ApplicationPet.create!(pet: @selected, application: @app)
+        pet = Pet.find(params[:pet_id])
+        ApplicationPet.create!(pet: pet, application: @app)
       end
     end
   end

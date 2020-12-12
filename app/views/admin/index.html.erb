@@ -6,6 +6,6 @@
 
 <% @applications.each do |app| %>
   <section id="application-<%=app.id %>">
-    <h3><%= link_to "Application #{app.id}", application_path(app.id), method: :get %></h3>
+    <h3><%= link_to "Application #{app.id}", admin_app_path(app.id), method: :get %></h3>
   </section>
 <% end %>

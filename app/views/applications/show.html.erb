@@ -1,5 +1,6 @@
 <h2><%= @application.name %></h2>
-<%= @application.street_address %>
-
-<%= @application.state %>
-<%= @application.zip %><br>
+<%= "Address:  #{@application.street_address}" %><br>
+<%= "City: #{@application.city}" %><br>
+<%= "State: #{@application.state}" %><br>
+<%= "Zipcode: #{@application.zip}" %><br>
+<%= "Why I am a good fit:  #{@application.description}" %><br>

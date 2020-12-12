@@ -39,5 +39,18 @@ describe Pet, type: :model do
       expect(pet.female?).to be(true)
       expect(pet.male?).to be(false)
     end
+
+    describe 'class methods' do
+      it '.search_by_pet_name' do
+        shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+        pet1 = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 3, description: 'super cute')
+        pet2 = shelter.pets.create!(sex: :female, name: "Floppy", approximate_age: 3, description: 'super cute')
+        pet3 = shelter.pets.create!(sex: :female, name: "Borko", approximate_age: 3, description: 'super cute')
+
+        expect(Pet.search_pet_by_name("Fl")).to eq([pet1, pet2])
+        expect(Pet.search_pet_by_name("Bork")).to eq([pet3])
+      end
+      
+    end
   end
 end

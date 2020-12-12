@@ -15,8 +15,8 @@ RSpec.describe 'As a user' do
                                         description: "I love animals.",
                                         status: "Pending"
                                         )
-    PetApplication.create!(application: @application1, pet: @pet1)
-    PetApplication.create!(application: @application1, pet: @pet3)
+    PetApplication.create!(application: @application, pet: @pet1)
+    PetApplication.create!(application: @application, pet: @pet3)
 
       # @application2 = Application.create!(name: 'James Malone', 
       #   address: '2630 W 23rd St, Denver, CO 80211',
@@ -36,7 +36,9 @@ RSpec.describe 'As a user' do
       expect(page).to have_content(@application.description)
       expect(page).to have_content(@application.status)
       expect(page).to have_link(@pet1.name, href: "/pets/#{@pet1.id}")
-      expect(page).to have_link(@pet2.name, href: "/pets/#{@pet2.id}")
+      expect(page).to have_link(@pet3.name, href: "/pets/#{@pet3.id}")
+      expect(page).not_to have_link(@pet2.name, href: "/pets/#{@pet2.id}")
+
     end
   end
 end

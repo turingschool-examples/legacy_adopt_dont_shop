@@ -41,4 +41,24 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  describe 'class methods' do
+    it 'can search for pets by exact pet name' do
+      fluff = create(:pet, name: "FLUFF")
+      fluffy = create(:pet, name: "Fluffy")
+      mrfluff = create(:pet, name: "Mr. Fluff")
+      spike = create(:pet, name: "Spike")
+
+      expect(Pet.search("Fluffy")).to eq([fluffy])
+    end
+
+    it 'can search for pets by partial pet name' do
+      fluff = create(:pet, name: "FLUFF")
+      fluffy = create(:pet, name: "Fluffy")
+      mrfluff = create(:pet, name: "Mr. Fluff")
+      spike = create(:pet, name: "Spike")
+
+      expect(Pet.search("fluff")).to eq([fluff, fluffy, mrfluff])
+    end
+  end
 end

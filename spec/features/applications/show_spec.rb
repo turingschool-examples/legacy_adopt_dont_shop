@@ -23,6 +23,13 @@ describe "As a visitor" do
                                       description: "likes barking",
                                       image: "image_2.png")
 
+      @pet4 = @shelter_1.pets.create!(name: "Hedo",
+                                        sex: 0,
+                                        adoptable: true,
+                                        approximate_age: 3,
+                                        description: "likes barking",
+                                        image: "image_2.png")
+
       @pet3 = @shelter_1.pets.create!(name: "Bork",
                                       sex: 0,
                                       adoptable: true,
@@ -42,7 +49,7 @@ describe "As a visitor" do
       ApplicationPet.create!(application: @bobby, pet: @pet2)
     end
 
-    it "I see the attributes of the specific application" do
+    it "I see the attributes of my application" do
       visit application_path(@bobby)
 
       expect(page).to have_content("Name: #{@bobby.name}")
@@ -57,5 +64,25 @@ describe "As a visitor" do
       expect(page).to have_content(@pet2.name)
       expect(page).to have_content(@pet3.name)
     end
+
+    # it 'I see can add a pet to my application' do
+    #   visit application_path(@bobby)
+
+    #   expect(page).to have_content("Add a pet to this application")
+
+    #   fill_in "pet_search" , with: "Hedi"
+
+    #   click_on "Search by Pet Name"
+
+    #   expect(page).to have_link("Hedi - Adopt me")
+
+    #   click_on "Hedi - Adopt me"
+
+    #   expect(current_path).to eq(application_path(@bobby))
+
+    #   within("#pets-applied-for-#{@application.id}") do
+    #     expect(page).to have_content(@pet2.name)
+    #     expect(page).to have_content(@pet4.name)
+    #   end
   end
 end

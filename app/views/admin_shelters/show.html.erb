@@ -5,3 +5,28 @@
     <%= @shelter.state %>
     <%= @shelter.zip %></li>
 </ul>
+
+<table class="pet_stats">
+  <tr>
+    <th colspan="3">Pet Statistics</th>
+  </tr>
+  <tr>
+    <th>Average Pet Age</th>
+    <th>Count Adoptable Pets</th>
+    <th>Count of Adopted Pets</th>
+  </tr>
+  <tr>
+    <td><%= @shelter.avg_pet_age %></td>
+    <td><%= @shelter.count_adoptable %></td>
+    <td><%= @shelter.count_adopted %></td>
+  </tr>
+</table>
+
+<h2>ACTION REQUIRED!</h2>
+<% if @pending_pets
+<% @pending_pets.each do |pet| %>
+  <%= pet.name %>
+  <% pet.application_pets.each do |app_pet| %>
+    <%=  app_pet.application_status %>
+  <% end %>
+<% end %>

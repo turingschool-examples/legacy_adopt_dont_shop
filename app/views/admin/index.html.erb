@@ -1,6 +1,6 @@
 <% @shelters.each do |shelter| %>
   <section id="shelter-<%= shelter.id %>">
-    <%= link_to "#{shelter.name}", show_shelter_path(shelter.id), method: :get %>
+    <%= link_to "#{shelter.name}", admin_shelter_path(shelter.id), method: :get %>
   </section>
 <% end %>
 

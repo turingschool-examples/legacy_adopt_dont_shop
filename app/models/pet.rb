@@ -9,6 +9,12 @@ class Pet < ApplicationRecord
             }
   enum sex: [:female, :male]
   scope :adoptable, -> { where('adoptable = true')}
+  scope :pending_apps, -> { joins(:applications).select('applications.*').where('applications.application_status = ?', "Pending")}
+
+  def pending_applications
+    joins(:applications).select('applications.*').where('applications.application_status = ?', "Pending")
+  end
+
 
   def self.search_pets(find)
     # binding.pry

@@ -19,4 +19,13 @@ class AdminApplicationsController < ApplicationController
       })
     end
   end
+
+  def update
+    @app = Application.find(params[:id])
+    @app.update!({
+      application_status: params[:application_status]
+    })
+
+    redirect_to admin_path
+  end
 end

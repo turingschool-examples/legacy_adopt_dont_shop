@@ -18,10 +18,19 @@ body {
   background-color: #fbf5cd;
    color: #065e09;
    font-family: Arial;
-   font-size: 35px;
-   line-height: 1.5em;
+   font-size: 1.0em;
+   line-height: 1.0em;
    margin: 0em;
-   text-align: center;
+   text-align: left;
+}
+
+.pet_stats, th, td {
+  border: 1px solid black;
+  text-align: left;
+  padding: 0px;
+}
+th {
+  font-weight: 900;
 }
 
 header {
@@ -55,20 +64,4 @@ header {
 
 .row {
   display: flex;
-}
-
-/* Create two equal columns that sits next to each other */
-.column {
-  flex: 50%;
-  padding: 10px;
-}
-
-.container {
-  width: 200px;
-  height: 120px;
-}
-
-.img-container {
-  width: 50%;
-  height: auto;
 }

@@ -1,4 +1,5 @@
 
+<%= @app.application_status %>
 <%= @app.id %>
 <%= @app.name %>
 <%= @app.street %>
@@ -6,28 +7,38 @@
 <%= @app.state %>
 <%= @app.zip_code %>
 <%= @app.description %>
-<% @pets.each do |pet| %>
-  <section id="pet-<%= pet.name %>">
-    <%= pet.name %>
-    <%= form_tag admin_app_path(@app.id), method: :get do %>
-    <%= hidden_field_tag :pet_id, "#{pet.id}" %>
-    <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
-    <%= hidden_field_tag :status, "true" %>
-    <div>
-      <%= submit_tag 'Approve' %>
-    </div>
-    <% end %>
-    <%= form_tag admin_app_path(@app.id), method: :get do %>
-    <%= hidden_field_tag :pet_id, "#{pet.id}" %>
-    <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
-    <%= hidden_field_tag :status, "false" %>
-      <%= submit_tag 'Reject' %>
-    <% end %>
-    <% if pet.status == true %>
-      <p> Approved! </p>
-    <% elsif pet.status == false %>
-      <p> Rejected! </p>
-    <% else %>
-    <% end %>
-  </section
+<% if @pets.all? {|pet| pet.status == true } %>
+  <%= link_to 'Next Steps', admin_app_path(@app.id, :application_status => "Approved!"), method: :get %>
+  <h3> Application for Adoption has been Approved! </h3>
+<% elsif @pets.any? {|pet| pet.status == false } && @pets.all? {|pet| pet.status != nil } %>
+  <%= link_to 'Click Here to Grieve', admin_app_path(@app.id, :application_status => "Rejected"), method: :get %>
+  <h3> We regret to inform you that your home is not good enough for our pets. </h3>
+<% else %>
+  <% @pets.each do |pet| %>
+    <section id="pet-<%= pet.name %>">
+      <%= pet.name %>
+      <% if pet.status == nil %>
+        <%= form_tag admin_app_path(@app.id), method: :get do %>
+          <%= hidden_field_tag :pet_id, "#{pet.id}" %>
+          <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
+          <%= hidden_field_tag :status, "true" %>
+          <div>
+            <%= submit_tag 'Approve' %>
+          </div>
+        <% end %>
+        <%= form_tag admin_app_path(@app.id), method: :get do %>
+          <%= hidden_field_tag :pet_id, "#{pet.id}" %>
+          <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
+          <%= hidden_field_tag :status, "false" %>
+          <div>
+            <%= submit_tag 'Reject' %>
+          <div>
+        <% end %>
+      <% elsif pet.status == true %>
+        <p> Approved! </p>
+      <% elsif pet.status == false %>
+        <p> Rejected! </p>
+      <% end %>
+    </section
+  <% end %>
 <% end %>

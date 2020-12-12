@@ -8,7 +8,6 @@ class ApplicationsController < ApplicationController
 
   def create
     @app = Application.new(application_params)
-    binding.pry
     if @app.save
       redirect_to application_path(@app.id)
     else
@@ -24,11 +23,9 @@ class ApplicationsController < ApplicationController
     if params[:application_status] == "Pending"
       @app.update({
         application_status: params[:application_status] })
-        binding.pry
     else
       if params[:search]
         @selected = Pet.search_pets(params[:search])
-        binding.pry
       end
       if params[:adopt] && params[:pet_id]
         pet = Pet.find(params[:pet_id])
@@ -43,7 +40,6 @@ class ApplicationsController < ApplicationController
 
   def update
     app = Application.find(params[:id])
-    binding.pry
     app.update(application_params)
     redirect_to application_path(app.id)
   end

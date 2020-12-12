@@ -12,9 +12,14 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    Application.create(applications_params)
+    application = Application.new(applications_params)
 
-    redirect_to "/applications"
+    if application.save
+      redirect_to "/applications"
+    else
+      flash[:notice] = "A field cannot be empty"
+      render :new
+    end
   end
 
   private

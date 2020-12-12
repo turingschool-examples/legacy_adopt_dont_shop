@@ -1,5 +1,8 @@
 class Pet < ApplicationRecord
   belongs_to :shelter
+  has_many :applicant_pets
+  has_many :applicants, through: :applicant_pets
+
   validates_presence_of :name, :description, :approximate_age, :sex
   # ^ AR method to validate presence of column
   # note image and adopable is not validated

@@ -10,23 +10,23 @@ RSpec.describe "New Application Page" do
     expect(page).to have_field("application[city]")
     expect(page).to have_field("application[state]")
     expect(page).to have_field("application[zip]")
-    expect(page).to have_button("Save Application")
+    expect(page).to have_button(:submit)
   end
 
   it 'navigates to the new applications show page on submit' do
     visit applications_new_path
 
-    fill_in(:applicant_name)
-    fill_in(:address)
-    fill_in(:city)
-    fill_in(:state)
-    fill_in(:zip)
-    click_button("Submit")
+    fill_in("application[applicant_name]", with: "Dexter Aufderhar")
+    fill_in("application[street_address]", with: "10491 Padberg Pines")
+    fill_in("application[city]", with: "West Warner")
+    fill_in("application[state]", with: "NJ")
+    fill_in("application[zip]", with: "40996")
+    click_button(:submit)
 
     application = Application.first
     expect(page).to have_current_path("/applications/#{application.id}")
     expect(page).to have_content(application.applicant_name)
-    expect(page).to have_content(application.address)
+    expect(page).to have_content(application.street_address)
     expect(page).to have_content(application.city)
     expect(page).to have_content(application.state)
     expect(page).to have_content(application.zip)

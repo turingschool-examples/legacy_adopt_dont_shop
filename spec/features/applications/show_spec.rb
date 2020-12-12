@@ -22,7 +22,7 @@ describe 'As a visitor' do
         expect(page).to have_content(@application_1.state)
         expect(page).to have_content(@application_1.zip)
         expect(page).to have_content(@application_1.description)
-        expect(page).to have_content(@application_1.status)
+        expect(page).to have_content("In Progress")
     end
   end
 end

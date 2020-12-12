@@ -73,12 +73,10 @@ RSpec.describe 'Pets index page' do
   it 'I see a link to start an application' do
 
     visit '/pets'
-
     expect(page).to have_link("Start Application")
 
     click_on("Start Application")
-
-    visit "/#{@applications}/#{@application_1.id}/new"
+    visit "/applications/new"
 
     fill_in(:applicant_name, with: "#{@application_1.applicant_name}")
     fill_in(:applicant_address, with: "#{@application_1.applicant_address}")
@@ -86,16 +84,16 @@ RSpec.describe 'Pets index page' do
     fill_in(:state, with: "#{@application_1.state}")
     fill_in(:zip, with: "#{@application_1.zip}")
 
-    click_on("Submit")
+    click_on("Submit Application")
 
-    visit "/#{@applications}/#{@application_1.id}/show"
-
-    expect(page).to have_content: "#{@application_1.applicant_name}"
-    expect(page).to have_content: "#{@application_1.applicant_address}"
-    expect(page).to have_content: "#{@application_1.city}"
-    expect(page).to have_content: "#{@application_1.state}"
-    expect(page).to have_content: "#{@application_1.zip}"
-    expect(page).to have_content: "#{@application_1.status}='In Progress'"
+    visit "/applications/#{@application_1.id}"
+    
+    expect(page).to have_content("#{@application_1.applicant_name}")
+    expect(page).to have_content("#{@application_1.applicant_address}")
+    expect(page).to have_content("#{@application_1.city}")
+    expect(page).to have_content("#{@application_1.state}")
+    expect(page).to have_content("#{@application_1.zip}")
+    expect(page).to have_content("In Progress")
     end
   end
 end

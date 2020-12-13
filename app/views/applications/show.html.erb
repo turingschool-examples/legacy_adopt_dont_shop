@@ -1,9 +1,16 @@
 <h2><%= @application.name %></h2>
-<%= form_tag pets_path, method: :get do %>
+<%= form_tag applications_show_path, method: :get do %>
   <%= label_tag :search, 'Add a Pet to this Application' %>
   <%= text_field_tag :search, params[:search] %><br>
   <%= submit_tag 'Search' %>
-
+  <% if @selected %>
+    <% @selected.each do |selected| %>
+    <%=  selected.name %> <%= link_to 'Adopt this Pet', applications_show_path(@application.id, :pet_id => selected.id, :adopt => true), method: :get %>
+    <% end %>
+    <%  @application.pets.each do |pet|%>
+    <%=  pet.name%>
+      <% end %>
+  <% end %>
 <% end %>
 <%= "Address:  #{@application.street_address}" %><br>
 <%= "City: #{@application.city}" %><br>

@@ -63,7 +63,7 @@ describe Pet, type: :model do
   end
 
   describe 'instance methods' do
-    it 'is approved for adoption' do
+    it 'changes adoptable to false when approved for adoption' do
       pet = create(:pet)
 
       pet.approve_adoption

@@ -11,7 +11,7 @@ RSpec.describe 'Application show page' do
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
   end
 
-  it "displays applcation w/ corresponding id with attributes and application status" do
+  it "displays application w/ corresponding id with attributes and application status" do
 
     visit "/applications/#{@application1.id}"
 

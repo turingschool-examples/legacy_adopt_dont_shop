@@ -66,23 +66,5 @@ RSpec.describe 'Pets index page' do
     click_link "Start an Application"
 
     expect(current_path).to eq("/applications/new")
-
-    fill_in "name", with: "Bercy Hamhands"
-    fill_in "street_address", with: "1234 hwat bobby Ave"
-    fill_in "city", with: "Denver"
-    fill_in "state", with: "CO"
-    fill_in "zip", with: 80011
-    fill_in "description", with: "Responsible"
-
-    click_button "Submit Application"
-    expect(current_path).to eq("/applications/#{Application.last.id}")
-
-    expect(page).to have_content("Name: #{Application.last.name}")
-    expect(page).to have_content("Address: #{Application.all.last.street_address}")
-    expect(page).to have_content("#{Application.last.city}")
-    expect(page).to have_content("#{Application.last.state}")
-    expect(page).to have_content("#{Application.last.zip}")
-    expect(page).to have_content("Description: #{Application.last.description}")
-    expect(page).to have_content("Status: #{Application.last.status}")
   end
 end

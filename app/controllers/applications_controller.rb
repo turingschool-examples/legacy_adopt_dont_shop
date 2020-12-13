@@ -19,8 +19,8 @@ class ApplicationsController < ApplicationController
       if application.save
         redirect_to "/applications/#{application.id}"
       else
-        flash[:notice] = "Please finish filling out the application before submitting"
-        render :new
+        redirect_to "/applications/new"
+        flash[:notice] = "ERROR: Please finish filling out the application before submitting"
       end
     end
 

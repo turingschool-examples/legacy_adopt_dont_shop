@@ -42,8 +42,7 @@ describe "As a visitor" do
                                    city: "Boulder",
                                    state: "CO",
                                    zip_code: 80302,
-                                   application_status: "In Progress",
-                                   description: "I want these animals")
+                                   application_status: "In Progress")
     end
 
     it 'I see can add a pet to my application' do

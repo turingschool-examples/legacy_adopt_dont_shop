@@ -70,5 +70,19 @@ describe Pet, type: :model do
 
       expect(pet.adoptable).to eq(false)
     end
+
+    it 'is approvable if it has not been approved on any applications' do
+      pet = create(:pet)
+
+      expect(pet.approvable?).to be(true)
+    end
+
+    it 'is not approvable if it has been approved on any applications' do
+      pet = create(:pet)
+      application_pet = create(:application_pet, pet: pet)
+      application_pet.approve
+
+      expect(pet.approvable?).to be(false)
+    end
   end
 end

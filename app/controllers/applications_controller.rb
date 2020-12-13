@@ -12,18 +12,12 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.new(app_params)
-    application.save
-    # require 'pry'; binding.pry
-    redirect_to "/applications/#{application.id}"
-    # if 
-    #   application = pet.applications.create(app_params)
-    #   application[:status] = "In Progress"
-    #   application.save
-    #   redirect_to "/applications/#{application.id}"
-    # else
-    #   flash[:notice] = "Please complete all fields."
-    #   redirect_to "/applications/new"
-    # end
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else 
+      flash[:notice] = "Please Complete All Fields"
+      render :new 
+    end 
   end
 
   private

@@ -30,5 +30,10 @@ RSpec.describe 'As a visitor', type: :feature do
       expect(page).to have_link('Thor')
       expect(page).to have_link('Zeus')
     end
+
+    # User story 4 
+    it 'does something' do
+      visit "/applications/#{@ms_jenkins.id}"
+    end
   end
 end

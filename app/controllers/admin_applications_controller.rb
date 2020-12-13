@@ -1,9 +1,5 @@
 class AdminApplicationsController < ApplicationController
 
-  def index
-    @applications = Application.where('application_status <> ?', "In Progress")
-  end
-
   def show
     @app = Application.find(params[:id])
     @pets = @app.pet_apps(params[:id])
@@ -17,20 +13,12 @@ class AdminApplicationsController < ApplicationController
       @pets.all.update({
         adoptable: false
       })
+      @app.update!({application_status: "Approved"})
     elsif @app.not_all_approved == true
-      binding.pry
       @app.application_pets.update({
         status: false
       })
+      @app.update!({application_status: "Rejected"})
     end
-  end
-
-  def update
-    @app = Application.find(params[:id])
-    @app.update!({
-      application_status: params[:application_status]
-    })
-
-    redirect_to admin_path
   end
 end

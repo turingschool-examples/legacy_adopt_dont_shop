@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'admin_apps show page' do
+RSpec.describe 'admin shelters index' do
   before :each do
     @app = Application.create!(name: "James Fox", street: "2286 Huntington Dr", city: "LHC", state: "AZ", zip_code: 86403, description: "I WANT HIM!")
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
@@ -14,34 +14,21 @@ describe 'admin_apps show page' do
     @app.update({application_status: "Pending"})
   end
 
-  it "displays  the applicant information" do
-    visit "/admin/applications/#{@app.id}"
+  it "can can show shelters in rev order" do
+    visit admin_shelters_path
 
-    expect(page).to have_content("#{@app.name}")
+    expect(page.all('li')[0]).to have_content("#{@shelter2.name}")
+    expect(page.all('li')[1]).to have_content("#{@shelter3.name}")
+    expect(page.all('li')[2]).to have_content("#{@shelter1.name}")
+    expect(page.all('li')[3]).to have_content("#{@shelter1.name}")
+    expect(page.all('li')[4]).to have_content("#{@shelter2.name}")
+  end
 
+  it "can show a shelters stuff" do
+    visit admin_shelter_path(@shelter1.id)
+
+    expect(page).to have_content("#{@shelter1.name}")
     expect(page).to have_content("#{@pet1.name}")
-  end
-
-  it "can update pets on application" do
-    visit "/admin/applications/#{@app.id}"
-    within("#accept-#{@pet1.id}") do
-      click_on "Approve"
-    end
-    expect(page).to have_content("Approved!")
-
-    within("#accept-#{@pet2.id}") do
-      click_on "Approve"
-    end
-
-    expect(page).to have_content("Application for Adoption has been Approved!")
-  end
-
-  it "can reject application" do
-    @pet_app1.update({status: true})
-    @pet_app2.update({status: false})
-    visit "/admin/applications/#{@app.id}"
-
-
-    expect(page).to have_content("We regret to inform you that your home is not good enough for our pets.")
+    expect(page).to have_content(3) #avg_pet_age
   end
 end

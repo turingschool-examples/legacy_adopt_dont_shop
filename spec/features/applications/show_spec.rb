@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'admin_apps show page' do
+RSpec.describe 'admin shelters index' do
   before :each do
     @app = Application.create!(name: "James Fox", street: "2286 Huntington Dr", city: "LHC", state: "AZ", zip_code: 86403, description: "I WANT HIM!")
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
@@ -11,37 +11,26 @@ describe 'admin_apps show page' do
     @pet3 = @shelter1.pets.create!(image:"puppies.jpeg", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
     @pet_app1 = ApplicationPet.create!(pet_id: @pet1.id, application_id: @app.id)
     @pet_app2 = ApplicationPet.create!(pet_id: @pet2.id, application_id: @app.id)
+  end
+
+  it "can can show an app page progress" do
+    visit application_path(@app.id)
+
+    expect(page).to have_content("In Progress")
     @app.update({application_status: "Pending"})
+    visit application_path(@app.id)
+    expect(page).to have_content("Pending")
   end
 
-  it "displays  the applicant information" do
-    visit "/admin/applications/#{@app.id}"
+  it "can search for pets" do
+    visit application_path(@app.id)
 
-    expect(page).to have_content("#{@app.name}")
+    fill_in 'search', with: "Thor"
 
-    expect(page).to have_content("#{@pet1.name}")
-  end
-
-  it "can update pets on application" do
-    visit "/admin/applications/#{@app.id}"
-    within("#accept-#{@pet1.id}") do
-      click_on "Approve"
-    end
-    expect(page).to have_content("Approved!")
-
-    within("#accept-#{@pet2.id}") do
-      click_on "Approve"
-    end
-
-    expect(page).to have_content("Application for Adoption has been Approved!")
-  end
-
-  it "can reject application" do
-    @pet_app1.update({status: true})
-    @pet_app2.update({status: false})
-    visit "/admin/applications/#{@app.id}"
-
-
-    expect(page).to have_content("We regret to inform you that your home is not good enough for our pets.")
+    click_on "search"
+    expect(page).to have_content("Thor")
+    expect(page).to have_link("Adopt this Pet?")
+    click_on "Adopt this Pet?"
+    click_on "Submit Application"
   end
 end

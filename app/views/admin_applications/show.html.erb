@@ -21,7 +21,7 @@
             <%= hidden_field_tag :pet_id, "#{pet.id}" %>
             <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
             <%= hidden_field_tag :status, "true" %>
-            <div>
+            <div id="accept-<%= pet.id %>">
               <%= submit_tag 'Approve' %>
             </div>
           <% end %>
@@ -30,7 +30,7 @@
           <%= hidden_field_tag :pet_id, "#{pet.id}" %>
           <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
           <%= hidden_field_tag :status, "false" %>
-          <div>
+          <div id="deny-<%= pet.id %>">
             <%= submit_tag 'Reject' %>
           <div>
         <% end %>

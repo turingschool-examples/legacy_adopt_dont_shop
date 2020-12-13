@@ -30,21 +30,6 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def edit
-    @app = Application.find(params[:id])
-  end
-
-  def update
-    app = Application.find(params[:id])
-    app.update(application_params)
-    redirect_to application_path(app.id)
-  end
-
-  def destroy
-    Application.destroy(params[:id])
-    redirect_to pets_path
-  end
-
   private
 
   def application_params

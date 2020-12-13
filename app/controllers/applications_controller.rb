@@ -19,10 +19,11 @@ class ApplicationsController < ApplicationController
       render :new
     end
   end
-
-  def adopt
-    @application = Application.find(params[:id])
-    
+  
+  def update
+    application = Application.find(params[:id])
+    application.update(description: params[:description])
+    redirect_to application_path(application.id)
   end
 
   private

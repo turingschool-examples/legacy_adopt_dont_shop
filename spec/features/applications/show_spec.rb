@@ -82,5 +82,15 @@ describe "As a visitor" do
       expect(current_path).to eq(application_path(@bobby))
       expect(current_path).to have_content(@bobby.description)
     end
+
+    it 'if i do not add pets i will not see a submit button' do
+      visit application_path(@bobby)
+
+      expect(page).to have_content("Add a pet to this application")
+
+      expect(page).to_not have_button("Submit")
+    end
+
+    
   end
 end

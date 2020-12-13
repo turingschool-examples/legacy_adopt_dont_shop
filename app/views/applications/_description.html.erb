@@ -6,22 +6,31 @@ City: <%= @application.city %><br>
 State: <%= @application.state %><br>
 Zip-code: <%= @application.zip_code %><br>
 Application Status: <%= @application.application_status %><br>
-<% if local_assigns[:desc] %>
-  Description: <%= @application.description %><br> 
-<% end %>
+
 <% if local_assigns[:in_progress] %>
   <h3>Add a pet to this application</h3>
   <section class="pet_search">
-    <%= form_tag application_path(@application), method: :get  do %>
+    <%= form_tag application_path(@application), method: :get do %>
     <%= label_tag :pet_search %>
     <%= text_field_tag :pet_search %>
-    <%= submit_tag 'Search by Pet Name' %>
+    <%= submit_tag 'Search by Pet Name'%>
   </section>
   <% end %>
   <% if params[:pet_search] %>
     <% @pets.each do |pet| %>
       <%= image_tag "#{pet.image}", :size => '80x80' %>
-      <%= link_to "#{pet.name} - Adopt me", application_pets_path(@application.id, pet_id: pet.id), method: :post %><br>
+      <%= link_to "#{pet.name} - Adopt me", application_pets_path(application_id: @application.id, pet_id: pet.id, status: "Pending"), method: :post %><br>
     <% end %> 
   <% end %>
+<% end %>
+
+<% if local_assigns[:pending] %>
+    Description: <%= @application.description %><br>
+    <%= form_tag application_path(@application), method: :patch do %>
+    <%= label_tag "Why you wish to adopt:" %>
+    <%= text_field_tag :description %><br>
+    <%= submit_tag 'Submit' %> <br> 
+  <% end %>
+<% else %>
+
 <% end %>

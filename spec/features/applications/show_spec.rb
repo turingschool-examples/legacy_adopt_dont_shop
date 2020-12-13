@@ -42,8 +42,7 @@ describe "As a visitor" do
                                         city: "Boulder",
                                         state: "CO",
                                         zip_code: 80302,
-                                        application_status: "In Progress",
-                                        description: "I want these animals")
+                                        application_status: "In Progress")
       
       ApplicationPet.create!(application: @bobby, pet: @pet3)
       ApplicationPet.create!(application: @bobby, pet: @pet2)
@@ -65,24 +64,23 @@ describe "As a visitor" do
       expect(page).to have_content(@pet3.name)
     end
 
-    # it 'I see can add a pet to my application' do
-    #   visit application_path(@bobby)
+    it 'Once I have added a pet to adopt i can submit my application after entering a brief description' do
+      visit application_path(@bobby)
 
-    #   expect(page).to have_content("Add a pet to this application")
+      expect(page).to have_content("Add a pet to this application")
 
-    #   fill_in "pet_search" , with: "Hedi"
+      fill_in "pet_search" , with: "Hedi"
+      click_on "Search by Pet Name"
+      expect(page).to have_link("Hedi - Adopt me")
 
-    #   click_on "Search by Pet Name"
+      click_on "Hedi - Adopt me"
+      expect(current_path).to eq(application_path(@bobby))
 
-    #   expect(page).to have_link("Hedi - Adopt me")
+      fill_in :description, with: "I really want these pets."
+      click_on "Submit"
 
-    #   click_on "Hedi - Adopt me"
-
-    #   expect(current_path).to eq(application_path(@bobby))
-
-    #   within("#pets-applied-for-#{@application.id}") do
-    #     expect(page).to have_content(@pet2.name)
-    #     expect(page).to have_content(@pet4.name)
-    #   end
+      expect(current_path).to eq(application_path(@bobby))
+      expect(current_path).to have_content(@bobby.description)
+    end
   end
 end

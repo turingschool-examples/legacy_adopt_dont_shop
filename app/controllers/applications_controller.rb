@@ -12,8 +12,8 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    Application.create(application_params)
-    redirect_to applications_path
+    application = Application.create(application_params)
+    redirect_to applications_show_path(application.id)
   end
 
   private

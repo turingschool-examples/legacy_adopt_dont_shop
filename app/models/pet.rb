@@ -16,5 +16,6 @@ class Pet < ApplicationRecord
 
   def approve_adoption
     self[:adoptable] = false
+    save
   end
 end

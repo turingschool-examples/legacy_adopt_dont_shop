@@ -401,6 +401,20 @@ RSpec.describe "Application Show Page" do
 
         expect(page).to have_content("Status: Rejected")
       end
+
+      it 'makes pets not adoptable when applications are approved' do
+        application = create(:application, status: "Pending")
+        pet = create(:pet, applications: [application])
+
+        visit pet_path(pet)
+        expect(page).to have_content("Adoption Status: true")
+
+        visit admin_path(application)
+        within("#pet-#{pet.id}") {click_on "Approve Pet"}
+
+        visit pet_path(pet)
+        expect(page).to have_content("Adoption Status: false")
+      end
     end
   end
 end

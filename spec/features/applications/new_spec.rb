@@ -33,5 +33,37 @@ RSpec.describe "As a user" do
 
     expect(current_path).to include("/applications/")
   end
+
+  it "I cannot create an application with an empty form" do
+    visit applications_new_path
+
+    click_on "Submit"
+
+    expect(page).to have_content("Application not created: Required information missing.")
+    expect(page).to have_button("Submit")
+  end
+
+  it "I cannot create an application without an address" do
+    visit applications_new_path
+
+    fill_in "Name:", with: "Billy Bob"
+    click_button "Submit"
+    
+    expect(page).to have_content("Application not created: Required information missing.")
+    expect(page).to have_button("Submit")
+  end
+
+  it "I can not create an application without a name" do
+    visit applications_new_path
+
+    fill_in "Street address:", with: "123 W Street"
+    fill_in "City:", with: "Denver"
+    fill_in "State (abbr):", with: "CO"
+    fill_in "Zip code:", with: "80246"
+    click_button "Submit"
+
+    expect(page).to have_content("Application not created: Required information missing.")
+    expect(page).to have_button("Submit")
+  end
  end
 end

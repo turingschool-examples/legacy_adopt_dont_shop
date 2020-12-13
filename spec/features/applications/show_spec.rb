@@ -323,5 +323,39 @@ RSpec.describe "Application Show Page" do
         expect(page).to have_content("Rejected")
       end
     end
+
+    it 'does not affect other applications when a pet is approved' do
+      pet = create(:pet)
+      application_1 = create(:application, pets: [pet], status: "Pending")
+      application_2 = create(:application, pets: [pet], status: "Pending")
+
+      visit admin_path(application_1)
+      within("#pet-#{pet.id}") {click_on "Approve Pet"}
+
+      visit admin_path(application_2)
+      within("#pet-#{pet.id}") do
+        expect(page).not_to have_content("Approved")
+        expect(page).to have_button("Approve Pet")
+        expect(page).not_to have_content("Rejected")
+        expect(page).to have_button("Reject Pet")
+      end
+    end
+
+    it 'does not affect other applications when a pet is rejected' do
+      pet = create(:pet)
+      application_1 = create(:application, pets: [pet], status: "Pending")
+      application_2 = create(:application, pets: [pet], status: "Pending")
+
+      visit admin_path(application_1)
+      within("#pet-#{pet.id}") {click_on "Reject Pet"}
+
+      visit admin_path(application_2)
+      within("#pet-#{pet.id}") do
+        expect(page).not_to have_content("Approved")
+        expect(page).to have_button("Approve Pet")
+        expect(page).not_to have_content("Rejected")
+        expect(page).to have_button("Reject Pet")
+      end
+    end
   end
 end

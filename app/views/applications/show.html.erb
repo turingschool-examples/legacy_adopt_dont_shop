@@ -1,11 +1,15 @@
-<h1><%= "#{@application.applicant_name}" %></h1><br>
+<h1><%= "#{@application.applicant_name}" %></h1>
 <h3><%= "#{@application.applicant_address}" %></h3>
 <h3><%= "#{@application.city}" %></h3>
 <h3><%= "#{@application.state}" %></h3>
 <h3><%= "#{@application.zip}" %></h3>
-<h3><%= "#{@application.description}" %></h3>
-<% if @application.status == nil %>
-  <p><%= "Add a pet to this application" %></p>
-  <% else %>
-  <p><%= "In Progress"  %></p>
-<% end %>
+<h3><%= "#{@application.status}" %></h3>
+
+<section id='add_pets' style='<%='display:none' if @application.status == nil%>'>
+  <h3>Add a pet to this application</h3>
+  <%= form_tag '/applications', method: :get do %>
+    <%= label_tag "Search pets by name:" %>
+    <%= text_field_tag :search %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</section>

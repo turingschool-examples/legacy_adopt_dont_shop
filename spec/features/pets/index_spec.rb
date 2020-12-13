@@ -87,13 +87,13 @@ RSpec.describe 'Pets index page' do
     click_on("Submit Application")
 
     visit "/applications/#{@application_1.id}"
-    
+
     expect(page).to have_content("#{@application_1.applicant_name}")
     expect(page).to have_content("#{@application_1.applicant_address}")
     expect(page).to have_content("#{@application_1.city}")
     expect(page).to have_content("#{@application_1.state}")
     expect(page).to have_content("#{@application_1.zip}")
-    expect(page).to have_content("In Progress")
+    expect(page).to have_content("#{@application_1.status}")
     end
   end
 end

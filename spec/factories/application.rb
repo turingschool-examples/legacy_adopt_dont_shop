@@ -5,7 +5,5 @@ FactoryBot.define do
     state { Faker::Address.state}
     city { Faker::Address.city}
     zip { Faker::Address.zip}
-    description { Faker::Lorem.paragraph(sentence_count: 5)}
-    status { ['In Progress','Pending','Accepted','Rejected'].sample }
   end
 end

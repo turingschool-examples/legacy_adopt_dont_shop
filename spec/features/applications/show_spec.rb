@@ -325,7 +325,8 @@ RSpec.describe "Application Show Page" do
         end
       end
 
-      it 'does not affect other applications when a pet is approved' do
+      xit 'does not affect other applications when a pet is approved' do
+        #the user stories "Approved/Rejected Pets on one Application do not affect other Applications" and "Pets can only have one approved application on them at any time" contradict each other on this point
         pet = create(:pet)
         application_1 = create(:application, pets: [pet], status: "Pending")
         application_2 = create(:application, pets: [pet], status: "Pending")
@@ -355,6 +356,21 @@ RSpec.describe "Application Show Page" do
           expect(page).not_to have_content("Approved")
           expect(page).to have_button("Approve Pet")
           expect(page).not_to have_content("Rejected")
+          expect(page).to have_button("Reject Pet")
+        end
+      end
+
+      it 'does not allow pets that have been approved elsewhere to be approved' do
+        pet = create(:pet)
+        application_1 = create(:application, pets: [pet], status: "Pending")
+        application_2 = create(:application, pets: [pet], status: "Pending")
+        application_1.application_pets.each {|pet| pet.approve}
+
+        visit admin_path(application_2)
+
+        within("#pet-#{pet.id}") do
+          expect(page).to have_content("This pet has been approved for adoption by another applicant")
+          expect(page).not_to have_button("Approve Pet")
           expect(page).to have_button("Reject Pet")
         end
       end

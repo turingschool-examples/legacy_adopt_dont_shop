@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Application, type: :model do
+RSpec.describe 'admin shelters index' do
   before :each do
     @app = Application.create!(name: "James Fox", street: "2286 Huntington Dr", city: "LHC", state: "AZ", zip_code: 86403, description: "I WANT HIM!")
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
@@ -11,38 +11,24 @@ describe Application, type: :model do
     @pet3 = @shelter1.pets.create!(image:"puppies.jpeg", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
     @pet_app1 = ApplicationPet.create!(pet_id: @pet1.id, application_id: @app.id)
     @pet_app2 = ApplicationPet.create!(pet_id: @pet2.id, application_id: @app.id)
+    @app.update({application_status: "Pending"})
   end
 
-  describe 'relationships' do
-    it { should have_many :application_pets }
-    it { should have_many(:pets).through(:application_pets)}
+  it "can can show shelters in rev order" do
+    visit admin_shelters_path
+
+    expect(page.all('li')[0]).to have_content("#{@shelter2.name}")
+    expect(page.all('li')[1]).to have_content("#{@shelter3.name}")
+    expect(page.all('li')[2]).to have_content("#{@shelter1.name}")
+    expect(page.all('li')[3]).to have_content("#{@shelter1.name}")
+    expect(page.all('li')[4]).to have_content("#{@shelter2.name}")
   end
 
-  describe 'instance methods' do
-    it "knows all_approved" do
+  it "can show a shelters stuff" do
+    visit admin_shelter_path(@shelter1.id)
 
-      expect(@app.all_approved).to eq(false)
-
-      @pet_app1.update!({status: true})
-      @pet_app2.update!({status: true})
-
-      expect(@app.all_approved).to eq(true)
-      expect(@app.not_all_approved).to eq(false)
-    end
-
-    it "knows if one is rejected" do
-
-      expect(@app.not_all_approved).to eq(false)
-      @pet_app1.update!({status: true})
-      @pet_app2.update!({status: false})
-
-      expect(@app.not_all_approved).to eq(true)
-      expect(@app.all_approved).to eq(false)
-    end
-
-    it "can return a new table with pet and pet app info" do
-
-      expect(@app.pet_apps(@app.id)).to eq([@pet1, @pet2])
-    end
+    expect(page).to have_content("#{@shelter1.name}")
+    expect(page).to have_content("#{@pet1.name}")
+    expect(page).to have_content(3) #avg_pet_age
   end
 end

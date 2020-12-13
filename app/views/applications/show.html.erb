@@ -31,7 +31,7 @@
       <%= selectee.approximate_age %>
       <%= selectee.sex %>
       <%= selectee.adoptable %>
-      <%= link_to "Adopt this Pet?", application_path(@app.id, :pet_id => selectee.id, :adopt => "true") %>
+      <%= button_to "Adopt this Pet?", application_path(@app.id), method: :get, params: {:pet_id => selectee.id, :adopt => "true"} %>
     <% end %>
   <% end %>
 </body>

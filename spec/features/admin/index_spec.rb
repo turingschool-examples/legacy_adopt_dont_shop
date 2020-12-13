@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Application, type: :model do
+RSpec.describe 'lists all shelters and apps' do
   before :each do
     @app = Application.create!(name: "James Fox", street: "2286 Huntington Dr", city: "LHC", state: "AZ", zip_code: 86403, description: "I WANT HIM!")
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
@@ -11,38 +11,15 @@ describe Application, type: :model do
     @pet3 = @shelter1.pets.create!(image:"puppies.jpeg", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
     @pet_app1 = ApplicationPet.create!(pet_id: @pet1.id, application_id: @app.id)
     @pet_app2 = ApplicationPet.create!(pet_id: @pet2.id, application_id: @app.id)
+    @app.update({application_status: "Pending"})
   end
 
-  describe 'relationships' do
-    it { should have_many :application_pets }
-    it { should have_many(:pets).through(:application_pets)}
-  end
+  it " lists shelters and applications" do
+    visit admin_path
 
-  describe 'instance methods' do
-    it "knows all_approved" do
-
-      expect(@app.all_approved).to eq(false)
-
-      @pet_app1.update!({status: true})
-      @pet_app2.update!({status: true})
-
-      expect(@app.all_approved).to eq(true)
-      expect(@app.not_all_approved).to eq(false)
-    end
-
-    it "knows if one is rejected" do
-
-      expect(@app.not_all_approved).to eq(false)
-      @pet_app1.update!({status: true})
-      @pet_app2.update!({status: false})
-
-      expect(@app.not_all_approved).to eq(true)
-      expect(@app.all_approved).to eq(false)
-    end
-
-    it "can return a new table with pet and pet app info" do
-
-      expect(@app.pet_apps(@app.id)).to eq([@pet1, @pet2])
-    end
+    expect(page).to have_content("#{@shelter1.name}")
+    expect(page).to have_content("#{@shelter3.name}")
+    expect(page).to have_content("#{@shelter2.name}")
+    expect(page).to have_content("Application #{@app.id}")
   end
 end

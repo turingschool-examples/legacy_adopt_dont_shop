@@ -15,8 +15,8 @@ class ApplicationsController < ApplicationController
     end
 
     def create
-      Application.create(applications_params)
-      redirect_to "/applications/#{applications.id}"
+      application = Application.create(applications_params)
+      redirect_to "/applications/#{application.id}"
     end
 
     def update
@@ -32,6 +32,6 @@ class ApplicationsController < ApplicationController
 
     private
     def applications_params
-      params.permit(:name, :street_address, :city, :state, :zip, :description, :status = nil)
+      params.permit(:name, :street_address, :city, :state, :zip, :description, :status)
     end
   end

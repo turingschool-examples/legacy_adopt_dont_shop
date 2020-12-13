@@ -1,3 +1,4 @@
 class PetApplication < ApplicationRecord
-  has_many :pet_applications
+  belongs_to :pet
+  belongs_to :application
 end

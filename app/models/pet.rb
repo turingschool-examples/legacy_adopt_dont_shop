@@ -11,14 +11,9 @@ class Pet < ApplicationRecord
 
   def self.search(search)
     if search
-      wanted_pet = Pet.find_by(name: search)
-        if wanted_pet
-          self.where(pet_id: wanted_pet)
-        else
-          @pets = Pet.all
-        end
+      wanted_pet = Pet.where(name: search)
     else
-      @pets = Pet.all
+      pets = Pet.all
     end
   end
 end

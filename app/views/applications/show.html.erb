@@ -1,8 +1,8 @@
 <h2><%= @application.name %></h2>
 <%= form_tag pets_path, method: :get do %>
-  <%= label_tag :search, 'Find a forever friend' %>
+  <%= label_tag :search, 'Add a Pet to this Application' %>
   <%= text_field_tag :search, params[:search] %><br>
-  <%= submit_tag 'Search', :name => nil %>
+  <%= submit_tag 'Search' %>
 
 <% end %>
 <%= "Address:  #{@application.street_address}" %><br>

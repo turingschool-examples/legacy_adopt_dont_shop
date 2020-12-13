@@ -337,7 +337,6 @@ RSpec.describe "Application Show Page" do
         visit admin_path(application_2)
         within("#pet-#{pet.id}") do
           expect(page).not_to have_content("Approved")
-          expect(page).to have_button("Approve Pet")
           expect(page).not_to have_content("Rejected")
           expect(page).to have_button("Reject Pet")
         end

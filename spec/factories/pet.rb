@@ -4,7 +4,7 @@ FactoryBot.define do
     name {Faker::Creature::Dog.name}
     approximate_age {2}
     description {Faker::Company.bs}
-    sex {Faker::Creature::Dog.sex}
+    sex {"M"}
   end
 end
 

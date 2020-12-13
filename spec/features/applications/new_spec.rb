@@ -22,11 +22,11 @@ end
 
 it 'I can not create an application missing information' do
 
-  visit pets_path
+  visit applications_new_path
 
-  click_link 'Start an Application'
+  click_button 'Submit'
 
   expect(page).to have_content("Application not created: Required information missing.")
-  expect(page).to have_link("Start an Application")
+  expect(page).to have_button("Submit")
 end
 end

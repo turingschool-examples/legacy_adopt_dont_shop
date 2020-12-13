@@ -4,9 +4,11 @@ class ApplicationPet < ApplicationRecord
 
   def approve
     self[:status] = "Approved"
+    save
   end
 
   def reject
     self[:status] = "Rejected"
+    save
   end
 end

@@ -197,7 +197,7 @@ RSpec.describe "Application Show Page" do
       pet = Pet.all.sample
       fill_in(:search, with: pet.name)
       click_button("Search")
-      click_button("Adopt this Pet")
+      within("#pet-#{pet.id}") {click_button("Adopt this Pet")}
 
       expect(page).to have_current_path(application_path(application))
       within("#application_pets") do
@@ -258,9 +258,9 @@ RSpec.describe "Application Show Page" do
       pet_2 = create(:pet)
       application = create(:application, pets: [pet_1, pet_2], status: "Pending")
 
-      visit application_path(application)
+      visit admin_path(application)
 
-      expect(page).to have_button("Approve")
+      expect(page).to have_button("Approve Pet")
     end
 
     it 'returns to the application show page when a pet is approved' do
@@ -268,10 +268,11 @@ RSpec.describe "Application Show Page" do
       pet_2 = create(:pet)
       application = create(:application, pets: [pet_1, pet_2], status: "Pending")
 
-      visit application_path(application)
+      visit admin_path(application)
+
       within("#pet-#{pet_1.id}") {click_on "Approve Pet"}
 
-      expect(current_path).to eq(application_path(application))
+      expect(current_path).to eq(admin_path(application))
     end
 
     it 'shows if a pet has been approved' do
@@ -279,7 +280,7 @@ RSpec.describe "Application Show Page" do
       pet_2 = create(:pet)
       application = create(:application, pets: [pet_1, pet_2], status: "Pending")
 
-      visit application_path(application)
+      visit admin_path(application)
       within("#pet-#{pet_1.id}") {click_on "Approve Pet"}
 
       within("#pet-#{pet_1.id}") do
@@ -293,7 +294,7 @@ RSpec.describe "Application Show Page" do
       pet_2 = create(:pet)
       application = create(:application, pets: [pet_1, pet_2], status: "Pending")
 
-      visit application_path(application)
+      visit admin_path(application)
 
       expect(page).to have_button("Reject")
     end
@@ -303,10 +304,10 @@ RSpec.describe "Application Show Page" do
       pet_2 = create(:pet)
       application = create(:application, pets: [pet_1, pet_2], status: "Pending")
 
-      visit application_path(application)
+      visit admin_path(application)
       within("#pet-#{pet_1.id}") {click_on "Reject Pet"}
 
-      expect(current_path).to eq(application_path(application))
+      expect(current_path).to eq(admin_path(application))
     end
 
     it 'shows if a pet has been rejected' do
@@ -314,7 +315,7 @@ RSpec.describe "Application Show Page" do
       pet_2 = create(:pet)
       application = create(:application, pets: [pet_1, pet_2], status: "Pending")
 
-      visit application_path(application)
+      visit admin_path(application)
       within("#pet-#{pet_1.id}") {click_on "Reject Pet"}
 
       within("#pet-#{pet_1.id}") do

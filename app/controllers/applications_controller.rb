@@ -1,6 +1,9 @@
 class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
+    if params[:pet_search]
+      @pets = Pet.all.search_pet_by_name(params[:pet_search])
+    end
   end
 
   def new
@@ -15,6 +18,12 @@ class ApplicationsController < ApplicationController
       flash[:failure] = "Application not created: Required information missing or invalid."
       render :new
     end
+  end
+  
+  def update
+    application = Application.find(params[:id])
+    application.update(description: params[:description])
+    redirect_to application_path(application.id)
   end
 
   private

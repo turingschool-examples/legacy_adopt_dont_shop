@@ -1,0 +1,32 @@
+<ul>
+  <li><%= @shelter.name %></li>
+  <li><%= @shelter.address %></li>
+  <li><%= @shelter.city %>
+    <%= @shelter.state %>
+    <%= @shelter.zip %></li>
+</ul>
+
+<table class="pet_stats">
+  <tr>
+    <th colspan="3">Pet Statistics</th>
+  </tr>
+  <tr>
+    <th>Average Pet Age</th>
+    <th>Count Adoptable Pets</th>
+    <th>Count of Adopted Pets</th>
+  </tr>
+  <tr>
+    <td><%= @shelter.avg_pet_age %></td>
+    <td><%= @shelter.count_adoptable %></td>
+    <td><%= @shelter.count_adopted %></td>
+  </tr>
+</table>
+
+<h2>ACTION REQUIRED!</h2>
+<% if @pending_pets != [] %>
+  <% @pending_pets.each do |pet| %>
+    <%= pet.name %>
+    <p><%= link_to "Application # #{pet.app_id}", admin_app_path(pet.app_id), method: :get %> </p>
+    <%= pet.pet_app_status %></p>
+  <% end %>
+<% end %>

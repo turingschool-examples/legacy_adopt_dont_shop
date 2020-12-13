@@ -4,19 +4,26 @@
     <title>AdoptDontShopM2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
   <header>
+    <ul class="nav-bar">
+      <li><%= link_to "admin", admin_path %></li>
+    </ul>
     <div class="nav-bar">
       <ul>
         <p><%= link_to "Back to Home", "/" %>
           <%= link_to "Go to Shelters", "/shelters" %>
           <%= link_to 'Go to Pets', "/pets" %>
+
   </head><br>
 
   <body>
+    <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

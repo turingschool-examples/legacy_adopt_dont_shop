@@ -16,7 +16,12 @@ class ApplicationsController < ApplicationController
 
     def create
       application = Application.create(applications_params)
-      redirect_to "/applications/#{application.id}"
+      if application.save
+        redirect_to "/applications/#{application.id}"
+      else
+        flash[:notice] = "Please finish filling out the application before submitting"
+        render :new
+      end
     end
 
     def update

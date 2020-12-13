@@ -9,7 +9,7 @@ class Pet < ApplicationRecord
             }
   enum sex: [:female, :male]
   scope :adoptable, -> { where('adoptable = true')}
-  scope :pending_apps, -> { where('applications.application_status = ?', "Pending")}
+  # scope :pending_apps, -> { where('applications.application_status = ?', "Pending")}
 
   def apps_approved
     application_pets.where('status = ?', true).count

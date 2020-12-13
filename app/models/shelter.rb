@@ -1,5 +1,6 @@
 class Shelter < ApplicationRecord
   has_many :pets, dependent: :destroy
+  validates_presence_of :name, :address, :city, :state, :zip
   scope :admin_shelter, -> {order('name DESC')}
   scope :pending_apps, -> {includes(pets: :applications).where(:applications => {:application_status => "Pending"})}
 

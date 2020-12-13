@@ -18,7 +18,7 @@
     <li id='pet-<%= pet.id %>'><%= link_to pet.name, pet_path(pet) %>
       <% if application_pet.status %>
         <%= application_pet.status %>
-      <% elsif !pet.approvable? %>
+      <% elsif !pet.adoptable %>
         <span>This pet has been approved for adoption by another applicant</span>
         <%= button_to "Reject Pet", admin_path(@application, pet: pet, status: :reject), method: :patch %>
       <% else %>

@@ -18,8 +18,4 @@ class Pet < ApplicationRecord
     self[:adoptable] = false
     save
   end
-
-  def approvable?
-    application_pets.none? {|app| app.status=="Approved"}
-  end
 end

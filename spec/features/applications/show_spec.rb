@@ -325,10 +325,10 @@ RSpec.describe "Application Show Page" do
         end
       end
 
-      xit 'does not affect other applications when a pet is approved' do
-        #the user stories "Approved/Rejected Pets on one Application do not affect other Applications" and "Pets can only have one approved application on them at any time" contradict each other on this point
+      it 'does not affect other applications when a pet is approved' do
         pet = create(:pet)
-        application_1 = create(:application, pets: [pet], status: "Pending")
+        pet_2 = create(:pet)
+        application_1 = create(:application, pets: [pet, pet_2], status: "Pending")
         application_2 = create(:application, pets: [pet], status: "Pending")
 
         visit admin_path(application_1)
@@ -364,7 +364,9 @@ RSpec.describe "Application Show Page" do
         pet = create(:pet)
         application_1 = create(:application, pets: [pet], status: "Pending")
         application_2 = create(:application, pets: [pet], status: "Pending")
-        application_1.application_pets.each {|pet| pet.approve}
+
+        visit admin_path(application_1)
+        within("#pet-#{pet.id}") {click_on "Approve Pet"}
 
         visit admin_path(application_2)
 

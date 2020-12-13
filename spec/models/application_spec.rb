@@ -5,4 +5,13 @@ RSpec.describe Application, type: :model do
     it {should have_many :pet_applications}
     it {should have_many(:pets).through(:pet_applications)}
   end
+
+  describe "validations" do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:address) }
+    it { is_expected.to validate_presence_of(:status) }
+    it { is_expected.to validate_presence_of(:city)}
+    it { is_expected.to validate_presence_of(:state)}
+    it { is_expected.to validate_presence_of(:zip_code)}
+  end
 end

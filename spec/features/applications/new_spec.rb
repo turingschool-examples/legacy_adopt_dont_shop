@@ -19,4 +19,14 @@ it 'start and application' do
    app = Application.all
   expect(current_path).to eq("/applications/#{app.first.id}")
 end
+
+it 'I can not create an application missing information' do
+
+  visit pets_path
+
+  click_link 'Start an Application'
+
+  expect(page).to have_content("Application not created: Required information missing.")
+  expect(page).to have_link("Start an Application")
+end
 end

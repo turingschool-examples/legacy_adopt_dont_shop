@@ -1,8 +1,4 @@
 class ApplicationsController < ApplicationController
-  def index
-    @apps = Application.all
-  end
-
   def new
   end
 
@@ -19,7 +15,7 @@ class ApplicationsController < ApplicationController
   def show
     @app = Application.find(params[:id])
     @pets = Pet.adoptable
-    @chosen_ones = @app.chosen_ones
+    @chosen_ones = @app.pets
     if params[:application_status] == "Pending"
       @app.update({
         application_status: params[:application_status] })

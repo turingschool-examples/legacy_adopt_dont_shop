@@ -13,9 +13,14 @@ class AdminApplicationsController < ApplicationController
         status: params[:status]
       })
     end
-    if params[:application_status] == "Approved!"
+    if @app.all_approved == true
       @pets.all.update({
         adoptable: false
+      })
+    elsif @app.not_all_approved == true
+      binding.pry
+      @app.application_pets.update({
+        status: false
       })
     end
   end

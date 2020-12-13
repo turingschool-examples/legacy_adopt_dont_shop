@@ -1,6 +1,7 @@
 class AdminSheltersController < ApplicationController
   def index
     @shelters = Shelter.admin_shelter
+    @pending_shelters = Shelter.pending_apps
   end
 
   def show

@@ -7,18 +7,16 @@
 <%= @app.state %>
 <%= @app.zip_code %>
 <%= @app.description %>
-<% if @pets.all? {|pet| pet.status == true } %>
-  <%= link_to 'Next Steps', update_admin_app_path(@app.id, :application_status => "Approved!"), method: :patch %>
+<% if @app.all_approved %>
   <h3> Application for Adoption has been Approved! </h3>
-<% elsif @pets.any? {|pet| pet.status == false } && @pets.all? {|pet| pet.status != nil } %>
-  <%= link_to 'Click Here to Grieve', update_admin_app_path(@app.id, :application_status => "Rejected"), method: :patch %>
+<% elsif @app.not_all_approved %>
   <h3> We regret to inform you that your home is not good enough for our pets. </h3>
 <% else %>
   <% @pets.each do |pet| %>
     <section id="pet-<%= pet.name %>">
       <%= pet.name %>
       <% if pet.status == nil %>
-        <% if pet.adoptable == true %>
+        <% if pet.apps_approved == 0 %>
           <%= form_tag admin_app_path(@app.id), method: :get do %>
             <%= hidden_field_tag :pet_id, "#{pet.id}" %>
             <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>

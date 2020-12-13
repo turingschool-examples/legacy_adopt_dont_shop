@@ -1,9 +1,7 @@
 class Shelter < ApplicationRecord
   has_many :pets, dependent: :destroy
-  has_many :applications, dependent: :nullify
   scope :admin_shelter, -> {order('name DESC')}
-  # scope :admin_pending_shelters, -> {order('name ASC'), where('applications.application_status =?', "Pending")}
-
+  scope :pending_apps, -> {includes(pets: :applications).where(:applications => {:application_status => "Pending"})}
 
   def avg_pet_age
     adoptable = pets.where('adoptable = ?', true)
@@ -11,8 +9,7 @@ class Shelter < ApplicationRecord
   end
 
   def pending_pets
-    pending = pets.each {|pet| pet.pending_applications}
-    binding.pry
+    pending_pets = pets.joins(:applications).where('applications.application_status = ?', "Pending").select('applications.application_status AS pet_app_status, applications.id AS app_id, pets.*')
   end
 
   def count_adoptable

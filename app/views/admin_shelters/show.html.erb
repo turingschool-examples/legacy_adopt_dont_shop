@@ -23,10 +23,10 @@
 </table>
 
 <h2>ACTION REQUIRED!</h2>
-<% if @pending_pets
-<% @pending_pets.each do |pet| %>
-  <%= pet.name %>
-  <% pet.application_pets.each do |app_pet| %>
-    <%=  app_pet.application_status %>
+<% if @pending_pets != [] %>
+  <% @pending_pets.each do |pet| %>
+    <%= pet.name %>
+    <p><%= link_to "Application # #{pet.app_id}", admin_app_path(pet.app_id), method: :get %> </p>
+    <%= pet.pet_app_status %></p>
   <% end %>
 <% end %>

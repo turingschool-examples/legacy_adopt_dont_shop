@@ -5,7 +5,7 @@
 <%= "Zipcode: #{@application.zip}" %><br>
 <%= "Why I am a good fit:  #{@application.description}" %><br>
 <%  @application.pets.each do |pet| %>
-   <%=  pet.name %>
+<%= link_to "#{pet.name}", pets_show_path%>
    <% end %>
 
 <%= "Application status  #{@application.status}" %><br>

@@ -12,8 +12,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.create(application_params)
-    redirect_to applications_show_path(application.id)
+    application = Application.new(application_params)
+    if application.save
+      redirect_to applications_show_path(application.id)
+    else
+      redirect_to applications_new_path
+      flash[:notice] = "Application not created: Required information missing."
+    end
   end
 
   private

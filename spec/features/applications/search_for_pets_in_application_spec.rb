@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# Applications can be "In Progress", "Pending", "Accepted", or "Rejected"
 RSpec.describe 'As a user' do
   describe "when I visit the Application show page" do
     let!(:shelter1) do
@@ -31,23 +30,20 @@ RSpec.describe 'As a user' do
         status: "Pending"
         )
     end
-    let!(:pet_application1) do
-      PetApplication.create(application: application, pet: pet1)
-    end
-    let!(:pet_application2) do
-      PetApplication.create(application: application, pet: pet3)
-    end
 
-    it "should show application details" do
-      visit "/applications/#{application.id}"
+    describe "And an application has not been submitted" do
+      it "has a section on the page to 'Add a Pet to this Application'" do
+        visit applications_show_path(id: application.id)
 
-      expect(page).to have_content(application.name)
-      expect(page).to have_content(application.address)
-      expect(page).to have_content(application.description)
-      expect(page).to have_content("Application Status: #{application.status}")
-      expect(page).to have_link(pet1.name, href: "/pets/#{pet1.id}")
-      expect(page).to have_link(pet3.name, href: "/pets/#{pet3.id}")
-      expect(page).not_to have_link(pet2.name, href: "/pets/#{pet2.id}")
+        expect(page).to have_content("Search for pets:")
+        fill_in "Search for pets:", with: "Thor"
+        click_button "Submit"
+        expect(current_path).to eq("/application/#{application.id}")
+        # And under the search bar I see any Pet whose name matches my search
+        expect(page).to have_content("Thor")
+      end
     end
+    
+    
   end
 end

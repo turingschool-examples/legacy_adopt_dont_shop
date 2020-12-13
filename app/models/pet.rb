@@ -13,4 +13,8 @@ class Pet < ApplicationRecord
   def self.search(name)
     Pet.where('LOWER(name) LIKE ?', "%#{name.downcase}%")
   end
+
+  def approve_adoption
+    self[:adoptable] = false
+  end
 end

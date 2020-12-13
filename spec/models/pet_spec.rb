@@ -48,7 +48,7 @@ describe Pet, type: :model do
         pet3 = shelter.pets.create!(sex: :female, name: "Borko", approximate_age: 3, description: 'super cute')
 
         expect(Pet.search_pet_by_name("Fl")).to eq([pet1, pet2])
-        expect(Pet.search_pet_by_name("Bork")).to eq([pet3])
+        expect(Pet.search_pet_by_name("bork")).to eq([pet3])
       end
       
     end

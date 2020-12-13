@@ -14,3 +14,10 @@
 # Applications
 @ms_jenkins  = Application.create!({name: 'Buttercup Jenkins', street: "101 Puppy Love Lane", city: 'Aurora', state: 'CO', zip: 80017, 
                                     description: 'I love dogs', status: 'In Progress'})
+@mr_bopbop   = Application.create!({name: 'Bogosh Bopbop', street: "205 Cats Dont Dance Dr", city: 'Littleton', state: 'CO', zip: 80012, 
+                                    description: 'Cat Dance Choreographer, need cat for upcoming show', status: 'In Progress'})
+
+# ApplicationPets 
+ApplicationPet.create!(application: @ms_jenkins, pet: @pet1)
+ApplicationPet.create!(application: @ms_jenkins, pet: @pet3)
+ApplicationPet.create!(application: @mr_bopbop, pet: @pet2)

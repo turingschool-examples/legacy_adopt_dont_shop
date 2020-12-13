@@ -10,6 +10,8 @@ RSpec.describe Application, type: :model do
     @pet3        = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
     @ms_jenkins  = Application.create!({name: 'Buttercup Jenkins', street: "101 Puppy Love Lane", city: 'Aurora', state: 'CO', zip: 80017, 
                                         description: 'I love dogs', status: 'In Progress'})
+    ApplicationPet.create!(application: @ms_jenkins, pet: @pet1)
+    ApplicationPet.create!(application: @ms_jenkins, pet: @pet3)
   end
 
   describe 'validations' do
@@ -26,6 +28,9 @@ RSpec.describe Application, type: :model do
     it {should have_many(:pets).through(:application_pets)}
   end
 
-  # describe 'instance methods' do
-  # end
+  describe 'Pet Names on Application' do
+    it 'knows the names of pets on the application' do
+      expect(@ms_jenkins.pet_names).to eq([@pet1.name, @pet3.name])
+    end
+  end
 end

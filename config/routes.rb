@@ -6,13 +6,15 @@ Rails.application.routes.draw do
     resources :pets, controller: "shelter_pets", only: [:index, :new, :create]
   end
   get "/shelters/:id/pets/:id", to: "pets#show"
-  # resources :applications
-   get "/applications", to: "applications#index"
-   get "/applications/:id", to: "applications#show"
+  
+  # get "/applications", to: "applications#index"
+  get "/applications/new", to: "applications#new"
+  post "/applications", to: "applications#create"
+  get "/applications/:id", to: "applications#show"
 end
+
   # get "/", to: "welcome#index"
 
-  # resources :shelters 
   # get "/shelters", to: "shelters#index"
   # get "/shelters/new", to: "shelters#new"
   # get "/shelters/:id", to: "shelters#show"

@@ -3,14 +3,17 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   resources :pets
-  # resources :applications
   resources :shelters do
     resources :pets, controller: "shelter_pets", only: [:index, :new, :create]
   end
   resources :applications do
     resources :pets, controller: "application_pets", only: [:create]
   end
-  
+  scope :admin, as: "admin" do
+    resources :applications, controller: "admin_applications", only: [:show]
+  end
+  # get '/admin/applications/:id', to: 'admin_applications', as: :admin_application
+
 
   # get "/shelters", to: "shelters#index"
   # get "/shelters/new", to: "shelters#new"

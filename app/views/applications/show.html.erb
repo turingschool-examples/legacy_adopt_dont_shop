@@ -4,5 +4,9 @@
 <%= "State: #{@application.state}" %><br>
 <%= "Zipcode: #{@application.zip}" %><br>
 <%= "Why I am a good fit:  #{@application.description}" %><br>
+<%  @application.pets.each do |pet| %>
+   <%=  pet.name %>
+   <% end %>
 
 <%= "Application status  #{@application.status}" %><br>
+

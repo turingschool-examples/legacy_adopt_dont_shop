@@ -5,8 +5,14 @@ require 'rails_helper'
     it 'I see name of applicant, address and description' do
 
       joe = Application.create!(name: 'Joe', street_address: "12 Broadway", city: "Boulder", state: "CO", zip: 80303)
-      # pet_1 = create(:pet)
-      # pet_2 = create(:pet)
+      
+      shelter = create(:shelter)
+      pet_1 = create(:pet, shelter: shelter)
+      pet_2 = create(:pet, shelter: shelter)
+
+      pet_app = PetApplication.create!(application: joe, pet: pet_1)
+
+      
 
       visit "/applications/#{joe.id}"
 
@@ -16,6 +22,8 @@ require 'rails_helper'
       expect(page).to have_content(joe.state)
       expect(page).to have_content(joe.zip)
       expect(page).to have_content("In Progress")
+
+      expect(page).to have_content(pet_1.name)
     end
   end
 end

@@ -30,9 +30,9 @@ FactoryBot.define do
       description {Faker::Restaurant.description}
     end
 
-    factory :application_pet do
-      pet { nil }
-      application { nil }
-    end
+    # factory :application_pet do
+    #   pets { [association(:pet)] }
+    #   applications { association(:application) }
+    # end
   
 end

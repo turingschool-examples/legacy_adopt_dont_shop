@@ -14,7 +14,7 @@ RSpec.describe "the Application index page" do
     
     it "should display Application info" do
          visit "/applications/#{@applicant1.id}"
-        save_and_open_page
+
          expect(page).to have_content(@applicant1.name)
          expect(page).to have_content(@applicant1.address)
          expect(page).to have_content(@applicant1.address)

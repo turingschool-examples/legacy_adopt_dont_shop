@@ -7,6 +7,13 @@ class Pet < ApplicationRecord
   validates :approximate_age, numericality: {
               greater_than_or_equal_to: 0
             }
-
   enum sex: [:female, :male]
+
+  def self.search(search)
+    if search
+      wanted_pet = Pet.where(name: search)
+    else
+      pets = Pet.all
+    end
+  end
 end

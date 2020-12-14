@@ -5,14 +5,10 @@ require 'rails_helper'
     it 'I see name of applicant, address and description' do
 
       joe = Application.create!(name: 'Joe', street_address: "12 Broadway", city: "Boulder", state: "CO", zip: 80303)
-      
       shelter = create(:shelter)
       pet_1 = create(:pet, shelter: shelter)
       pet_2 = create(:pet, shelter: shelter)
-
       pet_app = PetApplication.create!(application: joe, pet: pet_1)
-
-      
 
       visit "/applications/#{joe.id}"
 
@@ -22,8 +18,22 @@ require 'rails_helper'
       expect(page).to have_content(joe.state)
       expect(page).to have_content(joe.zip)
       expect(page).to have_content("In Progress")
-
       expect(page).to have_content(pet_1.name)
+    end
+
+    it 'I can search for a pet and add it to the page'  do
+      joe = Application.create!(name: 'Joe', street_address: "12 Broadway", city: "Boulder", state: "CO", zip: 80303)
+      shelter = create(:shelter)
+      puppy = create(:pet, shelter: shelter)
+      kitteh = create(:pet, shelter: shelter)
+      pet_app = PetApplication.create!(application: joe, pet: puppy, pet:kitteh)
+
+      visit "/applications/#{joe.id}"
+      fill_in "Add a Pet to this Application", with:"#{puppy.name}"
+      click_on "Search"
+      # require 'pry'; binding.pry
+      click_link "Adopt this Pet"
+
     end
   end
 end

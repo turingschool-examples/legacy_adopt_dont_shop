@@ -5,6 +5,7 @@
 <p>Address: <%= @application.address %></p>
 <p>Description: <%= @application.description %></p>
 <h3>Pets applied for:</h3>
-<%= if params[:status] == "In Progress" %>
-  <%= render "_pets_list" %>
-<%= render partial: "pets", collection: @application.pets %>
+<%= render "pets_list", collection: @application.pets %>
+
+<h3>Add a Pet to this Application</h3>
+  <%= render partial: "pets_search", locals: { path: "/applications/#{@application.id}", method: :get, button_text: "Submit" }  %>

@@ -53,10 +53,10 @@ RSpec.describe 'As a user' do
       it "has a section on the page to 'Add a Pet to this Application'" do
         visit applications_show_path(id: @application.id)
 
-        expect(page).to have_content("Search for pets:")
-        fill_in "Search for pets:", with: "Thor"
+        expect(page).to have_content("Add a Pet to this Application")
+        fill_in "Name:", with: "Thor"
         click_button "Submit"
-        expect(current_path).to eq("/application/#{@application.id}")
+        expect(current_path).to eq("/applications/#{@application.id}")
         # And under the search bar I see any Pet whose name matches my search
         expect(page).to have_content("Thor")
       end

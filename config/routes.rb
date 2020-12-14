@@ -24,5 +24,5 @@ Rails.application.routes.draw do
 
   get "/applications/:id", to: "applications#show"
 
-  get "/applications/:id/pets" to: "pet_applications#index"
+  get "/applications/:id/pets" to: "application_pets#index"
 end

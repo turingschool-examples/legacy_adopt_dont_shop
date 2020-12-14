@@ -1,0 +1,5 @@
+<ul>
+  <% @application.pets.each do |pet| %>
+    <li><%= link_to "#{pet.name}", pets_show_path(id: pet.id) %></li>
+  <% end %>
+</ul>

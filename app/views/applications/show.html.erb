@@ -5,8 +5,6 @@
 <p>Address: <%= @application.address %></p>
 <p>Description: <%= @application.description %></p>
 <h3>Pets applied for:</h3>
-<ul>
-<% @application.pets.each do |pet| %>
-  <li><%= link_to "#{pet.name}", pets_show_path(id: pet.id) %></li>
-<% end %>
-</ul>
+<%= if params[:status] == "In Progress" %>
+  <%= render "_pets_list" %>
+<%= render partial: "pets", collection: @application.pets %>

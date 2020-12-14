@@ -20,7 +20,7 @@ describe "application show page" do
 
   it "displays all related application info on application show page" do
     visit "/applications/#{@application1.id}"
-    expect(page).to have_content("#{@application1.applicant}'s Application'")
+    expect(page).to have_content(@application1.applicant)
     expect(page).to have_content(@application1.address)
     expect(page).to have_content(@application1.description)
     expect(page).to have_content(@pet1.name)

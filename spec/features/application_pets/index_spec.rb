@@ -31,4 +31,11 @@ describe "application pet show page" do
     expect(page).to have_no_content(@pet1.name)
     expect(page).to have_no_content(@pet4.name)
   end
+
+  it "has a button for each pet which creates a new application_pet record" do
+    visit "/applications/#{@application1.id}/pets"
+    first(:button, 'Adopt').click
+    expect(current_path).to eq("/applications/#{@application1.id}")
+    expect(page).to have_content("Thor")
+  end
 end

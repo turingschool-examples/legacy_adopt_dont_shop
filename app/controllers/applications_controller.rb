@@ -22,7 +22,11 @@ class ApplicationsController < ApplicationController
   
   def update
     application = Application.find(params[:id])
-    application.update(description: params[:description])
+    if params[:description] == ""
+      flash[:failure] = "Enter a valid description"
+    else
+      application.update(description: params[:description], application_status: "Pending")
+    end
     redirect_to application_path(application.id)
   end
 

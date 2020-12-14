@@ -42,7 +42,7 @@ RSpec.describe 'As a visitor', type: :feature do
         expect(page).to have_content('Search for Pet by Name')
         
         fill_in 'Search for Pet by Name', with: "#{@pet1.name}"
-        click_on 'Submit'
+        click_on 'Search'
 
         expect(current_path).to eq("/applications/#{@ms_jenkins.id}")
         expect(page).to have_content("#{@pet1.name}")

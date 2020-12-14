@@ -1,11 +1,12 @@
 UserApplication.destroy_all
+Pet.destroy_all
+Shelter.destroy_all
 
 
+FactoryBot.create_list(:shelter, rand(2..5))
 
-isabelle = UserApplication.create!(name: 'Isabelle',
-                                     address: '1234 Downing St', 
-                                     city: 'Denver', 
-                                     state: 'CO', 
-                                     zip: '80218',
-                                     description: 'i give a lot of pets to my pets.',
-                                     status: 'Accepted')
+Shelter.all.each do |shelter|
+  rand(2..5).times do
+    FactoryBot.create(:pet, shelter: shelter)
+  end
+end

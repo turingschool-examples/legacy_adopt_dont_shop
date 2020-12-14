@@ -18,11 +18,20 @@ class Application < ApplicationRecord
     self.application_status == "Pending"
   end
 
-  def accepted?
-    self.application_status == "Accepted"
+  def approved?
+    self.application_status == "Approved"
   end
 
   def rejected?
     self.application_status == "Rejected"
   end
+
+  def has_pets_selected?
+    self.pets.count >= 1
+  end
+
+  def pet_status(pet_id)
+    application_pets.find_by(pet_id: pet_id).status
+  end
+
 end

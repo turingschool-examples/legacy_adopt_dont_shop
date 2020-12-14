@@ -2,10 +2,10 @@
 <%= form_tag applications_show_path, method: :get do %>
   <%= label_tag :search, 'Add a Pet to this Application' %>
   <%= text_field_tag :search, params[:search] %><br>
-  <%= submit_tag 'Search' %>
+  <%= submit_tag 'Search' %><br>
   <% if @selected %>
     <% @selected.each do |selected| %>
-    <%=  selected.name %> <%= link_to 'Adopt this Pet', applications_show_path(@application.id, :pet_id => selected.id, :adopt => true), method: :get %>
+    <%=  selected.name %> <%= link_to 'Adopt this Pet', applications_show_path(@application.id, :pet_id => selected.id, :adopt => true), method: :get %> <br>
     <% end %>
     <%  @application.pets.each do |pet|%>
     <%=  pet.name%>
@@ -18,7 +18,7 @@
 <%= "Zipcode: #{@application.zip}" %><br>
 <%= "Why I am a good fit:  #{@application.description}" %><br>
 <%  @application.pets.each do |pet| %>
-<%= link_to "#{pet.name}", pets_show_path%>
+<%= link_to "#{pet.name}", pets_show_path%><br>
 <% end %>
 
 <%= "Application status  #{@application.status}" %><br>

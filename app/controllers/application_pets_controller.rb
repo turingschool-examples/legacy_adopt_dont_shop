@@ -1,5 +1,5 @@
 class ApplicationPetsController < ApplicationController
   def index
-    @pets = Pet.all
+    @pets = ApplicationPet.find_by_name(params[:search])
   end
 end

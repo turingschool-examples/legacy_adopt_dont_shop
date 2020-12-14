@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   get "/applications/:id", to: "applications#show"
 
   get "/applications/:id/pets", to: "application_pets#index"
+  post "/applications/:id/pets/:id", to: "application_pets#create"
 end

@@ -11,7 +11,7 @@ class ApplicationsController < ApplicationController
     end
     if params[:adopt]
       chosen = Pet.find(params[:pet_id])
-      PetApplication.create!(pet_id: chosen.id, application_id: @application.id)
+      @pet_app = PetApplication.create!(pet_id: chosen.id, application_id: @application.id)
     end
   end
 

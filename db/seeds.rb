@@ -15,3 +15,9 @@ Shelter.all.each do |shelter|
         FactoryBot.create(:pet, shelter: shelter)
     end
 end
+
+# FactoryBot.create(:applicant)
+# FactoryBot.create(:application, applicant: @applicant1)
+
+# ApplicationPet.create!(pet: @pet1, application: @application1)
+# ApplicationPet.create!(pet: @pet2, application: @application1)

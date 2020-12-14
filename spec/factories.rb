@@ -1,6 +1,7 @@
 FactoryBot.define do
     factory :shelter do
         name {Faker::TvShows::Simpsons.location}
+        # name {Faker::Cannabis.brand}
         address {Faker::Address.street_address}
         city {Faker::Address.city}
         state {Faker::Address.state_abbr}
@@ -26,7 +27,7 @@ FactoryBot.define do
     end
   
     factory :application do
-      description {Faker::Restaurant.review}
+      description {Faker::Restaurant.description}
     end
 
     factory :application_pet do

@@ -1,0 +1,18 @@
+
+<h2>Applicant: <%= "#{@application.applicant.name}" %></h2>
+Address:<br/>
+<%= @applicant.address %><br/>
+<%= @applicant.city %>
+<%= @applicant.state %>
+<%= @applicant.zip %>
+<br/>
+Description: <%= @application.description %>
+<br/>
+Pets: <br/>
+<% @application.pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    </section>
+<% end %>
+<br />
+Status: <%= @application.status %>

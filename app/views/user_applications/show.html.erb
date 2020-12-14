@@ -8,10 +8,6 @@
   <p><b>Zip: </b><%= @app.zip %></p>
   <p><b>Description: </b><%= @app.description %></p>
   <p><b>Application Status: </b><%= @app.status %></p>
-  <div>
-    <% @app.pets.each do |pet| %>
-       <p><%= pet.name %></p>
-    <% end %>
-  </div>
+  <p><b>Pets Applied For: </b><%= link_to "#{@app.pet_name}", "/applications/#{@app.id}/pets"%></p>
 </section>
 

@@ -1,14 +1,12 @@
 class UserApplication < ApplicationRecord
   has_many :pet_applications, dependent: :destroy
   has_many :pets, through: :pet_applications
-  validates :name, :city, presence: true
-  validates :state, length: {maximum: 2}, presence: true
-  validates :zip, numericality: { only_integer: true }, presence: true
+  validates_presence_of :name, :city
+  validates_presence_of :state, length: {maximum: 2}
+  validates_presence_of :zip, numericality: { only_integer: true }
+  enum status: ['In Progress', 'Pending', 'Approved', 'Rejected']
 
-
-  def pet_app(app_id)
-    @pets = Pet.select('application_pets.id AS pet_app_id, pets.*, application_pets.status')
-    .joins(:application_pets)
-    .where('application_pets.application_id = ?', app_id)
+  def pet_name
+    pets.pluck(:name)
   end
 end

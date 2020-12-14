@@ -3,10 +3,6 @@ class Pet < ApplicationRecord
   has_many :pet_applications, dependent: :destroy
   has_many :user_applications, through: :pet_applications
   validates_presence_of :name, :description, :approximate_age, :sex
-
-  validates :approximate_age, numericality: {
-              greater_than_or_equal_to: 0
-            }
-
+  validates :approximate_age, numericality: { greater_than_or_equal_to: 0 }
   enum sex: [:female, :male]
 end

@@ -36,7 +36,7 @@ require 'rails_helper'
       expect(page).to have_content(puppy.name)
     end
 
-    it 'I can search for a pet and add it to the page'  do
+    it 'When I have a pet, I can submit my application'  do
       joe = Application.create!(name: 'Joe', street_address: "12 Broadway", city: "Boulder", state: "CO", zip: 80303)
       shelter = create(:shelter)
       puppy = create(:pet, shelter: shelter)

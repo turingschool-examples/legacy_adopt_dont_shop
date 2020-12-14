@@ -24,11 +24,11 @@ describe "As a visitor" do
                                       image: "image_2.png")
 
       @pet4 = @shelter_1.pets.create!(name: "Hedo",
-                                        sex: 0,
-                                        adoptable: true,
-                                        approximate_age: 3,
-                                        description: "likes barking",
-                                        image: "image_2.png")
+                                      sex: 0,
+                                      adoptable: true,
+                                      approximate_age: 3,
+                                      description: "likes barking",
+                                      image: "image_2.png")
 
       @pet3 = @shelter_1.pets.create!(name: "Bork",
                                       sex: 0,
@@ -38,12 +38,19 @@ describe "As a visitor" do
                                       image: "image_2.png")
 
       @bobby = Application.create!(name: "Bobby",
-                                        street: "756 6th st.",
-                                        city: "Boulder",
-                                        state: "CO",
-                                        zip_code: 80302,
-                                        application_status: "In Progress")
-      
+                                   street: "756 6th st.",
+                                   city: "Boulder",
+                                   state: "CO",
+                                   zip_code: 80302,
+                                   application_status: "In Progress")
+
+      @sam = Application.create!(name: "Sam",
+                                 street: "756 6th st.",
+                                 city: "Boulder",
+                                 state: "CO",
+                                 zip_code: 80302,
+                                 application_status: "In Progress")
+
       ApplicationPet.create!(application: @bobby, pet: @pet3)
       ApplicationPet.create!(application: @bobby, pet: @pet2)
     end
@@ -64,12 +71,12 @@ describe "As a visitor" do
       expect(page).to have_content(@pet3.name)
     end
 
-    it 'Once I have added a pet to adopt i can submit my application after entering a brief description' do
+    it "Once I have added a pet to adopt i can submit my application after entering a brief description" do
       visit application_path(@bobby)
 
       expect(page).to have_content("Add a pet to this application")
 
-      fill_in "pet_search" , with: "Hedi"
+      fill_in "pet_search", with: "Hedi"
       click_on "Search by Pet Name"
       expect(page).to have_link("Hedi - Adopt me")
 
@@ -83,14 +90,12 @@ describe "As a visitor" do
       expect(current_path).to have_content(@bobby.description)
     end
 
-    it 'if i do not add pets i will not see a submit button' do
-      visit application_path(@bobby)
+    it "if i do not add pets i will not see a submit button" do
+      visit application_path(@sam)
 
       expect(page).to have_content("Add a pet to this application")
 
       expect(page).to_not have_button("Submit")
     end
-
-    
   end
 end

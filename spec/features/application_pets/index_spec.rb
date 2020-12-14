@@ -33,7 +33,7 @@ describe "application pet show page" do
   end
 
   it "has a button for each pet which creates a new application_pet record" do
-    visit "/applications/#{@application1.id}/pets"
+    visit "/applications/#{@application1.id}/pets?search=Thor"
     first(:button, 'Adopt').click
     expect(current_path).to eq("/applications/#{@application1.id}")
     expect(page).to have_content("Thor")

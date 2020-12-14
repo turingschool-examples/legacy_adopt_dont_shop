@@ -8,7 +8,7 @@ describe "application pet show page" do
     @pet1 = @shelter1.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
     @pet2 = @shelter1.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
-    @pet3 = @shelter1.pets.create!(image:"", name: "Zeus 2", description: "dog", approximate_age: 4, sex: "male")
+    @pet4 = @shelter1.pets.create!(image:"", name: "Zeus 2", description: "dog", approximate_age: 4, sex: "male")
 
     @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
     @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "Somewhere")

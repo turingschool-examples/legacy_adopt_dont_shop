@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :pets, controller: "shelter_pets", only: [:index, :new, :create]
   end
   resources :applications do
-    resources :pets, controller: "application_pets", only: [:create]
+    resources :pets, controller: "application_pets", only: [:create, :update]
   end
   scope :admin, as: "admin" do
     resources :applications, controller: "admin_applications", only: [:show]

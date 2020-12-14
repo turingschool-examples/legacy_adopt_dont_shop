@@ -1,6 +1,7 @@
 FactoryBot.define do
     factory :shelter do
         name {Faker::TvShows::Simpsons.location}
+        # name {Faker::Cannabis.brand}
         address {Faker::Address.street_address}
         city {Faker::Address.city}
         state {Faker::Address.state_abbr}
@@ -26,12 +27,15 @@ FactoryBot.define do
     end
   
     factory :application do
-      description {Faker::Restaurant.review}
+      description {"I'll build a doghouse made of #{Faker::Games::Minecraft.block} \n
+      and put a  #{Faker::House.furniture} in the #{Faker::House.room}. \n
+      I'll feed my pet #{Faker::Food.dish} everyday! \n
+      As a longtime #{Faker::Company.profession} I always say - #{Faker::Marketing.buzzwords}."}
     end
 
-    factory :application_pet do
-      pet { nil }
-      application { nil }
-    end
+    # factory :application_pet do
+    #   pets { [association(:pet)] }
+    #   applications { association(:application) }
+    # end
   
 end

@@ -5,7 +5,7 @@ class CreateApplicants < ActiveRecord::Migration[5.2]
       t.string :address
       t.string :city
       t.string :state, :limit => 2
-      t.string :zip, :limit => 5
+      t.integer :zip, :limit => 5
 
       t.timestamps
     end

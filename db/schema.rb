@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_12_12_213105) do
     t.string "address"
     t.string "city"
     t.string "state", limit: 2
-    t.string "zip", limit: 5
+    t.bigint "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

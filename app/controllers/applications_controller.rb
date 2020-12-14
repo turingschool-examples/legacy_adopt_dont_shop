@@ -16,23 +16,24 @@ class ApplicationsController < ApplicationController
     @app = Application.find(params[:id])
     @pets = Pet.adoptable
     @chosen_ones = @app.pets
-    if params[:application_status] == "Pending"
-      @app.update({
-        application_status: params[:application_status] })
-    else
-      if params[:search]
-        @selected = Pet.search_pets(params[:search])
-      end
-      if params[:adopt] && params[:pet_id]
-        pet = Pet.find(params[:pet_id])
-        ApplicationPet.create!(pet: pet, application: @app)
-      end
+    if params[:search]
+      @selected = Pet.search_pets(params[:search])
     end
+    if params[:adopt] && params[:pet_id]
+      pet = Pet.find(params[:pet_id])
+      ApplicationPet.create!(pet: pet, application: @app)
+    end
+  end
+
+  def update
+    app = Application.find(params[:id])
+    app.update!(application_params)
+    redirect_to application_path(app.id)
   end
 
   private
 
   def application_params
-    params.permit(:name, :street, :city, :state, :zip_code, :description)
+    params.permit(:name, :street, :city, :state, :zip_code, :description, :application_status)
   end
 end

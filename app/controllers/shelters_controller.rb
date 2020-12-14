@@ -9,6 +9,7 @@ class SheltersController < ApplicationController
   end
 
   def new
+    @shelter = Shelter.new(name: "", address: "", state: "", zip: "")
   end
 
   def create

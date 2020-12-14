@@ -3,12 +3,20 @@ class AdminApplicationsController < ApplicationController
   def show
     @app = Application.find(params[:id])
     @pets = @app.pet_apps(params[:id])
+    commit
+    app_status
+  end
+
+  def commit
     if params[:commit]
       app_pet = ApplicationPet.find(params[:pet_app_id])
       app_pet.update({
         status: params[:status]
       })
     end
+  end
+
+  def app_status
     if @app.all_approved == true
       @pets.all.update({
         adoptable: false

@@ -1,3 +1,3 @@
 <h2>Edit <%= link_to "#{@shelter.name}", "shelters/#{@shelter.name}" %></h2>
 
-<%= render partial: 'form', locals: {path: "/shelters/#{@shelter.id}", method: :patch, name2: :name, name: @shelter.name, address: @shelter.address, city: @shelter.city, state: @shelter.state, zip: @shelter.zip, button_text: 'Update Shelter'} %>
+<%= render partial: 'form', locals: {path: "/shelters/#{@shelter.id}", method: :patch, button_text: 'Update Shelter'} %>

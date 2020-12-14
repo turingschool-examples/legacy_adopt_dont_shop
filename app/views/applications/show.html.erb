@@ -1,11 +1,10 @@
 
-<h2>Applicant: <%= "#{@application.applicant.name}" %></h2>
-Address:<br/>
+<h2><%= @application.applicant.name %></h2>
+<p>Address:<br/>
 <%= @applicant.address %><br/>
 <%= @applicant.city %>
 <%= @applicant.state %>
-<%= @applicant.zip %>
-<br/>
+<%= @applicant.zip %></p>
 Description: <%= @application.description %>
 <br/>
 Pets: <br/>

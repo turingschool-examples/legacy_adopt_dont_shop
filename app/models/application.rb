@@ -5,5 +5,5 @@ class Application < ApplicationRecord
 
     validates_presence_of :description
 
-    enum sex: [:In_Progress, :Pending, :Accepted, :Rejected]
+    enum status: [:"In Progress", :Pending, :Accepted, :Rejected]
 end

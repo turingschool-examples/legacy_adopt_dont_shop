@@ -25,22 +25,17 @@ describe 'As a visitor' do
         expect(page).to have_content(@application_1.status)
       end
       it 'Has a section to add pet in case application not submitted' do
-        application = create(:application, status: nil)
         pet = create(:pet, name: "Brutus")
-
         visit "/applications/#{@application_1.id}"
 
         expect(page).to have_content("Add a pet to this application")
-        # expect(page).to_not have_content("In Progress")
-        # expect(page).to_not have_content("Accepted")
-        # expect(page).to_not have_content("Pending")
-        # expect(page).to_not have_content("Rejected")
-        expect(page).to have_field(:search)
-
         fill_in(:search, with: "Brutus")
-        
-        expect(current_path).to eq("/applications/#{application.id}")
-        expect(page).to have_content("Brutus")
+        expect(page).to have_field(:search)
+        click_on "Submit"
+
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_content(pet.name)
+        expect(page).to_not have_content("Add a pet to this application")
       end
   end
 end

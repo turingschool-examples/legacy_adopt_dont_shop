@@ -22,6 +22,11 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    Application.find(params[:id]).update(applications_params)
+    render :show
+  end
+
   private
   def applications_params
     params.permit(:applicant_name, :applicant_address, :city, :state, :zip, :description, :status)

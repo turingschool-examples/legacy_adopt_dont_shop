@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
     def index
-      @applications = Application.all
+      @pet = Pet.find(params[:id])
     end
 
     def show
@@ -33,6 +33,14 @@ class ApplicationsController < ApplicationController
     def destroy
       Application.destroy(params[:id])
       redirect_to '/applications'
+    end
+
+    def search
+      if params[:search].blank?
+        redirect_to(root_path, alert: "Empty field!") and return
+      else
+        @parameter = params[:search].downcase
+        @results = Pet.all.where("lower(name) LIKE :search", search: @parameter)
     end
 
     private

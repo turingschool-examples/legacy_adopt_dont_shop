@@ -24,4 +24,6 @@ RSpec.describe 'Application show page' do
     expect(page).to have_content("Description: #{@application1.description}")
     expect(page).to have_content("Status: #{@application1.status}")
   end
+
+  it "displays a section where I can search for and add pets to this application."
 end

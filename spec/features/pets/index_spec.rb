@@ -27,6 +27,8 @@ RSpec.describe 'Pets index page' do
     expect(page).to have_content(@shelter2.name)
 
     expect(page).to_not have_content(@shelter3.name)
+
+    expect(page).to have_link("Start an Application")
   end
 
   it "can delete a pet from pet index page" do

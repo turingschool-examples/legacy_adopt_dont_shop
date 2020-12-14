@@ -16,21 +16,22 @@ Application Status: <%= @application.application_status %><br>
     <%= submit_tag 'Search by Pet Name'%>
   </section>
   <% end %>
+  <% if @application.has_pets_selected? %>
+      Description: <%= @application.description %><br>
+      <%= form_tag application_path(@application), method: :patch do %>
+      <%= label_tag "Why you wish to adopt:" %>
+      <%= text_field_tag :description %><br>
+      <%= submit_tag 'Submit' %> <br> 
+      <% end %>
+    <% end %>
   <% if params[:pet_search] %>
     <% @pets.each do |pet| %>
       <%= image_tag "#{pet.image}", :size => '80x80' %>
-      <%= link_to "#{pet.name} - Adopt me", application_pets_path(application_id: @application.id, pet_id: pet.id, status: "Pending"), method: :post %><br>
+      <%= link_to "#{pet.name} - Adopt me", application_pets_path(application_id: @application.id, pet_id: pet.id), method: :post %><br>
     <% end %> 
   <% end %>
 <% end %>
 
 <% if local_assigns[:pending] %>
     Description: <%= @application.description %><br>
-    <%= form_tag application_path(@application), method: :patch do %>
-    <%= label_tag "Why you wish to adopt:" %>
-    <%= text_field_tag :description %><br>
-    <%= submit_tag 'Submit' %> <br> 
-  <% end %>
-<% else %>
-
 <% end %>

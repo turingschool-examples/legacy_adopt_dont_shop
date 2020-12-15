@@ -3,6 +3,10 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
+  def new
+
+  end
+
   def submit
     application = Application.find(params[:id])
     application.status = "Pending"
@@ -22,8 +26,9 @@ class ApplicationsController < ApplicationController
     else
       @application = Application.find(params[:id])
       flash.now[:error] = @application.errors.full_messages.first
-      require "pry"; binding.pry
       render :edit
     end
   end
+
+
 end

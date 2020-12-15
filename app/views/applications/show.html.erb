@@ -6,6 +6,8 @@
 <p>Description: <%= @application.description %></p>
 <h3>Pets applied for:</h3>
 <%= render "pets_list", collection: @application.pets %>
-
+<section id="application-<%= @application.id %>">
 <h3>Add a Pet to this Application</h3>
-  <%= render partial: "pets_search", locals: { path: "/applications/#{@application.id}", method: :get, button_text: "Submit" }  %>
+  <%= render partial: "pets_search", locals: { path: "/applications/#{@application.id}", method: :get, search: params[:search], button_text: "Submit" }  %>
+  <%= render partial: "search_results", locals: { search: params[:search] } %>
+</section>

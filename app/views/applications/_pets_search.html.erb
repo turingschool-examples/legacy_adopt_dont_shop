@@ -1,6 +1,5 @@
 <%= form_tag path, method: method do %>
-  <%= label_tag :name, "Name: " %>
-  <%= text_field_tag :name %>
-
-  <%= submit_tag button_text %>
+  <%= label_tag :search, "Name: " %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag button_text, name: nil %>
 <% end %>

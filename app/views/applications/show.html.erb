@@ -1,12 +1,12 @@
 <body>
   <h3>Application Status:<%= @app.application_status %></h3>
   <% if @chosen_ones.count >= 1 && @app.application_status == "In Progress" %>
-    <%= link_to "Submit Application", application_path(@app.id, :application_status => "Pending"), method: :patch %>
+    <%= button_to "Submit Application", application_path(@app.id), params: {:application_status => "Pending"}, method: :patch %>
   <% end %>
   <% if @app.application_status == "Pending" %>
     <h3>Pets chosen for Adoption </h3>
     <% @chosen_ones.each do |pet| %>
-      <%= link_to "#{pet.name}", show_pets_path(pet.id) %>
+      <%= link_to "#{pet.name}", pet_path(pet.id) %>
     <% end %>
   <% end %>
 

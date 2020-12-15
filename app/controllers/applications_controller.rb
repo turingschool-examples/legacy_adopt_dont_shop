@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   def new
-    @application = Application.new
+    @app = Application.new
   end
 
   def create
@@ -8,18 +8,18 @@ class ApplicationsController < ApplicationController
     if @app.save
       redirect_to application_path(@app.id)
     else
-      flash[:notice] = "Application not created: Required information missing."
-      render :new
+      # binding.pry
+      flash.now[:notice] = @app.errors.full_messages
+      render :new, action: @app
     end
   end
 
   def show
-    binding.pry
-    @app = Application.find(params[:application][:id])
+    @app = Application.find(params[:id])
     @pets = Pet.adoptable
     @chosen_ones = @app.pets
     if params[:search]
-      @selected = Pet.search_pets(params[:search])
+        @selected = Pet.search_pets(params[:search])
     end
     if params[:adopt] && params[:pet_id]
       pet = Pet.find(params[:pet_id])
@@ -29,13 +29,17 @@ class ApplicationsController < ApplicationController
 
   def update
     app = Application.find(params[:id])
-    app.update!(application_params)
+    app.update!(update_params)
     redirect_to application_path(app.id)
   end
 
   private
 
   def application_params
-    params.require(:application).permit(:name, :street, :city, :state, :zip_code, :description, :application_status)
+    params.require(:application).permit(:name, :street, :city, :state, :zip_code, :description)
+  end
+
+  def update_params
+    params.permit(:application_status)
   end
 end

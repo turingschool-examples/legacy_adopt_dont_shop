@@ -16,6 +16,6 @@
     <%= selectee.sex %>
     <%= selectee.adoptable %>
     <%= button_to "Adopt this Pet?", application_path(@app.id),
-        method: :get, params: {application[:pet_id] => selectee.id, :adopt => "true"} %>
+        method: :get, params: {:pet_id => selectee.id, :adopt => "true"} %>
   <% end %>
 <% end %>

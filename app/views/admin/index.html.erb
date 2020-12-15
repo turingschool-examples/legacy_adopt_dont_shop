@@ -17,13 +17,15 @@
   </tr>
   <tr>
 <% @applications.each do |app| %>
-  <section id="application-<%=app.id %>">
-    <td><%= link_to "review #{app.id}", admin_app_path(app.id), method: :get %></td>
-    <td><%= app.name %></td>
-    <td><%= app.id %></td>
-    <td><%= app.application_status %></td>
-  </section>
+  <% if app.application_status == "Pending" %>
+    <section id="application-<%=app.id %>">
+      <td><%= link_to "review #{app.id}", admin_application_path(app.id), method: :get %></td>
+      <td><%= app.name %></td>
+      <td><%= app.id %></td>
+      <td><%= app.application_status %></td>
+    </section>
   </tr>
+  <% end %>
 <% end %>
 
 </tr>

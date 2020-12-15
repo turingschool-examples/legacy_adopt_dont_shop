@@ -1,4 +1,4 @@
-<%= form_with model: @application, action: "/applications/", local: true, builder: LabellingFormBuilder do |form| %>
+<%= form_with model: @app, action: "/applications/", local: true, builder: LabellingFormBuilder do |form| %>
   <%= form.text_field :name %><br>
   <%= form.text_field :street %><br>
   <%= form.text_field :city %><br>

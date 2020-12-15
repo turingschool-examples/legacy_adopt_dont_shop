@@ -3,7 +3,7 @@
     <%= pet.name %>
     <% if pet.status == nil %>
       <% if pet.apps_approved == 0 %>
-        <%= form_tag admin_app_path(@app.id), method: :get do %>
+        <%= form_tag admin_application_path(@app.id), method: :get do %>
           <%= hidden_field_tag :pet_id, "#{pet.id}" %>
           <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
           <%= hidden_field_tag :status, "true" %>
@@ -12,7 +12,7 @@
           </div>
         <% end %>
       <% end %>
-      <%= form_tag admin_app_path(@app.id), method: :get do %>
+      <%= form_tag admin_application_path(@app.id), method: :get do %>
         <%= hidden_field_tag :pet_id, "#{pet.id}" %>
         <%= hidden_field_tag :pet_app_id, "#{pet.pet_app_id}" %>
         <%= hidden_field_tag :status, "false" %>

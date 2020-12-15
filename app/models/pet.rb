@@ -9,9 +9,14 @@ class Pet < ApplicationRecord
             }
   enum sex: [:female, :male]
   scope :adoptable, -> { where('adoptable = true')}
-  scope :search_pets, -> (find) {where("LOWER(name) like :search", search: find)}
+  # scope :search_pets, -> (find) {where("LOWER(name) like :search", search: find)}
 
   def apps_approved
     application_pets.where('status = ?', true).count
+  end
+
+  def self.search_pets(find)
+    key = "%#{find}%".downcase
+    where("LOWER(name) like :search", search: key)
   end
 end

@@ -10,13 +10,19 @@ class Pet < ApplicationRecord
 
   enum sex: [:female, :male]
 
-  def self.search(search)
+  def self.search_pets(search)
     if search
-      pet_name = Pet.find_by(name: search)
-      if pet_name
-        self.where(id: pet_name)
-      else
+      if search == ""
         Pet.all
+      else
+        formatted_search = search.downcase.capitalize
+        results = Pet.all.select{ |pet| pet.name == formatted_search }
+        if results.empty?
+          nil
+          # self.where(id: results)
+        else
+          results
+        end
       end
     else
       Pet.all

@@ -14,43 +14,38 @@ Pet.destroy_all
 Application.destroy_all
 ApplicationPet.destroy_all
 
-FactoryBot.create_list(:shelter, 2)
 
-Shelter.all.each do |shelta|
-  rand(1..10).times do
-    shelta.pets.create!(name: FFaker::Name.first_name,
-                        image: "image_" + "#{[*1..2].sample}",
-                        approximate_age: [*0..10].sample,
-                        description: FFaker::Lorem.sentence(1),
-                        adoptable: true,
-                        sex: [*0..1].sample)
-  end
-end
 
-bobby = Application.create!(name: "Bobby",
-                             street: "756 6th st.",
-                             city: "Boulder",
-                             state: "CO",
-                             zip_code: 80302,
-                             application_status: "In Progress")
+shelter_2 = Shelter.create!(name: "Boulder Humane Society",
+  address: "1234 Wallabe Way",
+  city: "Boulder",
+  state: "CO",
+  zip: 80302)
 
-elane = Application.create!(name: "Elane",
-                             street: "1222 6th st.",
-                             city: "Denver",
-                             state: "CO",
-                             zip_code: 80214,
-                             application_status: "Pending",
-                            description: "i want these pets")
+pet1 = shelter_2.pets.create!(name: "Rex",
+     sex: 1,
+     adoptable: true,
+     approximate_age: 2,
+     description: "likes walks",
+     image: "image_1.png")
 
-dane = Application.create!(name: "Dane",
-                            street: "134 12th st.",
-                            city: "Denver",
-                            state: "CO",
-                            zip_code: 80502,
-                            application_status: "Pending",
-                          description: "i want a pet")
+pet2 = shelter_2.pets.create!(name: "Hedi",
+     sex: 0,
+     adoptable: true,
+     approximate_age: 3,
+     description: "likes barking",
+     image: "image_2.png")
 
-ApplicationPet.create(application: elane, pet: Pet.first, status: "Approved")
-ApplicationPet.create(application: elane, pet: Pet.second, status: "Pending")
-ApplicationPet.create(application: dane, pet: Pet.third, status: "Pending")
-ApplicationPet.create(application: dane, pet: Pet.first, status: "Pending")
+pet4 = shelter_2.pets.create!(name: "Hedo",
+     sex: 0,
+     adoptable: true,
+     approximate_age: 3,
+     description: "likes barking",
+     image: "image_2.png")
+
+pet3 = shelter_2.pets.create!(name: "Bork",
+     sex: 0,
+     adoptable: true,
+     approximate_age: 3,
+     description: "likes barking",
+     image: "image_2.png")

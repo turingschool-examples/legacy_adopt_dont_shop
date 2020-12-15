@@ -1,3 +1,2 @@
 class AdminApplication < ApplicationRecord
-
 end

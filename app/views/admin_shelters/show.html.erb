@@ -17,8 +17,8 @@
   </tr>
   <tr>
     <td><%= @shelter.avg_pet_age %></td>
-    <td><%= @shelter.count_adoptable %></td>
-    <td><%= @shelter.count_adopted %></td>
+    <td><%= @shelter.pet_count(true) %></td>
+    <td><%= @shelter.pet_count(false) %></td>
   </tr>
 </table>
 

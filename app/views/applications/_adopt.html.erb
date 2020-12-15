@@ -11,10 +11,11 @@
 <% if @selected %>
   <% @selected.each do |selectee| %>
     <h3>Want to adopt? </h3>
-    <%= selectee.name %>
+    <%= link_to "#{selectee.name}", show_pets_path(selectee.id) %>
     <%= selectee.approximate_age %>
     <%= selectee.sex %>
     <%= selectee.adoptable %>
-    <%= button_to "Adopt this Pet?", application_path(@app.id), method: :get, params: {:pet_id => selectee.id, :adopt => "true"} %>
+    <%= button_to "Adopt this Pet?", application_path(@app.id),
+        method: :get, params: {:pet_id => selectee.id, :adopt => "true"} %>
   <% end %>
 <% end %>

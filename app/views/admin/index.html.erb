@@ -1,13 +1,36 @@
+<<<<<<< Updated upstream
 <body>
+=======
+<ul class="shelters-list">
+>>>>>>> Stashed changes
 <% @shelters.each do |shelter| %>
   <section id="shelter-<%= shelter.id %>">
-    <%= link_to "#{shelter.name}", admin_shelter_path(shelter.id), method: :get %>
+    <li><%= link_to "#{shelter.name}", admin_shelter_path(shelter.id), method: :get %></li>
   </section>
 <% end %>
+</ul>
+<br>
 
+<table class="App-list">
+  <tr>
+    <th>Link to Review</th>
+    <th>Applicant</th>
+    <th>App ID</th>
+    <th>Status</th>
+  </tr>
+  <tr>
 <% @applications.each do |app| %>
   <section id="application-<%=app.id %>">
-    <h3><%= link_to "Application #{app.id}", admin_app_path(app.id), method: :get %></h3>
+    <td><%= link_to "review #{app.id}", admin_app_path(app.id), method: :get %></td>
+    <td><%= app.name %></td>
+    <td><%= app.id %></td>
+    <td><%= app.application_status %></td>
   </section>
+  </tr>
 <% end %>
+<<<<<<< Updated upstream
 </body>
+=======
+</tr>
+</table>
+>>>>>>> Stashed changes

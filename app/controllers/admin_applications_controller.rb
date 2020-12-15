@@ -18,14 +18,10 @@ class AdminApplicationsController < ApplicationController
 
   def app_status
     if @app.all_approved == true
-      @pets.all.update({
-        adoptable: false
-      })
+      @pets.all.update({adoptable: false})
       @app.update!({application_status: "Approved"})
     elsif @app.not_all_approved == true
-      @app.application_pets.update({
-        status: false
-      })
+      @app.application_pets.update({status: false})
       @app.update!({application_status: "Rejected"})
     end
   end

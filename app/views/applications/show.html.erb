@@ -6,7 +6,7 @@
   <% if @app.application_status == "Pending" %>
     <h3>Pets chosen for Adoption </h3>
     <% @chosen_ones.each do |pet| %>
-      <%= pet.name %>
+      <%= link_to "#{pet.name}", show_pets_path(pet.id) %>
     <% end %>
   <% end %>
 

@@ -3,7 +3,7 @@ class ApplicationPetsController < ApplicationController
     application_pet = ApplicationPet.new(application_id: params[:application_id], pet_id: params[:pet_id])
     if application_pet.save
     else
-      flash[:notice] = "You've already applied for this pet."
+      flash[:notice] = "You've already added this pet."
     end
     redirect_to application_path(params[:application_id])
   end

@@ -6,4 +6,5 @@
   <h3><p><% @application.pets.each do |pet| %>
     <%= link_to("#{pet.name}", "/pets/#{pet.id}") %>
   <% end %></p></h3>
+  <% #binding.pry %>
 <h4><p><%= @application.status %></p></h4>

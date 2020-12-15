@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Pets index page' do
+RSpec.describe "Applications creation" do
   before :each do
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
     @shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Longmont", state: "CO", zip: 80012)
@@ -15,25 +15,36 @@ RSpec.describe 'Pets index page' do
     ApplicationPet.create!(pet: @pet3, application: @application1)
   end
 
-  describe "on an application's show page" do
-    it "shows the application information" do
+  describe "As a visitor" do
+    describe "I can create a new application" do
+      it "takes me to the new application page" do
 
-      visit "/applications/#{@application1.id}"
+        visit "/pets"
+        click_link "Start an Application"
 
-      expect(page).to have_content(@application1.name)
-      expect(page).to have_content(@application1.street)
-      expect(page).to have_content(@application1.city)
-      expect(page).to have_content(@application1.state)
-      expect(page).to have_content(@application1.zip)
-      expect(page).to have_content(@application1.description)
-      expect(page).to have_content(@application1.status)
-      expect(page).to have_link("#{@application1.pets[0].name}")
-      expect(page).to have_link("#{@application1.pets[1].name}")
-      expect(page).to have_link("#{@application1.pets[2].name}")
-      click_on "#{@application1.pets[0].name}"
-      expect(current_path).to eq("/pets/#{@application1.pets[0].id}")
+        expect(current_path).to eq("/applications/new")
+      end
     end
+    it "can fill out a form" do
+      visit "/pets"
+      click_link "Start an Application"
 
+      fill_in 'name', with: 'Michael Heath'
+      fill_in 'street', with: '674 Locust Hill Rd.'
+      fill_in 'city', with: 'Chester'
+      fill_in 'state', with: 'WV'
+      fill_in 'zip', with: '26034'
+      fill_in 'description', with: 'I love puppies so much'
+      click_on 'Submit'
+      save_and_open_page
 
+      expect(current_path).to eq("/applications/#{Application.last.id}")
+      expect(page).to have_content("Michael Heath")
+      expect(page).to have_content("674 Locust Hill Rd.")
+      expect(page).to have_content("Chester")
+      expect(page).to have_content("26034")
+      expect(page).to have_content("I love puppies so much")
+      expect(page).to have_content("In Progress")
+    end
   end
 end

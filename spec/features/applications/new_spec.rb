@@ -1,15 +1,19 @@
 require 'rails_helper'
 
-RSPec.describe 'New Application' do
+RSpec.describe 'New Application' do
     before :each do
-        applicant1 = Applicant.create!(name: "Adam Cohen", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
+        @shelter1 = FactoryBot.create(:shelter)
+        @pet1 = FactoryBot.create(:pet, shelter: @shelter1)
+        @pet2 = FactoryBot.create(:pet, shelter: @shelter1)
+        @applicant1 = FactoryBot.create(:applicant)
+        @application1 = FactoryBot.create(:application, applicant: @applicant1)
       end
     
     describe 'As a visitor' do
         describe 'When I visit the new application form by clicking a link on the pets index' do
             it "I can start a new application" do
                 visit "/pets"
-                
+                save_and_open_page
                 click_link 'Start an Application'
                 
                 expect(current_path).to eq('/applications/new')

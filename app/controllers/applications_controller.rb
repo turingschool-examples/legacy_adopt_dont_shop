@@ -13,9 +13,8 @@ class ApplicationsController < ApplicationController
     application = Application.new(application_params)
     if application.save
       redirect_to application_path(application.id)
-      flash[:success] = nil
     else 
-      flash[:failure] = "Application not created: Required information missing or invalid."
+      flash.now.notice = "Application not created: Required information missing or invalid."
       render :new
     end
   end

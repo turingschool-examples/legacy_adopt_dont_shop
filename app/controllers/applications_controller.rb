@@ -7,6 +7,15 @@ class ApplicationsController < ApplicationController
 
   end
 
+  def create
+    application = Application.new(
+      app_params
+    )
+    application.save
+
+    redirect_to "/applications/#{application.id}"
+  end
+
   def submit
     application = Application.find(params[:id])
     application.status = "Pending"
@@ -28,6 +37,12 @@ class ApplicationsController < ApplicationController
       flash.now[:error] = @application.errors.full_messages.first
       render :edit
     end
+  end
+
+  private
+
+  def app_params
+    params.permit(:applicant, :address, :city, :state, :zip)
   end
 
 

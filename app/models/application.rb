@@ -12,6 +12,10 @@ class Application < ApplicationRecord
     submitted
   end
 
+  def formatted_address
+    address + " " + city + ", " + state + " " + zip
+  end
+
   def check_status
     if submitted?
       final_result = "Approved"

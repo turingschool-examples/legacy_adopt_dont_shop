@@ -11,8 +11,6 @@ class Application < ApplicationRecord
   validates :zip_code, zipcode: { country_code: :us }
   validates_presence_of :description, on: :update
 
-  
-
   def in_progress?
     application_status == "In Progress"
   end

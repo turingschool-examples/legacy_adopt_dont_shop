@@ -15,53 +15,6 @@
 
  // Custom Bootstrap variables must be set or imported before bootstrap.
  // @import "bootstrap";
-<<<<<<< Updated upstream
-// */
- table, th, td {
-   border: 1px solid black;
-   text-align: left;
-   padding: 0px;
- }
- th {
-   font-weight: 900;
- }
- .navbar {
- list-style-type: none;
- color:black;
- margin: 0;
- padding: 0;
- overflow: hidden;
- background-color: #618685;
- }
- li {
- float: left;
- font-size: 1.0em;
- word-spacing: 0px;
- padding: 5px;
- }
-
- li a {
- display: block;
- background-color: #a2b9bc;
- color: black;
- padding: 2px;
- }
-
- .home {
-   color: black;
-   float: none;
-   word-spacing: 0px;
-   width: 150px;
- }
-
- li a:hover {
- background-color: red;
- }
-
- body {
-   background-color: #618685;
- }
-=======
 
  .App-list, tr, th, td {
   border: 1px solid black;
@@ -78,6 +31,9 @@ margin: 0;
 padding: 0;
 overflow: hidden;
 background-color: #618685;
+}
+.navbar li {
+  float: left;
 }
 li {
 font-size: 1.0em;
@@ -106,7 +62,6 @@ body {
   background-color: #618685;
 }
 //
->>>>>>> Stashed changes
 // body {
 //   background-color: #fbf5cd;
 //    color: #065e09;

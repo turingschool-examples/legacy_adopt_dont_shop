@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :applications, as: 'applications'
 
   get '/admin', to: "admin#index", as: 'admin'
+  get '/admin/applications', to: "admin_applications#index", as: 'admin_apps'
   get '/admin/applications/:id', to: "admin_applications#show", as: 'admin_app'
   patch '/admin/applications/:id', to: "admin_applications#update", as: 'update_admin_app'
   get '/admin/shelters', to: "admin_shelters#index", as: 'admin_shelters'

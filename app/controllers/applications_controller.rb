@@ -1,11 +1,13 @@
 class ApplicationsController < ApplicationController
   def new
+    @application = Application.new
   end
 
   def create
     @app = Application.new(application_params)
     if @app.save
       redirect_to application_path(@app.id)
+        # binding.pry
     else
       flash[:notice] = "Application not created: Required information missing."
       render :new
@@ -34,6 +36,6 @@ class ApplicationsController < ApplicationController
   private
 
   def application_params
-    params.permit(:name, :street, :city, :state, :zip_code, :description, :application_status)
+    params.require(:application).permit(:name, :street, :city, :state, :zip_code, :description, :application_status)
   end
 end

@@ -2,7 +2,7 @@ class Application < ApplicationRecord
   has_many :application_pets
   has_many :pets, through: :application_pets
 
-  validates :description, presence: true, on: :update
+  validates_length_of :description, minimum:1 , on: :update
 
   def has_pets?
     !pets.empty?

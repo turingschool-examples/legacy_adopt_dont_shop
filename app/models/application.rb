@@ -13,23 +13,23 @@ class Application < ApplicationRecord
   
 
   def in_progress?
-    self.application_status == "In Progress"
+    application_status == "In Progress"
   end
 
   def pending?
-    self.application_status == "Pending"
+    application_status == "Pending"
   end
 
   def approved?
-    self.application_status == "Approved"
+    application_status == "Approved"
   end
 
   def rejected?
-    self.application_status == "Rejected"
+    application_status == "Rejected"
   end
 
   def has_pets_selected?
-    self.pets.count >= 1
+    pets.count >= 1
   end
 
   def pet_status(pet_id)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'From application index page, create new Application' do
+RSpec.describe 'From Pet Index page, create new Application' do
     before :each do
         @shelter1 = FactoryBot.create(:shelter)
         @pet1 = FactoryBot.create(:pet, shelter: @shelter1)
@@ -32,6 +32,19 @@ RSpec.describe 'From application index page, create new Application' do
                 expect(page).to have_content("CO")
                 expect(page).to have_content("80205")
                 expect(page).to have_content('In Progress')
+            end
+
+            it "Can not start application without completing all fields" do
+                visit "/applications/new"
+
+                click_on 'Submit'
+
+                within ('#new-application') do
+                    expect(page).to have_button('Submit')
+                end
+                within ('#flash-notice') do
+                    expect(page).to have_content("Please fill out all fields")
+                end
             end
         end
     end

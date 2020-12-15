@@ -1,3 +1,5 @@
+require 'factory_bot'
+
 class Pet < ApplicationRecord
   belongs_to :shelter
   has_many :application_pets

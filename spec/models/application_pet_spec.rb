@@ -22,7 +22,7 @@ describe ApplicationPet, type: :model do
     end
 
     it "can find pets by name" do
-      pets = ApplicationPet.find_by_name("Zeus")
+      pets = ApplicationPet.find_by_name("zeus")
       expect(pets).to include(@pet3)
       expect(pets).to include(@pet4)
     end

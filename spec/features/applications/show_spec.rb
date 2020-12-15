@@ -8,7 +8,7 @@ RSpec.describe 'Pets index page' do
     @pet1 = @shelter1.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
     @pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
-    @application1 = Application.create!(name: "Robert Heath", street: "521 E Thornhill Ave", city: "McAllen", state: "TX", zip: "78503", description: "I have always wanted a dog and would train him or her and would make sure they have lots of food.")
+    @application1 = Application.create!(name: "Robert Heath", street: "521 E Thornhill Ave", city: "McAllen", state: "TX", zip: "78503", description: "I have always wanted a dog and would train him or her and would make sure they have lots of food.", status: "In progress")
 
     ApplicationPet.create!(pet: @pet1, application: @application1)
     ApplicationPet.create!(pet: @pet2, application: @application1)
@@ -27,10 +27,11 @@ RSpec.describe 'Pets index page' do
       expect(page).to have_content(@application1.zip)
       expect(page).to have_content(@application1.description)
       expect(page).to have_content(@application1.status)
-      expect(page).to have_content(@application1.pets[0].name)
-      expect(page).to have_content(@application1.pets[1].name)
-      expect(page).to have_content(@application1.pets[2].name)
+      expect(page).to have_link("#{@application1.pets[0].name}")
+      expect(page).to have_link("#{@application1.pets[1].name}")
+      expect(page).to have_link("#{@application1.pets[2].name}")
+      click_on "#{@application1.pets[0].name}"
+      expect(current_path).to eq("/pets/#{@application1.pets[0].id}")
       end
-      #still need to test that the pets link to their pages
   end
 end

@@ -7,10 +7,12 @@
 <% if params[:search_pets] %>
 <% if @pet_results %>
   <% @pet_results.each do |pet| %>
-    <%= image_tag "#{pet.image}", size: "100x100" %>
-    <p><%= pet.name %></p>
-    <% end %>
-  <% else %>
+    <section id="pet-#{pet.id}">
+      <%= image_tag "#{pet.image}", size: "100x100" %>
+      <p><%= pet.name %></p>
+    <% section_end %>
+    < /section >
+<% else %>
     <%= flash.now[:error] = "No pets found with that name." %>
   <% end %>
 <% end %>

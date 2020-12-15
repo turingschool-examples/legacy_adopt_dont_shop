@@ -4,7 +4,10 @@
 <p>Name: <%= @application.name %></p>
 <p>Address: <%= @application.address %></p>
 <p>Description: <%= @application.description %></p>
-<h3>Pets applied for:</h3>
+
+<section id="pets-applied">
+  <h3>Pets applied for:</h3>
+</section>
 <%= render "pets_list", collection: @application.pets %>
 <section id="application-<%= @application.id %>">
 <h3>Add a Pet to this Application</h3>

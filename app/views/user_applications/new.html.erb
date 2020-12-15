@@ -1,16 +1,22 @@
-<%= form_tag("/applications", method: :post) do %>
-  <%= label_tag :name %><br>
-  <%= text_field_tag :name %><br>
-  <%= label_tag :street_address %><br>
-  <%= text_field_tag :address %><br>
-  <%= label_tag :city %><br>
-  <%= text_field_tag :city %><br>
-  <%= label_tag :state %><br>
-  <%= text_field_tag :state %><br>
-  <%= label_tag :zip_code %><br>
-  <%= text_field_tag :zip %><br>
-  <%= label_tag :describe_why_you_would_be_a_good_owner_in_255_words_or_less %><br>
-  <%= text_field_tag :description %><br>
-  <%= submit_tag 'Submit Application' %>
+<%= form_with model: @userapp, local: true do |f| %>
+  <%= f.label :name, 'name' %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :address, 'address' %><br>
+  <%= f.text_field :address %><br>
+
+  <%= f.label :city, 'city' %><br>
+  <%= f.text_field :city %><br>
+
+  <%= f.label :state, 'state' %><br>
+  <%= f.text_field :state %><br>
+
+  <%= f.label :zip, 'zip' %><br>
+  <%= f.text_field :zip %><br>
+
+  <%= f.label :describe_why_you_would_be_a_good_owner_in_255_words_or_less %><br>
+  <%= f.text_field :description %><br>
+
+  <%= f.submit 'Submit Application' %>
 
 <% end %>

@@ -4,14 +4,16 @@ class UserApplicationsController < ApplicationController
   end
 
   def new
+    @userapp = UserApplication.new
   end
 
   def create
-    app = UserApplication.create(app_params)
+    app = UserApplication.new(app_params)
     if app.save
-      redirect_to "/applications/#{app.id}"
+      redirect_to user_application_path(app.id)
+      flash[:success] = nil
     else
-      flash[:notice] = "Please Fill in all Required Fields"
+      flash[:failure] = "Please Fill in all Required Fields"
       render :new
     end
   end

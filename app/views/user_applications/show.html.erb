@@ -8,6 +8,6 @@
   <p><b>Zip: </b><%= @app.zip %></p>
   <p><b>Description: </b><%= @app.description %></p>
   <p><b>Application Status: </b><%= @app.status %></p>
-  <p><b>Pets Applied For: </b><%= link_to "#{@app.pet_name}", "/applications/#{@app.id}/pets"%></p>
+  <p><b>Pets Applied For: </b><%= link_to "#{@app.pet_name}", "/user_applications/#{@app.id}/pets"%></p>
 </section>
 

@@ -1,10 +1,15 @@
-
 <h2><%= @application.applicant.name %></h2>
+
+<%# <h2>Add a Pet!</h2> %>
+<%# <%= form_with model:@pets, method: :get do |form| %>
+    <%# <% form.text_field :search, params[:search])%>
+    <%# <% form.submit "Add"%>
+<%# <% end %>
 <p>Address:<br/>
-<%= @applicant.address %><br/>
-<%= @applicant.city %>
-<%= @applicant.state %>
-<%= @applicant.zip %></p>
+<%= @application.applicant.address %><br/>
+<%= @application.applicant.city %>
+<%= @application.applicant.state %>
+<%= @application.applicant.zip %></p>
 Description: <%= @application.description %>
 <br/>
 Pets: <br/>

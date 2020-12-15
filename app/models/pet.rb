@@ -3,6 +3,10 @@ class Pet < ApplicationRecord
   has_many :application_pets
   has_many :applications, through: :application_pets
 
+  # def self.search
+  #   pet = pet.find
+  # end
+
   validates_presence_of :name, :description, :approximate_age, :sex
   # ^ AR method to validate presence of column
   # note image and adopable is not validated

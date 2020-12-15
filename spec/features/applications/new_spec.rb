@@ -36,10 +36,14 @@ RSpec.describe 'From Pet Index page, create new Application' do
 
             it "Can not start application without completing all fields" do
                 visit "/applications/new"
+                fill_in 'Name', with: "Adam"
+                fill_in 'Address', with: "123 cherry st"
 
                 click_on 'Submit'
 
                 within ('#new-application') do
+                    expect(page).to have_content("Adam")
+                    expect(page).to have_content("123 cherry st")    
                     expect(page).to have_button('Submit')
                 end
                 within ('#flash-notice') do

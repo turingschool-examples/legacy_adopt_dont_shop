@@ -10,5 +10,4 @@ class Pet < ApplicationRecord
     where("lower(name) like ?", "%#{animal_name.downcase}%")
   end
 
-
 end

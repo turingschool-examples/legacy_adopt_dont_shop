@@ -1,11 +1,13 @@
-<h2>Application #<%= @application.id %></h2>
-Name: <%= @application.name %><br>
-Street: <%= @application.street %><br>
-City: <%= @application.city %><br>
-State: <%= @application.state %><br>
-Zip-code: <%= @application.zip_code %><br>
-Application Status: <%= @application.application_status %><br>
-Description: <%= @application.description %><br>
+<section id="main">
+  <h2>Application #<%= @application.id %></h2>
+  Name: <%= @application.name %><br>
+  Street: <%= @application.street %><br>
+  City: <%= @application.city %><br>
+  State: <%= @application.state %><br>
+  Zip-code: <%= @application.zip_code %><br>
+  Application Status: <%= @application.application_status %><br>
+  Description: <%= @application.description %><br>
+</section>
 
 <% if @application.pending? %>
   <%= render "approval" %>

@@ -29,6 +29,6 @@ describe "Description page" do
   it "does not allow an empty form to be entered" do
     visit "/applications/#{@application1.id}/edit"
     click_on "Submit"
-    expect(page).to have_content("Application not submitted: Please enter valid description")
+    expect(page).to have_content("Description is too short (minimum is 1 character)")
   end
 end

@@ -6,7 +6,7 @@ describe Application, type: :model do
   end
 
   describe "validations" do
-    it {should validate_presence_of(:description).on(:update)}
+    it {should validate_length_of(:description).is_at_least(1).on(:update)}
   end
 
   describe "instance methods" do

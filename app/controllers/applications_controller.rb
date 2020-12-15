@@ -18,8 +18,6 @@ class ApplicationsController < ApplicationController
 
   def submit
     application = Application.find(params[:id])
-    application.status = "Pending"
-    application.save
     redirect_to "/applications/#{application.id}"
   end
 
@@ -29,12 +27,13 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-    @application.description = params[:description]
-    if @application.save
+    if @application.update(description: params[:description])
+      @application.submitted = true
+      @application.save
       redirect_to "/applications/#{@application.id}"
     else
-      @application = Application.find(params[:id])
-      flash.now[:error] = @application.errors.full_messages.first
+      require "pry"; binding.pry
+      flash.now[:error] = @application.errors.full_messages
       render :edit
     end
   end

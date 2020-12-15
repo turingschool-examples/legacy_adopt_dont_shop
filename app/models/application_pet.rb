@@ -7,7 +7,7 @@ class ApplicationPet < ApplicationRecord
   belongs_to :pet
   validates_presence_of :status, :application_id, :pet_id
   validates :pet_id, uniqueness: { scope: :application_id }
-  # validates_uniqueness_of :status, conditions: -> { where(status: "true") }
+  
 
   def self.all_pets_approved?(application_id)
     find_applications(application_id).is_approved

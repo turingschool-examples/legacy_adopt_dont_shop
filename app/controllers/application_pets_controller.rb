@@ -15,6 +15,7 @@ class ApplicationPetsController < ApplicationController
       application_pet.update(status: "Approved")
       if ApplicationPet.all_pets_approved?(application.id)
         application.update(application_status: "Approved")
+        application.pets.make_adopted
       end
     elsif params[:status] == "Rejected" 
       application_pet.update(status: "Rejected")

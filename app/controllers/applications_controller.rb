@@ -8,7 +8,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.create!({
+    application = Application.new({
       name: params[:name],
       address: params[:address],
       city: params[:city],
@@ -16,7 +16,12 @@ class ApplicationsController < ApplicationController
       zip: params[:zip],
       description: params[:description]
       })
-    redirect_to "/applications/#{@application.id}"
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else
+      flash[:notice] = "You must fill out all fields in form"
+      redirect_to "/applications/new"
+    end
   end
   # def index
   #

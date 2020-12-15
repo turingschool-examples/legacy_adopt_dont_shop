@@ -76,11 +76,11 @@ describe "As a visitor" do
 
       expect(page).to have_content("Add a pet to this application")
 
-      fill_in "pet_search", with: "Hedi"
+      fill_in "pet_search", with: "Hedo"
       click_on "Search by Pet Name"
-      expect(page).to have_link("Hedi - Adopt me")
+      expect(page).to have_link("Hedo - Adopt me")
 
-      click_on "Hedi - Adopt me"
+      click_on "Hedo - Adopt me"
       expect(current_path).to eq(application_path(@bobby))
 
       fill_in :description, with: "I really want these pets."

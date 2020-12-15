@@ -5,7 +5,7 @@ describe Application, type: :model do
     it {should have_many(:pets).through(:application_pets)}
   end
 
-  describe "validations" do 
+  describe "validations" do
     it {should validate_presence_of(:description)}
   end
 
@@ -18,8 +18,9 @@ describe Application, type: :model do
       @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
       @pet4 = @shelter1.pets.create!(image:"", name: "Zeus 2", description: "dog", approximate_age: 4, sex: "male")
 
-      @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
-      @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "Somewhere")
+
+      @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
+      @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80229")
     end
 
     it "determines whether application has pets" do
@@ -37,6 +38,10 @@ describe Application, type: :model do
       @application1.save
 
       expect(@application1.submitted?).to eq(true)
+    end
+
+    it "Has formatted address" do
+      expect(@application1.formatted_address).to eq("123 Street Denver, Colorado 80410")
     end
 
     it "checks whether status is approved or rejected" do

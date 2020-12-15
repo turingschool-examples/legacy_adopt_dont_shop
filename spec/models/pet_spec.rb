@@ -50,8 +50,8 @@ describe Pet, type: :model do
       @pet2 = @shelter1.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
       @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
 
-      @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
-      @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "Somewhere")
+      @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
+      @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
 
       @pet_1_app_1 = ApplicationPet.create(application: @application1, pet: @pet1)
       @pet_1_app_1.status = "Approved"

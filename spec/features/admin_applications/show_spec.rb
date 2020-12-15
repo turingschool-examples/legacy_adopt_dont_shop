@@ -29,6 +29,8 @@ describe "admin application show page" do
     approve.click
     expect(page).to have_content("Approved")
     expect(first(:button, "Approve")).to_not eq(approve) #if the same button is still on the page, there is an issue
+    first(:button, "Approve").click
+    expect(page).to have_content("Status: Approved")
 
     visit "/admin/applications/#{@application2.id}"
 
@@ -36,6 +38,7 @@ describe "admin application show page" do
     reject.click
     expect(page).to have_content("Rejected")
     expect(first(:button, "Reject")).to_not eq(reject)
+    first(:button, "Reject").click
 
     expect(page).to have_content("Status: Rejected")
   end

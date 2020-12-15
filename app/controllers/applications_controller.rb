@@ -17,7 +17,12 @@ class ApplicationsController < ApplicationController
   def update
     application = Application.find(params[:id])
     application.description = params[:description]
-    application.save
-    redirect_to "/applications/#{application.id}"
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else
+      flash.now[:error] = "Application not submitted: Please enter valid description"
+      @application = Application.find(params[:id])
+      render :edit
+    end
   end
 end

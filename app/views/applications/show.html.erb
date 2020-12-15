@@ -18,8 +18,8 @@
 <% end%>
 
 <% if @pets != nil %>
-<% @pets.each do |pet| %>
-<%= pet.name %>
+  <% @pets.each do |pet| %>
+    <%= pet.name %>
+  <% end %>
+  <%= button_to "Adopt!" %>
 <% end %>
-<% end %>
-<%= button_to "Adopt!" %>

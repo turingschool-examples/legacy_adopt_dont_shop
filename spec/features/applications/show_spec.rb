@@ -58,17 +58,22 @@ describe "As a visitor" do
     it "I see the attributes of my application" do
       visit application_path(@bobby)
 
-      expect(page).to have_content("Name: #{@bobby.name}")
-      expect(page).to have_content("Street: #{@bobby.street}")
-      expect(page).to have_content("City: #{@bobby.city}")
-      expect(page).to have_content("State: #{@bobby.state}")
-      expect(page).to have_content("Zip-code: #{@bobby.zip_code}")
-      expect(page).to have_content("Application Status: #{@bobby.application_status}")
-      expect(page).to_not have_content("Description: #{@bobby.description}")
+      within "#main" do
+        expect(page).to have_content("Name: #{@bobby.name}")
+        expect(page).to have_content("Street: #{@bobby.street}")
+        expect(page).to have_content("City: #{@bobby.city}")
+        expect(page).to have_content("State: #{@bobby.state}")
+        expect(page).to have_content("Zip-code: #{@bobby.zip_code}")
+        expect(page).to have_content("Application Status: #{@bobby.application_status}")
+        expect(page).to_not have_content("Description: #{@bobby.description}")
+      end
 
       expect(page).to have_content("Pets applied for:")
-      expect(page).to have_content(@pet2.name)
-      expect(page).to have_content(@pet3.name)
+
+      within "#pets-applied-for-#{@bobby.id}" do
+        expect(page).to have_content(@pet2.name)
+        expect(page).to have_content(@pet3.name) 
+      end
     end
 
     it "Once I have added a pet to adopt i can submit my application after entering a brief description" do

@@ -58,4 +58,11 @@ RSpec.describe 'Pets index page' do
     expect(page).to have_content("Calvin")
     expect(page).to_not have_content("Thor")
   end
+
+  it "I don't see pets that aren't adoptable" do
+    visit '/pets'
+    pet4 = @shelter1.pets.create!(image:"", name: "XXXXX", description: "dog", approximate_age: 4, sex: "male", adoptable: false)
+    expect(page).to_not have_content(pet4.name)
+  end
+  
 end

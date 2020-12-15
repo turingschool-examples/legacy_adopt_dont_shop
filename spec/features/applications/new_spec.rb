@@ -39,4 +39,10 @@ describe "applications new page" do
     expect(page).to have_content("80224")
     expect(page).to have_content("I love cats.")
   end
+  it "has a message when fields aren't filled out and redirects to new form" do
+    visit "/applications/new"
+    click_on "Submit Application"
+    expect(current_path).to eq("/applications/new")
+    expect(page).to have_content("You must fill out all fields in form")
+  end
 end

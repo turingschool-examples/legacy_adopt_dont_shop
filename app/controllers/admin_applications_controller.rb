@@ -4,9 +4,9 @@ class AdminApplicationsController < ApplicationController
   end
 
   def review
-    application_pet = ApplicationPet.where(pet_id: params[:pet_id],application_id: params[:id])
-    application_pet.status = params[:action]
+    application_pet = ApplicationPet.where(pet_id: params[:pet],application_id: params[:id]).first
+    application_pet.status = params[:decision]
     application_pet.save
-    redirect("/admin/applications/#{params[:id]}")
+    redirect_to "/admin/applications/#{params[:id]}"
   end
 end

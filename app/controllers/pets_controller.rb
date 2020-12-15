@@ -2,6 +2,7 @@ class PetsController < ApplicationController
 
   def index
     @pets = Pet.all
+    #@filtered = params[:search] ? @pets : @pets.search(params[:search], params[:options])
   end
 
   def show
@@ -27,5 +28,4 @@ class PetsController < ApplicationController
   def pets_params
     params.permit(:image, :name, :description, :approximate_age, :sex, :adoptable)
   end
-
 end

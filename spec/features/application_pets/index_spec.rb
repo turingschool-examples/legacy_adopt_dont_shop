@@ -23,7 +23,6 @@ describe "application pet index page" do
     expect(page).to have_content(@pet3.name)
 
     expect(page).to have_no_content(@pet1.name)
-    expect(page).to have_no_content(@pet4.name)
   end
 
   it "has a button for each pet which creates a new application_pet record" do

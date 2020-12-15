@@ -1,0 +1,15 @@
+<h3>Add a pet to this application</h3>
+<section class="pet_search">
+  <%= form_tag application_path(@application), method: :get do %>
+  <%= label_tag :pet_search %>
+  <%= text_field_tag :pet_search %>
+  <%= submit_tag 'Search by Pet Name'%>
+  <% end %>
+</section>
+
+<% if params[:pet_search] %>
+  <% @pets.each do |pet| %>
+    <%= image_tag "#{pet.image}", :size => '80x80' %>
+    <%= link_to "#{pet.name} - Adopt me", application_pets_path(application_id: @application.id, pet_id: pet.id), method: :post %><br>
+  <% end %> 
+<% end %>

@@ -1,0 +1,8 @@
+<% if @application.has_pets_selected? %>
+  Description: <%= @application.description %><br>
+  <%= form_tag application_path(@application), method: :patch do %>
+  <%= label_tag "Why you wish to adopt:" %>
+  <%= text_field_tag :description %><br>
+  <%= submit_tag 'Submit' %> <br> 
+  <% end %>
+<% end %>

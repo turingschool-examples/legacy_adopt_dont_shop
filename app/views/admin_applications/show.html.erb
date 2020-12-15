@@ -1,20 +1,5 @@
-<section id="main">
-  <h2>Application #<%= @application.id %></h2>
-  Name: <%= @application.name %><br>
-  Street: <%= @application.street %><br>
-  City: <%= @application.city %><br>
-  State: <%= @application.state %><br>
-  Zip-code: <%= @application.zip_code %><br>
-  Application Status: <%= @application.application_status %><br>
-  Description: <%= @application.description %><br>
-</section>
+<%= render "main" %>
+<%= render "pets" %>
 
-<% if @application.pending? %>
-  <%= render "approval" %>
-<% elsif @application.approved? %>
-  <%= render "approval", approval: true%>
-<% elsif @application.rejected? %>
-  <%= render "approval", rejection: true %>
-<% end %>
 
 

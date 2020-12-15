@@ -15,9 +15,15 @@ class UserApplicationsController < ApplicationController
     if app.save
       redirect_to user_application_path(app.id)
     else
-      flash[:failure] = "Please Fill in all Required Fields"
+      flash[:error] = "Please Fill in all Required Fields"
       render :new
     end
+  end
+
+  def update
+    app = UserApplication.find(params[:id])
+    app.update(status: "Pending")
+    redirect_to user_application_path(app.id)
   end
 
   private

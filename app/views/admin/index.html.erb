@@ -1,3 +1,4 @@
+<body>
 <% @shelters.each do |shelter| %>
   <section id="shelter-<%= shelter.id %>">
     <%= link_to "#{shelter.name}", admin_shelter_path(shelter.id), method: :get %>
@@ -9,3 +10,4 @@
     <h3><%= link_to "Application #{app.id}", admin_app_path(app.id), method: :get %></h3>
   </section>
 <% end %>
+</body>

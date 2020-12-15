@@ -1,5 +1,7 @@
-class AdminApplicationsController < ApplicationController
-
+class Admin::ApplicationsController < ApplicationController
+  def index
+    @applications = Application.all
+  end
   def show
     @app = Application.find(params[:id])
     @pets = @app.pet_apps(params[:id])

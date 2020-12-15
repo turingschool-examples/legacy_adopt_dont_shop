@@ -7,7 +7,6 @@ class ApplicationsController < ApplicationController
     @app = Application.new(application_params)
     if @app.save
       redirect_to application_path(@app.id)
-        # binding.pry
     else
       flash[:notice] = "Application not created: Required information missing."
       render :new
@@ -15,7 +14,8 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    @app = Application.find(params[:id])
+    binding.pry
+    @app = Application.find(params[:application][:id])
     @pets = Pet.adoptable
     @chosen_ones = @app.pets
     if params[:search]

@@ -1,0 +1,8 @@
+<body>
+  <ul class="shelters-list">
+    <% @applications.each do |application| %>
+      <li><%= link_to "#{application.name}", application_path(application.id) %>
+      <%= application.id %></li>
+    <% end %>
+  </ul>
+</body>

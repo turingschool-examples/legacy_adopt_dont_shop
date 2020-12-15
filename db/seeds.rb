@@ -27,14 +27,14 @@ Shelter.all.each do |shelta|
   end
 end
 
-@bobby = Application.create!(name: "Bobby",
+bobby = Application.create!(name: "Bobby",
                              street: "756 6th st.",
                              city: "Boulder",
                              state: "CO",
                              zip_code: 80302,
                              application_status: "In Progress")
 
-@elane = Application.create!(name: "Elane",
+elane = Application.create!(name: "Elane",
                              street: "1222 6th st.",
                              city: "Denver",
                              state: "CO",
@@ -42,7 +42,7 @@ end
                              application_status: "Pending",
                             description: "i want these pets")
 
-@dane = Application.create!(name: "Dane",
+dane = Application.create!(name: "Dane",
                             street: "134 12th st.",
                             city: "Denver",
                             state: "CO",
@@ -50,6 +50,6 @@ end
                             application_status: "Pending",
                           description: "i want a pet")
 
-ApplicationPet.create(application: @elane, pet: Pet.first, status: "Pending")
-ApplicationPet.create(application: @elane, pet: Pet.second, status: "Pending")
-ApplicationPet.create(application: @dane, pet: Pet.third, status: "Pending")
+ApplicationPet.create(application: elane, pet: Pet.first, status: "Pending")
+ApplicationPet.create(application: elane, pet: Pet.second, status: "Pending")
+ApplicationPet.create(application: dane, pet: Pet.third, status: "Pending")

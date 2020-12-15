@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "As a visitor" do
-  describe "When i visit the application page" do
+  describe "When i visit an application show page" do
     before :each do
       @shelter_1 = Shelter.create!(name: "Boulder Humane Society",
                                    address: "1234 Wallabe Way",
@@ -66,6 +66,30 @@ describe "As a visitor" do
           expect(page).to_not have_content(@pet4.name)
         end
       end
+    end
+
+    it "I cant add a pet if i've already added it" do
+      visit application_path(@bobby)
+
+      expect(page).to have_content("Add a pet to this application")
+
+      fill_in "pet_search" , with: "Hedi"
+      click_on "Search by Pet Name"
+
+      expect(page).to have_link("Hedi - Adopt me")
+
+      click_on "Hedi - Adopt me"
+
+      expect(current_path).to eq(application_path(@bobby))
+
+      fill_in "pet_search" , with: "Hedi"
+      click_on "Search by Pet Name"
+
+      expect(page).to have_link("Hedi - Adopt me")
+
+      click_on "Hedi - Adopt me"
+
+      expect(page).to have_content("You've already added this pet.")
     end
   end
 end

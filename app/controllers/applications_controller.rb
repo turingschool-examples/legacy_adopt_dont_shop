@@ -1,12 +1,12 @@
 class ApplicationsController < ApplicationController
     def index
-      @pet = Pet.find(params[:id])
+        @application = Application.all
     end
 
     def show
       @application = Application.find(params[:id])
       if params[:search]
-        @searched_pets = Pet.where("name like ?", "%#{params[:search]}%")
+        @searched_pets = Pet.where("lower(name) like ?", "%#{params[:search].downcase}%")
       end
     end
 

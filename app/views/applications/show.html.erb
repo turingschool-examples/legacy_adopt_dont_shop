@@ -1,9 +1,25 @@
 <h1>Applicant Information</h1>
+<p>Application Status: <%=@application.status%></p>
 <p>Applicant Name: <%=@application.name%></p>
 <p>Street Address: <%=@application.address%></p>
 <p>City: <%=@application.city%></p>
 <p>State: <%=@application.state%></p>
 <p>Zip Code: <%=@application.zip%></p>
 <p>Why the applicant says they'd be a good home: <%=@application.description%></p>
-<p>Pets Applied For:</p>
-<p>Application Status: <%=@application.status%></p>
+<p>Pets Applied For: <%=@application.pets.each do |pet|%></p>
+                      <%= pet %>
+                      <% end %>
+<% if @application.status == "In Progress" %>
+<p><%= "Add a Pet to this Application:"%></p>
+  <%=form_tag "/applications/#{@application.id}", method: :get do %>
+  <%= text_field_tag :search, "", required: true %>
+  <%= submit_tag "Search"%>
+  <% end%>
+<% end%>
+
+<% if @pets != nil %>
+<% @pets.each do |pet| %>
+<%= pet.name %>
+<% end %>
+<% end %>
+<%= button_to "Adopt!" %>

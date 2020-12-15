@@ -1,6 +1,5 @@
 class Application < ApplicationRecord
-
-  has_many :application_pets
+  has_many :application_pets, dependent: :destroy
   has_many :pets, through: :application_pets
 
   validates_presence_of :name
@@ -9,6 +8,9 @@ class Application < ApplicationRecord
   validates_presence_of :state
   validates_presence_of :zip_code
   validates :zip_code, zipcode: { country_code: :us }
+  validates_presence_of :description, on: :update
+
+  
 
   def in_progress?
     self.application_status == "In Progress"

@@ -46,7 +46,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "ffaker"
   gem "orderly"
-  gem "city-state", "~> 0.0.13"
+  gem "city-state"
   gem "validates_zipcode"
 end
 
@@ -59,7 +59,7 @@ end
 
 group :production do
   gem "rails_12factor", group: :production
-  gem "city-state", "~> 0.0.13"
+  gem "city-state"
   gem "validates_zipcode"
 end
 

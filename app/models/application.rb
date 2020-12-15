@@ -1,6 +1,7 @@
 class Application < ApplicationRecord
   has_many :application_pets, dependent: :destroy
   has_many :pets, through: :application_pets
+  accepts_nested_attributes_for :pets
 
   validates_presence_of :name
   validates_presence_of :street

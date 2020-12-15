@@ -25,4 +25,10 @@ describe "Description page" do
     expect(current_path).to eq("/applications/#{@application1.id}")
     expect(page).to have_content("I like dogs")
   end
+
+  it "does not allow an empty form to be entered" do 
+    visit "/applications/#{@application1.id}/edit"
+    click_on "Submit"
+    expect(page).to have_content("Application not submitted: Please enter valid description")
+  end
 end

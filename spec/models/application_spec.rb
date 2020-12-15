@@ -5,6 +5,10 @@ describe Application, type: :model do
     it {should have_many(:pets).through(:application_pets)}
   end
 
+  describe "validations" do 
+    it {should validate_presence_of(:description)}
+  end
+
   describe "instance methods" do
     before :each do
       @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)

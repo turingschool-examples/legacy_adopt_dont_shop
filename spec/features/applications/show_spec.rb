@@ -90,6 +90,25 @@ describe "As a visitor" do
       expect(current_path).to have_content(@bobby.description)
     end
 
+    it "It does not allow me to proceed without entering a description" do
+      visit application_path(@bobby)
+
+      expect(page).to have_content("Add a pet to this application")
+
+      fill_in "pet_search", with: "Hedo"
+      click_on "Search by Pet Name"
+      expect(page).to have_link("Hedo - Adopt me")
+
+      click_on "Hedo - Adopt me"
+      expect(current_path).to eq(application_path(@bobby))
+
+      fill_in :description, with: ""
+      click_on "Submit"
+
+      expect(current_path).to eq(application_path(@bobby))
+      expect(page).to have_content("Enter a valid description")
+    end
+
     it "if i do not add pets i will not see a submit button" do
       visit application_path(@sam)
 

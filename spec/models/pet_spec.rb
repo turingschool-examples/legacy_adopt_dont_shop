@@ -41,4 +41,24 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  describe 'search' do
+    shelter = FactoryBot.create(:shelter)
+    pet1 = FactoryBot.create(:pet)
+    pet2 = FactoryBot.create(:pet)
+
+    it "can search existing pets" do
+      expect(Pet.search_pets(pet1.name)).to eq([pet1])
+      expect(Pet.search_pets(pet2.name)).to eq([pet2])
+    end
+
+    it "returns all pets when there is no search parameter or it is an empty string" do
+      expect(Pet.search_pets(nil)).to eq(Pet.all)
+      expect(Pet.search_pets("")).to eq(Pet.all)
+    end
+
+    it "returns nil when there is no pet matching the search parameter" do
+      expect(Pet.search_pets("12345")).to eq(nil)
+    end
+  end
 end

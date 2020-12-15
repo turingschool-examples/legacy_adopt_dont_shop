@@ -2,9 +2,7 @@
   <%= render "description", in_progress: true %>
 <% elsif @application.pending? %>
   <%= render "description",  pending: true%>
-<% elsif @application.accepted? %>
-  <%= render "description"  %>
-<% elsif @application.rejected? %>
+<% else %>
   <%= render "description"  %>
 <% end %>
 

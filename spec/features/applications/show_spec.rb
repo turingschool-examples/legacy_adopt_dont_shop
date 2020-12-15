@@ -14,15 +14,13 @@ describe "application show page" do
     ApplicationPet.create(application: @application1, pet: @pet1)
     ApplicationPet.create(application: @application1, pet: @pet2)
 
-    ApplicationPet.create(application: @application2, pet: @pet2)
-    ApplicationPet.create(application: @application2, pet: @pet3)
+
   end
 
   it "displays all related application info on application show page" do
     visit "/applications/#{@application1.id}"
     expect(page).to have_content(@application1.applicant)
     expect(page).to have_content(@application1.address)
-    expect(page).to have_content(@application1.description)
     expect(page).to have_content(@pet1.name)
     expect(page).to have_content(@pet2.name)
     expect(page).to_not have_content(@pet3.name)
@@ -33,5 +31,20 @@ describe "application show page" do
     expect(page).to have_button("Add Pet")
     click_on "Add Pet"
     expect(current_path).to eq("/applications/#{@application1.id}/pets")
+  end
+
+  it "has a submit button and description text field only after adding pets to application" do
+    visit "/applications/#{@application2.id}"
+
+    expect(page).to_not have_button("Submit")
+    expect(page).to_not have_field("description")
+
+    ApplicationPet.create(application: @application2, pet: @pet1)
+    ApplicationPet.create(application: @application2, pet: @pet2)
+
+    visit "/applications/#{@application2.id}"
+
+    expect(page).to have_button("Submit")
+    expect(page).to have_field("description")
   end
 end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "application pet show page" do
+describe "application pet index page" do
 
   before :each do
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
@@ -12,12 +12,6 @@ describe "application pet show page" do
 
     @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
     @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "Somewhere")
-
-    ApplicationPet.create(application: @application1, pet: @pet1)
-    ApplicationPet.create(application: @application1, pet: @pet2)
-
-    ApplicationPet.create(application: @application2, pet: @pet2)
-    ApplicationPet.create(application: @application2, pet: @pet3)
   end
 
 

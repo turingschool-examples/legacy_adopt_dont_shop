@@ -3,3 +3,16 @@
 <li><%= @application.city %></li>
 <li><%= @application.state %></li>
 <li><%= @application.zip %></li>
+
+<%= form_tag applications_show_path, method: :get do %>
+  <h3><%= 'Add a Pet!'%></h3>
+  <%= label_tag :search, 'Search for Pet by Name' %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag 'Submit' %>
+<% end %>
+  <% if @selected %>
+  <p>Add a Pet to this Application: </p>
+    <% @selected.each do |selected| %>
+      <%= selected.name %><% link_to "Adopt this Pet!", applications_show_path(@application.id, :pet_id => selected.id, :adopt => true), method: :get %><br>
+      <% end %>
+<% end %>

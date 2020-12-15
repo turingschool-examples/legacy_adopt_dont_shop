@@ -25,8 +25,6 @@ RSpec.describe 'From application index page, create new Application' do
 
                 @application = Application.last 
 
-                save_and_open_page
-                require 'pry'; binding.pry
                 expect(current_path).to eq("/applications/#{@application.id}")
                 expect(page).to have_content("Adam")
                 expect(page).to have_content("123 cherry st")

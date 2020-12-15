@@ -1,15 +1,4 @@
 class ApplicantsController < ApplicationController
-    
-    def index
-        @applicants = Applicant.all
-    end
-
-    def show
-        @applicant = Applicant.find(params[:id])
-    end
-    
-    def new
-    end
 
     def create
         Applicant.create(applicant_params)
@@ -22,10 +11,5 @@ class ApplicantsController < ApplicationController
     private
     def applicant_params
         params.permit(:name, :address, :city, :state, :zip)
-    end
-
-    private
-    def application_params
-        params.permit(:description, :status)
     end
 end

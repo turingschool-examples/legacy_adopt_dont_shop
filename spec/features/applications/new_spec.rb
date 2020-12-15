@@ -12,11 +12,11 @@ describe "New page" do
   end
 
   it "has fields for information to fill out" do
-    expect(page).to have_field("Applicant")
-    expect(page).to have_field("Address")
-    expect(page).to have_field("City")
-    expect(page).to have_field("State")
-    expect(page).to have_field("Zip")
+    expect(page).to have_field("applicant")
+    expect(page).to have_field("address")
+    expect(page).to have_field("city")
+    expect(page).to have_field("state")
+    expect(page).to have_field("zip")
     expect(page).to have_button("Submit")
   end
 
@@ -27,7 +27,6 @@ describe "New page" do
     fill_in "state", with: "CO"
     fill_in "zip", with: "80000"
     click_on "Submit"
-    require "pry"; binding.pry
     processed = current_path.split("/")
     expect(processed[1]).to eq("applications")
     expect(processed[2].length).to eq(processed[2].to_i.to_s.length)

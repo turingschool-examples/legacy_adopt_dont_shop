@@ -50,7 +50,7 @@ require 'rails_helper'
 
 
       expect(page).to have_button("Submit")
-      expect(page).to have_content("Pending")
+      expect(page).to have_content("In Progress")
     end
 
     it 'When I visit an applications show page, if there is no submit button if no pets' do

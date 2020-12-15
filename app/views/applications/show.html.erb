@@ -9,13 +9,18 @@
   <%= @application.zip %><br>
   Description:
   <%= @application.description %><br>
-  Pets:
-  <%# <%= @application.pet_applications.pets.each do |pet|
-       pet.name
-      end %></p>
-<%= form_tag("/pets", method: :get) do %>
-<%= label_tag :add_a_pet_to_this_application %>
-<%= search_field_tag :search, params[:search] %>
-<%= submit_tag "Search", name: nil %>
+  Pets:</p>
+
+<%= form_tag("/applications/#{@application.id}", method: :get) do %>
+  <%= label_tag :add_a_pet_to_this_application %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search" %>
 <% end %>
+
+<% if @searched_pets %>
+  <% @searched_pets.each do |pet| %>
+    <%= pet.name %>
+  <% end %>
+<% end %>
+
 <h3>Application Status: <%= @application.status %></h3>

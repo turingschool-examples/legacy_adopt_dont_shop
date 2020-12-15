@@ -5,6 +5,9 @@ class ApplicationsController < ApplicationController
 
     def show
       @application = Application.find(params[:id])
+      if params[:search]
+        @searched_pets = Pet.where(name: params[:search])
+      end
     end
 
     def edit
@@ -35,13 +38,14 @@ class ApplicationsController < ApplicationController
       redirect_to '/applications'
     end
 
-    def search
-      if params[:search].blank?
-        redirect_to(root_path, alert: "Empty field!") and return
-      else
-        @parameter = params[:search].downcase
-        @results = Pet.all.where("lower(name) LIKE :search", search: @parameter)
-    end
+    # def search
+    #   if params[:search].blank?
+    #     redirect_to(root_path, alert: "Empty field!") and return
+    #   else
+    #     @parameter = params[:search].downcase
+    #     @results = Pet.all.where("lower(name) LIKE :search", search: @parameter)
+    #   end
+    # end
 
     private
     def applications_params

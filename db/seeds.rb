@@ -50,6 +50,7 @@ dane = Application.create!(name: "Dane",
                             application_status: "Pending",
                           description: "i want a pet")
 
-ApplicationPet.create(application: elane, pet: Pet.first, status: "Pending")
+ApplicationPet.create(application: elane, pet: Pet.first, status: "Approved")
 ApplicationPet.create(application: elane, pet: Pet.second, status: "Pending")
 ApplicationPet.create(application: dane, pet: Pet.third, status: "Pending")
+ApplicationPet.create(application: dane, pet: Pet.first, status: "Pending")

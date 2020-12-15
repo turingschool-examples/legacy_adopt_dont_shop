@@ -1,7 +1,7 @@
 
 <h1><%= @application.applicant %>'s Application</h1>
 <% if @application.submitted? %>
-<h2>Status:<%= @application.status %></h2>
+<h2>Status:<%= @application.check_status %></h2>
 <% end %>
 
 <h3>Address:</h3>

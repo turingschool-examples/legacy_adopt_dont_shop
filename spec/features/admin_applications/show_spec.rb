@@ -11,6 +11,12 @@ describe "admin application show page" do
     @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
     @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "Somewhere")
 
+    @application1.submitted = true
+    @application2.submitted = true
+
+    @application1.save
+    @application2.save
+
     ApplicationPet.create(application: @application1, pet: @pet1)
     ApplicationPet.create(application: @application1, pet: @pet2)
 

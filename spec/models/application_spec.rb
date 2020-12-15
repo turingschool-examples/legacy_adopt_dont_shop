@@ -29,7 +29,7 @@ describe Application, type: :model do
     it "determines whether application has been submitted" do
       expect(@application1.submitted?).to eq(false)
 
-      @application1.status = "Pending"
+      @application1.submitted = true
       @application1.save
 
       expect(@application1.submitted?).to eq(true)
@@ -40,12 +40,11 @@ describe Application, type: :model do
       pet2app1 = ApplicationPet.create(application: @application1, pet: @pet2)
 
 
-      pet3app2 = ApplicationPet.create(application: @application1, pet: @pet3)
-      pet2app2 = ApplicationPet.create(application: @application1, pet: @pet2)
+      pet3app2 = ApplicationPet.create(application: @application2, pet: @pet3)
+      pet2app2 = ApplicationPet.create(application: @application2, pet: @pet2)
 
-      @application1.status = "Pending"
-      @application2.status = "Pending"
-
+      @application1.submitted = true
+      @application2.submitted = true
       @application1.save
       @application2.save
 
@@ -54,22 +53,19 @@ describe Application, type: :model do
       pet1app1.save
       pet3app2.save
 
-      @application1.check_status
-      @application2.check_status
 
-      expect(@application1.status).to eq("Pending")
-      expect(@application2.status).to eq("Pending")
+
+      expect(@application1.check_status).to eq("Pending")
+      expect(@application2.check_status).to eq("Pending")
 
       pet2app1.status = "Rejected"
       pet2app2.status = "Approved"
+
       pet2app1.save
       pet2app2.save
 
-      @application1.check_status
-      @application2.check_status
-
-      expect(@application1.status).to eq("Rejected")
-      expect(@application2.status).to eq("Approved")
+      expect(@application1.check_status).to eq("Rejected")
+      expect(@application2.check_status).to eq("Approved")
     end
   end
 

@@ -7,6 +7,9 @@ describe ApplicationPet, type: :model do
   end
 
   describe "validations" do
+    it { should validate_presence_of :application_id }
+    it { should validate_presence_of :pet_id }
+    it { should validate_presence_of :status }
   end
 
   describe "class methods" do
@@ -44,10 +47,8 @@ describe ApplicationPet, type: :model do
       ApplicationPet.create!(application: frank, pet: pet6, status: "Approved")
       ApplicationPet.create!(application: frank, pet: pet7, status: "Rejected")
 
-
       expect(ApplicationPet.all_pets_approved?(abby.id)).to eq(true)
       expect(ApplicationPet.all_pets_approved?(frank.id)).to eq(false)
     end
-
   end
 end

@@ -53,5 +53,20 @@ require 'rails_helper'
       expect(page).to have_content("Pending")
     end
 
+    it 'When I visit an applications show page, if there is no submit button if no pets' do
+
+      joe = Application.create!(name: 'Joe', street_address: "12 Broadway", city: "Boulder", state: "CO", zip: 80303)
+      shelter = create(:shelter)
+      puppy = create(:pet, shelter: shelter)
+      kitteh = create(:pet, shelter: shelter)
+
+      visit "/applications/#{joe.id}"
+
+      expect(page).to have_content("In Progress")
+      expect(page).to have_no_button("Submit")
+      expect(page).to have_no_content("Pending")
+    
+    end
+
   end
 end

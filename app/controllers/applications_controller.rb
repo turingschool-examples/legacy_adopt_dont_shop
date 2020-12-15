@@ -4,7 +4,6 @@ class ApplicationsController < ApplicationController
     if params[:search]
       @pets = Pet.where("name ILIKE :name", name:"%#{params[:search]}")
     end
-    
   end
 
   def new
@@ -27,6 +26,7 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/new"
     end
   end
+
   # def index
   #
   # end

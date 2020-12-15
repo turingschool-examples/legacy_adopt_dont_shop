@@ -55,6 +55,7 @@ describe 'As a visitor' do
       ApplicationPet.create!(application: @bobby, pet: @pet3)
       ApplicationPet.create!(application: @bobby, pet: @pet2)
       ApplicationPet.create!(application: @abby, pet: @pet1)
+      ApplicationPet.create!(application: @abby, pet: @pet4)
     end
 
     it 'I can approve a pet for adoption' do
@@ -69,18 +70,34 @@ describe 'As a visitor' do
         expect(page).to_not have_button("Reject")
         end
       end
+    end
 
-      # visit admin_application_path(@abby)
+    it "Once all pets on an application are approved, the application status is appoved" do
+      visit admin_application_path(@bobby)
+      within "#pets-applied-for-#{@bobby.id}" do
+        within "#pets-id-#{@pet2.id}" do
+          click_button "Approve"
+        end
+        within "#pets-id-#{@pet3.id}" do
+          click_button "Approve"
+        end
+      end
+      within "#main" do
+        expect(page).to have_content("Application Status: Approved")
+      end
 
-      # within "#pets-applied-for-#{@abby.id}" do
-      #   within "#pets-id-#{@pet1.id}" do
-      #   expect(page).to have_content(@pet1.name)
-      #   click_button "Approve"
-      #   expect(page).to have_content("#{@pet1.name} has been approved")
-      #   end
-      # end
+    end
 
-      
+    it "Once a pet on an application are rejected, the application status is rejected" do
+      visit admin_application_path(@bobby)
+      within "#pets-applied-for-#{@bobby.id}" do
+        within "#pets-id-#{@pet3.id}" do
+          click_button "Reject"
+        end
+      end
+      within "#main" do
+        expect(page).to have_content("Application Status: Rejected")
+      end
     end
   end
 end

@@ -1,11 +1,14 @@
 class ApplicantsController < ApplicationController
 
     def create
-        Applicant.create(applicant_params)
-        @applicant = Applicant.last
-        @applicant.applications.create!
-        @application = Application.last
-        redirect_to "/applications/#{@application.id}"
+        @applicant = Applicant.new(applicant_params)
+        if @applicant.save
+            @applicant.applications.create!
+            @application = Application.last
+            redirect_to "/applications/#{@application.id}"
+        else
+            redirect_to "/applications/new", alert: @applicant.errors.full_messages
+        end
     end
 
     private

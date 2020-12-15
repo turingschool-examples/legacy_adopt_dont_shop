@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+  </head><br>
 
   <header>
     <div class="nav-bar">
@@ -14,9 +15,17 @@
         <p><%= link_to "Back to Home", "/" %>
           <%= link_to "Go to Shelters", "/shelters" %>
           <%= link_to 'Go to Pets', "/pets" %>
-  </head><br>
+  </header><br>
 
   <body>
+    <section id= 'flash-notice'>
+    <% flash.each do |type, messages| %>
+      <% messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    <% end %>
+    </section>
+    
     <%= yield %>
   </body>
 </html>

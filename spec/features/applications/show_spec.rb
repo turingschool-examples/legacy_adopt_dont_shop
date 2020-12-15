@@ -33,11 +33,10 @@ describe "application show page" do
     expect(current_path).to eq("/applications/#{@application1.id}/pets")
   end
 
-  it "has a submit button and description text field only after adding pets to application" do
+  it "has a submit button only after adding pets to application" do
     visit "/applications/#{@application2.id}"
 
     expect(page).to_not have_button("Submit")
-    expect(page).to_not have_field("description")
 
     ApplicationPet.create(application: @application2, pet: @pet1)
     ApplicationPet.create(application: @application2, pet: @pet2)
@@ -45,6 +44,11 @@ describe "application show page" do
     visit "/applications/#{@application2.id}"
 
     expect(page).to have_button("Submit")
-    expect(page).to have_field("description")
+  end
+
+  it "redirects to edit page after clicking submit" do
+    visit "/applications/#{@application1.id}"
+    click_on "Submit"
+    expect(current_path).to eq("/applications/#{@application1.id}/edit")
   end
 end

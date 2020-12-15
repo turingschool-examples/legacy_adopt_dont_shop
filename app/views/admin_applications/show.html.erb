@@ -14,10 +14,10 @@
 <% @application.pets.each do |pet| %>
   <li><%= pet.name %>
     <% if !pet.application_result(@application.id) %>
-      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet=#{pet.id}&action=approve", method: :post %>
-      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&action=reject", method: :post %></li>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet=#{pet.id}&action=Approved", method: :post %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&action=Rejected", method: :post %></li>
     <% else %>
-      <%= pet.application_result(@application.id) %> 
+      <%= pet.application_result(@application.id) %>
     <% end %>
 <% end %>
 

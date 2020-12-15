@@ -28,7 +28,27 @@ RSpec.describe 'As a visitor' do
         # Then I am taken back to the new applications page
         expect(current_path).to eq("/applications/new")
         # And I see a message that I must fill in those fields.
-        # expect(page).to have_content("You must fill in the fields.")  # TODO: investigate why this is not passing 
+        expect(page).to have_content("You must fill in the fields.")  # TODO: investigate why this is not passing
+    end
+
+    it "Searching for Pets for an Application" do
+        application = Application.create!(application_name: "Leah Adoption", street_address: "123 Ridge Parkway", city: "Broomfiled", state: "CO", zip: "80021")
+        shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+        pet_1 = shelter.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
+        # As a visitor
+        # When I visit an application's show page
+        visit "/applications/#{application.id}"
+        # And that application has not been submitted,
+        expect(ApplicationPet.all).to eq([])
+        require "pry"; binding.pry
+        save_and_open_page
+        # Then I see a section on the page to "Add a Pet to this Application"
+        expect(page).to have_content("Add a Pet to this Application")
+# In that section I see an input where I can search for Pets by name
+# When I fill in this field with a Pet's name
+# And I click submit,
+# Then I am taken back to the application show page
+# And under the search bar I see any Pet whose name matches my search
     end
   end
 end

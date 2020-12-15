@@ -5,33 +5,45 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Shelter.destroy_all
+PetApplication.destroy_all
 Pet.destroy_all
 Application.destroy_all
+Shelter.destroy_all
 
-sample(3..5).times do
-  create(:shelter)
+rand(3..5).times do
+  FactoryBot.create(:shelter)
 end
 
-sample(15..20).times do
-  create(:pet)
+rand(15..20).times do
+  FactoryBot.create(:pet)
 end
 
-sample(10..15).times do
-  applications = create(:application)
-  applications.each do |app|
-    pets = Pet.all.sample(1..5)
-    pets.each do |pet|
-      pet_applications.create(app.id, pet.id)
-    end
+rand(10..15).times do
+  application = FactoryBot.create(:application)
+  pets = Pet.all.sample(rand(1..5))
+  pets.each do |pet|
+    PetApplication.create(application_id: application.id, pet_id: pet.id)
   end
+  application.status = "Pending"
 end
 
-sample(5..10).times do
-  applications = create(:application)
-  applications.each do |app|
-    app.status = "Rejected"
+rand(5..10).times do
+  application = FactoryBot.create(:application)
+  pets = Pet.all.sample(rand(1..5))
+  pets.each do |pet|
+    PetApplication.create(application_id: application.id, pet_id: pet.id)
   end
+  application.status = "Rejected"
 end
+
+# Don't seed Accepted applications until later
+# rand(5..10).times do
+#   application = FactoryBot.create(:application)
+#   pets = Pet.all.sample(rand(1..5))
+#   pets.each do |pet|
+#     PetApplication.create(application_id: application.id, pet_id: pet.id)
+#   end
+#   application.status = "Accepted"
+# end
 
 # "In Progress", "Pending", "Accepted", or "Rejected"

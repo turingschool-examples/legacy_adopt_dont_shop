@@ -18,19 +18,8 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # def search
-  #   @pet_results = @pet_results = Pet.search(params[:search])
-    
-  # end
-
   private
   def application_params
-    params.permit(:name)
-    params.permit(:address)
-    params.permit(:city)
-    params.permit(:state)
-    params.permit(:zip_code)
-    params.permit(:status)
-    params.permit(:search)
+    params.permit :name, :address, :city, :state, :zip_code, :status, :search
   end
 end

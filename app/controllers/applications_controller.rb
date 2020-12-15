@@ -13,6 +13,7 @@ class ApplicationsController < ApplicationController
     if params[:adopt]
       chosen = Pet.find(params[:pet_id])
       pet_app = PetApplication.create!(pet_id: chosen.id, application_id: @application.id)
+      @application.update(status: "Pending")
     end
   end
 

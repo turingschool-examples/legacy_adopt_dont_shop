@@ -47,7 +47,6 @@ require 'rails_helper'
       fill_in "Add a Pet to this Application", with:"#{puppy.name}"
       click_on "Search"
       click_link "Adopt this Pet"
-      # require 'pry'; binding.pry
 
 
       expect(page).to have_button("Submit")

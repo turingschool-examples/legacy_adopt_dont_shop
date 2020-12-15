@@ -1,0 +1,7 @@
+<h3>Pets applied for:</h3>
+<section id="pets-applied-for-<%= @application.id  %>"> 
+  <% @application.pets.each do |pet| %>
+    <%= image_tag "#{pet.image}", :size => '80x80' %>
+    <%= link_to "#{pet.name}", pet_path(pet), id: "pet-id-#{pet.id}" %><br>
+  <% end %> 
+</section>

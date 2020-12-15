@@ -17,7 +17,7 @@
   </head><br>
 
   <body>
-    <% flash.each do |type, message| %>
+    <% flash[:error].each do |message| %>
       <p class = "flash" ><%= message %></p>
     <% end %>
 

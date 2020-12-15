@@ -36,5 +36,7 @@ describe "admin application show page" do
     reject.click
     expect(page).to have_content("Rejected")
     expect(first(:button, "Reject")).to_not eq(reject)
+
+    expect(page).to have_content("Status: Rejected")
   end
 end

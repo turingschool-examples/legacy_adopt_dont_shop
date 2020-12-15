@@ -23,4 +23,18 @@ describe "admin application show page" do
     expect(page).to have_button("Approve")
     expect(page).to have_button("Reject")
   end
+
+  it "updates page and displays new result after button click" do
+    approve = first(:button, "Approve")
+    approve.click
+    expect(page).to have_content("Approved")
+    expect(first(:button, "Approve")).to_not eq(approve) #if the same button is still on the page, there is an issue
+
+    visit "/admin/applications/#{@application2.id}"
+
+    reject = first(:button, "Reject")
+    reject.click
+    expect(page).to have_content("Rejected")
+    expect(first(:button, "Reject")).to_not eq(reject)
+  end
 end

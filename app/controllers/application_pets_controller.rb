@@ -18,7 +18,9 @@ class ApplicationPetsController < ApplicationController
       end
     elsif params[:status] == "Rejected" 
       application_pet.update(status: "Rejected")
-      application.update(application_status: "Rejected")
+      if ApplicationPet.any_pets_rejected?(application.id)
+        application.update(application_status: "Rejected")
+      end
     end
     redirect_to admin_application_path(application)
   end

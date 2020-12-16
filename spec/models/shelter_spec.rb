@@ -16,5 +16,9 @@ describe Shelter, type: :model do
       expect(Shelter.reverse_alphabetical).to eq([@shelter3, @shelter2, @shelter1])
     end
 
+    it '.name_address' do
+      expect(Shelter.name_address(@shelter1.id)).to eq(@shelter1)
+    end
+
   end
 end

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_190835) do
     t.bigint "applications_id"
     t.bigint "application_id"
     t.bigint "pet_id"
-    t.string "status"
+    t.string "status" #enum
     t.index ["application_id"], name: "index_application_pets_on_application_id"
     t.index ["applications_id"], name: "index_application_pets_on_applications_id"
     t.index ["pet_id"], name: "index_application_pets_on_pet_id"

@@ -32,7 +32,6 @@ class ApplicationsController < ApplicationController
       @application.save
       redirect_to "/applications/#{@application.id}"
     else
-      require "pry"; binding.pry
       flash.now[:error] = @application.errors.full_messages
       render :edit
     end

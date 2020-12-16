@@ -1,0 +1,9 @@
+<h1>Shelters</h1>
+<%= link_to 'New Shelter', '/shelters/new' %>
+<% @shelters.each do |shelter| %>
+  <section id="shelter-<%=shelter.id%>">
+    <h2><%= link_to "#{shelter.name}", admin_shelter_path(shelter.id) %></h2>
+    <%= link_to "Edit Shelter", shelter_path(shelter.id), method: :get %>
+    <%= link_to "Delete Shelter", shelter_path(shelter.id), method: :delete %>
+  </section>
+<% end %>

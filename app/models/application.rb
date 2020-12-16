@@ -8,4 +8,8 @@ class Application < ApplicationRecord
   validates :state, presence: true
   validates :zip, presence: true
   validates :description, presence: true
+
+  #enum status: [:in_progress, ] this is where you can limit the status
+
+
 end

@@ -1,5 +1,6 @@
 <ul>
   <% @application.pets.each do |pet| %>
-    <li><%= link_to "#{pet.name}", pets_show_path(id: pet.id) %></li>
+    <%= image_tag "#{pet.image}", size: "100x100" %><br/>
+    <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
   <% end %>
 </ul>

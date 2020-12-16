@@ -2,7 +2,14 @@
 
 <h4>Status: <%= @application.status %>
     <% if @chosen_ones.count >= 1 && @application.status == "In Progress" %>
-        <%= button_to 'Submit', "/applications/#{@application.id}", method: :patch, params:{status: :"Pending"}%>
+        <%= form_with url: "/applications/#{@application.id}", method: :patch do |form| %>
+            <%= form.label :description %>
+            <%= form.text_field :description %>
+            <%= form.hidden_field :status, value: "Pending" %>
+        <%= form.submit ("Submit") %>
+    <% end %>
+
+        <%# <%= button_to 'Submit', "/applications/#{@application.id}", method: :patch, params:{status: :"Pending"}%>
     <% end %>
 </h4>
 

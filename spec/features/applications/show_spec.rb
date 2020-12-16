@@ -31,7 +31,7 @@ describe "Applications show page" do
     end
   end
   describe "when I fill in the search field and click submit" do
-    it "brings me back to the application show page and I can see any Pet who matches search" do
+    it "can see any Pet who matches search and I can click adopt to add a pet to my application" do
         application1 = Application.create!(
           name: "Bob Ross", address: "123 Paint Spill Lane", city: "Denver",
           state: "Colorado", zip: 80224, description: "I love animals")
@@ -42,12 +42,17 @@ describe "Applications show page" do
 
         visit "/applications/#{application1.id}"
 
-        fill_in :search, with: pet1.name
+        fill_in :search, with: "#{pet1.name}"
         click_on "Search"
 
         expect(current_path).to eq("/applications/#{application1.id}")
-        expect(page).to have_content(pet1.name)
+        expect(page).to have_content("#{pet1.name}")
         expect(page).to have_button("Adopt!")
+
+        click_on "Adopt!"
+        expect(current_path).to eq("/applications/#{application1.id}")
+        expect(page).to have_content("Pets Applied For:")
+        expect(page).to have_content("#{pet1.name}")
     end
   end
 end

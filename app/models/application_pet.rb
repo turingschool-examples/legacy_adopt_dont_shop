@@ -10,13 +10,11 @@ class ApplicationPet < ApplicationRecord
   
 
   def self.all_pets_approved?(application_id)
-    find_applications(application_id).is_approved
-    .count == find_applications(application_id).count
+    find_applications(application_id).is_approved.count == find_applications(application_id).count
   end
 
   def self.any_pets_rejected?(application_id)
-    find_applications(application_id).is_rejected
-    .count >= 1
+    find_applications(application_id).is_rejected.count >= 1
   end
-
+  
 end

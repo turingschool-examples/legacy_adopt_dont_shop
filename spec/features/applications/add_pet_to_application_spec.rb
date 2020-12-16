@@ -32,7 +32,5 @@ RSpec.describe 'as a user' do
         expect(page).to have_content(@pet1.name)
       end
     end
-
-
   end
 end

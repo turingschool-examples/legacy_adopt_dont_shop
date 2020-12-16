@@ -10,8 +10,8 @@
     <section id="pet-#{pet.id}">
       <%= image_tag "#{pet.image}", size: "100x100" %>
       <p><%= pet.name %></p>
-    <% section_end %>
-    < /section >
+    </section>
+  <% end %>
 <% else %>
     <%= flash.now[:error] = "No pets found with that name." %>
   <% end %>

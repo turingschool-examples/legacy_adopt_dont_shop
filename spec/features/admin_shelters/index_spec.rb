@@ -52,7 +52,7 @@ describe 'As a visitor' do
 
     it 'it shows a list of shelters with pending applications' do
       visit admin_shelters_path
-      save_and_open_page
+
       within "#shelter-pending-#{@shelter2.id}" do
         expect(page).to have_content(@shelter2.name)
       end

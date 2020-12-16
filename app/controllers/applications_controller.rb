@@ -3,6 +3,7 @@ class ApplicationsController < ApplicationController
     def show
         @application = Application.find(params[:id])
         @pets = Pet.search(params[:search])
+        @chosen_ones = @application.pets
         # # if params[:search]
         # # end
         # # if params[:adopt]
@@ -19,7 +20,7 @@ class ApplicationsController < ApplicationController
         @application = Application.find(params[:id])
         @application.update(application_params)
         require 'pry'; binding.pry
-        redirect_to "/applications/#{@application.id}"
+        redirect_to "/applications/#{params[:id]}"
     end
 
     private

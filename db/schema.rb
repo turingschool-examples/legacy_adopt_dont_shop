@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_12_12_213105) do
   end
 
   create_table "pets", force: :cascade do |t|
-    t.string "image"
+    t.string "image"  
     t.string "name"
     t.integer "approximate_age"
     t.bigint "shelter_id"

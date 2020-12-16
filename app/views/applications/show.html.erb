@@ -1,34 +1,49 @@
 <h2><%= @application.applicant.name %></h2>
 
+<h4>Status: <%= @application.status %>
+    <% if @chosen_ones.count >= 1 && @application.status == "In Progress" %>
+        <%= form_with url: "/applications/#{@application.id}", method: :patch do |form| %>
+            <%= form.label :description %>
+            <%= form.text_field :description %>
+            <%= form.hidden_field :status, value: "Pending" %>
+        <%= form.submit ("Submit") %>
+    <% end %>
+<% end %></h4>
+
 <p>Address:<br/>
-<%= @application.applicant.address %><br/>
-<%= @application.applicant.city %>
-<%= @application.applicant.state %>
-<%= @application.applicant.zip %></p>
-Description: <%= @application.description %>
-<br/>
-Pets: <br/>
-<% @application.pets.each do |pet| %>
-    <section id="pet-<%= pet.id %>">
-    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    <%= @application.applicant.address %><br/>
+    <%= @application.applicant.city %>
+    <%= @application.applicant.state %>
+    <%= @application.applicant.zip %>
+</p>
+
+<p>Description: <%= @application.description %></p>
+
+<p>Pets: <br/>
+    <% @application.pets.each do |pet| %>
+        <section id="pet-<%= pet.id %>">
+            <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+        </section>
+    <% end %>
+<p>
+
+<% if @application.status == "In Progress" %>
+    <section id='add-a-pet'>
+        <h4>Add a Pet!</h4>
+        
+        <%= form_tag "/applications/#{@application.id}", method: :get do %>
+            <%= text_field_tag :search, params[:search] %>
+            <%= submit_tag ("Search") %>
+        <% end %>
+
+        <p> <% @pets.each do |pet| %>
+            <section id="pet-<%= pet.id %>">
+            <ul>
+                <li><%= link_to pet.name, "/pets/#{pet.id}"%>
+                <%= button_to 'Adopt me!', "/adoptions", method: :post, params:{pet_id: pet.id, app_id: @application.id} %>
+                </li><br>
+            </ul>
+            </section>
+        <% end %></p>
     </section>
 <% end %>
-<%= button_to 'Submit', "/applications/#{@application.id}", method: :patch, params:{status: :"Pending"}%>
-<br />
-Status: <%= @application.status %>
-
-<h3>Add a Pet!</h3>
-<%= form_tag "/applications/#{@application.id}", method: :get do %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag ("Search") %>
-<% end %>
-
-<p><% @pets.each do |pet| %>
-    <section id="pet-<%= pet.id %>">
-    <ul>
-        <li><%= link_to pet.name, "/pets/#{pet.id}"%>
-        <%= button_to 'Adopt me!', "/adoptions", method: :post, params:{pet_id: pet.id, app_id: @application.id} %>
-        </li><br>
-    </ul>
-    </section>
-<% end %></p>

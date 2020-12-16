@@ -20,5 +20,17 @@ describe 'As a visitor' do
       expect(page).to have_button("Delete Shelter")
     end
 
+    it 'Then I see the shelters statistics' do
+      visit admin_shelter_path(@shelter1)
+
+      expect(page).to have_content("Statistics")
+
+      within('#statistics') do
+        expect(page).to have_content("Average pet age: #{@shelter1.pets.avg_age}")
+        expect(page).to have_content("Available pets: #{@shelter1.pets.adoptable_count}")
+        expect(page).to have_content("Adopted pets: #{@shelter1.pets.adopted_count}")
+      end
+    end
+
   end
 end

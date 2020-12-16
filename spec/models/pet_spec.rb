@@ -61,6 +61,33 @@ describe Pet, type: :model do
       
       expect(Pet.make_adopted).to eq(3)
     end
+
+    it '.avg_age' do
+      shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+      pet1 = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 0, description: 'super cute')
+      pet2 = shelter.pets.create!(sex: :female, name: "Floppy", approximate_age: 1, description: 'super cute')
+      pet3 = shelter.pets.create!(sex: :female, name: "Borko", approximate_age: 2, description: 'super cute')
+
+      expect(Pet.avg_age).to eq(1)
+    end
+
+    it '.adoptable_count' do
+      shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+      pet1 = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 0, description: 'super cute', adoptable: true)
+      pet2 = shelter.pets.create!(sex: :female, name: "Floppy", approximate_age: 1, description: 'super cute', adoptable: true)
+      pet3 = shelter.pets.create!(sex: :female, name: "Borko", approximate_age: 2, description: 'super cute', adoptable: false)
+
+      expect(Pet.adoptable_count).to eq(2)
+    end
+
+    it '.adopted_count' do
+      shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+      pet1 = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 0, description: 'super cute', adoptable: true)
+      pet2 = shelter.pets.create!(sex: :female, name: "Floppy", approximate_age: 1, description: 'super cute', adoptable: true)
+      pet3 = shelter.pets.create!(sex: :female, name: "Borko", approximate_age: 2, description: 'super cute', adoptable: false)
+
+      expect(Pet.adopted_count).to eq(1)
+    end
   end
   
 end

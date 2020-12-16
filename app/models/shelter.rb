@@ -1,6 +1,7 @@
 class Shelter < ApplicationRecord
   has_many :pets, dependent: :destroy
 
+
   def self.reverse_alphabetical
     find_by_sql('SELECT * FROM shelters ORDER BY name DESC')
   end
@@ -9,11 +10,10 @@ class Shelter < ApplicationRecord
     find_by_sql("SELECT * FROM shelters WHERE id=#{id}").first
   end
 
-  def pending_applications
-    pets.select("pets.name, applications.id")
-    .joins(application_pets: [:application])
+  def self.pending_applications
+    joins(pets: [:application_pets, :applications])
     .where("applications.application_status = ?", "Pending")
-    .where("application_pets.status =?", "Pending")
+    .distinct
   end
 
 end

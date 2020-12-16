@@ -28,7 +28,6 @@ RSpec.describe 'As a user' do
         fill_in "Name:", with: "Thor"
         click_button "Search"
         expect(current_path).to eq("/applications/#{@application.id}")
-        # And under the search bar I see any Pet whose name matches my search
 
         within("#application-#{@application.id}") do
           expect(page).to have_content(@pet1.name)

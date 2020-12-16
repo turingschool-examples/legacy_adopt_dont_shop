@@ -3,8 +3,24 @@ class Pet < ApplicationRecord
   has_many :application_pets
   has_many :applications, through: :application_pets
 
-  # def self.search
-  #   pet = pet.find
+  def self.search(search)
+    if search
+      pet = Pet.find_by(name: search)
+      if pet
+        self.where(name: pet.name)
+      else
+        Pet.all
+      end
+    else
+      Pet.all
+    end
+  end
+
+
+
+  # def self.search_pets(find)
+  #   key = "%#{find}%".downcase
+  #   where("LOWER(name) like :search", search: key)
   # end
 
   validates_presence_of :name, :description, :approximate_age, :sex

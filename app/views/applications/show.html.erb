@@ -1,10 +1,5 @@
 <h2><%= @application.applicant.name %></h2>
 
-<%# <h2>Add a Pet!</h2> %>
-<%# <%= form_with model:@pets, method: :get do |form| %>
-    <%# <% form.text_field :search, params[:search])%>
-    <%# <% form.submit "Add"%>
-<%# <% end %>
 <p>Address:<br/>
 <%= @application.applicant.address %><br/>
 <%= @application.applicant.city %>
@@ -20,3 +15,17 @@ Pets: <br/>
 <% end %>
 <br />
 Status: <%= @application.status %>
+
+<h3>Add a Pet!</h3>
+<%= form_tag "/applications/#{@application.id}", method: :get do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag ("Search") %>
+<% end %>
+<% binding.pry%>
+    <% @pets.each do |pet| %>
+        <ul>
+            <li><%= link_to pet.name, "/pets/#{pet.id}"%></li><br>
+            </ul>
+        <% end %>
+
+

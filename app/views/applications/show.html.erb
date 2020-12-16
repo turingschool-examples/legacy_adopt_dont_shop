@@ -7,7 +7,7 @@
 <p>Zip Code: <%=@application.zip%></p>
 <p>Why the applicant says they'd be a good home: <%=@application.description%></p>
 <p>Pets Applied For: <%=@application.pets.each do |pet|%></p>
-                      <%= pet %>
+                      <li><%= link_to "#{pet.name}", "/pets/#{pet.id}", method: :get %></li>
                       <% end %>
 <% if @application.status == "In Progress" %>
 <p><%= "Add a Pet to this Application:"%></p>
@@ -20,6 +20,6 @@
 <% if @pets != nil %>
   <% @pets.each do |pet| %>
     <%= pet.name %>
+    <%= button_to "Adopt!", pet_applications_path(application_id: @application.id, pet_id: pet.id), method: :post %>
   <% end %>
-  <%= button_to "Adopt!" %>
 <% end %>

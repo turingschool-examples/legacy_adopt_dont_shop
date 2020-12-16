@@ -13,6 +13,7 @@ Pets: <br/>
     <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
     </section>
 <% end %>
+<%= button_to 'Submit', "/applications/#{@application.id}", method: :patch, params:{status: :"Pending"}%>
 <br />
 Status: <%= @application.status %>
 
@@ -22,12 +23,12 @@ Status: <%= @application.status %>
     <%= submit_tag ("Search") %>
 <% end %>
 
-<section id="pet-list">
 <p><% @pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
     <ul>
-        <li><%= link_to pet.name, "/pets/#{pet.id}"%></li><br>
+        <li><%= link_to pet.name, "/pets/#{pet.id}"%>
+        <%= button_to 'Adopt me!', "/adoptions", method: :post, params:{pet_id: pet.id, app_id: @application.id} %>
+        </li><br>
     </ul>
+    </section>
 <% end %></p>
-</section>
-
-

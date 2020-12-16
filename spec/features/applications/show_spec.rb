@@ -8,8 +8,8 @@ RSpec.describe "the Application index page" do
         @applicant1 = FactoryBot.create(:applicant)
         @application1 = FactoryBot.create(:application, applicant: @applicant1)
 
-        ApplicationPet.create!(pet: @pet1, application: @application1)
-        ApplicationPet.create!(pet: @pet2, application: @application1)
+        Adoption.create!(pet: @pet1, application: @application1)
+        Adoption.create!(pet: @pet2, application: @application1)
       end
     
     it "should display Application info" do
@@ -24,7 +24,7 @@ RSpec.describe "the Application index page" do
          expect(page).to have_content(@pet2.name)
     end
 
-    it "should allow you to search for and add a pet" do 
+    it "should allow you to search for and click on a pet" do 
       visit "/applications/#{@applicant1.id}"
 
       expect(page).to have_button('Search')
@@ -40,6 +40,22 @@ RSpec.describe "the Application index page" do
       click_on "#{@pet1.name}"
 
       expect(current_path).to eq("/pets/#{@pet1.id}")
+
+    end
+
+    it "should allow you to adopt a pet" do
+      visit "/applications/#{@applicant1.id}"
+
+      within("#playlist-#{@pet1.id}") do
+        expect(page).to have_button('Adopt Me!')
+        expect(page).to have_content(@pet1.name)
+      end
+
+      within("#playlist-#{@pet1.id}") do
+        click_button 'Adopt Me!'
+      end
+
+      expect(page).to have_content("Pets")
 
     end
 end

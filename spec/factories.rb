@@ -30,7 +30,7 @@ FactoryBot.define do
       description {"I'll build a doghouse made of #{Faker::Games::Minecraft.block} and put a #{Faker::House.furniture} in the #{Faker::House.room}. I'll feed my pet #{Faker::Food.dish} everyday! As a longtime #{Faker::Company.profession} I always say - #{Faker::Marketing.buzzwords}."}
     end
 
-    # factory :application_pet do
+    # factory :adoption do
     #   pets { [association(:pet)] }
     #   applications { association(:application) }
     # end

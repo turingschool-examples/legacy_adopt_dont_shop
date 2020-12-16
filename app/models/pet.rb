@@ -5,9 +5,11 @@ class Pet < ApplicationRecord
 
   def self.search(search)
     if search
-      pet = Pet.find_by(name: search.titlecase)
+      pet = Pet.where("LOWER(name) LIKE ?", "%#{search.downcase}%")
+      # pet = Pet.find_by(name: search.titlecase)
+      require 'pry'; binding.pry
       if pet
-        self.where(name: pet.name)
+        pet
       else
         Pet.all
       end

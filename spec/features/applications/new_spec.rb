@@ -36,7 +36,6 @@ RSpec.describe "Applications creation" do
       fill_in 'zip', with: '26034'
       fill_in 'description', with: 'I love puppies so much'
       click_on 'Submit'
-      save_and_open_page
 
       expect(current_path).to eq("/applications/#{Application.last.id}")
       expect(page).to have_content("Michael Heath")
@@ -45,6 +44,20 @@ RSpec.describe "Applications creation" do
       expect(page).to have_content("26034")
       expect(page).to have_content("I love puppies so much")
       expect(page).to have_content("In Progress")
+    end
+    it "shows a message if I fail to fill in any form fields" do
+      visit "/pets"
+      click_link "Start an Application"
+
+      fill_in 'name', with: 'Michael Heath'
+      fill_in 'street', with: '674 Locust Hill Rd.'
+      fill_in 'state', with: 'WV'
+      fill_in 'zip', with: '26034'
+      fill_in 'description', with: 'I love puppies so much'
+      click_on 'Submit'
+
+      expect(page).to have_content("Whoops! Fill in that which you have forgotten.")
+      expect(page).to have_button("Submit")
     end
   end
 end

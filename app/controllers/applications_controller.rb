@@ -11,11 +11,18 @@ class ApplicationsController < ApplicationController
     @application = Application.new(application_params)
     @application.status = "In Progress"
     @application.save
-    redirect_to "/applications/#{@application.id}"
+
+    if @application.id
+      redirect_to "/applications/#{@application.id}"
+    else
+      flash[:notice] = "Whoops! Fill in that which you have forgotten."
+      render :new
+    end
   end
+
 
   private
   def application_params
-    params.permit(:name, :street, :city, :state, :zip, :description, :status)
+    params.permit(:name, :street, :city, :state, :zip, :description, :status, :pets)
   end
 end

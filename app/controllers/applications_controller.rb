@@ -3,6 +3,8 @@ class ApplicationsController < ApplicationController
     def show
         @application = Application.find(params[:id])
         @pets = Pet.search(params[:search])
+        # require 'pry'; binding.pry
+        @chosen_ones = @application.pets
         # # if params[:search]
         # # end
         # # if params[:adopt]

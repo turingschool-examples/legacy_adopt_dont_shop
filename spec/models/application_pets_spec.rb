@@ -46,9 +46,6 @@ describe ApplicationPet, type: :model do
       ApplicationPet.create!(application: @frank, pet: @pet5, status: "Approved")
       ApplicationPet.create!(application: @frank, pet: @pet6, status: "Approved")
       ApplicationPet.create!(application: @frank, pet: @pet7, status: "Rejected")
-
-      expect(ApplicationPet.all_pets_approved?(@abby.id)).to eq(true)
-      expect(ApplicationPet.all_pets_approved?(@frank.id)).to eq(false)
     end
     it ".all_pets_approved?" do
       expect(ApplicationPet.all_pets_approved?(@abby.id)).to eq(true)

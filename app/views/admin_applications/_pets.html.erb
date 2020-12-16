@@ -7,6 +7,8 @@
         <%= link_to "#{pet.name}", pet_path(pet) %> - Approved
       <% elsif @application.pet_status(pet.id) == "Rejected" %>
         <%= link_to "#{pet.name}", pet_path(pet) %> - Rejected
+      <% elsif @application.in_progress? %>
+        <%= link_to "#{pet.name}", pet_path(pet) %>
       <% elsif pet.adoptable == false %>
         <%= link_to "#{pet.name}", pet_path(pet) %> - This pet has already been adopted
         <%= button_to 'Reject', application_pet_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Rejected"} %><br>

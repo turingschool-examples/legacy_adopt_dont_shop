@@ -7,16 +7,14 @@ class ApplicationPet < ApplicationRecord
   belongs_to :pet
   validates_presence_of :status, :application_id, :pet_id
   validates :pet_id, uniqueness: { scope: :application_id }
-  # validates_uniqueness_of :status, conditions: -> { where(status: "true") }
+  
 
   def self.all_pets_approved?(application_id)
-    find_applications(application_id).is_approved
-    .count == find_applications(application_id).count
+    find_applications(application_id).is_approved.count == find_applications(application_id).count
   end
 
   def self.any_pets_rejected?(application_id)
-    find_applications(application_id).is_rejected
-    .count >= 1
+    find_applications(application_id).is_rejected.count >= 1
   end
-
+  
 end

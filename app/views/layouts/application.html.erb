@@ -7,20 +7,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-
-  <header>
-    <div class="nav-bar">
-      <ul>
-        <p><%= link_to "Home", "/" %>
-          <%= link_to "Shelters", "/shelters" %>
-          <%= link_to 'Pets', "/pets" %>
   </head><br>
 
   <body>
     <% flash.each do |type, message| %>
     <p><%= message %></p>
     <% end %>
-
+    <div class="nav-bar">
+      <ul>
+        <p><%= link_to "Home", "/" %>
+          <%= link_to "Shelters", "/shelters" %>
+          <%= link_to 'Pets', "/pets" %>
+        </p>
+      </ul>
+    </div>
     <%= yield %>
   </body>
+  
 </html>

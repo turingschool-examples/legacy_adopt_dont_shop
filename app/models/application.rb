@@ -23,13 +23,14 @@ class Application < ApplicationRecord
         result = pet.application_result(id)
         if result == "Rejected"
           final_result = "Rejected"
-          break
         elsif !result #no action has been taken
           final_result = "Pending"
           break
         end
       end
       final_result
+    else 
+      "Not Submitted"
     end
   end
 end

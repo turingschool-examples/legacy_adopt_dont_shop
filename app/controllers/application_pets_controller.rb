@@ -13,16 +13,25 @@ class ApplicationPetsController < ApplicationController
     application_pet = ApplicationPet.where(application_id: params[:application_id], pet_id: params[:pet_id])
     if params[:status] == "Approved"
       application_pet.update(status: "Approved")
-      if ApplicationPet.all_pets_approved?(application.id)
-        application.update(application_status: "Approved")
-        application.pets.make_adopted
-      end
+      approves(application)
     elsif params[:status] == "Rejected" 
       application_pet.update(status: "Rejected")
-      if ApplicationPet.any_pets_rejected?(application.id)
-        application.update(application_status: "Rejected")
-      end
+      rejects(application)
     end
     redirect_to admin_application_path(application)
   end
 end
+
+def approves(application)
+  if ApplicationPet.all_pets_approved?(application.id)
+    application.update(application_status: "Approved")
+    application.pets.make_adopted
+  end
+end
+
+def rejects(application)
+  if ApplicationPet.any_pets_rejected?(application.id)
+    application.update(application_status: "Rejected")
+  end
+end
+

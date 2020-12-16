@@ -14,9 +14,13 @@ Pet.destroy_all
 Application.destroy_all
 ApplicationPet.destroy_all
 
+shelter_1 = Shelter.create!(name: "Boulder Humane Society",
+  address: "1234 Wallabe Way",
+  city: "Boulder",
+  state: "CO",
+  zip: 80302)
 
-
-shelter_2 = Shelter.create!(name: "Boulder Humane Society",
+shelter_2 = Shelter.create!(name: "Other Humane Society",
   address: "1234 Wallabe Way",
   city: "Boulder",
   state: "CO",
@@ -49,3 +53,31 @@ pet3 = shelter_2.pets.create!(name: "Bork",
      approximate_age: 3,
      description: "likes barking",
      image: "image_2.png")
+
+pet5 = shelter_1.pets.create!(name: "jibs",
+      sex: 1,
+      adoptable: true,
+      approximate_age: 2,
+      description: "likes walks",
+      image: "image_1.png")
+ 
+ pet6 = shelter_1.pets.create!(name: "jax",
+      sex: 0,
+      adoptable: true,
+      approximate_age: 3,
+      description: "likes barking",
+      image: "image_2.png")
+ 
+ pet7 = shelter_1.pets.create!(name: "bianca",
+      sex: 0,
+      adoptable: true,
+      approximate_age: 3,
+      description: "likes barking",
+      image: "image_2.png")
+ 
+ pet8 = shelter_1.pets.create!(name: "clementine",
+      sex: 0,
+      adoptable: true,
+      approximate_age: 3,
+      description: "likes barking",
+      image: "image_2.png")

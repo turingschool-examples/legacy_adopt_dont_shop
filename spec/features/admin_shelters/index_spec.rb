@@ -12,11 +12,11 @@ describe 'As a visitor' do
       visit shelters_path
 
       within "#shelter-#{@shelter3.id}" do
-        expect(page).to have_content(@shelter1.name)
+        expect(page).to have_content(@shelter3.name)
       end
 
       within "#shelter-#{@shelter2.id}" do
-        expect(page).to have_content(@shelter1.name)
+        expect(page).to have_content(@shelter2.name)
       end
 
       within "#shelter-#{@shelter1.id}" do

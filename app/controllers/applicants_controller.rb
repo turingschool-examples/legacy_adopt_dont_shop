@@ -5,9 +5,11 @@ class ApplicantsController < ApplicationController
         if @applicant.save
             @applicant.applications.create!
             @application = Application.last
+            # require 'pry'; binding.pry
             redirect_to "/applications/#{@application.id}"
         else
-            redirect_to "/applications/new", alert: @applicant.errors.full_messages
+            flash.now[:error] = @applicant.errors.full_messages
+            render "applications/new"
         end
     end
 

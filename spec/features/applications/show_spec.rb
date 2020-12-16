@@ -23,5 +23,24 @@ RSpec.describe "the Application index page" do
          expect(page).to have_content(@application1.status)
          expect(page).to have_content(@pet2.name)
     end
+
+    it "should allow you to search for and add a pet" do 
+      visit "/applications/#{@applicant1.id}"
+
+      expect(page).to have_button('Search')
+      expect(page).to have_content(@pet1.name)
+      expect(page).to have_content(@pet2.name)
+
+      fill_in 'Search', with @pet1.name
+      click_on 'Search'
+
+      expect(page).to have_content(@pet1.name)
+      expect(page).to not_have_content(@pet2.name)
+
+      click_on "#{@pet1.name}"
+
+      expect(current_path).to eq("/pets/#{@pet1.id}")
+
+    end
 end
 

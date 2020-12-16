@@ -1,10 +1,10 @@
-
 <h2><%= @application.applicant.name %></h2>
+
 <p>Address:<br/>
-<%= @applicant.address %><br/>
-<%= @applicant.city %>
-<%= @applicant.state %>
-<%= @applicant.zip %></p>
+<%= @application.applicant.address %><br/>
+<%= @application.applicant.city %>
+<%= @application.applicant.state %>
+<%= @application.applicant.zip %></p>
 Description: <%= @application.description %>
 <br/>
 Pets: <br/>
@@ -15,3 +15,19 @@ Pets: <br/>
 <% end %>
 <br />
 Status: <%= @application.status %>
+
+<h3>Add a Pet!</h3>
+<%= form_tag "/applications/#{@application.id}", method: :get do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag ("Search") %>
+<% end %>
+
+<section id="pet-list">
+<p><% @pets.each do |pet| %>
+    <ul>
+        <li><%= link_to pet.name, "/pets/#{pet.id}"%></li><br>
+    </ul>
+<% end %></p>
+</section>
+
+

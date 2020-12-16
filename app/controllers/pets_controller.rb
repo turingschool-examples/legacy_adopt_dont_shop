@@ -4,6 +4,10 @@ class PetsController < ApplicationController
     @pets = Pet.all
   end
 
+  def search
+    @pet = Pet.find(params[])
+  end
+
   def show
     @pet = Pet.find(params[:id])
   end
@@ -25,7 +29,11 @@ class PetsController < ApplicationController
 
   private
   def pets_params
-    params.permit(:image, :name, :description, :approximate_age, :sex, :adoptable)
+    params.permit(:image, :name, :description, :approximate_age, :sex, :adoptable, :search)
   end
+
+  # def search_params
+  #   params.permit(:search)
+  # end
 
 end

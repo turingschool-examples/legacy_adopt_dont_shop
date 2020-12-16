@@ -11,15 +11,38 @@ Pet.destroy_all
 Shelter.destroy_all
 Applicant.destroy_all
 
-FactoryBot.create_list(:shelter, rand(2..5))
+shelter1 = Shelter.create!(
+    name:'Hals Happy Home for Hounds',
+    address: '4 Paws Place',
+    city: 'Dogtown',
+    state: 'CA',
+    zip: 90405,
+)
 
-Shelter.all.each do |shelter|
-    rand(3..5).times do
-        FactoryBot.create(:pet, shelter: shelter)
-    end
-end
+shelter2 = Shelter.create!(
+    name:'Kathies Kathouse',
+    address: '123  Rodeo Drive',
+    city: 'Beverly Hills',
+    state: 'CA',
+    zip: 90210,
+)
 
-FactoryBot.create_list(:applicant, rand(2..5))
+# shelter1.pets.create!(name: 'Buck',
+#     approximate_age:    t.string "image"
+#     t.string "name"
+#     t.integer "approximate_age"
+#     t.bigint "shelter_id"
+#     t.string "description"
+#     t.boolean "adoptable", default: true
+#     t.integer "sex"
+
+# Shelter.all.each do |shelter|
+#     rand(3..5).times do
+#         FactoryBot.create(:pet, shelter: shelter)
+#     end
+# end
+
+# FactoryBot.create_list(:applicant, rand(2..5))
 
 Applicant.all.each do |applicant|
     FactoryBot.create(:application, applicant: applicant)

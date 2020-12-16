@@ -17,7 +17,9 @@ class ApplicationPetsController < ApplicationController
 end
 
 
+
 private
+
 def approval(application)
   if ApplicationPet.all_pets_approved?(application.id)
     application.update(application_status: "Approved")

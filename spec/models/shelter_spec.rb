@@ -41,14 +41,14 @@ describe Shelter, type: :model do
                                   city: "Denver",
                                   state: "CO",
                                   zip_code: 80214,
-                                  application_status: "Approved",
+                                  application_status: "Pending",
                                   description: "I want these pets.")
 
-      app_pet1 = ApplicationPet.create!(application: linda, pet: pet1, status: "Approved")
-      app_pet2 = ApplicationPet.create!(application: linda, pet: pet2, status: "Approved")
+      app_pet1 = ApplicationPet.create!(application: linda, pet: pet1, status: "Pending")
+      app_pet2 = ApplicationPet.create!(application: linda, pet: pet2, status: "Pending")
       app_pet3 = ApplicationPet.create!(application: frank, pet: pet3, status: "Pending")
 
-      expect(Shelter.pending_applications).to eq([shelter2])
+      expect(Shelter.pending_applications).to eq([shelter, shelter2])
     end
   end
 end

@@ -5,7 +5,7 @@ class Pet < ApplicationRecord
 
   def self.search(search)
     if search
-      pet = Pet.find_by(name: search)
+      pet = Pet.find_by(name: search.titlecase)
       if pet
         self.where(name: pet.name)
       else
@@ -15,13 +15,6 @@ class Pet < ApplicationRecord
       Pet.all
     end
   end
-
-
-
-  # def self.search_pets(find)
-  #   key = "%#{find}%".downcase
-  #   where("LOWER(name) like :search", search: key)
-  # end
 
   validates_presence_of :name, :description, :approximate_age, :sex
   # ^ AR method to validate presence of column

@@ -27,7 +27,8 @@ describe "admin shelter index page" do
   end
 
   it "shows shelters with pending application section containing shelters that have pending applications" do
-    shel2 = find("shelter-#{@shelter2.id}")
-    expect(shel2).to appear_before("All Shelters")
+    shel2 = find(".shelter-#{@shelter2.id}")
+    header = find(".all-shelter-header")
+    expect(shel2).to appear_before(header)
   end
 end

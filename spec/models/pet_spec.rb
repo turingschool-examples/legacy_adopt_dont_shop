@@ -88,6 +88,38 @@ describe Pet, type: :model do
 
       expect(Pet.adopted_count).to eq(1)
     end
+
+    it '.action_required' do
+      shelter = Shelter.create!(name: "Pet Rescue", address: "123 Adoption Ln.", city: "Denver", state: "CO", zip: "80222")
+      shelter2 = Shelter.create!(name: "Pet Rescue", address: "123 Adoption Ln.", city: "Denver", state: "CO", zip: "80222")
+
+      pet5 = shelter.pets.create!(sex: :female, name: "lena", approximate_age: 6, description: "sort of cute")
+      pet6 = shelter.pets.create!(sex: :male, name: "ed", approximate_age: 1, description: "scruffy cute")
+      pet7 = shelter2.pets.create!(sex: :female, name: "fark", approximate_age: 2, description: "mega cute")
+
+      poe = Application.create!(name: "Poe",
+                                 street: "666 18th st.",
+                                 city: "Lakewood",
+                                 state: "CO",
+                                 zip_code: 80511,
+                                 application_status: "Pending",
+                                 description: "I want these pets.")
+
+      bob = Application.create!(name: "bob",
+                                 street: "1231 6th st.",
+                                 city: "Louisville",
+                                 state: "CO",
+                                 zip_code: 82111,
+                                 application_status: "Pending",
+                                 description: "I want these pets.")
+
+      ApplicationPet.create!(application: bob, pet: pet5, status: "In Progress")
+      ApplicationPet.create!(application: bob, pet: pet6, status: "In Progress")
+
+      ApplicationPet.create!(application: poe, pet: pet7, status: "Rejected")
+
+      expect(Pet.action_required.size).to eq(2)
+    end
   end
   
 end

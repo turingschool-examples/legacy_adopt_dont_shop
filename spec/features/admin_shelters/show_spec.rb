@@ -11,6 +11,6 @@ describe "admin shelter index page" do
 
   it "shows shelter name and full address" do
     expect(page).to have_content("Shady Shelter")
-    expect(page).to have_content("123 Shady Ave Denver, CO 80129")
+    expect(page).to have_content("123 Shady Ave Denver, CO 80011")
   end
 end

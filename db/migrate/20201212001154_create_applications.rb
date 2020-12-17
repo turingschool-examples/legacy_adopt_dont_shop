@@ -6,8 +6,8 @@ class CreateApplications < ActiveRecord::Migration[5.2]
       t.string :city
       t.string :state
       t.integer :zip
-      t.string :description
-      t.string :status, :default => "In Progress"
+      t.string :description, :default => "Why should you be able to adopt this pet?"
+      t.string :status, default: "In Progress"
 
       t.timestamps
     end

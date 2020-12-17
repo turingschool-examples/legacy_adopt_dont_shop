@@ -20,7 +20,6 @@ RSpec.describe 'Application new page' do
     fill_in "city", with: "Denver"
     fill_in "state", with: "CO"
     fill_in "zip", with: 80011
-    fill_in "description", with: "Responsible"
 
     click_button "Submit Application"
     expect(current_path).to eq("/applications/#{Application.last.id}")
@@ -30,7 +29,6 @@ RSpec.describe 'Application new page' do
     expect(page).to have_content("#{Application.last.city}")
     expect(page).to have_content("#{Application.last.state}")
     expect(page).to have_content("#{Application.last.zip}")
-    expect(page).to have_content("Description: #{Application.last.description}")
     expect(page).to have_content("Status: #{Application.last.status}")
   end
 

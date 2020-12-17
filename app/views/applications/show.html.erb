@@ -9,7 +9,19 @@
   <%= @application.zip %><br>
   Description:
   <%= @application.description %><br>
-  Pets:</p>
+  Pets I Wish to Adopt:<br>
+  <% @application.pets.each do |pet| %>
+  <%= link_to "#{pet.name}", "/pets/#{pet.id}" %><br>
+  <% end %>
+  <% if @application.in_progress? %>
+    <% if @application.pets != [] %>
+      <%= form_tag "/applications/#{@application.id}", method: :patch do %>
+        <%= label_tag :description %>
+        <%= text_field_tag :description, params[:description]%>
+        <%= button_to "Submit Application", edit_application_path(description: params[:description]) %>
+      <% end %>
+    <% end %>
+</p>
 
 <%= form_tag("/applications/#{@application.id}", method: :get) do %>
   <%= label_tag :add_a_pet_to_this_application %>
@@ -17,10 +29,15 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<% if @searched_pets %>
+<% if @searched_pets.nil? %>
+  <h3 class="flash">Search for some pets!</h3>
+<% elsif @searched_pets.count == 0 %>
+  <p class="flash">No pets matched your search.</p>
+<% else @searched_pets %>
   <% @searched_pets.each do |pet| %>
-    <%= pet.name %><br>
+    <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <%= button_to "Adopt this Pet", pet_applications_path(pet_id: pet.id, application_id: @application.id), method: :post %><p>
   <% end %>
 <% end %>
-
+<% end %>
 <h3>Application Status: <%= @application.status %></h3>

@@ -3,16 +3,18 @@ class Application < ApplicationRecord
   has_many :pet_applications
   has_many :pets, through: :pet_applications
 
-  def self.search(search)
-    if search
-      adoptable = Pet.find_by(name: search)
-      if adoptable
-        self.where(pet_id: adoptable)
-      else
-        @applications = Application.all
-      end
-    else
-      @application = Application.all
-    end
+  def in_progress?
+    self.status == "In Progress"
+  end
+
+  def pending?
+    self.status == "Pending"
+  end
+
+  def accepted?
+    self.status == "Accepted"
+  end
+  def rejected?
+    self.status == "Rejected"
   end
 end

@@ -1,12 +1,12 @@
 class ApplicationsController < ApplicationController
     def index
-      @pet = Pet.find(params[:id])
+        @application = Application.all
     end
 
     def show
       @application = Application.find(params[:id])
       if params[:search]
-        @searched_pets = Pet.where("name like ?", "%#{params[:search]}%")
+        @searched_pets = Pet.where("lower(name) like ?", "%#{params[:search].downcase}%")
       end
     end
 
@@ -30,6 +30,9 @@ class ApplicationsController < ApplicationController
     def update
       application = Application.find(params[:id])
       application.update(applications_params)
+      if params[:description]
+        application.update(status: "Pending")
+      end
       redirect_to "/applications/#{application.id}"
     end
 
@@ -37,15 +40,6 @@ class ApplicationsController < ApplicationController
       Application.destroy(params[:id])
       redirect_to '/applications'
     end
-
-    # def search
-    #   if params[:search].blank?
-    #     redirect_to(root_path, alert: "Empty field!") and return
-    #   else
-    #     @parameter = params[:search].downcase
-    #     @results = Pet.all.where("lower(name) LIKE :search", search: @parameter)
-    #   end
-    # end
 
     private
     def applications_params

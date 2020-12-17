@@ -27,4 +27,10 @@ class Pet < ApplicationRecord
   def self.adopted_count
     where(adoptable: false).count
   end
+
+  def self.action_required
+    select("DISTINCT ON (pets.name) pets.name, applications.id as app_id")
+    .joins(application_pets: [:application])
+    .where("application_pets.status='In Progress'")
+  end
 end

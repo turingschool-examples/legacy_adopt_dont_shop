@@ -1,0 +1,5 @@
+<h1>Shelters</h1>
+<ul>
+<% @shelters.each do |shelter| %>
+  <li class = <%= "shelter-#{shelter.id}" %>><%= shelter.name %></li>
+<% end %>

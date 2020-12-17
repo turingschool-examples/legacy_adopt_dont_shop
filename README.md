@@ -37,13 +37,10 @@
   <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ol>
 
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Adopt Don't Shop](https://fathomless-inlet-21274.herokuapp.com/) is a module 2 solo project for Turing School of Software & Design's Back-End Engineering (BEE) program. Users are able to apply to adopt pets, and Admins cab either approve or reject applications and see statistics for the shelters, pets, and applications in the system.
+[Adopt Don't Shop](https://fathomless-inlet-21274.herokuapp.com/) is a module 2 solo project for Turing School of Software & Design's Back-End Engineering (BEE) program. Users are able to apply to adopt pets, and Admins cab either approve or reject applications and see statistics for the shelters, pets, and applications in the system. User stories were tracked using Github projects [here](https://github.com/elyhess/adopt_dont_shop/projects/2)
 
 ### Skills Developed by Project
 * Built out CRUD functionality for a many to many relationship
@@ -55,11 +52,13 @@
 * Use of `within` blocks in tests
 * Deployment of application to Heroku
 
+
 <!-- BUILT WITH -->
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/)
 * [Postgresql](https://www.postgresql.org/)
+
 
 <!-- SETUP INSTRUCTIONS -->
 ## Setup Instructions
@@ -90,18 +89,15 @@ To get a local copy up and running follow these simple steps.
 
 <!-- SCHEMA -->
 ## Database Schema
-
-![schema](https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png)
-
 <p align="center">
   <img src="https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png" />
 </p>
+
 
 <!-- ROADMAP -->
 ## Roadmap
 
 Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
-
 
 
 <!-- CONTACT -->
@@ -112,12 +108,11 @@ Ely Hess - Ely.hess@Me.com
 Project Link: [https://github.com/elyhess/adopt_dont_shop](https://github.com/elyhess/adopt_dont_shop)
 
 
-
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [README template](https://github.com/othneildrew/Best-README-Template)
-* [Turing School of Software & Desion](https://github.com/turingschool-examples/adopt_dont_shop)
+* [Turing School of Software & Desion Project Repo](https://github.com/turingschool-examples/adopt_dont_shop)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

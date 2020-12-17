@@ -30,11 +30,10 @@
 <ol>
   <li><a href="#about-the-project">About The Project</a>
   <li><a href="#built-with">Built With</a>
-  <li><a href="#getting-started">Getting Started</a>
   <li><a href="#usage">Usage</a></li>
+  <li><a href="#setup-instructions">Setup Instructions</a></li>
   <li><a href="#roadmap">Roadmap</a></li>
   <li><a href="#contributing">Contributing</a></li>
-  <li><a href="#license">License</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ol>
@@ -45,34 +44,49 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Adopt Don't Shop - a pet adoption Platform that allows users to apply and adopt pets.
+Admins can approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
+
+This exercise coveres the following topics:
+- CRUD functionality
+- Many-to-many data models 
+- Model validations
+- ActiveRecord queries
+- Raw SQL queries
+- View Partials
+- RSpec within blocks
+- Heroku depoloyment
 
 
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/)
+* [Postgresql](https://www.postgresql.org/)
 
 
 ## Setup Instructions
 To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
-   ```sh
+   ```
    git clone https://github.com/elyhess/adopt_dont_shop
    ```
 2. Install gems
-   ```sh
+   ```
    bundle install
    ```
 3. Install gems
-   ```sh
+   ```
    rails db:{create,migrate,seed}
    ```
+4. Run server and navigate to http://localhost:3000/
+   ```
+   rails s
+   ```
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 
 _For more examples, please refer to the [Documentation](https://example.com)_

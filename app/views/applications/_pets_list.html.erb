@@ -1,6 +1,9 @@
-<ul>
-  <% @application.pets.each do |pet| %>
-    <%= image_tag "#{pet.image}", size: "100x100" %><br/>
-    <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
-  <% end %>
-</ul>
+<section id="pets-applied">
+  <h3>Pets applied for:</h3>
+  <ul>
+    <% @application.pets.each do |pet| %>
+      <%= image_tag "#{pet.image}", size: "100x100" %><br/>
+      <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
+    <% end %>
+  </ul>
+  </section>

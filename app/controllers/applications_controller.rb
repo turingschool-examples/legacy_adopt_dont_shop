@@ -20,6 +20,16 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    @application = Application.find(params[:id])
+    if params[:description] == ""
+      flash[:failure] = "Invalid description. Try again."
+    else
+      @application.update!(status: "Pending", description: params[:description])
+      redirect_to applications_show_path(@application.id)
+    end
+  end
+
   private
   def application_params
     params.permit :name, :address, :city, :state, :zip_code, :status, :search

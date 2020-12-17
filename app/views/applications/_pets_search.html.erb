@@ -1,3 +1,6 @@
+<section id="add-pets">
+<h3>Add a Pet to this Application</h3>
+
 <%= form_tag path, method: :get do %>
   <%= label_tag :search_pets, "Name: " %>
   <%= text_field_tag :search_pets, params[:search_pets] %>
@@ -5,15 +8,16 @@
 <% end %>
 
 <% if params[:search_pets] %>
-<% if @pet_results %>
-  <% @pet_results.each do |pet| %>
-    <section id="pet-<%= pet.id %>">
-      <%= image_tag "#{pet.image}", size: "100x100" %><br/>
-      <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
-      <%= link_to "Adopt this Pet", pet_applications_create_path(application_id: @application.id, pet_id: pet.id), method: :post %> <br/>
-    </section>
-  <% end %>
-<% else %>
-    <%= flash.now[:error] = "No pets found with that name." %>
+  <% if @pet_results %>
+    <% @pet_results.each do |pet| %>
+      <section id="pet-<%= pet.id %>">
+        <%= image_tag "#{pet.image}", size: "100x100" %><br/>
+        <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
+        <%= link_to "Adopt this Pet", pet_applications_create_path(application_id: @application.id, pet_id: pet.id), method: :post %> <br/>
+      </section>
+    <% end %>
+  <% else %>
+      <%= flash.now[:error] = "No pets found with that name." %>
   <% end %>
 <% end %>
+</section>

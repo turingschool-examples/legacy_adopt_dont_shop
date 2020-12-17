@@ -5,13 +5,12 @@
 <p>Address: <%= @application.address %></p>
 <p>Description: <%= @application.description %></p>
 
-<section id="pets-applied">
-  <h3>Pets applied for:</h3>
-  <%= render "pets_list" %>
-</section>
+<%= render "pets_list" %>
 
-
-<section id="application-<%= @application.id %>">
-<h3>Add a Pet to this Application</h3>
+<% if @application.status == "In Progress" %>
+  <%= render partial: "new_description", locals: { path: "/applications/#{@application.id}" } %>
   <%= render partial: "pets_search", locals: { path: "/applications/#{@application.id}", search: params[:search], button_text: "Search" }  %>
-</section>
+<% else %>
+  <h3>Description</h3>
+  <p><%= @application.description %></p>
+<% end %>

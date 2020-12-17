@@ -16,21 +16,20 @@ RSpec.describe 'As a user' do
         state: 'CO',
         zip_code: '80246',
         description: "I love animals.",
-        status: "Pending"
+        status: "In Progress"
       )
     end
 
-    describe "And an application has not been submitted" do
+    describe "and an application has not been submitted" do
       it "has a section on the page to 'Add a Pet to this Application'" do
         visit applications_show_path(id: @application.id)
 
         expect(page).to have_content("Add a Pet to this Application")
-        fill_in "Name:", with: "Thor"
+        fill_in "Name:", with: "#{@pet1.name}"
         click_button "Search"
         expect(current_path).to eq("/applications/#{@application.id}")
-        # And under the search bar I see any Pet whose name matches my search
 
-        within("#application-#{@application.id}") do
+        within("#pet-#{@pet1.id}") do
           expect(page).to have_content(@pet1.name)
         end
       end

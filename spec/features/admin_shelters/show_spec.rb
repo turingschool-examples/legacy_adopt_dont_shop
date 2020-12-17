@@ -6,9 +6,30 @@ describe "admin shelter index page" do
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
     visit "/admin/shelters/#{@shelter1.id}"
   end
-  
+
   it "shows shelter name and full address" do
     expect(page).to have_content("Shady Shelter")
     expect(page).to have_content("123 Shady Ave Denver, CO 80011")
+  end
+
+  it "has a statistics section containing average pet age, count of adoptable pets, and count of pets that have been adopted" do
+    pet1 = @shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
+    pet2 = @shelter1.pets.create!(name: "Fluffy 2", approximate_age: 5, sex: 'male', description: 'super cute')
+    application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
+    application2 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
+
+    a1p1 = ApplicationPet.create(pet: pet1, application: application1)
+    a2p2 = ApplicationPet.create(pet: pet2, application: application2)
+
+    pet1.update(adoptable: false)
+    a1p1.update(status: "Approve")
+    
+    visit "/admin/shelters/#{@shelter1.id}"
+    #Average Pet Age
+    expect(page).to have_content("Average Pet Age: 4")
+    #Count of Adoptable Pets
+    expect(page).to have_content("Adoptable Pets: 1")
+    #Count of Pets That Have Been Adopted
+    exepct(page).to have_content("Adopted Pets: 1")
   end
 end

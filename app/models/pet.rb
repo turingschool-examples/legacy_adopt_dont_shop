@@ -16,7 +16,11 @@ class Pet < ApplicationRecord
         Pet.all
       else
         formatted_search = search.downcase.capitalize
-        results = Pet.all.select{ |pet| pet.name == formatted_search }
+        # results = Pet.all.select{ |pet| pet.name == formatted_search }
+        results = Pet.all.select do |pet|
+          pet.name.include?(search)
+        end
+
         if results.empty?
           nil
           # self.where(id: results)

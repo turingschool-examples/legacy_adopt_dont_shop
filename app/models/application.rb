@@ -8,12 +8,4 @@ class Application < ApplicationRecord
   validates :state,presence: true
   validates :zip_code, presence: true
   validates :status, presence: true
-
-  def check_status_for_add_pets
-    if status == 'In Progress'
-      "show"
-      
-    end
-    
-  end
 end

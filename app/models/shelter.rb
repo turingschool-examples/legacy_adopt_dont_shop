@@ -13,7 +13,12 @@ class Shelter < ApplicationRecord
     pets.where("adoptable = 'true'").count
   end
 
+  def num_adopted
+    pets.joins(:application_pets).where("status IS NOT NULL").count
+  end
+
   def self.pending_shelters
     joins(pets: :application_pets).where("status IS NULL")
   end
+
 end

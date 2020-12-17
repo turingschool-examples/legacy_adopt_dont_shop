@@ -1,7 +1,11 @@
 class ApplicationsController < ApplicationController
 
   def show
-    if params[:search]
+    if params[:submitted]
+      @application = Application.find(params[:id])
+      @application.status = "Pending"
+      @application.save
+    elsif params[:search]
       @application = Application.find(params[:id])
       @pets = Pet.where("name = ?", params[:search])
     else

@@ -15,6 +15,11 @@
     <%= submit_tag 'Submit' %>
     <% end %>
   <% end %>
+  <% if @application.pets && if @application.status != 'Pending'%>
+    <%= button_to 'Submit Application', "/applications/#{@application.id}", params: {submitted: true}, method: :get %>
+    <% end %>
+  <% end %>
+
 
 <% if @pets %>
   <% @pets.each do |pet| %>

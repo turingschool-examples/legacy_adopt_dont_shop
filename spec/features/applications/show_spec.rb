@@ -54,5 +54,35 @@ RSpec.describe 'Application Show Page' do
         expect(page).to have_link("Thor")
       end
     end
+
+    describe "I have added one or more pets" do
+      describe "I see a section to submit my application" do
+        it "has a 'submit application' section" do
+
+          visit "/applications/#{@application1.id}"
+
+          fill_in 'search', with: "Thor"
+          click_on 'Submit'
+          click_on 'Adopt Me'
+
+          expect(page).to have_button('Submit Application')
+        end
+    #
+        it "submits the application and changes the status to pending" do
+
+          visit "/applications/#{@application1.id}"
+
+          fill_in 'search', with: "Thor"
+          click_on 'Submit'
+          click_on 'Adopt Me'
+          click_on 'Submit Application'
+
+          expect(page).to have_content('Pending')
+          expect(page).not_to have_content('In Progress')
+          expect(page).not_to have_button('Submit Application')
+          expect(page).not_to have_content('Submit')
+        end
+      end
+    end
   end
 end

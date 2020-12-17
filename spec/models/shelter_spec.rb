@@ -32,7 +32,7 @@ describe Shelter, type: :model do
       pet1 = shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
       pet2 = shelter1.pets.create!(name: "Fluffy", approximate_age: 4, sex: 'male', description: 'super cute')
       pet3 = shelter1.pets.create!(name: "Fluffy", approximate_age: 5, sex: 'male', description: 'super cute')
-      pet4 = shelter1.pets.create!(name: "Fluffy", approximate_age: 6, sex: 'male', description: 'super cute')
+      pet4 = shelter1.pets.create!(name: "Fluffy", approximate_age: 6, sex: 'male', description: 'super cute', adoptable: false)
       application2 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
 
       ApplicationPet.create(pet: pet4, application: application2, status: "Approved")

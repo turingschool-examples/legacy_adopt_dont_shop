@@ -34,6 +34,6 @@ describe "admin shelter index page" do
     #Count of Adoptable Pets
     expect(page).to have_content("Adoptable Pets: 2")
     #Count of Pets That Have Been Adopted
-    exepct(page).to have_content("Adopted Pets: 1")
+    expect(page).to have_content("Adopted Pets: 1")
   end
 end

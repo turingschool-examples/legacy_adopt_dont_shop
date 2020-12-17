@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   post "/admin/applications/:id", to: "admin_applications#review" #non restful
 
   get "/admin/shelters", to: "admin_shelters#index"
+  get "/admin/shelters/:id", to: "admin_shelters#show"
 end

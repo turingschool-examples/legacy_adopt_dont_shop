@@ -82,7 +82,7 @@ pet8 = shelter_1.pets.create!(name: "Cujo",
                               description: "likes everything",
                               image: "image_8.png")
 
-pet9 = shelter_1.pets.create!(name: "Cujo",
+pet9 = shelter_1.pets.create!(name: "Trogdor",
                               sex: 1,
                               adoptable: true,
                               approximate_age: 4,

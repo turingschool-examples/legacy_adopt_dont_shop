@@ -19,26 +19,7 @@ class ApplicationsController < ApplicationController
     def update
         @application = Application.find(params[:id])
         @application.update(application_params)
-        require 'pry'; binding.pry
         redirect_to "/applications/#{params[:id]}"
-    end
-
-    def all_approved
-        @application = Application.find(params[:id])
-        if ALL PETS APPROCED
-            true
-        else
-            false
-        end
-    end
-
-    def not_all_approved
-        @application = Application.find(params[:id])
-        if @application.adoption
-            true
-        else
-            false
-        end
     end
 
     private

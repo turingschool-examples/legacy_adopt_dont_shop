@@ -6,9 +6,11 @@ class Admin::ApplicationsController < ApplicationController
 
     def show
         @application = Application.find(params[:id])
+        app_status
     end
 
     def app_status
+        require 'pry'; binding.pry
         if @application.all_approved == true
             @pets.all.update({adoptable: false})
             @application.update!({status: 3})

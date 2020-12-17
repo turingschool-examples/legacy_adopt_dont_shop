@@ -5,6 +5,9 @@ class AdminSheltersController < ApplicationController
   end
 
   def show
+    #had to add id here because having no id would break all of the relations in the model
     @shelter = Shelter.find_by_sql("SELECT name, address, city, state, zip, id FROM Shelters WHERE id = '#{params[:id]}'").first
   end
+
+
 end

@@ -7,8 +7,8 @@ class Application < ApplicationRecord
     enum status: [:"In Progress", :Pending, :Accepted, :Rejected]
 
     def all_approved
-        if self.adoptions.all(status:  true)
-            #THATS NOT HOW YOU SEARCH ALL CHILD. USE WHERE. AND OCUNT
+        binding.pry
+        if self.adoptions.where(status: true).count == self.adoptions.count
             true
         else
             false
@@ -16,7 +16,7 @@ class Application < ApplicationRecord
     end
 
     def not_all_approved
-        if self.adoptions.any(status:  false)
+        if self.adoptions.where(status: false).count >= 1
             true
         else
             false

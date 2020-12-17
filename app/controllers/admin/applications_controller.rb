@@ -10,12 +10,13 @@ class Admin::ApplicationsController < ApplicationController
     end
 
     def app_status
-        require 'pry'; binding.pry
+        # require 'pry'; binding.pry
         if @application.all_approved == true
-            @pets.all.update({adoptable: false})
-            @application.update!({status: 3})
+            require 'pry'; binding.pry
+            @application.pets.update_all({adoptable: false})
+            @application.update!({status: "Accepted"})
         elsif @application.not_all_approved == true
-            @application.update!({status: 4})
+            @application.update!({status: "Rejected"})
         end
     end
 

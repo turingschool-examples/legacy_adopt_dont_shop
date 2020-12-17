@@ -93,6 +93,9 @@ To get a local copy up and running follow these simple steps.
 
 ![schema](https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png)
 
+<p align="center">
+  <img src="https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png" />
+</p>
 
 <!-- ROADMAP -->
 ## Roadmap

@@ -64,42 +64,30 @@ Here's a blank template to get started:
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Ruby on Rails](https://rubyonrails.org/)
 
 
-
-<!-- GETTING STARTED -->
-## Getting Started
-
+### Setup Instructions
 To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/elyhess/adopt_dont_shop
    ```
-2. Install NPM packages
+2. Install gems
    ```sh
-   npm install
+   bundle install
    ```
-
-
+3. Install gems
+   ```sh
+   rails db:{create,migrate,seed}
+   ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -108,8 +96,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
-
+Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
 
 
 <!-- CONTRIBUTING -->
@@ -125,32 +112,19 @@ Contributions are what make the open source community such an amazing place to b
 
 
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Ely Hess - Ely.hess@Me.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/elyhess/adopt_dont_shop](https://github.com/elyhess/adopt_dont_shop)
 
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
-
-
-
-
+* [README template](https://github.com/othneildrew/Best-README-Template)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

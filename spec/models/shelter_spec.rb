@@ -25,5 +25,15 @@ describe Shelter, type: :model do
       shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
       expect(shelter1.formatted_address).to eq("123 Shady Ave Denver, CO 80011")
     end
+
+    it "avg_age" do
+      pet1 = shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
+      pet2 = shelter1.pets.create!(name: "Fluffy", approximate_age: 4, sex: 'male', description: 'super cute')
+      pet3 = shelter1.pets.create!(name: "Fluffy", approximate_age: 5, sex: 'male', description: 'super cute')
+      pet4 = shelter1.pets.create!(name: "Fluffy", approximate_age: 6, sex: 'male', description: 'super cute')
+      application2 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
+
+      ApplicationPet.create(pet: pet4, application: application2, status: "Approved")
+    end
   end
 end

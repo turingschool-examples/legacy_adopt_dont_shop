@@ -29,7 +29,6 @@ describe "admin shelter index page" do
     a1p1.update(status: "Approve")
 
     visit "/admin/shelters/#{shelter.id}"
-    require "pry"; binding.pry
     #Average Pet Age
     expect(page).to have_content("Average Pet Age: 4")
     #Count of Adoptable Pets

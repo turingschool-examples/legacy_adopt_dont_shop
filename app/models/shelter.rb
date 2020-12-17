@@ -7,7 +7,6 @@ class Shelter < ApplicationRecord
 
   def avg_age
     a = pets.where("adoptable = 'true'").average(:approximate_age)
-    require "pry"; binding.pry
     a
   end
 

@@ -41,4 +41,10 @@ describe "admin shelter index page" do
     expect(shel2).to appear_before(shel1)
     expect(shel1).to appear_before(header)
   end
+
+  it "has links for each admin shelter" do
+    expect(page).to have_link(@shelter1.name)
+    click_link @shelter1.name
+    expect(current_path).to eq("/admin/shelters/#{@shelter1.id}")
+  end
 end

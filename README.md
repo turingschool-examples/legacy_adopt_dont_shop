@@ -40,7 +40,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Adopt Don't Shop](https://fathomless-inlet-21274.herokuapp.com/) is a module 2 solo project for Turing School of Software & Design's Back-End Engineering (BEE) program. Users are able to apply to adopt pets, and Admins cab either approve or reject applications and see statistics for the shelters, pets, and applications in the system. User stories were tracked using Github projects [here](https://github.com/elyhess/adopt_dont_shop/projects/2)
+[Adopt Don't Shop](https://fathomless-inlet-21274.herokuapp.com/) is a module 2 solo project for Turing School of Software & Design's Back-End Engineering (BEE) program. Users are able to apply to adopt pets and admins can either approve or reject applications. In addition admins also see adoption statistics for shelters, pets, and applications in the system. User stories were tracked using Github projects [here](https://github.com/elyhess/adopt_dont_shop/projects/2).
 
 ### Skills Developed by Project
 * Built out CRUD functionality for a many to many relationship
@@ -50,7 +50,7 @@
 * Use of flash messages to give feedback to the user
 * Use of partials in views
 * Use of `within` blocks in tests
-* Deployment of application to Heroku
+* Deployment of application to [Heroku](https://fathomless-inlet-21274.herokuapp.com/)
 
 
 <!-- BUILT WITH -->

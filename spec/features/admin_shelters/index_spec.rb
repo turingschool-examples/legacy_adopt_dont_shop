@@ -6,7 +6,7 @@ describe "admin shelter index page" do
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
 
 
-    visit "/admin/shelters/#{@shelter1.id}"
+    visit "/admin/shelters"
   end
 
   it "lists all shelters in reverse alphabetical order by name" do

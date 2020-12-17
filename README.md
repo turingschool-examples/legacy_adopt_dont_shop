@@ -31,8 +31,8 @@
   <li><a href="#about-the-project">About The Project</a>
   <li><a href="#built-with">Built With</a>
   <li><a href="#setup-instructions">Setup Instructions</a></li>
-  <li><a href="#schema">Database Schema</a></li>
   <li><a href="#roadmap">Roadmap</a></li>
+  <li><a href="#database-schema">Database Schema</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ol>
@@ -52,6 +52,16 @@
 * Use of `within` blocks in tests
 * Deployment of application to [Heroku](https://fathomless-inlet-21274.herokuapp.com/)
 
+<!-- ROADMAP -->
+## Roadmap
+
+Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
+
+<!-- DATABBASE SCHEMA -->
+## Database Schema
+<p align="center">
+  <img src="https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png" />
+</p>
 
 <!-- BUILT WITH -->
 ## Built With
@@ -85,20 +95,6 @@ To get a local copy up and running follow these simple steps.
    ```
    rails s
    ```
-
-
-<!-- SCHEMA -->
-## Database Schema
-<p align="center">
-  <img src="https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png" />
-</p>
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
-
 
 <!-- CONTACT -->
 ## Contact

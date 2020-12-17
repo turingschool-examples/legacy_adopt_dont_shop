@@ -6,6 +6,8 @@ describe "admin shelter index page" do
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
 
     @pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
+    @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
+    ApplicationPet.create(pet: @pet2, application: @application1)
     visit "/admin/shelters"
   end
 

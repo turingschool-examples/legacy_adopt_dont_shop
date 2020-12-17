@@ -1,7 +1,7 @@
 class AdminSheltersController < ApplicationController
   def index
     @shelters = Shelter.find_by_sql("SELECT name, id FROM Shelters ORDER BY name DESC")
-    @pending_shelters = Shelter.pending_shelters
+    @pending_shelters = Shelter.pending_shelters.order(name: :desc)
   end
 
   def show

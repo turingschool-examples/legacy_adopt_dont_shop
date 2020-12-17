@@ -18,7 +18,6 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    binding.pry
     @application = Application.new(application_params)
     @application.status = "In Progress"
     @application.save

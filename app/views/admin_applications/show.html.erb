@@ -13,12 +13,15 @@
 <ul>
 <% @application.pets.each do |pet| %>
   <li><%= pet.name %>
-    <% if !pet.application_result(@application.id) %>
-      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Approved", method: :post %>
-      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %></li>
-    <% else %>
+    <% if pet.application_result(@application.id) %>
       <%= pet.application_result(@application.id) %>
-    <% end %>
+    <% elsif pet.adoptable %>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Approved", method: :post %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %>
+    <% else %>
+      <%= button_to "Adopted", "", method: :post, disabled: true %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %>
+    <% end %></li>
 <% end %>
 
 </ul>

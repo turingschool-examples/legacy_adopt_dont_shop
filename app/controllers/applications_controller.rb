@@ -23,6 +23,24 @@ class ApplicationsController < ApplicationController
         redirect_to "/applications/#{params[:id]}"
     end
 
+    def all_approved
+        @application = Application.find(params[:id])
+        if ALL PETS APPROCED
+            true
+        else
+            false
+        end
+    end
+
+    def not_all_approved
+        @application = Application.find(params[:id])
+        if @application.adoption
+            true
+        else
+            false
+        end
+    end
+
     private
     def application_params
         params.permit(:status, :description, :pets)

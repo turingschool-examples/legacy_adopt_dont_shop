@@ -187,6 +187,7 @@ RSpec.describe "the admin/application show page" do
                 end
             
             end
+        end
 
 
         describe "When I reject one or more pets on an application" do
@@ -207,6 +208,6 @@ RSpec.describe "the admin/application show page" do
             
             end
         
-        end        
+        end
     end
 end

@@ -145,7 +145,7 @@ RSpec.describe "the admin/application show page" do
                     click_button 'Approve'
                 end
 
-                expect(page).to have_content("Status: Approved")
+                expect(page).to have_content("Status: Accepted")
             end
 
             it "changes all pet show pages to no longer adoptable" do
@@ -160,10 +160,10 @@ RSpec.describe "the admin/application show page" do
                 end
 
                 visit "/pets/#{@pet1.id}"
-                expect(page).to have_content("Adoptable: false")
+                expect(page).to have_content("Adopted!")
                 
                 visit "/pets/#{@pet2.id}"
-                expect(page).to have_content("Adoptable: false")
+                expect(page).to have_content("Adopted!")
             
             end
 
@@ -180,9 +180,9 @@ RSpec.describe "the admin/application show page" do
 
                 visit "/admin/applications/#{@application2.id}"
                 
-                within ("#pet-#{@pet2.id}") do
+                within ("#pet-#{@pet1.id}") do
                     expect(page).to have_button("Reject")
-                    expect(page).to not_have_button("Accept")
+                    expect(page).to have_no_button("Accept")
                     expect(page).to have_content("This pet has been approved for adoption")
                 end
             

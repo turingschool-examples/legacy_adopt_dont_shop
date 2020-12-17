@@ -1,6 +1,6 @@
 <h2><%= @application.applicant.name%>'s Application </h2>
 
-<h3><%= @application.status %></h3>
+<h3>Status: <%= @application.status %></h3>
 
 <% @application.pets.each do |pet| %>
     <section id="pet-<%= pet.id %>">

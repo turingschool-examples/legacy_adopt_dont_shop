@@ -28,13 +28,9 @@
 
 <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
 <ol>
-  <li>
-    <a href="#about-the-project">About The Project</a>
-    <a href="#built-with">Built With</a>
-  </li>
-  <li>
-    <a href="#getting-started">Getting Started</a>
-  </li>
+  <li><a href="#about-the-project">About The Project</a>
+  <li><a href="#built-with">Built With</a>
+  <li><a href="#getting-started">Getting Started</a>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#roadmap">Roadmap</a></li>
   <li><a href="#contributing">Contributing</a></li>
@@ -52,12 +48,12 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 
-### Built With
+## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/)
 
 
-### Setup Instructions
+## Setup Instructions
 To get a local copy up and running follow these simple steps.
 
 1. Clone the repo

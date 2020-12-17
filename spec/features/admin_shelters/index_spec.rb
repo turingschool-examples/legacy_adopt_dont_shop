@@ -44,7 +44,7 @@ describe "admin shelter index page" do
 
   it "has links for each admin shelter" do
     expect(page).to have_link(@shelter1.name)
-    click_link @shelter1.name
+    click_link(@shelter1.name, match: :first)
     expect(current_path).to eq("/admin/shelters/#{@shelter1.id}")
   end
 end

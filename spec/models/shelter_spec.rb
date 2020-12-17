@@ -27,6 +27,8 @@ describe Shelter, type: :model do
     end
 
     it "avg_age" do
+      shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
+
       pet1 = shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
       pet2 = shelter1.pets.create!(name: "Fluffy", approximate_age: 4, sex: 'male', description: 'super cute')
       pet3 = shelter1.pets.create!(name: "Fluffy", approximate_age: 5, sex: 'male', description: 'super cute')

@@ -6,8 +6,11 @@ class Shelter < ApplicationRecord
   end
 
   def avg_age
-    a = pets.where("adoptable = 'true'").average(:approximate_age)
-    a
+    pets.where("adoptable = 'true'").average(:approximate_age)
+  end
+
+  def num_adoptable
+    pets.where("adoptable = 'true'").count
   end
 
   def self.pending_shelters

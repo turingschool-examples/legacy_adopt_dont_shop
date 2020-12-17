@@ -20,7 +20,6 @@ class ApplicationsController < ApplicationController
     @application = Application.new(application_params)
     @application.status = "In Progress"
     @application.save
-
     if @application.id
       redirect_to "/applications/#{@application.id}"
     else

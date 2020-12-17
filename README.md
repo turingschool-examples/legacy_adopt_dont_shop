@@ -30,10 +30,9 @@
 <ol>
   <li><a href="#about-the-project">About The Project</a>
   <li><a href="#built-with">Built With</a>
-  <li><a href="#usage">Usage</a></li>
   <li><a href="#setup-instructions">Setup Instructions</a></li>
+  <li><a href="#schema">Database Schema</a></li>
   <li><a href="#roadmap">Roadmap</a></li>
-  <li><a href="#contributing">Contributing</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ol>
@@ -44,18 +43,17 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Adopt Don't Shop is a pet adoption Platform that allows users to apply and adopt pets.
-Admins can approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
+[Adopt Don't Shop](https://fathomless-inlet-21274.herokuapp.com/) is a module 2 solo project for Turing School of Software & Design's Back-End Engineering (BEE) program. Users are able to apply to adopt pets, and Admins cab either approve or reject applications and see statistics for the shelters, pets, and applications in the system.
 
-This project coveres the following topics:
-- CRUD functionality
-- Many-to-many data models 
-- Model validations
-- ActiveRecord queries
-- Raw SQL queries
-- View Partials
-- RSpec within blocks
-- Heroku depoloyment
+### Skills Developed by Project
+* Built out CRUD functionality for a many to many relationship
+* Used ActiveRecord to write queries that join multiple tables of data together
+* Used MVC to organize code effectively, limiting the amount of logic included in views and controllers
+* Validation of models sad path handling
+* Use of flash messages to give feedback to the user
+* Use of partials in views
+* Use of `within` blocks in tests
+* Deployment of application to Heroku
 
 <!-- BUILT WITH -->
 ## Built With
@@ -71,13 +69,18 @@ To get a local copy up and running follow these simple steps.
    ```
    git clone https://github.com/elyhess/adopt_dont_shop
    ```
-2. Install gems
+2. Install dependencies
    ```
    bundle install
    ```
-3. Install gems
+3. DB creation/migration
    ```
    rails db:{create,migrate,seed}
+   ```
+3. Run tests and view test coverage
+   ```
+   bundle exec rspec
+   open coverage/index.html
    ```
 4. Run server and navigate to http://localhost:3000/
    ```
@@ -85,12 +88,10 @@ To get a local copy up and running follow these simple steps.
    ```
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
+<!-- SCHEMA -->
+## Database Schema
 
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+![schema](https://github.com/elyhess/adopt_dont_shop/blob/main/schema.png)
 
 
 <!-- ROADMAP -->

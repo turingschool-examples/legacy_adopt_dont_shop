@@ -22,7 +22,7 @@ RSpec.describe 'as a user' do
       end
       
       expect(current_path).to eq("/applications/#{@application.id}")
-      save_and_open_page
+      
       within("#pets-applied") do
         expect(page).to have_content(@pet1.name)
       end

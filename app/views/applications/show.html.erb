@@ -8,6 +8,7 @@
 <%= render "pets_list" %>
 
 <% if @application.status == "In Progress" %>
+  <%= render partial: "new_description", locals: { path: "/applications/#{@application.id}" } %>
   <%= render partial: "pets_search", locals: { path: "/applications/#{@application.id}", search: params[:search], button_text: "Search" }  %>
 <% else %>
   <h3>Description</h3>

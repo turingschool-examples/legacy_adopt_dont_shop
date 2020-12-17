@@ -57,7 +57,7 @@ describe "admin application show page" do
 
     visit "/admin/applications/#{@application2.id}"
 
-    expect(page).to have_button("Adopted")
+    expect(page).to have_button("Adopted", disabled: true)
     #expect the page to have a disabled button called adopted
     #because the pet was accepted from the first application
   end

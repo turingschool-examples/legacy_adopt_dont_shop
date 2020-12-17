@@ -105,7 +105,8 @@ Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2)
 
 Ely Hess - Ely.hess@Me.com
 
-Project Link: [https://github.com/elyhess/adopt_dont_shop](https://github.com/elyhess/adopt_dont_shop)
+Project Repo: [Adopt Don't Shop Repo](https://github.com/elyhess/adopt_dont_shop)
+Heroku: [Adopt Don't Shop](https://fathomless-inlet-21274.herokuapp.com/)
 
 
 <!-- ACKNOWLEDGEMENTS -->

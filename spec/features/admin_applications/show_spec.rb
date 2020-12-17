@@ -48,4 +48,17 @@ describe "admin application show page" do
 
     expect(page).to have_content("Status: Rejected")
   end
+
+  it "sets pet adoptable? to false when approved" do
+    approve = first(:button, "Approve")
+    approve.click
+    approve = first(:button, "Approve") #adopt both pets on first application
+    approve.click
+
+    visit "/admin/applications/#{@application2.id}"
+
+    expect(page).to have_button("Adopted")
+    #expect the page to have a disabled button called adopted
+    #because the pet was accepted from the first application
+  end
 end

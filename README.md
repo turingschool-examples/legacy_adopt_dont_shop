@@ -44,10 +44,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Adopt Don't Shop - a pet adoption Platform that allows users to apply and adopt pets.
+Adopt Don't Shop is a pet adoption Platform that allows users to apply and adopt pets.
 Admins can approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
 
-This exercise coveres the following topics:
+This project coveres the following topics:
 - CRUD functionality
 - Many-to-many data models 
 - Model validations
@@ -57,13 +57,13 @@ This exercise coveres the following topics:
 - RSpec within blocks
 - Heroku depoloyment
 
-
+<!-- BUILT WITH -->
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/)
 * [Postgresql](https://www.postgresql.org/)
 
-
+<!-- SETUP INSTRUCTIONS -->
 ## Setup Instructions
 To get a local copy up and running follow these simple steps.
 
@@ -99,18 +99,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
 
 
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
 
 <!-- CONTACT -->
 ## Contact
@@ -125,6 +113,7 @@ Project Link: [https://github.com/elyhess/adopt_dont_shop](https://github.com/el
 ## Acknowledgements
 
 * [README template](https://github.com/othneildrew/Best-README-Template)
+* [Turing School of Software & Desion](https://github.com/turingschool-examples/adopt_dont_shop)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

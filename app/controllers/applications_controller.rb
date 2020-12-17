@@ -24,7 +24,7 @@ class ApplicationsController < ApplicationController
   # def index
   #
   # end
-  
+
   private
     def app_params
       params.permit(:name, :address, :city, :state, :zip, :description)

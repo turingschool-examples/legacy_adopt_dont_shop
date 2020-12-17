@@ -22,7 +22,7 @@
 -->
 
 
-
+![Adopt Dont Shop](https://github.com/elyhess/adopt_dont_shop/blob/main/banner.png)
 
 <!-- TABLE OF CONTENTS -->
 

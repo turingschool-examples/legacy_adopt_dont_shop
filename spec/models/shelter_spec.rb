@@ -36,7 +36,7 @@ describe Shelter, type: :model do
       application2 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
 
       ApplicationPet.create(pet: pet4, application: application2, status: "Approved")
-      expect(shelter1.avg_age to eq(4))
+      expect(shelter1.avg_age).to eq(4)
     end
 
     it "num_adoptable" do
@@ -46,7 +46,7 @@ describe Shelter, type: :model do
       pet2 = shelter1.pets.create!(name: "Fluffy", approximate_age: 4, sex: 'male', description: 'super cute')
       pet3 = shelter1.pets.create!(name: "Fluffy", approximate_age: 5, sex: 'male', description: 'super cute', adoptable: false)
 
-      expect(shelter1.num_adoptable) to eq(2))
+      expect(shelter1.num_adoptable).to eq(2)
     end
   end
 end

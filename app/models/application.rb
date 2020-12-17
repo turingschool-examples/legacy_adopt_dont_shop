@@ -7,7 +7,6 @@ class Application < ApplicationRecord
     enum status: [:"In Progress", :Pending, :Accepted, :Rejected]
 
     def all_approved
-        binding.pry
         if self.adoptions.where(status: true).count == self.adoptions.count
             true
         else

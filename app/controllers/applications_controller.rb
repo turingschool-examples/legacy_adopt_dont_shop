@@ -8,6 +8,7 @@ class ApplicationsController < ApplicationController
     elsif params[:search]
       @application = Application.find(params[:id])
       @pets = Pet.where("name = ?", params[:search])
+      # possible move to model
     else
       @application = Application.find(params[:id])
     end
@@ -17,6 +18,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
+    binding.pry
     @application = Application.new(application_params)
     @application.status = "In Progress"
     @application.save

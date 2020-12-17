@@ -10,12 +10,14 @@ describe "admin shelter index page" do
   end
 
   it "lists all shelters in reverse alphabetical order by name" do
-    name1 = find("shelter-#{@shelter1.id}")
-    name2 = find("shelter-#{@shelter1.id}")
-    name3 = find("shelter-#{@shelter1.id}")
 
-    expect(name1).to appear_before(name2)
-    expect(name2).to appear_before(name3)
+
+    name1 = find(".shelter-#{@shelter1.id}")
+    name2 = find(".shelter-#{@shelter2.id}")
+    name3 = find(".shelter-#{@shelter3.id}")
+
+    expect(name3).to appear_before(name2)
+    expect(name2).to appear_before(name1)
 
     expect(page).to have_content("Shady Shelter")
     expect(page).to have_content("Silly Shelter")

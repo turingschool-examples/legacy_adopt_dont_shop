@@ -13,3 +13,11 @@
   Available pets: <%= @shelter.pets.adoptable_count %><br>
   Adopted pets: <%= @shelter.pets.adopted_count %>
 </section>
+
+<h3>Action Required</h3>
+<section id="action-required">
+  <% @shelter.pets.action_required.each do |pet| %>
+    <%= pet.name  %>
+    <%= link_to 'Take Action', admin_application_path(pet.app_id), method: :get, class: "action-link" %><br>
+  <% end %>
+</section>

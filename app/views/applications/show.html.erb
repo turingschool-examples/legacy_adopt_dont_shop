@@ -1,4 +1,4 @@
-<h1> Name: <%= "#{@application.name}" %> </h1>
+<section id='main'><h1> Name: <%= "#{@application.name}" %> </h1>
 <h2> Address: <br>
   <%= @application.street %> <br>
   <%= @application.city %> <%= @application.state %> <%= @application.zip %> </h2>
@@ -7,7 +7,7 @@
     <%= link_to("#{pet.name}", "/pets/#{pet.id}") %>
   <% end %></p></h3>
 <h4><p><%= @application.status %></p></h4>
-
+</section>
 <% if @application.status == "In progress" %>
     <h3>Search for your new pet:</h3>
     <%= form_tag("/applications/#{@application.id}", method: :get) do %>
@@ -18,6 +18,6 @@
 
 <% if @pets %>
   <% @pets.each do |pet| %>
-    <%= link_to("#{pet.name}", "/pets/#{pet.id}") %>
+    <%= link_to("#{pet.name}", "/pets/#{pet.id}") %><%= button_to 'Adopt Me', "/application_pets/new", params: {pet_id: pet.id, app_id: @application.id} %>
   <% end %>
 <% end %>

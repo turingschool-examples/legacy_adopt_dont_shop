@@ -45,6 +45,14 @@ RSpec.describe 'Application Show Page' do
 
       expect(current_path).to eq("/applications/#{@application1.id}")
       expect(page).to have_link("Thor")
+      expect(page).to have_button("Adopt Me")
+
+      click_on 'Adopt Me'
+      expect(current_path).to eq("/applications/#{@application1.id}")
+
+      within('#main') do
+        expect(page).to have_link("Thor")
+      end
     end
   end
 end

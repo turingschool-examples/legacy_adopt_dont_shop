@@ -20,8 +20,7 @@ RSpec.describe 'Application show page' do
     expect(page).to have_content("#{@application1.city}")
     expect(page).to have_content("#{@application1.state}")
     expect(page).to have_content("#{@application1.zip}")
-    expect(page).to have_content("Pets:")
-    expect(page).to have_content("Description: #{@application1.description}")
+    expect(page).to have_content("Pets I Wish to Adopt:")
     expect(page).to have_content("Status: #{@application1.status}")
   end
 
@@ -45,5 +44,8 @@ RSpec.describe 'Application show page' do
     fill_in "search", with: "Rabbid"
     click_button "Search"
     expect(page).to have_content("Rabbid Monster")
+  end
+
+  it "allows me to add a pet to an application after searching" do
   end
 end

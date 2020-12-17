@@ -13,9 +13,14 @@
   <% @application.pets.each do |pet| %>
   <%= link_to "#{pet.name}", "/pets/#{pet.id}" %><br>
   <% end %>
-  <% if @application.pets.nil? == false %>
-  <%= button_to "Submit Application" %>
-  <% end %>
+  <% if @application.in_progress? %>
+    <% if @application.pets != [] %>
+      <%= form_tag "/applications/#{@application.id}", method: :patch do %>
+        <%= label_tag :description %>
+        <%= text_field_tag :description, params[:description]%>
+        <%= button_to "Submit Application", edit_application_path(description: params[:description]) %>
+      <% end %>
+    <% end %>
 </p>
 
 <%= form_tag("/applications/#{@application.id}", method: :get) do %>
@@ -33,5 +38,6 @@
     <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
       <%= button_to "Adopt this Pet", pet_applications_path(pet_id: pet.id, application_id: @application.id), method: :post %><p>
   <% end %>
+<% end %>
 <% end %>
 <h3>Application Status: <%= @application.status %></h3>

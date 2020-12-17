@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_12_12_001254) do
     t.string "city"
     t.string "state"
     t.integer "zip"
-    t.string "description"
+    t.string "description", default: "Why should you be able to adopt this pet?"
     t.string "status", default: "In Progress"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

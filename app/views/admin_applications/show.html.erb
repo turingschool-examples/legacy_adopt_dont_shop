@@ -1,0 +1,15 @@
+<h1><%= @application.name %>'s Application for Pet Adoption</h1>
+
+<p>
+<% @application.pets.each do |pet| %>
+<%= image_tag "#{pet.image}" %><br>
+Name: <%= pet.name %><br>
+Age: <%= pet.approximate_age %><br>
+Description: <%= pet.description %><br>
+Sex: <%= pet.sex %><br>
+  <% if pet.adoptable == true %>
+  <%= button_to "Approve", edit_application_path(params: { status: "Approved" })::edit_pet_path(params: { adoptable: false}), method: :patch  %>
+  <%= button_to "Reject", edit_application_path(params: { status: "Rejected" })::edit_pet_path(params: { adoptable: false}), method: :patch  %>
+  <% end %>
+<% end %>
+</p>

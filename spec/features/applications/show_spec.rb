@@ -84,5 +84,12 @@ RSpec.describe 'Application Show Page' do
         end
       end
     end
+    describe "On an application with no pets" do
+      it "does not show the submit button" do
+        visit "/applications/#{@application1.id}"
+
+        expect(page).not_to have_button("Submit Application")
+      end
+    end
   end
 end

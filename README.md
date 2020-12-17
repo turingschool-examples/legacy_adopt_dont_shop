@@ -29,10 +29,10 @@
 <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
 <ol>
   <li><a href="#about-the-project">About The Project</a>
+  <li><a href="#project-board">Project Board</a></li>
+  <li><a href="#database-schema">Database Schema</a></li>
   <li><a href="#built-with">Built With</a>
   <li><a href="#setup-instructions">Setup Instructions</a></li>
-  <li><a href="#roadmap">Roadmap</a></li>
-  <li><a href="#database-schema">Database Schema</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ol>
@@ -52,10 +52,9 @@
 * Use of `within` blocks in tests
 * Deployment of application to [Heroku](https://fathomless-inlet-21274.herokuapp.com/)
 
-<!-- ROADMAP -->
-## Roadmap
-
-Check the [project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
+<!-- PROJECT BOARD -->
+## Project Board
+[project board](https://github.com/elyhess/adopt_dont_shop/projects/2) for a complete list of features / user stories used to develop this application.
 
 <!-- DATABBASE SCHEMA -->
 ## Database Schema

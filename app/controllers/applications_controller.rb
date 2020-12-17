@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
       @application.save
     elsif params[:search]
       @application = Application.find(params[:id])
-      @pets = Pet.where("name = ?", params[:search])
+      @pets = Application.find_pet(params[:search])
       # possible move to model
     else
       @application = Application.find(params[:id])
@@ -28,7 +28,6 @@ class ApplicationsController < ApplicationController
       render :new
     end
   end
-
 
   private
   def application_params

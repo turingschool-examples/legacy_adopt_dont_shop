@@ -10,6 +10,7 @@ class Application < ApplicationRecord
   validates :description, presence: true
 
   #enum status: [:in_progress, ] this is where you can limit the status
-
-
+  def self.find_pet(name_search)
+    Pet.where("LOWER(name) LIKE ?", "%" + name_search.downcase + "%")
+  end
 end

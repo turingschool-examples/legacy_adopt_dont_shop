@@ -91,5 +91,26 @@ RSpec.describe 'Application Show Page' do
         expect(page).not_to have_button("Submit Application")
       end
     end
+
+    describe "I can search for pets" do
+      it "will return pets that are partial matches" do
+
+        visit "/applications/#{@application1.id}"
+
+        fill_in 'search', with: "Th"
+        click_on 'Submit'
+
+        expect(page).to have_link('Thor')
+      end
+
+      it "will return pets that are case insensitive" do
+        visit "/applications/#{@application1.id}"
+
+        fill_in 'search', with: "aThEnA"
+        click_on 'Submit'
+
+        expect(page).to have_link('Athena')
+      end
+    end
   end
 end

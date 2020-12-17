@@ -6,7 +6,14 @@ class Shelter < ApplicationRecord
   end
 
   def self.name_address(id)
-    find_by_sql("SELECT id, name, address, city, state, zip FROM shelters WHERE id=#{id}").first
+    find_by_sql("SELECT * FROM shelters WHERE id=#{id}").first
+  end
+
+  def self.pending_applications
+    joins(pets: [:application_pets, :applications])
+    .where("applications.application_status = ?", "Pending")
+    .distinct
+    .order(:name)
   end
 
 end

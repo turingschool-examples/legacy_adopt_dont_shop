@@ -5,9 +5,14 @@ describe "admin shelter index page" do
     @shelter3 = Shelter.create!(name: "Singular Shelter", address: "1 Ave", city: "Denver", state: "CO", zip: 80011)
     @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
 
+    @pet1 = @shelter1.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
     @pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
+    @pet3 = @shelter3.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
+
     @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "Somewhere")
+    ApplicationPet.create(pet: @pet1, application: @application1)
     ApplicationPet.create(pet: @pet2, application: @application1)
+    ApplicationPet.create(pet: @pet3, application: @application1)
     visit "/admin/shelters"
   end
 
@@ -26,9 +31,14 @@ describe "admin shelter index page" do
     expect(page).to have_content("Singular Shelter")
   end
 
-  it "shows shelters with pending application section containing shelters that have pending applications" do
+  it "shows shelters with pending application section containing shelters that have pending applications ordered reverse alphabeticallly" do
+    shel3 = find(".pending-shelter-#{@shelter3.id}")
     shel2 = find(".pending-shelter-#{@shelter2.id}")
+    shel1 = find(".pending-shelter-#{@shelter1.id}")
+
     header = find(".all-shelter-header")
-    expect(shel2).to appear_before(header)
+    expect(shel3).to appear_before(shel2)
+    expect(shel2).to appear_before(shel1)
+    expect(shel1).to appear_before(header)
   end
 end

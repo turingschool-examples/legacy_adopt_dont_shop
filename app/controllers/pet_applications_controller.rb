@@ -9,4 +9,9 @@ class PetApplicationsController < ApplicationController
     end
     redirect_to "/applications/#{@app.id}"
   end
+
+  def update
+    petapp = PetApplication.find(params[:id])
+    petapp.update(params[:status])
+  end
 end

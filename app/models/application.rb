@@ -14,6 +14,7 @@ class Application < ApplicationRecord
   def accepted?
     self.status == "Accepted"
   end
+
   def rejected?
     self.status == "Rejected"
   end

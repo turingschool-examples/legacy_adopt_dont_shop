@@ -41,6 +41,12 @@ class ApplicationsController < ApplicationController
       redirect_to '/applications'
     end
 
+    # def accept_application_and_adopt_pet(app, pet)
+    #   app.update(status: "accepted")
+    #   pet.adopted
+    #   redirect_to "/admin/applications/#{app.id}"
+    # end
+
     private
     def applications_params
       params.permit(:name, :street_address, :city, :state, :zip, :description, :status)

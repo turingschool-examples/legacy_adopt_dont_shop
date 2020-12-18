@@ -40,18 +40,18 @@ describe "admin shelter index page" do
   it "has an action required section with pets that have pending applications as well as links to those applications" do
     expect(page).to have_content("Action Required")
 
-    pet0 = @shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
-    pet1 = @shelter2.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
-    pet2 = @shelter3.pets.create!(name: "Fluffy 2", approximate_age: 5, sex: 'male', description: 'super cute')
+    pet0 = @shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute', adoptable: false)
+    pet1 = @shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
+    pet2 = @shelter1.pets.create!(name: "Fluffy 2", approximate_age: 5, sex: 'male', description: 'super cute')
     application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
     application2 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
 
     a1p1 = ApplicationPet.create(pet: pet1, application: application1)
-    a2p2 = ApplicationPet.create(pet: pet2, application: application2)
+    a2p2 = ApplicationPet.create(pet: pet2, application: application1)
+
 
     visit "/admin/shelters/#{@shelter1.id}"
-
-    expect(page).to have_no_content(pet0.name)
+    require "pry"; binding.pry
     expect(page).to have_content(pet1.name)
     expect(page).to have_content(pet2.name)
 

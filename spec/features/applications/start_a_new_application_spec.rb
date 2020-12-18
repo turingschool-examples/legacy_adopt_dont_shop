@@ -43,7 +43,7 @@ RSpec.describe "As a user" do
       expect(page).to have_button("Submit")
     end
 
-    it "I can not create an application without a name" do
+    it "I can not create an application with empty fields" do
       visit applications_new_path
 
       fill_in "Street address:", with: "123 W Street"

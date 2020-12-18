@@ -14,18 +14,33 @@ describe Pet, type: :model do
     it {should validate_numericality_of(:approximate_age).is_greater_than_or_equal_to(0)}
 
     it 'is created as adoptable by default' do
+      PetApplication.destroy_all
+      Pet.destroy_all
+      Application.destroy_all
+      Shelter.destroy_all
+
       shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
       pet = shelter.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
       expect(pet.adoptable).to eq(true)
     end
 
     it 'can be created as not adoptable' do
+      PetApplication.destroy_all
+      Pet.destroy_all
+      Application.destroy_all
+      Shelter.destroy_all
+
       shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
       pet = shelter.pets.create!(adoptable: false, name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
       expect(pet.adoptable).to eq(false)
     end
 
     it 'can be male' do
+      PetApplication.destroy_all
+      Pet.destroy_all
+      Application.destroy_all
+      Shelter.destroy_all
+
       shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
       pet = shelter.pets.create!(sex: :male, name: "Fluffy", approximate_age: 3, description: 'super cute')
       expect(pet.sex).to eq('male')
@@ -34,6 +49,11 @@ describe Pet, type: :model do
     end
 
     it 'can be female' do
+      PetApplication.destroy_all
+      Pet.destroy_all
+      Application.destroy_all
+      Shelter.destroy_all
+
       shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
       pet = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 3, description: 'super cute')
       expect(pet.sex).to eq('female')
@@ -43,6 +63,11 @@ describe Pet, type: :model do
   end
 
   describe 'search' do
+    PetApplication.destroy_all
+    Pet.destroy_all
+    Application.destroy_all
+    Shelter.destroy_all
+
     shelter = FactoryBot.create(:shelter)
     pet1 = FactoryBot.create(:pet)
     pet2 = FactoryBot.create(:pet)

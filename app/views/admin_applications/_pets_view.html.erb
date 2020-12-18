@@ -9,7 +9,8 @@
     <p><%= pet.name %> | <b>Rejected</b><p>
     <% else %>
       <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
-      <%= button_to "Approve", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Approved", path: path} %>
+      <%= button_to "Approve", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Approved", path: path} %><br/>
+      <%= button_to "Reject", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Rejected", path: path} %>
     <% end %>
     </section>
   <% end %>

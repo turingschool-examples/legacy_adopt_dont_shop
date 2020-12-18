@@ -1,16 +1,13 @@
 <h1> Application <%= @application.id %> </h1>
-<p><b>Application Status: <%= @application.status %></b></p>
-<h3>Details:</h3>
-<p>Name: <%= @application.name %></p>
-<p>Address: <%= @application.address %></p>
-<p>Description: <%= @application.description %></p>
+<%= render partial: "shared/application_details" %>
 
-<%= render "pets_list" %>
 
 <% if @application.status == "In Progress" %>
   <%= render partial: "new_description", locals: { path: "/applications/#{@application.id}" } %>
+  <%= render "pets_list" %>
   <%= render partial: "pets_search", locals: { path: "/applications/#{@application.id}", search: params[:search], button_text: "Search" }  %>
 <% else %>
   <h3>Description</h3>
+  <%= render "pets_list" %>
   <p><%= @application.description %></p>
 <% end %>

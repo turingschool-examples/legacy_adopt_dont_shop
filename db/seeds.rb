@@ -24,7 +24,18 @@ rand(10..15).times do
   pets.each do |pet|
     PetApplication.create(application_id: application.id, pet_id: pet.id)
   end
+  application.save
+end
+
+rand(10..15).times do
+  application = FactoryBot.create(:application)
+  pets = Pet.all.sample(rand(1..5))
+  pets.each do |pet|
+    PetApplication.create(application_id: application.id, pet_id: pet.id)
+  end
+  application.description = Faker::Lorem.sentences(number: 3).join(' ')
   application.status = "Pending"
+  application.save
 end
 
 rand(5..10).times do
@@ -33,17 +44,20 @@ rand(5..10).times do
   pets.each do |pet|
     PetApplication.create(application_id: application.id, pet_id: pet.id)
   end
+  application.description = Faker::Lorem.sentences(number: 3).join(' ')
   application.status = "Rejected"
+  application.save
 end
 
-# Don't seed Accepted applications until later
-# rand(5..10).times do
+# rand(10..15).times do
 #   application = FactoryBot.create(:application)
 #   pets = Pet.all.sample(rand(1..5))
 #   pets.each do |pet|
 #     PetApplication.create(application_id: application.id, pet_id: pet.id)
 #   end
+#   application.description = Faker::Lorem.sentences(number: 3).join(' ')
 #   application.status = "Accepted"
+#   application.save
 # end
 
 # "In Progress", "Pending", "Accepted", or "Rejected"

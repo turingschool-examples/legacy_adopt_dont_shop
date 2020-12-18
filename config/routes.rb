@@ -28,4 +28,17 @@ Rails.application.routes.draw do
   patch "/applications/:id", to: "applications#update", as: "applications_update"
 
   post "/pet_applications", to: "pet_applications#create", as: "pet_applications_create"
+  patch "/pet_applications", to: "pet_applications#update", as: "pet_applications_update"
+
+  # resources :shelter
+
+  # resources :pets, only: [:index, :show, :edit, :destroy,  :update]
+
+  # resources :applications, only: [:new, :show, :create, :update]
+
+  # resources :pet_applications, only: [:create]
+  
+  scope :admin, as: "admin" do
+    resources :applications, controller: "admin_applications", only: [:show]
+  end
 end

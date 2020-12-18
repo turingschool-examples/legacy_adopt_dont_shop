@@ -1,0 +1,16 @@
+<h3>Pets applied for:</h3>
+<ul>
+  <% @application.pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+    <%= image_tag "#{pet.image}", size: "100x100" %><br/>
+    <% if @application.adoption_status(pet.id) == "Approved" %>
+      <p><%= pet.name %> | <b>Approved</b><p>
+    <% elsif @application.adoption_status(pet.id) == "Rejected" %>
+    <p><%= pet.name %> | <b>Rejected</b><p>
+    <% else %>
+      <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
+      <%= button_to "Approve", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Approved", path: path} %>
+    <% end %>
+    </section>
+  <% end %>
+</ul>

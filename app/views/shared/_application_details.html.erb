@@ -1,0 +1,7 @@
+<p><b>Application Status: <%= @application.status %></b></p>
+<h3>Details:</h3>
+<p>Name: <%= @application.name %></p>
+<p>Address: <%= @application.address %>, <%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %></p>
+<% if @application.status != "In Progress" %>
+  <p>Description: <%= @application.description %></p>
+<% end %>

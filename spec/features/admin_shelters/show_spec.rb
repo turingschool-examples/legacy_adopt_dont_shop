@@ -49,11 +49,11 @@ describe "admin shelter index page" do
     a1p1 = ApplicationPet.create(pet: pet1, application: application1)
     a2p2 = ApplicationPet.create(pet: pet2, application: application2)
 
-    visit "/admin/shelters/#{shelter.id}"
-    expect(page).to have_no_content(@shelter1.name)
+    visit "/admin/shelters/#{@shelter1.id}"
 
-    expect(page).to have_content(@shelter2.name)
-    expect(page).to have_content(@shelter3.name)
+    expect(page).to have_no_content(pet0.name)
+    expect(page).to have_content(pet1.name)
+    expect(page).to have_content(pet2.name)
 
     expect(page).to have_link("view application")
     click_link("view application", match: :first)

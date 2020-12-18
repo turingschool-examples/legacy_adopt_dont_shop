@@ -10,7 +10,7 @@ class Shelter < ApplicationRecord
   end
 
   def num_adoptable
-    pending_pets.count
+    pets.where("adoptable = 'true'").count
   end
 
   def num_adopted
@@ -18,7 +18,7 @@ class Shelter < ApplicationRecord
   end
 
   def pending_pets
-    pets.where("adoptable = 'true'")
+    pets.joins(:application_pets).where("status IS NULL")
   end
 
   def self.pending_shelters

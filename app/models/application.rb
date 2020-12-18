@@ -8,4 +8,9 @@ class Application < ApplicationRecord
   validates :state,presence: true
   validates :zip_code, presence: true
   validates :status, presence: true
+
+  def adoption_status(pet_id)
+    pet_app = PetApplication.find_by(pet_id: pet_id, application_id: id)
+    pet_app.status
+  end
 end

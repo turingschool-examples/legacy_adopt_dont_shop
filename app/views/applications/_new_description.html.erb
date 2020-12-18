@@ -1,9 +1,9 @@
 <% if @application.pets.count >= 1 %>
   <section id="description-section">
-  <p>Why would you be a good home?</p><br/>
+  <p><b>Why would you be a good home?</b></p>
   <%= form_tag path, method: :patch do %>
     <%= label_tag :description, "Description:" %>
-    <%= text_field_tag :description %>
+    <%= text_field_tag :description %><br/>
     <%= submit_tag "Submit Application" %>
   <% end %>
   </section>

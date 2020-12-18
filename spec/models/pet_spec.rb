@@ -67,7 +67,7 @@ describe Pet, type: :model do
     it "pending_apps" do
       pet_1_app_2 = ApplicationPet.create(application: @application2, pet: @pet1)
       pet_1_app_3 = ApplicationPet.create(application: @application3, pet: @pet1)
-      expect(@pet1.pending_apps.to eq([pet_1_app_2,pet_1_app_3]))
+      expect(@pet1.pending_apps).to eq([pet_1_app_2,pet_1_app_3])
     end
   end
 end

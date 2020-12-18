@@ -51,7 +51,6 @@ describe "admin shelter index page" do
 
 
     visit "/admin/shelters/#{@shelter1.id}"
-    require "pry"; binding.pry
     expect(page).to have_content(pet1.name)
     expect(page).to have_content(pet2.name)
 

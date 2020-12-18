@@ -10,7 +10,7 @@ RSpec.describe "As a user" do
       PetApplication.create(application_id: @application.id, pet_id: @pet1.id)
     end
     
-    it "has an approve button for each pet on an application" do
+    it "has a reject button for each pet on an application" do
       visit "/admin/applications/#{@application.id}"
 
       expect(page).to have_content("Admin Account")
@@ -18,22 +18,22 @@ RSpec.describe "As a user" do
 
       within("#pet-#{ @pet1.id }") do
         expect(page).to have_content(@pet1.name)
-        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
       end
     end
     
-    it "can approve a pet on an application" do
+    it "can reject a pet on an application" do
       visit "/admin/applications/#{@application.id}"
 
       within("#pet-#{@pet1.id}") do
-        click_button("Approve")
+        click_button("Reject")
       end
 
       expect(current_path).to eq("/admin/applications/#{@application.id}")
 
       within("#pet-#{@pet1.id}") do
         expect(page).to have_content(@pet1.name)
-        expect(page).to have_content("Approved")
+        expect(page).to have_content("Rejected")
       end
     end
   end

@@ -23,7 +23,8 @@ class ApplicationsController < ApplicationController
   def update
     @application = Application.find(params[:id])
     if params[:description] == ""
-      flash[:failure] = "Invalid description. Try again."
+      flash.now[:notice] = "Invalid description. Try again."
+      render :show
     else
       @application.update!(status: "Pending", description: params[:description])
       redirect_to applications_show_path(@application.id)

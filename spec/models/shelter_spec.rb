@@ -61,5 +61,17 @@ describe Shelter, type: :model do
 
       expect(shelter1.num_adopted).to eq(1)
     end
+
+    it "pending_pets" do
+      shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
+      pet1 = shelter1.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
+      pet2 = shelter1.pets.create!(name: "Fluffy 2", approximate_age: 3, sex: 'male', description: 'super cute')
+      application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
+      application2 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80410")
+
+      ApplicationPet.create(pet: pet1, application: application1)
+      ApplicationPet.create(pet: pet2, application: application2, status: "Approved")
+      expect(shelter1.pending_pets).to eq([pet1])
+    end
   end
 end

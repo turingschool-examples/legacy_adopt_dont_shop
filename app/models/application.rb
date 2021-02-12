@@ -1,5 +1,7 @@
 class Application < ApplicationRecord
-  #belongs_to :applicationpets
+  has_many :application_pets
+  has_many :pets, through: :application_pets
+
   validates_presence_of :first_name, :last_name
 
   validates :zipcode, numericality: {
@@ -7,4 +9,11 @@ class Application < ApplicationRecord
             }
 
   enum status: [:in_progress, :pending, :accepted, :rejected]
+
+  def capitalized_status
+    string_status = status.capitalize
+    if status == "in_progress"
+      string_status = "In Progress"
+    end
+  end
 end

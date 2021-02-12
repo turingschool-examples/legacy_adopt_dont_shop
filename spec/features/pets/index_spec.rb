@@ -5,7 +5,7 @@ RSpec.describe 'Pets index page' do
     @shelter1 = create(:shelter)
     @shelter2 = create(:shelter)
     @shelter3 = create(:shelter)
-    @pet1 = create(:pet, shelter_id: @shelter1.id)
+    @pet1 = create(:pet, shelter_id: @shelter1.id, name: "Thor")
     @pet2 = create(:pet, shelter_id: @shelter2.id)
     @pet3 = create(:pet, shelter_id: @shelter1.id)
   end

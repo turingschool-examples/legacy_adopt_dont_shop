@@ -1,2 +1,2 @@
-class Application < ApplicationController
+class Application < ApplicationRecord
 end

@@ -1,0 +1,8 @@
+<h2>Application for <%= @application.name %></h2><br>
+<b>Name:</b> <%= @application.name %><br>
+<b>Address:</b> <%= @application.street_address%>, <%= @application.city%>, <%= @application.state%> <%= @application.zip %><br>
+<b>Explanation for adoption:</b> <%= @application.description %><br>
+<b>Applying for:</b><% @application.chosen_pets_id.each do |pet_id| %>
+  <a href="/pets/<%= pet_id %>"><%= Pet.find_name(pet_id)%></a> /
+<% end %> <br>
+<b>Status:</b> <%= @application.app_status%><br>

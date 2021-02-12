@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe ApplicationsPets, type: :model do
+describe ApplicationPet, type: :model do
   describe 'relationships' do
     it { should belong_to :application }
     it { should belong_to :pet }
   end
 
   describe 'validations' do
-    ApplicationsPets.destroy_all
+    ApplicationPet.destroy_all
     Pet.destroy_all
     Shelter.destroy_all
     Application.destroy_all
@@ -18,7 +18,7 @@ describe ApplicationsPets, type: :model do
                                       address: '123 Adoption Ln.', city: 'Denver',
                                       state: 'CO', zipcode: '80222',
                                       description: 'description of application', status: 'in_progress')
-    ApplicationsPets.create!(application_id: application.id, pet_id: pet.id)
+    ApplicationPet.create!(application_id: application.id, pet_id: pet.id)
 
     it {should validate_presence_of :application_id}
     it {should validate_presence_of :pet_id}

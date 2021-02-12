@@ -1,5 +1,7 @@
 class Application < ApplicationRecord
-  #belongs_to :applicationpets
+  has_many :application_pets
+  has_many :pets, through: :application_pets
+
   validates_presence_of :first_name, :last_name
 
   validates :zipcode, numericality: {

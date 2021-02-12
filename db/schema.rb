@@ -10,17 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_142018) do
+ActiveRecord::Schema.define(version: 2021_02_12_150036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "application_pets", force: :cascade do |t|
-    t.bigint "applications_id"
-    t.bigint "pets_id"
-    t.index ["applications_id"], name: "index_application_pets_on_applications_id"
-    t.index ["pets_id"], name: "index_application_pets_on_pets_id"
-  end
 
   create_table "applications", force: :cascade do |t|
     t.string "first_name"
@@ -30,9 +23,16 @@ ActiveRecord::Schema.define(version: 2021_02_12_142018) do
     t.string "state"
     t.integer "zipcode"
     t.string "description"
-    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
+  end
+
+  create_table "applications_pets", force: :cascade do |t|
+    t.bigint "application_id"
+    t.bigint "pet_id"
+    t.index ["application_id"], name: "index_applications_pets_on_application_id"
+    t.index ["pet_id"], name: "index_applications_pets_on_pet_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_02_12_142018) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "application_pets", "applications", column: "applications_id"
-  add_foreign_key "application_pets", "pets", column: "pets_id"
+  add_foreign_key "applications_pets", "applications"
+  add_foreign_key "applications_pets", "pets"
   add_foreign_key "pets", "shelters"
 end

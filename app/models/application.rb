@@ -9,4 +9,11 @@ class Application < ApplicationRecord
             }
 
   enum status: [:in_progress, :pending, :accepted, :rejected]
+
+  def capitalized_status
+    string_status = status.capitalize
+    if status == "in_progress"
+      string_status = "In Progress"
+    end
+  end
 end

@@ -1,10 +1,15 @@
-<h1> Application for <%= "#{@application.first_name} #{@application.last_name}" %>
+<body>
+<h1> Application for <%= "#{@application.first_name} #{@application.last_name}" %></h1>
 Address: <%= @application.address %><br>
 City: <%= @application.city %><br>
 State: <%= @application.state %><br>
 Zipcode: <%= @application.zipcode %><br>
 Description: <%= @application.description %><br>
-<% binding.pry %>
-
-Pets:
-Application Status: <%= @application.status %><br>
+Pets' Names:
+<div class="nav-bar">
+<% @application.pets.each do |pet| %>
+<p><%= pet.name %></p>
+<% end %>
+</div>
+Application Status: <%= @application.capitalized_status %><br>
+</body>

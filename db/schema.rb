@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_174915) do
+ActiveRecord::Schema.define(version: 2021_02_12_050537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.string "name"
+    t.string "street_address"
+    t.string "city"
+    t.string "state"
+    t.integer "zip"
+    t.string "description"
+    t.integer "chosen_pets_id", array: true
+    t.string "app_status"
+  end
 
   create_table "pets", force: :cascade do |t|
     t.string "image"

@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe Pet, type: :model do
   describe 'relationships' do
+    it { should have_many :pet_applicants }
+    it { should have_many(:applicants).through(:pet_applicants) }
     it { should belong_to :shelter }
   end
 

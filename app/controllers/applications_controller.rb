@@ -9,7 +9,8 @@ class ApplicationsController < ApplicationController
 
   def create
     @application = Application.create(app_params)
-    require "pry"; binding.pry
+    @application.update(status: "In Progress")
+    redirect_to "/applications/#{@application.id}"
   end
 
   private

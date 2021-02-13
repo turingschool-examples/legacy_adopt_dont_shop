@@ -24,7 +24,12 @@ RSpec.describe 'As a vistor visiting the Pet index page' do
       fill_in "state", :with => "FL"
       fill_in "zipcode", :with => "32123"
       click_button("Submit")
-      expect(current_path).to eq("/applications/#{@apollo.id}")
+      expect(page).to have_content("Cait B")
+      expect(page).to have_content("111 Sweet St")
+      expect(page).to have_content("Tampa")
+      expect(page).to have_content("FL")
+      expect(page).to have_content("32123")
+      expect(page).to have_content("In Progress")
     end
   end
 end

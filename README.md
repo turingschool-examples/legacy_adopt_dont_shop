@@ -160,7 +160,7 @@ Then I do not see a section to submit my application
 ```
 
 ```
-[ ] done
+[X] done
 
 Partial Matches for Pet Names
 
@@ -172,7 +172,7 @@ For example, if I search for "fluff", my search would match pets with names "flu
 ```
 
 ```
-[ ] done
+[X] done
 
 Case Insensitive Matches for Pet Names
 

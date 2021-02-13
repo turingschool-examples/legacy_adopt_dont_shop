@@ -1,12 +1,15 @@
 <a href="/applications">All Applications</a>
 
 <div class="Application Info Show">
+  <h4>Name</h4>
   <p><%= @application.first_name %></p>
   <p><%= @application.last_name %></p>
+  <h4>Address</h4>
   <p><%= @application.street_address %></p>
   <p><%= @application.city %></p>
   <p><%= @application.state %></p>
   <p><%= @application.zip %></p>
+  <h4>"Why I would make a good owner:"</h4>
   <p><%= @application.description %></p>
   <p><%= @application.status %></p>
 </div>

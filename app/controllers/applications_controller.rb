@@ -19,6 +19,7 @@ class ApplicationsController < ApplicationController
       city: params[:city],
       state: params[:state],
       zip: params[:zip],
+      description: "",
       status: "Pending",
     })
 

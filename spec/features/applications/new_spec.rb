@@ -32,6 +32,7 @@ RSpec.describe "application new page" do
       expect(page).to have_content("IL")
       expect(page).to have_content("78910")
       expect(page).to have_content("Pending")
+      expect(page).to have_content("Why I would make a good owner:")
     end
   end
 end

@@ -1,4 +1,4 @@
 class ApplicationPet < ApplicationRecord
   belongs_to :application
-  belongs_to :song
-end 
+  belongs_to :pet
+end

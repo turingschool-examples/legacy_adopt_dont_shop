@@ -33,7 +33,7 @@ During your Check In, you should be prepared to review your database schema for 
 ## Deploy
 
 ```
-[ ] done
+[X] done
 
 Deploy your application to Heroku
 

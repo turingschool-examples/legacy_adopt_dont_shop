@@ -1,3 +1,3 @@
 class ApplicationForm < ApplicationRecord
-
-end 
+  has_many :application_pets
+end

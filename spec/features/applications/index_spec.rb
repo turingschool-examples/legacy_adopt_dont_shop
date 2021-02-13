@@ -14,10 +14,10 @@ RSpec.describe "application index page" do
 
     visit "/shelters/#{@shelter.id}/applications/"
 
-    expect(page).to have_content(application_1.fist_name)
-    expect(page).to have_content(application_2.first_name)
-    expect(page).to have_content(application_3.first_name)
-    expect(page).to have_content(application_4.first_name)
-    expect(page).to have_content(application_5.first_name)
+    expect(page).to have_content(@application_1.first_name)
+    expect(page).to have_content(@application_2.first_name)
+    expect(page).to have_content(@application_3.first_name)
+    expect(page).to have_content(@application_4.first_name)
+    expect(page).to have_content(@application_5.first_name)
   end
 end

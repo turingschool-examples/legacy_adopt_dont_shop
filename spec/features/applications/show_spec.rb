@@ -13,7 +13,7 @@ RSpec.describe "the applications show page" do
 
   describe "should show the application and attributes" do
     it "name, address, description, and status " do
-      visit "/shelters/#{@shelter.id}/applications/#{@application.id}"
+      visit "/applications/#{@application.id}"
 
       expect(page).to have_content(@application.first_name)
       expect(page).to have_content(@application.last_name)

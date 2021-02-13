@@ -4,6 +4,12 @@ RSpec.describe Application do
 	before :each do
   	@application_1 = Application.create!(name: 'Ben', street: '123 street', city: 'Denver', state: 'CO', zip: '80220')
   end
+
+  describe 'relationships' do
+		it { should have_many :pet_applications}
+
+		it {should have_many(:pets).through(:pet_applications)}
+  end
 	describe 'validations' do
 		it { should validate_presence_of :name }
 		it { should validate_presence_of :street }

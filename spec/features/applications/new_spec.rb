@@ -22,7 +22,25 @@ RSpec.describe 'As a Visitor' do
 			expect(page).to have_content("Ben")
 			expect(page).to have_content("123 street,denver,co,12332")
   	end
-
   end
+
+  it'shows an error message when leaving fields empty'do
+  	visit '/pets'
+
+  	expect(page).to have_content("Start an Application")
+  	expect(page).to have_link(href: "/applications/new")
+
+  	click_link("Start an Application")
+
+  	expect(current_path).to eq("/applications/new")
+  	fill_in("name", with:'Ben')
+  	fill_in("street", with:'123 street')
+  	fill_in("city", with:'denver')
+  	click_button("Submit")
+
+  	expect(page).to have_content("Missing fields, please fill in all info.")
+
+	end
+
 
 end

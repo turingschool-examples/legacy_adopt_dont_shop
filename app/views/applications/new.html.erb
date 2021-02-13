@@ -1,0 +1,18 @@
+<h1>Start an Application</h1>
+
+
+<%= form_with url: "/applications/:id", method: :post do |form| %>
+  <%= form.label :name, "Name:" %>
+  <%= form.text_field :name %><br>
+  <%= form.label :street, "Street:" %>
+  <%= form.text_field :street %><br>
+  <%= form.label :city, "City:" %>
+  <%= form.text_field :city %><br>
+  <%= form.label :state, "State:" %>
+  <%= form.text_field :state %><br>
+  <%= form.label :zip, "Zip:" %>
+  <%= form.text_field :zip %><br>
+  <%= form.label :description, "Description:" %>
+  <%= form.text_area :description %><br>
+  <%= form.submit "Submit" %>
+  <% end %>

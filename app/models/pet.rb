@@ -9,4 +9,8 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
+
+  def self.partial_search(input)
+    where("name ILIKE ?", "%#{input}%")
+  end
 end

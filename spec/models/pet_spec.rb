@@ -41,4 +41,19 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  describe 'class methods' do
+    it 'Search finds a pet by name' do
+      shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+      pet1 = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 3, description: 'super cute')
+      pet2 = shelter.pets.create!(sex: :male, name: "Thor", approximate_age: 4, description: 'soooo cute')
+      pet3 = shelter.pets.create!(sex: :male, name: "Spark", approximate_age: 2, description: 'too cute')
+
+      pets = Pet.all
+      expected = [pet2]
+      unexpected = [pet1, pet3]
+      expect(pets.partial_search("Thor")).to eq(expected)
+      expect(pets.partial_search("Thor")).to_not include(unexpected)
+    end
+  end
 end

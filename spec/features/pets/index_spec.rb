@@ -58,4 +58,32 @@ RSpec.describe 'Pets index page' do
     expect(page).to have_content("Calvin")
     expect(page).to_not have_content("Thor")
   end
+
+  it "can create new application from pets index" do
+    visit '/pets'
+
+    expect(page).to have_link('Start an Application')
+
+    click_link('Start an Application')
+
+    expect(current_path).to eq('applications/new')
+
+    fill_in "name", with: "Sally"
+    fill_in "address", with: "234 Third Ave"
+    fill_in "city", with: "Dallas"
+    fill_in "state", with: "TX"
+    fill_in "zip", with: 88678
+    fill_in "description", with: "I would be a great dog mom!"
+
+    click_on('Submit Application')
+
+    expect(current_path).to eq('/applications/show')
+    expect(page).to have_content("Sally's application:")
+    expect(page).to have_content("234 Third Ave")
+    expect(page).to have_content("Dallas")
+    expect(page).to have_content("TX")
+    expect(page).to have_content(88678)
+    expect(page).to have_content("I would be a great dog mom!")
+    expect(page).to have_content("In Progress")
+  end
 end

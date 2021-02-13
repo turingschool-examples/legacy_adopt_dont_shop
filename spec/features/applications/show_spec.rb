@@ -5,11 +5,14 @@ RSpec.describe 'Applications index page' do
     @applicant_1 = create(:application)
     @applicant_2 = create(:application, name: "John Doe, Jr.")
     @applicant_3 = create(:application, name: "Jane Doe")
+    @dog_1 = create(:pet)
+    @dog_2 = create(:pet, name: "Zeus")
+    @dog_3 = create(:pet, name: "Goofy")
   end
 
   it "displays an applicant with corresponding id and attributes" do
     visit "/applicants/#{@applicant_1.id}"
-
+    require "pry"; binding.pry
     save_and_open_page
 
     expect(page).to have_content("Name: #{@applicant_1.name}")

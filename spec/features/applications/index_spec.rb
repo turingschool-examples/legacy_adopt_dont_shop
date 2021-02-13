@@ -9,7 +9,7 @@ RSpec.describe 'the Application index page' do
     @pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
     @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
     @jenn = Application.create!(name:'Jenny O', address:'455 Zim Street', city:'Valporia', state:'Illinois', zip:'74515', description:'welcoming young family looking for energetic dogs good with kids')
-    @bill = Application.create!(name:'Billy B', address:'120 Anchor Ave', city:'Dreamland', state:'Michigan', zip:'85142', description:'aging widower looking for a lazy cat for quiet companionship')
+    @bill = Application.create!(name:'Billy B', address:'120 Anchor Ave', city:'Dreamland', state:'Michigan', zip:'85142', description:'aging widower looking for a lazy cat for quiet companionship', status: 'Pending')
 
     @jenn.pets << @pet1
     @jenn.pets << @pet3
@@ -38,7 +38,7 @@ RSpec.describe 'the Application index page' do
       expect(page).to have_content(@bill.state)
       expect(page).to have_content(@bill.zip)
       expect(page).to have_content(@bill.description)
-      expect(page).to have_content(@bill.status)
+      expect(page).to have_content('Pending')
 
       expect(page).to have_content(@pet2.name)
     end

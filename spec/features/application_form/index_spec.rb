@@ -42,5 +42,14 @@ RSpec.describe "the Application index page", type: :feature do
 
   it "should display all the applications" do
     visit '/applications'
+
+    within("#application-#{@app_1.id}") do
+      expect(page).to have_content(@app_1.name)
+    end
+
+    within("#application-#{@app_2.id}") do
+      expect(page).to have_content(@app_2.name)
+    end
+
   end
 end

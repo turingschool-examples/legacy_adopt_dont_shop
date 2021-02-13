@@ -7,9 +7,9 @@ class ApplicantsController < ApplicationController
   end
 
   def create
-    applicant = Applicant.new(applicant_params)
+    applicant = Applicant.create(applicant_params)
 
-    applicant.save
+    # applicant.save
     redirect_to "/applicants/#{applicant.id}"
   end
 end

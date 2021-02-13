@@ -1,10 +1,9 @@
-class ApplicationsController < ActionController::Base
+class ApplicationsController < ApplicationController
   def index
   end
 
   def show
     @application = Application.find(params[:id])
-    @application_pets = ApplicationPet.find_by_application_id(params[:id])
     if params[:pet_name]
       @pets = Pet.find_by_name(params[:pet_name])
     end
@@ -20,7 +19,7 @@ class ApplicationsController < ActionController::Base
     else
       flash[:notice] = "Application not created: Required information missing."
       render "/applications/new"
-end
+    end
   end
 
    private

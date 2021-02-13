@@ -1,15 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/", to: "welcome#index"
-  get "/applications/new", to: "applications#new"
-  get "/applications/:id", to: "applications#show"
-  get "/applications/:id/edit", to: "applications#edit"
-  patch "/applications/:id", to: "applications#update"
-  post "/applications", to: "applications#create"
-  # delete "/applications/:id", to: "applications#destroy"
-  #
-  # get "/applications/:id/edit", to: "applications#edit"
-  # patch "/applications/:id", to: "applications#update"
 
   get "/shelters", to: "shelters#index"
   get "/shelters/new", to: "shelters#new"
@@ -30,4 +21,13 @@ Rails.application.routes.draw do
   get "/shelters/:shelter_id/pets/new", to: "shelter_pets#new"
   post "/shelters/:shelter_id/pets", to: "shelter_pets#create"
   get "/shelters/:id/pets/:id", to: "pets#show"
+
+  get "/applications/new", to: "applications#new"
+  get "/applications/:id", to: "applications#show"
+  get "/applications/:id/edit", to: "applications#edit"
+  patch "/applications/:id", to: "applications#update"
+  post "/applications", to: "applications#create"
+  delete "/applications/:id", to: "applications#destroy"
+
+  post "/application_pets", to: "application_pets#create"
 end

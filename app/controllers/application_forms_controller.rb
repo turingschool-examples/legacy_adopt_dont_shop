@@ -1,5 +1,9 @@
 class ApplicationFormsController < ApplicationController
   def index
-    @index = ApplicationForm.all
+    @applications = ApplicationForm.all
   end
-end 
+
+  def show
+    @application = ApplicationForm.find(params[:id])
+  end
+end

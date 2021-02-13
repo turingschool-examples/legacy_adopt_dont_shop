@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/", to: "welcome#index"
-
-  get "/applications", to: "applications#index"
   get "/applications/new", to: "applications#new"
   get "/applications/:id", to: "applications#show"
-  delete "/applications/:id", to: "applications#destroy"
-  post "/applications", to: "applications#create"
   get "/applications/:id/edit", to: "applications#edit"
   patch "/applications/:id", to: "applications#update"
+  post "/applications", to: "applications#create"
+  # delete "/applications/:id", to: "applications#destroy"
+  #
+  # get "/applications/:id/edit", to: "applications#edit"
+  # patch "/applications/:id", to: "applications#update"
 
   get "/shelters", to: "shelters#index"
   get "/shelters/new", to: "shelters#new"

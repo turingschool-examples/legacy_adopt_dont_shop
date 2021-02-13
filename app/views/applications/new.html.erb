@@ -1,0 +1,18 @@
+<%= form_tag "/applications" do %>
+  <h2>Start an Application</h2>
+  <%= label_tag :first_name %>
+  <%= text_field_tag :first_name %><br>
+  <%= label_tag :last_name%>
+  <%= text_field_tag :last_name %><br>
+  <%= label_tag :address %>
+  <%= text_field_tag :address %><br>
+  <%= label_tag :city %>
+  <%= text_field_tag :city %><br>
+  <%= label_tag :state %>
+  <%= text_field_tag :state%><br>
+  <%= label_tag :zipcode %>
+  <%= number_field_tag :zipcode%><br>
+  <%= label_tag :description %>
+  <%= text_field_tag :description%><br>
+  <%= submit_tag 'Create Application' %>
+<% end %>

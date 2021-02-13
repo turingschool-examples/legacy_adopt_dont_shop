@@ -6,8 +6,8 @@ RSpec.describe 'Application show page' do
     @pet1 = create(:pet, id: 1, shelter_id: 1)
     @pet2 = create(:pet, id: 2, shelter_id: 1)
     @application = create(:application, id: 1)
-    # @application_pets = create(:application_pet, application_id: 1, pet_id: 1)
-    # @application_pets2 = create(:application_pet, application_id: 1, pet_id: 2)
+    @application_pets = create(:application_pet, application_id: 1, pet_id: 1)
+    @application_pets2 = create(:application_pet, application_id: 1, pet_id: 2)
   end
   describe 'As a visitor' do
     describe 'When I visit an applications show page' do

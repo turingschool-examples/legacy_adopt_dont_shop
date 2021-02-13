@@ -12,9 +12,14 @@ class ApplicationsController < ApplicationController
 
   def create
   	  application = Application.new(application_params)
-
-      application.save
-      redirect_to "/applications/#{application.id}"
+ 			if application.save
+        redirect_to "/applications/#{application.id}"
+      else
+        flash.now[:notice] = 'Missing fields, please fill in all info.'
+        render :new
+      end
+      
+      
      
   end
 

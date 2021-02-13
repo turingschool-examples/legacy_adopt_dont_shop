@@ -16,12 +16,24 @@ RSpec.describe 'Application new page' do
     fill_in 'zipcode', with: 72034
 
     click_on 'Create Application'
-    
+
 
     expect(page).to have_content('Application for Jenny Branham')
     expect(page).to have_content('3570 Cutter Ridge Rd')
     expect(page).to have_content('Conway')
     expect(page).to have_content('AR')
     expect(page).to have_content('72034')
+  end
+  it 'can not create an application without a first_name' do
+    visit '/pets'
+
+    click_link 'Start An Application'
+
+    expect(current_path).to eq('/applications/new')
+
+    click_on 'Create Application'
+
+    expect(page).to have_content("Application not created: Required information missing.")
+
   end
 end

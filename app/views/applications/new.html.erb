@@ -1,5 +1,8 @@
 <%= form_tag "/applications" do %>
   <h2>Start an Application</h2>
+  <% flash.each do |type, message| %>
+    <p><%= message %></p>
+  <% end %>
   <%= label_tag :first_name %>
   <%= text_field_tag :first_name %><br>
   <%= label_tag :last_name%>

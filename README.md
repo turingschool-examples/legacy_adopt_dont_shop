@@ -32,7 +32,7 @@ During your Check In, you should be prepared to review your database schema for 
 ## Deploy
 
 ```
-[ ] done
+[x] done
 
 Deploy your application to Heroku
 
@@ -43,6 +43,8 @@ Localhost is fine for development, but
 the application must be hosted on Heroku.
 
 Use these guides: https://devcenter.heroku.com/articles/getting-started-with-rails5
+
+## Link to many to many relationship schema design: https://gist.github.com/klatour324/16179a775e840276b6452b046d84a256
 ```
 
 ## Apply for Pet(s)

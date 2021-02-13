@@ -27,6 +27,34 @@ RSpec.describe 'Application show page' do
         end
         expect(page).to have_content("Application Status: #{@application.capitalized_status}")
       end
+
+      describe "And that application has not been submitted," do
+        describe "Then I see a section on the page to 'Add a Pet to this Application'" do
+          describe "When I fill in this field with a Pet's name and I click submit," do
+            it "under the search bar I see any Pet whose name matches my search" do
+              visit "/applications/#{@application.id}"
+              within("section") do
+                expect(page).to have_content("Add a Pet to this Application")
+                expect(page).to have_content("Pet name")
+                expect(page).to have_button("Search")
+                fill_in('name', with: 'Daisy')
+                click_on('Search')
+
+                expect(page).to have_content("Daisy")
+              end
+            end
+          end
+        end
+      end
+      describe "And that application has been submitted," do
+        it "under the search bar I see any Pet whose name matches my search" do
+          application = create(:application, id: 2, status: :pending)
+          visit "/applications/#{application.id}"
+            expect(page).to_not have_content("Add a Pet to this Application")
+            expect(page).to_not have_content("Pet name")
+            expect(page).to_not have_button("Search")
+        end
+      end
     end
   end
 end

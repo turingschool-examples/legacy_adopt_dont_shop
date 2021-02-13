@@ -1,4 +1,3 @@
-<body>
 <h1> Application for <%= "#{@application.first_name} #{@application.last_name}" %></h1>
 Address: <%= @application.address %><br>
 City: <%= @application.city %><br>
@@ -11,5 +10,19 @@ Pets' Names:
 <p><%= pet.name %></p>
 <% end %>
 </div>
-Application Status: <%= @application.capitalized_status %><br>
-</body>
+Application Status: <%= @application.capitalized_status %>
+<% if @application.in_progress? %>
+<section>
+  <h3>Add a Pet to this Application</h3>
+  <p>
+    <%= form_with url:"/applications/#{@application.id}", method: :get, local: true do |form| %>
+    <%= form.label :pet_name %>
+    <%= form.text_field :pet_name %>
+    <%= form.submit 'Search' %>
+    <% end %>
+  </p>
+  <% if @pet %>
+  <p><%= @pet.name %></p>
+  <% end %>
+</section>
+<% end %>

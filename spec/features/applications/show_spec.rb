@@ -33,7 +33,7 @@ RSpec.describe 'As a vistor visiting the Applications show page' do
   describe 'When I visit the new application page' do
     describe 'And when I fail to fill in any fields and submit' do
       it 'takes me back to the new app page and says must fill in required fields' do
-        visit "/pets/#{@apollo.id}"
+        visit "/pets"
         click_link("Start an Application")
         fill_in "name", :with => "Cait B"
         fill_in "street_address", :with => "111 Sweet St"
@@ -44,7 +44,7 @@ RSpec.describe 'As a vistor visiting the Applications show page' do
       end
 
       it 'takes me back when name is not filled in' do
-        visit "/pets/#{@apollo.id}"
+        visit "/pets"
         click_link("Start an Application")
         fill_in "street_address", :with => "111 Sweet St"
         fill_in "city", :with => "Tampa"

@@ -13,7 +13,7 @@ RSpec.describe 'As a vistor visiting the Pet index page' do
 
   describe 'See a link to start an application' do
     it 'Has a link that takes me to new application page' do
-      visit "/pets/#{@apollo.id}"
+      visit "/pets"
       expect(page).to have_link("Start an Application")
       click_link("Start an Application")
       expect(page).to have_button("Submit")

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get "/shelters/:id/pets/:id", to: "pets#show"
 
   #applications
+  get "/applications/new", to: "applications#new"
   get "/applications/:id", to: "applications#show"
-  get "/pets/:id/applications/new", to: "applications#new"
   post "/applications", to: "applications#create"
 end

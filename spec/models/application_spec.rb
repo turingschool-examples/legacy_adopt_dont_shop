@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Application, type: :model do
+
   describe 'relationships' do
     it {should have_many(:application_pets)}
     it {should have_many(:pets).through(:application_pets)}
@@ -11,11 +12,11 @@ describe Application, type: :model do
     it {should validate_presence_of :last_name}
     it {should validate_numericality_of(:zipcode).is_greater_than_or_equal_to(0)}
 
-    it 'status can be in_progress' do
+    it 'status can be in_progress by default' do
       application = Application.create!(first_name: 'Jenny', last_name: 'Branham',
                                         address: '123 Adoption Ln.', city: 'Denver',
                                         state: 'CO', zipcode: '80222',
-                                        description: 'description of application', status: 'in_progress')
+                                        description: 'description of application')
       expect(application.status).to eq('in_progress')
       expect(application.in_progress?).to eq(true)
       expect(application.pending?).to eq(false)

@@ -9,6 +9,11 @@ class Application < ApplicationRecord
             }
 
   enum status: [:in_progress, :pending, :accepted, :rejected]
+  before_save :default_values
+
+  def default_values
+    status ||= :in_progress
+  end
 
   def capitalized_status
     string_status = status.capitalize

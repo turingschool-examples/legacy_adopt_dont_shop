@@ -1,7 +1,8 @@
 FactoryBot.define do
-  factory :aplication do
-    name { Faker::Name.name}
-    address { Faker::Address.street_name }
+  factory :application do
+    first_name { Faker::Name.first_name}
+    last_name { Faker::Name.last_name}
+    street_address { Faker::Address.street_name }
     city { Faker::Address.city }
     state { Faker::Address.state }
     zip { Faker::Address.zip }

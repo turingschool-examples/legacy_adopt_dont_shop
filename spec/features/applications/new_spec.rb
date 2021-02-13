@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Application show page' do
+RSpec.describe 'Application new page' do
   before :each do
     @shelter1 = Shelter.create!(name: "Shady Shelter",
                                 address: "123 Shady Ave",
@@ -27,20 +27,32 @@ RSpec.describe 'Application show page' do
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id, status: "Pending")
   end
 
-  it 'displays application w/ id and all attributes' do
+  it "can create new application from pets index" do
+    visit '/pets'
 
-    visit "/applications/#{@application_1.id}"
+    expect(page).to have_link('Start an Application')
 
-    expect(page).to have_content("#{@application_1.name}'s application")
-    expect(page).to have_content("Name: #{@application_1.name}")
-    expect(page).to have_content("Address: #{@application_1.address}")
-    expect(page).to have_content("City: #{@application_1.city}")
-    expect(page).to have_content("State: #{@application_1.state}")
-    expect(page).to have_content("Zip: #{@application_1.zip}")
-    expect(page).to have_content("Description: #{@application_1.description}")
-    expect(page).to have_content("Pets applied for:")
-    @application_1.pets.each do |pet|
-      expect(page).to have_content(pet.name)
-    end
+    click_link('Start an Application')
+
+    expect(current_path).to eq('/applications/new')
+
+    fill_in "name", with: "Sally"
+    fill_in "address", with: "234 Third Ave"
+    fill_in "city", with: "Dallas"
+    fill_in "state", with: "TX"
+    fill_in "zip", with: 88678
+    fill_in "description", with: "I would be a great dog mom!"
+
+    click_on('Submit Application')
+
+    # expect(current_path).to eq("/applications/#{@application_1.id}")
+    expect(page).to have_content("Sally's application")
+    expect(page).to have_content("Sally")
+    expect(page).to have_content("234 Third Ave")
+    expect(page).to have_content("Dallas")
+    expect(page).to have_content("TX")
+    expect(page).to have_content(88678)
+    expect(page).to have_content("I would be a great dog mom!")
+    # expect(page).to have_content("In Progress")
   end
 end

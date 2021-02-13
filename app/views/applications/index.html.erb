@@ -1,0 +1,15 @@
+<% @applications.each do |application| %>
+  <section id="application-<%= application.id %>">
+    <h1><%= application.name %></h1>
+    <h2>Applicant Address:</h2>
+    <h3><%= application.address %>, <%= application.city %>, <%= application.state %>, <%= application.zip %></h3>
+    <h2>Applicant Description</h2>
+    <h3><%= application.description %></h3>
+    <h2>Pets Applied For:</h2>
+    <% application.pets.each do |pet| %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: :get %>
+    <% end %>
+    <h2>Application Status:</h2>
+    <h3><%= application.status %></h3>
+  </section>
+<% end %>

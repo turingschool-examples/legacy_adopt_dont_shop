@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe PetApplication, type: :model do
   describe 'relationships' do
-    it { should belong_to :pets }
-    it { should belong_to :applications }
+    it { should belong_to :pet }
+    it { should belong_to :application }
   end
 end

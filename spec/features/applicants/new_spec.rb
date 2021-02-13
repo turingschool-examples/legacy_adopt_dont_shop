@@ -37,4 +37,14 @@ RSpec.describe 'As a visitor' do
       end
     end
   end
+
+  describe 'When I visit the new application page' do
+    it 'I fail to fill in any form fields and see a message' do
+      visit '/applicants/new'
+      click_button('Submit')
+      expect(page).to have_content("Applicant not created: Required information missing.")
+      expect(page).to have_button('Submit')
+      expect(current_path).to eq('/applicants/new')
+    end
+  end
 end

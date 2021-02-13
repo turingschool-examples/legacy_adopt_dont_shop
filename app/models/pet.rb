@@ -7,8 +7,4 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
-
-  def self.find_name(id)
-    Pet.find(id).name
-  end
 end

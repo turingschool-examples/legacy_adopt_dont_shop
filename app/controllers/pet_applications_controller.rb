@@ -1,5 +1,6 @@
-class PetApplicationsController < ApplicationController
+class PetApplicationsController < ActionController
+
   def index
-    @pet_applications = PetApplication.all
+    @pet_applications = PetApplications.all
   end
 end

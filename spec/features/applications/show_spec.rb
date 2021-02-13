@@ -9,6 +9,13 @@ RSpec.describe 'As a Visitor' do
   	it'displays the information about the application'do
   	visit "applications/#{@application_1.id}"
 
+  	within("#shown-app") do
+			expect(page).to have_content("Ben")
+			expect(page).to have_content("123 street,Denver,CO,80220")
+  	end
+
+  	
+
 
   	end
 

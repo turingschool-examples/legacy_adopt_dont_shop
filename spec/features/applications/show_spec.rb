@@ -29,4 +29,20 @@ RSpec.describe 'As a vistor visiting the Applications show page' do
     click_link(@apollo.name)
     expect(current_path).to eq("/pets/#{@apollo.id}")
   end
+
+  describe 'When I visit the new application page' do
+    describe 'And when I fail to fill in any fields and submit' do
+      it 'takes me back to the new app page and says must fill in required fields' do
+        visit "/pets/#{@apollo.id}"
+        click_link("Start an Application")
+        fill_in "name", :with => "Cait B"
+        fill_in "street_address", :with => "111 Sweet St"
+        fill_in "city", :with => "Tampa"
+        # fill_in "state", :with => "FL"
+        click_button("Submit")
+        expect(current_path).to eq("/applications")
+        expect(page).to have_content("Required fields missing")
+      end
+    end
+  end
 end

@@ -16,7 +16,6 @@ RSpec.describe 'As a vistor visiting the Pet index page' do
       visit "/pets/#{@apollo.id}"
       expect(page).to have_link("Start an Application")
       click_link("Start an Application")
-      expect(current_path).to eq("/pets/#{@apollo.id}/applications/new")
       expect(page).to have_button("Submit")
       fill_in "name", :with => "Cait B"
       fill_in "street_address", :with => "111 Sweet St"

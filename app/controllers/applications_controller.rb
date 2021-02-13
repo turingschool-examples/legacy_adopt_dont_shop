@@ -4,13 +4,18 @@ class ApplicationsController < ApplicationController
   end
 
   def new
-    @pet = Pet.find(params[:id])
   end
 
   def create
     @application = Application.create(app_params)
     @application.update(status: "In Progress")
-    redirect_to "/applications/#{@application.id}"
+    if app_params.values.any?(&:empty?)
+      flash[:notice] = "Required fields missing"
+      render :new
+    else
+      @application.save
+      redirect_to "/applications/#{@application.id}"
+    end
   end
 
   private

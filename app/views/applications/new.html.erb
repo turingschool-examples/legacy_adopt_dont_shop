@@ -1,6 +1,4 @@
-<h1><%= @pet.name %>Application</h1>
-
-<%= form_with(url: "/pets/#{@pet.id}/applications", method: "post", local: true) do |f| %>
+<%= form_with(url: "/applications", method: "post", local: true) do |f| %>
   <h3><%= f.label "Applicant Information:" %></h3>
   <p><%= f.label "Name: " %></p>
   <p><%= f.text_field :name, placeholder: "Enter Name" %></p><br>
@@ -9,7 +7,7 @@
   <p><%= f.label "City: " %></p>
   <p><%= f.text_field :city, placeholder: "Enter City" %></p><br>
   <p><%= f.label "State: " %></p>
-  <p><%= f.text_field :state, placeholder: "Enter State" %></p><br>
+  <p><%= f.text_field :state, placeholder: "Enter State", value: false %></p><br>
   <p><%= f.label "Zipcode: " %></p>
   <p><%= f.text_field :zipcode, placeholder: "Enter Zipcode" %></p><br>
   <%= f.submit "Submit" %>

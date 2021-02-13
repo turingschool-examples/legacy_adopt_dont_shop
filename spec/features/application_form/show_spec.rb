@@ -40,15 +40,16 @@ RSpec.describe "the Application index page", type: :feature do
     ApplicationPet.create!(application_form: @app_2, pet: @cindy)
   end
 
-  it "should display all the applications" do
-    visit '/applications'
+  it "should display all the application info" do
+    visit "/applications/#{@app_1.id}"
 
-    within("#application-#{@app_1.id}") do
-      expect(page).to have_content(@app_1.name)
-    end
-
-    within("#application-#{@app_2.id}") do
-      expect(page).to have_content(@app_2.name)
-    end
+    expect(page).to have_content(@app_1.name)
+    expect(page).to have_content(@app_1.street_address)
+    expect(page).to have_content(@app_1.city)
+    expect(page).to have_content(@app_1.state)
+    expect(page).to have_content(@app_1.description)
+    expect(page).to have_content("#{@app_1.zip_code}")
+    expect(page).to have_content("#{@app_1.reviewed}")
+    expect(page).to have_content("#{@app_1.accepted}")
   end
 end

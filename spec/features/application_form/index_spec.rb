@@ -41,6 +41,6 @@ RSpec.describe "the Application index page", type: :feature do
   end
 
   it "should display all the applications" do
-
+    visit '/applications'
   end
 end

@@ -1,0 +1,16 @@
+<%= form_with model: @application, action:"/applications",local: true do |form| %>
+  <p> Name: </p>
+  <%= form.text_field :name %>
+    <p> Street: </p>
+  <%= form.text_field :street %>
+    <p> City: </p>
+  <%= form.text_field :city %>
+    <p> State: </p>
+  <%= form.text_field :state %>
+    <p> ZipCode: </p>
+  <%= form.text_field :zip_code %>
+  <p>Tell us why you would make a good home for these pets?</p>
+    <p> Description: </p>
+  <%= form.text_area :description, size: "70x5" %>
+  <%= form.submit "Submit" %>
+<% end %>

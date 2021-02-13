@@ -16,6 +16,31 @@ RSpec.describe 'the Application index page' do
     @bill.pets << @pet2
   end
   it 'should display all applications' do
+    visit '/applications'
 
+    within("#application-#{@jenn.id}") do
+      expect(page).to have_content(@jenn.name)
+      expect(page).to have_content(@jenn.address)
+      expect(page).to have_content(@jenn.city)
+      expect(page).to have_content(@jenn.state)
+      expect(page).to have_content(@jenn.zip)
+      expect(page).to have_content(@jenn.description)
+      expect(page).to have_content(@jenn.status)
+
+      expect(page).to have_link(@pet1.name)
+      expect(page).to have_link(@pet3.name)
+    end
+
+    within("#application-#{@bill.id}") do
+      expect(page).to have_content(@bill.name)
+      expect(page).to have_content(@bill.address)
+      expect(page).to have_content(@bill.city)
+      expect(page).to have_content(@bill.state)
+      expect(page).to have_content(@bill.zip)
+      expect(page).to have_content(@bill.description)
+      expect(page).to have_content(@bill.status)
+
+      expect(page).to have_content(@pet2.name)
+    end
   end
 end

@@ -5,5 +5,6 @@ FactoryBot.define do
     description { Faker::ChuckNorris.fact }
     adoptable { true }
     sex { 'female' }
+    shelter
   end
 end

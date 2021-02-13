@@ -58,4 +58,11 @@ RSpec.describe 'Pets index page' do
     expect(page).to have_content("Calvin")
     expect(page).to_not have_content("Thor")
   end
+
+  it "I see a link to start an application" do
+
+    visit "/pets"
+
+    expect(page).to have_link("Start An Application")
+  end
 end

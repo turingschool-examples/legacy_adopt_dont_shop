@@ -2,20 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Application show page' do
   before :each do
-    ApplicationPet.destroy_all
-    Pet.destroy_all
-    Shelter.destroy_all
-    Application.destroy_all
-
-    @shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
-    @pet1 = @shelter.pets.create!(name: "Fluffy", approximate_age: 3, sex: 'male', description: 'super cute')
-    @pet2 = @shelter.pets.create!(name: "Princess", approximate_age: 2, sex: 'female', description: 'super cute')
-    @application = Application.create!(first_name: 'Jenny', last_name: 'Branham',
-                                      address: '123 Adoption Ln.', city: 'Denver',
-                                      state: 'CO', zipcode: '80222',
-                                      description: 'description of application', status: 'in_progress')
-    @application_pets = ApplicationPet.create!(application_id: @application.id, pet_id: @pet1.id)
-    @application_pets2 = ApplicationPet.create!(application_id: @application.id, pet_id: @pet2.id)
+    shelter = create(:shelter, id: 1)
+    @pet1 = create(:pet, id: 1, shelter_id: 1)
+    @pet2 = create(:pet, id: 2, shelter_id: 1)
+    @application = create(:application, id: 1)
+    # @application_pets = create(:application_pet, application_id: 1, pet_id: 1)
+    # @application_pets2 = create(:application_pet, application_id: 1, pet_id: 2)
   end
   describe 'As a visitor' do
     describe 'When I visit an applications show page' do
@@ -33,7 +25,7 @@ RSpec.describe 'Application show page' do
           expect(page).to have_content(@pet1.name)
           expect(page).to have_content(@pet2.name)
         end
-        expect(page).to have_content("Application Status: #{@application.status}")
+        expect(page).to have_content("Application Status: #{@application.capitalized_status}")
       end
     end
   end

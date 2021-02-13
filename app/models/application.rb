@@ -16,9 +16,6 @@ class Application < ApplicationRecord
   end
 
   def capitalized_status
-    string_status = status.capitalize
-    if status == "in_progress"
-      string_status = "In Progress"
-    end
+    status.capitalize
   end
 end

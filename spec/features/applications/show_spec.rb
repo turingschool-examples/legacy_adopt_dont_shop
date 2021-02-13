@@ -25,7 +25,7 @@ RSpec.describe 'Application show page' do
         expect(page).to have_content("Zipcode: #{@application.zipcode}")
         expect(page).to have_content("Description: #{@application.description}")
         expect(page).to have_content("Pets' Names:")
-        within("div") do
+        within(".nav-bar") do
           expect(page).to have_content(@pet1.name)
           expect(page).to have_content(@pet2.name)
         end
@@ -58,7 +58,7 @@ RSpec.describe 'Application show page' do
                 expect(page).to have_button("Adopt this Pet")
                 click_on("Adopt this Pet")
               end
-              within("div") do
+              within(".nav-bar") do
                 expect(page).to have_content(@pet1.name)
               end
 
@@ -74,6 +74,36 @@ RSpec.describe 'Application show page' do
             expect(page).to_not have_content("Pet name")
             expect(page).to_not have_button("Search")
         end
+      end
+    end
+    describe "And I have added one or more pets to the application" do
+      describe "I see a section to submit my applicaiton" do
+        describe "And I can add a description and click submit application" do
+          it "changes the status to pending and no longer shows a section to add more pets" do
+            visit "/applications/#{@application.id}"
+            within("#submittion") do
+              expect(page).to have_content("Why I would make a good owner for these pet(s):")
+              fill_in('description', with: '#1 dog mom')
+              click_on('Submit')
+
+            end
+            expect(current_path).to eq("/applications/#{@application.id}")
+            expect(page).to_not have_content("Add a Pet to this Application")
+            expect(page).to_not have_content("Pet name")
+            expect(page).to_not have_button("Search")
+            expect(page).to have_content("Status: Pending")
+          end
+        end
+      end
+    end
+    describe "And I have not added any pets to the application" do
+      it "Then I do not see a section to submit my application" do
+        ApplicationPet.destroy_all
+        visit "/applications/#{@application.id}"
+
+        expect(current_path).to eq("/applications/#{@application.id}")
+        expect(page).to_not have_content("Why I would make a good owner for these pet(s):")
+        expect(page).to_not have_button("Submit")
       end
     end
   end

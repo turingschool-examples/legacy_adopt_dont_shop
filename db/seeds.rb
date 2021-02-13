@@ -5,9 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-@shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
-@shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Longmont", state: "CO", zip: 80012)
-@shelter3 = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
-@pet1 = @shelter1.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
-@pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
-@pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
+@shelter1 = Shelter.create!(name: 'Shady Shelter', address: '123 Shady Ave', city: 'Denver', state: 'CO', zip: 80011)
+@shelter2 = Shelter.create!(name: 'Silly Shelter', address: '123 Silly Ave', city: 'Longmont', state: 'CO', zip: 80012)
+@shelter3 = Shelter.create!(name: 'Shell Shelter', address: '102 Shelter Dr.', city: 'Commerce City', state: 'CO', zip: 80022)
+
+@pet1 = @shelter1.pets.create!(image:'', name: 'Thor', description: 'dog', approximate_age: 2, sex: 'male')
+@pet2 = @shelter2.pets.create!(image:'', name: 'Athena', description: 'cat', approximate_age: 3, sex: 'female')
+@pet3 = @shelter1.pets.create!(image:'', name: 'Zeus', description: 'dog', approximate_age: 4, sex: 'male')
+
+@applicant1 = Applicant.create!(name: 'Angel', address: '123 Street', city: 'Conway', state: 'AR', zip: 72034, good_home_description: 'I love dogs.', status: 0)
+@applicant2 = Applicant.create!(name: 'Chris', address: '456 Street', city: 'Denver', state: 'CO', zip: 80011, good_home_description: 'I love dogs more.', status: 1)
+@applicant3 = Applicant.create!(name: 'Amber', address: '789 Street', city: 'Longmont', state: 'CO', zip: 80012, good_home_description: 'I love dogs 2.', status: 2)
+@applicant4 = Applicant.create!(name: 'Levi', address: '101 Street', city: 'Commerce City', state: 'CO', zip: 80022, good_home_description: 'I love ALL dogs.', status: 3)
+
+PetApplicant.create!(pet: @pet1, applicant: @applicant1)

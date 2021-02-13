@@ -8,10 +8,10 @@ class Pet < ApplicationRecord
   validates :approximate_age, numericality: {
               greater_than_or_equal_to: 0
             }
-
+  validates :name, uniqueness: {case_sensitive: false}
   enum sex: [:female, :male]
 
   def self.find_by_name(name)
-    where(name: name)
+    where("lower(name) like ?", "%#{name.downcase}%")
   end
 end

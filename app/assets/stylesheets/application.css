@@ -60,6 +60,15 @@ h2 {
 
 }
 
+#submittion {
+  font-family: Arial;
+  background-color: lightblue;
+  color: black;
+  text-align: left;
+  font-size: 20px;
+  padding: 0px;
+
+}
 * {
   box-sizing: border-box;
 }

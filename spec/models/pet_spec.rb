@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe Pet, type: :model do
+  before :each do
+    ApplicationPet.destroy_all
+    Pet.destroy_all
+    Shelter.destroy_all
+  end
+
   describe 'relationships' do
     it { should belong_to :shelter }
     it {should have_many(:application_pets)}

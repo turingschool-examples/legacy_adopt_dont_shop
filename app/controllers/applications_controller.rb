@@ -6,7 +6,7 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    binding.pry
-    @application = Application(params[:id])
+    @application = Application.find(params[:id])
+    @shelter = Shelter.find(params[:shelter_id])
   end
 end

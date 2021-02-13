@@ -7,4 +7,5 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
+  has_many :applications
 end

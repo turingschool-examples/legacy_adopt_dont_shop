@@ -9,7 +9,7 @@ RSpec.describe 'As a vistor visiting the Applications show page' do
       state: "OH",
       zipcode: 11552,
       status: "In Progress",
-      description: "I love pets"
+      description: "I love pets and have been a longtime pet owner"
     )
   end
   it 'Shows Application attributes' do

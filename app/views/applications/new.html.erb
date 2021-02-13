@@ -1,0 +1,16 @@
+<%= form_with(url: '/applications', method: "post", local: true) do  |form| %>
+  <h2>Create a New Shelter</h2>
+  <%= form.label :first_name %>
+  <%= form.text_field :first_name %><br>
+  <%= form.label :last_name %>
+  <%= form.text_field :last_name %><br>
+  <%= form.label :street_address %>
+  <%= form.text_field :street_address %><br>
+  <%= form.label :city %>
+  <%= form.text_field :city %><br>
+  <%= form.label :state %>
+  <%= form.text_field :state %><br>
+  <%= form.label :zip %>
+  <%= form.text_field :zip%><br>
+  <%= form.submit 'Submit' %>
+<% end %>

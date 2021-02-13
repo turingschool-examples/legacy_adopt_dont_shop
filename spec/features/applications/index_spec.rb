@@ -12,7 +12,7 @@ RSpec.describe "application index page" do
 
   it "should show a list of the applicants" do
 
-    visit "/shelters/#{@shelter.id}/applications/"
+    visit "/applications/"
 
     expect(page).to have_content(@application_1.first_name)
     expect(page).to have_content(@application_2.first_name)

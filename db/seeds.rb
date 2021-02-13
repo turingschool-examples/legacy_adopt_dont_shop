@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# shelter = Shelter.create!(attrs)
+# pet = Pet.create!(attrs)
+# application = 

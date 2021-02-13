@@ -26,4 +26,11 @@ RSpec.describe 'Shelter_Pets index page' do
 
     expect(page).to_not have_content(@pet2.name)
   end
+
+  it "can link to a new application form" do
+    visit "/shelters/#{@shelter1.id}/pets"
+    click_link("Start an Application")
+
+    expect(current_path).to eq("/applications/new")
+  end
 end

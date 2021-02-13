@@ -1,6 +1,9 @@
 class ApplicantsController < ApplicationController
   def show
     @applicant = Applicant.find(params[:applicant_id])
+    if params[:search]
+      @pets = Pet.partial_search(params[:search])
+    end
   end
 
   def new

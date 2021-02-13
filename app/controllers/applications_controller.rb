@@ -6,7 +6,7 @@ class ApplicationsController < ActionController::Base
     @application = Application.find(params[:id])
     @application_pets = ApplicationPet.find_by_application_id(params[:id])
     if params[:pet_name]
-      @pet = Pet.find_by_name(params[:pet_name])
+      @pets = Pet.find_by_name(params[:pet_name])
     end
   end
 

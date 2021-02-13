@@ -11,7 +11,7 @@ class Pet < ApplicationRecord
 
   enum sex: [:female, :male]
 
-  def find_by_name(name)
+  def self.find_by_name(name)
     where(name: name)
   end
 end

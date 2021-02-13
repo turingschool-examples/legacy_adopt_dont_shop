@@ -21,8 +21,10 @@ Application Status: <%= @application.capitalized_status %>
     <%= form.submit 'Search' %>
     <% end %>
   </p>
-  <% if @pet %>
-  <p><%= @pet.name %></p>
+  <% if @pets %>
+  <% @pets.each do |pet| %>
+  <p><%= pet.name %></p>
+  <% end %>
   <% end %>
 </section>
 <% end %>

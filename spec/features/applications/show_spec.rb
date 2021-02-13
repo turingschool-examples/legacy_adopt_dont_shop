@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Application show page' do
   before :each do
+    ApplicationPet.destroy_all
+    Pet.destroy_all
+    Shelter.destroy_all
+    Application.destroy_all
     shelter = create(:shelter, id: 1)
     @pet1 = create(:pet, id: 1, shelter_id: 1)
     @pet2 = create(:pet, id: 2, shelter_id: 1)
@@ -37,7 +41,7 @@ RSpec.describe 'Application show page' do
                 expect(page).to have_content("Add a Pet to this Application")
                 expect(page).to have_content("Pet name")
                 expect(page).to have_button("Search")
-                fill_in('name', with: 'Daisy')
+                fill_in('pet_name', with: 'Daisy')
                 click_on('Search')
 
                 expect(page).to have_content("Daisy")

@@ -5,6 +5,7 @@ RSpec.describe 'As a Visitor' do
   	@application_1 = Application.create!(name: 'Ben')
   end
 
+
   it 'can navigate to the pet index page' do
   	visit '/pets'
 

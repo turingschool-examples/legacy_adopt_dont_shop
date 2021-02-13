@@ -25,4 +25,5 @@ Rails.application.routes.draw do
 
   #application routes
   get "/applications", to:"applications#index"
+  get "/applications/:id", to:'applications#show' 
 end

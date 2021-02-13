@@ -38,7 +38,18 @@ RSpec.describe 'As a vistor visiting the Applications show page' do
         fill_in "name", :with => "Cait B"
         fill_in "street_address", :with => "111 Sweet St"
         fill_in "city", :with => "Tampa"
-        # fill_in "state", :with => "FL"
+        click_button("Submit")
+        expect(current_path).to eq("/applications")
+        expect(page).to have_content("Required fields missing")
+      end
+
+      it 'takes me back when name is not filled in' do
+        visit "/pets/#{@apollo.id}"
+        click_link("Start an Application")
+        fill_in "street_address", :with => "111 Sweet St"
+        fill_in "city", :with => "Tampa"
+        fill_in "state", :with => "FL"
+        fill_in "zipcode", :with => "33331"
         click_button("Submit")
         expect(current_path).to eq("/applications")
         expect(page).to have_content("Required fields missing")

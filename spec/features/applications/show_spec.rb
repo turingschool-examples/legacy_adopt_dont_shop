@@ -34,8 +34,8 @@ RSpec.describe 'Application show page' do
 
       describe "And that application has not been submitted," do
         describe "Then I see a section on the page to 'Add a Pet to this Application'" do
+          ApplicationPet.destroy_all
           describe "When I fill in this field with a Pet's name and I click submit," do
-            ApplicationPet.destroy_all
             it "under the search bar I see any Pet whose name matches my search" do
               visit "/applications/#{@application.id}"
               within("section") do
@@ -61,7 +61,32 @@ RSpec.describe 'Application show page' do
               within(".nav-bar") do
                 expect(page).to have_content(@pet1.name)
               end
+            end
+          end
+          describe "When I search for Pets by name," do
+            it "Then I see any pet whose name PARTIALLY matches my search" do
+              visit "/applications/#{@application.id}"
+              within("section") do
+                expect(page).to have_content("Add a Pet to this Application")
+                expect(page).to have_content("Pet name")
+                expect(page).to have_button("Search")
+                fill_in('pet_name', with: 'ais')
+                click_on('Search')
 
+                expect(page).to have_content("Daisy")
+              end
+            end
+          end
+          it "Then my search is case insensitive" do
+            visit "/applications/#{@application.id}"
+            within("section") do
+              expect(page).to have_content("Add a Pet to this Application")
+              expect(page).to have_content("Pet name")
+              expect(page).to have_button("Search")
+              fill_in('pet_name', with: 'DAISY')
+              click_on('Search')
+
+              expect(page).to have_content("Daisy")
             end
           end
         end

@@ -9,7 +9,7 @@ RSpec.describe "Application new page" do
 
       click_link("Start an Application")
 
-      expect(current_path).to eq("/applicattions/new")
+      expect(current_path).to eq("/applications/new")
     end
   end
 
@@ -25,5 +25,18 @@ RSpec.describe "Application new page" do
       expect(page).to have_field("description")
       expect(page).to have_button("submit")
     end
+
+#     it "will redirect me to the new applications show page" do
+#       visit "/applications/new"
+#
+#       fill_field "name", with: "John"
+#       fill_field "street", with: "123 Abc St."
+#       fill_field "city", with: "San Diego"
+#       fill_field "state", with: "CA"
+#       fill_field "zip", with: "92078"
+#       click_button "submit"
+# require "pry"; binding.pry
+#       expect(current_path).to eq("")
+#     end
   end
 end

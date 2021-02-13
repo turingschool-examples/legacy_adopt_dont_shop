@@ -1,0 +1,10 @@
+<%= form_with url: "/members/create", method: :post do |form|%>
+  <h4><%= form.label :Name %> <%= form.text_field :name %></h4>
+  <h4> <%= form.label :Street_address %> <%= form.text_field :street %></h4>
+  <h4> <%= form.label :City %> <%= form.text_field :city %></h4>
+  <h4> <%= form.label :State %> <%= form.text_field :state %></h4>
+  <h4> <%= form.label :Zipcode %> <%= form.text_field :zip %></h4>
+  <h4> Please provide a breif description of why you would be a good home:</h4>
+  <p> <%= form.text_area :description %> </p>
+  <h4><%= form.submit :submit %></h4>
+<%end%>

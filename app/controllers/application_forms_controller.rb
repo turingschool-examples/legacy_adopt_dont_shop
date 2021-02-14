@@ -12,7 +12,7 @@ class ApplicationFormsController < ApplicationController
 
   def create
     ApplicationForm.create(application_params)
-    redirect_to '/applications'
+    redirect_to "/applications/#{ApplicationForm.last.id}"
   end
 
   private

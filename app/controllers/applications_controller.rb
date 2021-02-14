@@ -8,6 +8,15 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
+  def new
+  end
+
+  def create
+    Application.create(applications_params)
+
+    redirect_to "/applications"
+  end
+
   private
   def applications_params
     params.permit(:name, :street_address, :city, :state, :zip_code, :description, :status)

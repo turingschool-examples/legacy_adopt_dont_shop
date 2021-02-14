@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_200928) do
+ActiveRecord::Schema.define(version: 2021_02_14_171316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_02_13_200928) do
     t.string "state"
     t.string "zip"
     t.text "case_for_adoption"
-    t.string "application_status"
+    t.string "application_status", default: "In Progress"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,7 +1,7 @@
 class Pet < ApplicationRecord
   belongs_to :shelter
-  has_many :pet_applications
-  has_many :applications, through: :pet_applications
+  has_many :pet_applications, dependent: :destroy
+  has_many :applications, through: :pet_applications, dependent: :destroy
   validates_presence_of :name, :description, :approximate_age, :sex
 
   validates :approximate_age, numericality: {

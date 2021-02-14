@@ -40,26 +40,37 @@ RSpec.describe "the Application index page", type: :feature do
     ApplicationPet.create!(application_form: @app_2, pet: @cindy)
   end
 
-  it "should have a form to fill out new" do
-    visit '/applications/new'
+  describe 'As a visitor' do
+    describe "When I visit the new application link on the pets index page" do
+      it "should have a form to create a new application" do
+        visit '/applications/new'
 
 
-    fill_in "name", with: "jeff"
-    fill_in "street_address", with: '123 st'
-    fill_in "city", with: 'Dover'
-    fill_in "zip_code", with: 3
-    fill_in "description", with: "idk"
-    fill_in "reviewed", with: "false"
-    fill_in "accepted", with: "false"
+        fill_in "name", with: "jeff"
+        fill_in "street_address", with: '123 st'
+        fill_in "city", with: 'Dover'
+        fill_in "zip_code", with: 3
+        fill_in "description", with: "idk"
+        fill_in "reviewed", with: "false"
+        fill_in "accepted", with: "false"
 
-    click_on 'Create Application'
+        click_on 'Create Application'
 
-    expect(current_path).to eq("/applications/#{ApplicationForm.last.id}")
+        expect(current_path).to eq("/applications/#{ApplicationForm.last.id}")
 
-    expect(page).to have_content("In Progress")
-    expect(page).to have_content("jeff")
-    expect(page).to have_content("123 st")
-    expect(page).to have_content("Dover")
-    expect(page).to have_content("3")
+        expect(page).to have_content("In Progress")
+        expect(page).to have_content("jeff")
+        expect(page).to have_content("123 st")
+        expect(page).to have_content("Dover")
+        expect(page).to have_content("3")
+      end
+
+      it "cannot create an application without filling out all forms" do
+        click_on 'Create Application'
+
+        expect(page).to have_content("Application not created: Required information missing.")
+        expect(page).to have_button('Create Application')
+      end
+    end
   end
 end

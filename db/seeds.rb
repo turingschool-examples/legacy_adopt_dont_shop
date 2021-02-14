@@ -20,7 +20,7 @@ PetApplication.destroy_all
 @pet4 = @shelter3.pets.create!(image:"", name: "Lunar", description: "cat", approximate_age: 3, sex: "female")
 @pet5 = @shelter3.pets.create!(image:"", name: "Tunar", description: "cat", approximate_age: 3, sex: "male")
 
-@jenn = Application.create!(name:'Jenny O', address:'455 Zim Street', city:'Valporia', state:'Illinois', zip:'74515', description:'welcoming young family looking for energetic dogs good with kids')
+@jenn = Application.create!(name:'Jenny O', address:'455 Zim Street', city:'Valporia', state:'Illinois', zip:'74515')
 @bill = Application.create!(name:'Billy B', address:'120 Anchor Ave', city:'Dreamland', state:'Michigan', zip:'85142', description:'aging widower looking for a lazy cat for quiet companionship')
 @chaz = Application.create!(name:'Chaz X', address:'3904 Chapel Drive', city:'Sarasota', state:'Florida', zip:'34243', description:'recently married couple looking for a furry friend, no dog or cat preference')
 

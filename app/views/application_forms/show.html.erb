@@ -15,3 +15,9 @@
     <p>Status: Rejected</p>
   <% end %>
 <% end %>
+
+<% @application.pets.each do |pet| %>
+  <section id="pet-<%=pet.id%>">
+  <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+<% end %>
+</section>

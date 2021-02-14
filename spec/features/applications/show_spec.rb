@@ -43,4 +43,11 @@ RSpec.describe 'Application show page' do
       expect(page).to have_content(pet.name)
     end
   end
+
+  # it 'has search for pet feature and brings me to their page' do 
+  #   visit "/applications/#{@application_1.id}"
+  #
+  #   expect(page).to have_content('Add a pet to this application')
+  #
+  # end
 end

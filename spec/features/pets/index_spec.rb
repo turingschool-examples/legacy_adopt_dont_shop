@@ -60,7 +60,6 @@ RSpec.describe 'Pets index page' do
   end
 
   it "has link to start application" do
-
     visit '/pets'
 
     click_link 'Start an Application'

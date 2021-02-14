@@ -20,9 +20,21 @@ class ApplicantsController < ApplicationController
     end
   end
 
+  def create_applicant_pet
+    applicant = Applicant.find(params[:applicant_id])
+    pet = Pet.find(params[:adopt_pet_id])
+    new_applicant_pet = PetApplicant.create(pet: pet, applicant: applicant)
+    new_applicant_pet.save
+    redirect_to "/applicants/#{applicant.id}"
+  end
+
   private
 
   def applicant_params
     params.permit(:name, :address, :city, :state, :zip)
+  end
+
+  def pets_params
+    params.permit(:image, :name, :description, :approximate_age, :sex, :adoptable)
   end
 end

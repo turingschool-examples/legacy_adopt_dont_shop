@@ -10,7 +10,6 @@ RSpec.describe 'As a visitor' do
 
   describe "When I visit an application's show page" do
     it 'I see a section on the page to "Add a Pet to this Application"' do
-
       visit "/applicants/#{@applicant1.id}"
       expect(page).to have_content('Add a Pet to this Application')
     end
@@ -21,6 +20,37 @@ RSpec.describe 'As a visitor' do
         fill_in :search, with: 'Thor'
         click_button('Search')
         expect(current_path).to eq("/applicants/#{@applicant1.id}")
+        expect(page).to have_content(@pet1.name)
+      end
+    end
+
+    it 'I see a button to "Adopt this Pet"' do
+      visit "/applicants/#{@applicant1.id}"
+      within(".applicant-pet-search") do
+        fill_in :search, with: 'Thor'
+        click_button('Search')
+        expect(page).to have_button('Adopt this Pet')
+      end
+    end
+  end
+
+  describe 'When I click "Adopt this Pet"' do
+    it 'I am taken back to the application show page' do
+      visit "/applicants/#{@applicant1.id}"
+      fill_in :search, with: 'Thor'
+      click_button('Search')
+      click_button('Adopt this Pet')
+      expect(current_path).to eq("/applicants/#{@applicant1.id}")
+    end
+
+    it 'I see the Pet I want to adopt listed on this application' do
+      visit "/applicants/#{@applicant1.id}"
+      fill_in :search, with: 'Thor'
+      click_button('Search')
+      click_button('Adopt this Pet')
+      expect(current_path).to eq("/applicants/#{@applicant1.id}")
+
+      within("#applicant-#{@applicant1.id}") do
         expect(page).to have_content(@pet1.name)
       end
     end

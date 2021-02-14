@@ -16,7 +16,8 @@
   <% end %>
   <% if @pets %>
     <% @pets.each do |pet| %>
-      <p><%= pet.name %></p>
+      <%= pet.name %>
+      <%= button_to "Adopt this Pet", "/applicants/#{@applicant.id}?adopt_pet_id=#{pet.id}" %>
     <% end %>
   <% end %>
 </aside>

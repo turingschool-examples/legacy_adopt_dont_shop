@@ -14,4 +14,17 @@
   <% @application.pets.each do |pet| %>
     <%= link_to pet.name, "/pets/#{pet.id}" %>
   <% end %>
+  <section id='<%= "application-#{@application.id}" %>'>
+    <h3>Add a Pet to this Application</h3>
+    <%= form_with url: "/applications/#{@application.id}", method: :get, local: :true do |form| %>
+      <%= form.label :pet_name %>
+      <%= form.text_field :pet_name %>
+      <%= form.submit "Submit" %>
+    <% end %>
+  </section>
+
+  <h3>Pet Name Matches:</h3>
+  <% @searched_pets.each do |pet| %>
+    <p><%= pet.name %></p>
+  <% end %>
 </div>

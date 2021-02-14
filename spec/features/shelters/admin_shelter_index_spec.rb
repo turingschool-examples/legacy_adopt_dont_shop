@@ -8,9 +8,19 @@ RSpec.describe 'Admin Shelters Index page' do
   end
 
   it 'as an admin, see all shelters in reverse alpha order' do
-    visit 'admin/shelters'
+    visit '/admin/shelters'
 
-    expect(page).to have_content(@shelter3, @shelter2, @shelter1)
+    within "#shelter-#{@shelter3.id}" do
+      expect(page).to have_content(@shelter3.name)
+    end
+
+    within "#shelter-#{@shelter2.id}" do
+      expect(page).to have_content(@shelter2.name)
+    end
+
+    within "#shelter-#{@shelter1.id}" do
+      expect(page).to have_content(@shelter1.name)
+    end
   end
 
 end

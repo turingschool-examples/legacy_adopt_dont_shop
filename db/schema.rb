@@ -16,14 +16,16 @@ ActiveRecord::Schema.define(version: 2021_02_13_200928) do
   enable_extension "plpgsql"
 
   create_table "applications", force: :cascade do |t|
-    t.string "name_of_applicant"
+    t.string "first_name"
+    t.string "last_name"
     t.string "address"
     t.string "city"
     t.string "state"
     t.string "zip"
     t.text "case_for_adoption"
-    t.string "adoptable_pet_names"
-    t.boolean "application_status"
+    t.string "application_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pet_applications", force: :cascade do |t|

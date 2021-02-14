@@ -11,12 +11,18 @@ class ApplicationFormsController < ApplicationController
   end
 
   def create
-    ApplicationForm.create(application_params)
-    redirect_to "/applications/#{ApplicationForm.last.id}"
+    pet_application = ApplicationForm.new(application_params)
+    if pet_application.save
+      redirect_to "/applications/#{pet_application.id}"
+    else
+      flash[:notice] = "Application not created: Required information missing."
+      render :new
+    end
   end
 
   private
+
   def application_params
-    params.permit(:name, :street_address, :city, :state, :zip_code, :description, :reviewed, :accepted, :created_at, :updated_at)
+    params.permit(:name, :street_address, :city, :state, :zip_code, :description, :reviewed, :accepted)
   end
 end

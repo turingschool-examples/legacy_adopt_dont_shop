@@ -19,12 +19,12 @@
 
 body {
   background-color: #fbf5cd;
-   color: #065e09;
+
    font-family: Arial;
    font-size: 20px;
    line-height: 1.5em;
-   margin: 0em;
-   text-align: center;
+   margin: 1em;
+   text-align: left;
 }
 
 header {
@@ -33,7 +33,7 @@ header {
   color: white;
   font-family: Arial;
   line-height: 2em;
-  text-align: center;
+  text-align: left;
 }
 
 h1 {

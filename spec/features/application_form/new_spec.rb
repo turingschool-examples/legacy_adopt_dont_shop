@@ -49,6 +49,7 @@ RSpec.describe "the Application index page", type: :feature do
         fill_in "name", with: "jeff"
         fill_in "street_address", with: '123 st'
         fill_in "city", with: 'Dover'
+        fill_in "state", with: 'CO'
         fill_in "zip_code", with: 3
         fill_in "description", with: "idk"
         fill_in "reviewed", with: "false"
@@ -66,6 +67,8 @@ RSpec.describe "the Application index page", type: :feature do
       end
 
       it "cannot create an application without filling out all forms" do
+        visit '/applications/new'
+
         click_on 'Create Application'
 
         expect(page).to have_content("Application not created: Required information missing.")

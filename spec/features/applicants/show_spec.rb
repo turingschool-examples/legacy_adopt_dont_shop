@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
   before :each do
-    @applicant1 = Applicant.create!(name: 'Angel', address: '123 Street', city: 'Conway', state: 'AR', zip: 72034, good_home_description: '', status: 0)
+    @applicant1 = Applicant.create!(name: 'Angel', address: '123 Street', city: 'Conway', state: 'AR', zip: 72034)
     @shelter1 = Shelter.create!(name: 'Shady Shelter', address: '123 Shady Ave', city: 'Denver', state: 'CO', zip: 80011)
     @pet1 = @shelter1.pets.create!(image:'', name: 'Thor', description: 'dog', approximate_age: 2, sex: 'male')
     PetApplicant.create!(pet: @pet1, applicant: @applicant1)
@@ -16,7 +16,6 @@ RSpec.describe 'As a visitor' do
       within("#applicant-#{@applicant1.id}") do
         expect(page).to have_content(@applicant1.name)
         expect(page).to have_content(@applicant1.full_address)
-        expect(page).to have_content(@applicant1.good_home_description)
         expect(page).to have_link("Thor")
         expect(page).to have_content(@applicant1.status)
       end

@@ -5,3 +5,17 @@
 <h3><%= @application.description %></h3>
 <h2>Application Status:</h2>
 <h3><%= @application.status %></h3>
+<section class="pet-find">
+  <h3>Add a Pet to this Application</h3>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+    <%= form.label :pet_name %>
+    <%= form.text_field :pet_name %>
+    <%= form.submit 'Find Pets by Name' %>
+  <% end %>
+  <% if @matching_pets %>
+    <% @matching_pets.each do |pet| %>
+      <h3><%= pet.name %></h3>
+      <h4>Age: <%= pet.approximate_age %></h4>
+    <% end %>
+  <% end %>
+</section>

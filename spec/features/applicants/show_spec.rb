@@ -40,6 +40,12 @@ RSpec.describe 'As a visitor' do
     end
   end
 
+  describe 'When no pets are on the application' do
+    it 'I do not see a section to submit my application' do
+      expect(page).not_to have_button('Submit Application')
+    end
+  end
+
   describe 'When I fill in good home description input and submit' do
     it 'I am taken back to the applications show page' do
       visit "/applicants/#{@applicant1.id}"

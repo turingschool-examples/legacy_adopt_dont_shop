@@ -42,4 +42,14 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+  describe 'class methods' do
+    describe 'Pet::match' do
+      it 'returns matching pet objects' do
+        shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+        pet = shelter.pets.create!(sex: :female, name: "Jimmy", approximate_age: 4, description: 'super cute')
+
+        expect(Pet.match('Jimmy')).to eq([pet])
+      end
+    end
+  end
 end

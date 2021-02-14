@@ -1,14 +1,19 @@
-<%= form_tag '/applications/new' do %>
-  <h2>Start a New Application</h2>
-  <%= label_tag :name %>
-  <%= text_field_tag :name %><br>
-  <%= label_tag :address %>
-  <%= text_field_tag :address %><br>
-  <%= label_tag :city %>
-  <%= text_field_tag :city %><br>
-  <%= label_tag :state %>
-  <%= text_field_tag :state %><br>
-  <%= label_tag :zip %>
-  <%= text_field_tag :zip%><br>
-  <%= submit_tag 'Submit' %>
+<h2>Start a New Application</h2>
+<%= form_with model: @application do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :address %>
+  <%= form.text_field :address %>
+
+  <%= form.label :city %>
+  <%= form.text_field :city %>
+
+  <%= form.label :state %>
+  <%= form.text_field :state %>
+
+  <%= form.label :zip %>
+  <%= form.number_field :zip %>
+
+  <%= form.submit "Submit" %>
 <% end %>

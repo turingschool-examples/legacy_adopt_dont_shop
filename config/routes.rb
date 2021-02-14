@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   post "/shelters/:shelter_id/pets", to: "shelter_pets#create"
   get "/shelters/:id/pets/:id", to: "pets#show"
 
-  get "/applications/:id/show", to: "applications#show"
-  get "/applications/new", to: "applications#new"
+  # get "/applications", to: "applications#index"
+  get "/applications/new", to: "applications#new"#, as: "applications"
   post "/applications/new", to: "applications#create"
+  get "/applications/show/:id", to: "applications#show" #try to keep this at the bottom for now (fixed id = new)
 end

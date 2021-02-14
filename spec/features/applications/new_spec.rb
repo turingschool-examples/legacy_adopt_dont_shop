@@ -22,6 +22,6 @@ RSpec.describe 'From pets index page start new application' do
 
     click_on 'Submit'
 
-    expect(current_path).to eq("/applications/#{@application1.id}/show")
+    expect(current_path).to eq("/applications/show/#{@application1.id}") #for some reason, the test is ONE id value behind what is actually shown.
   end
 end

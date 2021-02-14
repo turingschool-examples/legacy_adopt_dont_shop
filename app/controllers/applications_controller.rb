@@ -6,13 +6,14 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
-
   def create
     application = Application.new(application_params)
-
-    application.save
-
-    redirect_to "/applications/#{application.id}"
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else
+      flash[:notice] = "Incomplete Application: Required information missing."
+      render :new
+    end
   end
 
 

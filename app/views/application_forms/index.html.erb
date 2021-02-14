@@ -1,0 +1,8 @@
+<% @applications.each do |application| %>
+  <section id="application-<%= application.id %>">
+    <h1><%= application.name %></h1>
+    <% application.pets.each do |app| %>
+       <p><%= app.name %></p>
+    <% end %>
+  </section>
+<% end %>

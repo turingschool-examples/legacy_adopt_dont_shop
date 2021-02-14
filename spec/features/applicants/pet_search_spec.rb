@@ -27,7 +27,7 @@ RSpec.describe 'As a visitor' do
       end
     end
 
-    it 'I see any pet whose name PARTIALLY matches my search' do
+    it 'I see any pet whose name PARTIALLY matches my search and is case insensitive' do
       visit "/applicants/#{@applicant1.id}"
       within(".applicant-pet-search") do
         fill_in :search, with: 'fluff'

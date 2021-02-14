@@ -1,0 +1,17 @@
+<div class="Application Data">
+  <h3 id="app headings">Name:</h3>
+  <p><%= @application.first_name %></p>
+  <p><%= @application.last_name %></p>
+  <h3>Address:</h3>
+  <p><%= @application.address %></p>
+  <p><%= @application.city %></p>
+  <p><%= @application.state %></p>
+  <p><%= @application.zip %></p>
+  <h3>Reason for Adopting:</h3>
+  <p><%= @application.case_for_adoption %></p>
+  <h3>Application Status:</h3>
+  <p><%= @application.application_status %></p>
+  <% @application.pets.each do |pet| %>
+    <%= link_to pet.name, "/pets/#{pet.id}" %>
+  <% end %>
+</div>

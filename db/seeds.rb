@@ -7,10 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Pet.destroy_all
-FactoryBot.create(:pet)
-
 Shelter.destroy_all
-FactoryBot.create(:shelter)
-
 Application.destroy_all
+
+FactoryBot.create(:pet)
+FactoryBot.create(:shelter)
 FactoryBot.create(:application)

@@ -3,6 +3,7 @@ require 'simplecov'
 SimpleCov.start do
   add_filter '/spec/'
 end
+require 'shoulda/matchers'
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

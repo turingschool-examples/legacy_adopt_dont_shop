@@ -2,35 +2,44 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
   describe "When I visit a 'applications/:id" do
+    before(:each) do
+      #create_list(:pets, 3, :application)
+      # @application = Application.new(name:'jim', address: "1234", description: 'good dog dad', status: "pending")
+
+      @application_1 = create(:application)
+      @application_2 = create(:application)
+      @application_1.pets << create(:pet)
+      @application_1.pets << create(:pet)
+      @application_2.pets << create(:pet)
+      @application_2.pets << create(:pet)
+
+    end
     it "Then I can see the following:name, full address, description, name of all pets, application status" do
-      before(:each) do
-        @application = Factory(:application)
-        @application_2 = Factory(:application)
-        @pet_1 = Factory(:pet)
-        @pet_2 = Factory(:pet)
-        @pet_3 = Factory(:pet)
-        @pet_4 = Factory(:pet)
-      end
 
-      visit "/applications/#{application.id}"
+      visit "/applications/#{@application_1.id}"
+      save_and_open_page
 
-      expect(current_path).to eq("/applications/#{application.id}")
-      expect(page).to have_content("Name: #{application.name}")
-      expect(page).to have_content("Address: #{application.address}")
-      expect(page).to have_content("Description: #{application.description}")
-      expect(page).to have_content("Name of all pets: #{application.pets}")
-      expect(page).to have_content("Application status:#{application.status}")
+      expect(current_path).to eq("/applications/#{@application_1.id}")
+
+      expect(page).to have_content("Name: #{@application_1.name}")
+      expect(page).to have_content("Address: #{@application_1.address}")
+      expect(page).to have_content("Description: #{@application_1.description}")
+      expect(page).to have_content(@application_1.pets.first.name)
+      expect(page).to have_content(@application_1.pets.last.name)
+      expect(page).to have_content("Application status: #{@application_1.status}")
 
     end
     it "visits another applications page" do
-      visit "/applications/#{application_2.id}"
+      visit "/applications/#{@application_2.id}"
+      save_and_open_page
 
-      expect(current_path).to eq("/applications/#{application_2.id}")
-      expect(page).to have_content("Name: #{application_2.name}")
-      expect(page).to have_content("Address: #{application_2.address}")
-      expect(page).to have_content("Description: #{application_2.description}")
-      expect(page).to have_content("Name of all pets: #{application_2.pets}")
-      expect(page).to have_content("Application status:#{application_2.status}")
+      expect(current_path).to eq("/applications/#{@application_2.id}")
+      expect(page).to have_content("Name: #{@application_2.name}")
+      expect(page).to have_content("Address: #{@application_2.address}")
+      expect(page).to have_content("Description: #{@application_2.description}")
+      expect(page).to have_content(@application_2.pets.first.name)
+      expect(page).to have_content(@application_2.pets.last.name)
+      expect(page).to have_content("Application status: #{@application_2.status}")
 
     end
   end

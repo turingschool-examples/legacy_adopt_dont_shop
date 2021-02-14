@@ -2,12 +2,12 @@ require 'faker'
 
 FactoryBot.define do
   factory :pet do
-    sequence(:image)  { |n| "image #{n}" }
+    image {''}
     sequence(:name)  { |n| "pet #{n}" }
     sequence(:approximate_age)  { |n| n }
-    sequence(:description) { |n| }
-    adoptable { "true" }
-    sex(:sex)
+    sequence(:description)  { |n| "Description #{n}" }
+    adoptable {true}
+    sex { 'male'}
     shelter
   end
 end

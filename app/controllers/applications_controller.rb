@@ -1,6 +1,11 @@
 class ApplicationsController < ApplicationController
   def show
-    @application = Application.find(params[:id])
+    if params[:search]
+      @pets = Pet.search(search_params)
+      @application = Application.find(params[:id])
+    else
+      @application = Application.find(params[:id])
+    end
   end
 
   def new
@@ -32,5 +37,9 @@ class ApplicationsController < ApplicationController
 
   def app_params
     params.permit(:name, :street_address, :city, :state, :zipcode)
+  end
+
+  def search_params
+    params.permit(:search)
   end
 end

@@ -7,9 +7,24 @@
 <h3>Application Status: <%= @application.status %></h3>
 <h3>Why I'd be a great pet owner: <%= @application.description %></h3>
 
+<section id="search_pets">
+  <%= form_with(url: "/applications/#{@application.id}", method: "get", local: true) do |f| %>
+    <h5><%= f.label "Add a Pet to this Application: " %></h5>
+    <p><%= f.text_field :search, placeholder: "Enter Pets Name" %></p><br>
+    <p><%= f.submit "Search Pets" %></p>
+    <% end %>
+
+    <% if !@pets.nil? %>
+      <%@pets.each do |pet| %>
+        <p><%= pet.name %></p>
+        <%end %>
+      <%else %>
+    <% end %>
+</section>
+
 <section id="description_submit">
   <%= form_with(url: "/applications/#{@application.id}", method: "patch", local: true) do |f| %>
-    <h3><%= f.label "Submit Your Application:" %></h3>
+    <h3><%= f.label "Submit Your Application: " %></h3>
     <p><%= f.label "Why You'd Make a Great Owner: " %></p>
     <p><%= f.text_field :description, placeholder: "Type Here" %></p><br>
     <p><%= f.submit "Submit Application" %></p>

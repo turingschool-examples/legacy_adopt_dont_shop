@@ -55,4 +55,20 @@ RSpec.describe 'Application new page' do
     expect(page).to have_content("I would be a great dog mom!")
     # expect(page).to have_content("In Progress")
   end
+
+  it 'gives error for incomplete application' do
+    visit '/applications/new'
+
+    fill_in "name", with: "Sally"
+    fill_in "address", with: "234 Third Ave"
+    fill_in "city", with: ""
+    fill_in "state", with: "TX"
+    fill_in "zip", with: 88678
+    fill_in "description", with: "I would be a great dog mom!"
+
+    click_on('Submit Application')
+
+    expect(current_path).to eq('/applications/new')
+    expect(page).to have_content('Your application was not saved. Please fill in all application fields.')
+  end
 end

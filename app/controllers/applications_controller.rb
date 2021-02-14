@@ -9,14 +9,12 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.create(
-      name: params[:post][:name],
-      street_address: params[:post][:street_address],
-      city: params[:post][:city],
-      state: params[:post][:state],
-      zip: params[:post][:zip],
-      description: params[:post][:description]
-    )
+    application = Application.create(app_params)
     redirect_to"/applications/#{application.id}"
+  end
+
+  private
+  def app_params
+    params.permit(:name, :street_address, :city, :state, :zip, :description)
   end
 end

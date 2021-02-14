@@ -3,6 +3,8 @@ Address: <%= @applicant.address %><br>
 City: <%= @applicant.city %><br>
 State: <%= @applicant.state %><br>
 Zip: <%= @applicant.zip %><br>
-Reason for Adoption: <%= @applicant.reason %>
-Name of pet(s): <%= @applicant.names_of_pets %>
+Reason for Adoption: <%= @applicant.reason %><br>
+Name of pet(s): <% @applicant.pets.each do |pet| %>
+<%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+<% end %><br>
 Application Status: <%= @applicant.application_status %>

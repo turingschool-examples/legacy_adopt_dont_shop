@@ -49,7 +49,6 @@ RSpec.describe "the Application index page", type: :feature do
     expect(page).to have_content(@app_1.state)
     expect(page).to have_content(@app_1.description)
     expect(page).to have_content("#{@app_1.zip_code}")
-    expect(page).to have_content("#{@app_1.reviewed}")
-    expect(page).to have_content("#{@app_1.accepted}")
+    expect(page).to have_content("Status: Accepted")
   end
 end

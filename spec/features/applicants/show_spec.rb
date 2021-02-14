@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
   before :each do
-    @applicant1 = Applicant.create!(name: 'Angel', address: '123 Street', city: 'Conway', state: 'AR', zip: 72034, good_home_description: 'I love dogs.', status: 0)
+    @applicant1 = Applicant.create!(name: 'Angel', address: '123 Street', city: 'Conway', state: 'AR', zip: 72034, good_home_description: '', status: 0)
     @shelter1 = Shelter.create!(name: 'Shady Shelter', address: '123 Shady Ave', city: 'Denver', state: 'CO', zip: 80011)
     @pet1 = @shelter1.pets.create!(image:'', name: 'Thor', description: 'dog', approximate_age: 2, sex: 'male')
     PetApplicant.create!(pet: @pet1, applicant: @applicant1)
@@ -20,6 +20,57 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_link("Thor")
         expect(page).to have_content(@applicant1.status)
       end
+    end
+  end
+
+  describe 'When one or more pets are added to the application' do
+    it 'I see a section to submit my application' do
+      visit "/applicants/#{@applicant1.id}"
+
+      within(".submit-application") do
+        expect(page).to have_button('Submit Application')
+      end
+    end
+
+    it 'I see an input to enter why I would make a good owner for these pet(s)' do
+      visit "/applicants/#{@applicant1.id}"
+
+      within(".submit-application") do
+        expect(page.find_field(:good_home_description)).to be_truthy
+      end
+    end
+  end
+
+  describe 'When I fill in good home description input and submit' do
+    it 'I am taken back to the applications show page' do
+      visit "/applicants/#{@applicant1.id}"
+
+      within(".submit-application") do
+        fill_in :good_home_description, with: 'I have friends who have dogs.'
+
+        click_button('Submit Application')
+      end
+
+      expect(page).to have_content('I have friends who have dogs.')
+      expect(current_path).to eq("/applicants/#{@applicant1.id}")
+    end
+
+    it 'I see an indicator that the application is "Pending"' do
+      visit "/applicants/#{@applicant1.id}"
+
+      within(".submit-application") do
+        click_button('Submit Application')
+      end
+      expect(page).to have_content('Pending')
+    end
+
+    it 'I do not see a section to add more pets to this application' do
+      visit "/applicants/#{@applicant1.id}"
+
+      within(".submit-application") do
+        click_button('Submit Application')
+      end
+      expect(page).not_to have_content('Add a Pet to this Application')
     end
   end
 end

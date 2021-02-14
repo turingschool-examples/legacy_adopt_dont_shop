@@ -4,11 +4,18 @@
     Pet: <%= application_pet.pet.name %>
     <% if application_pet.approved? %>
       <p>Approved!</p>
+    <% elsif application_pet.rejected? %>
+        <p>Rejected!</p>
     <% else %>
       <%= form_with url:"/admin/applications/#{@application.id}", method: :patch, local: true do |form| %>
       <%= form.hidden_field :ap_id, value: "#{application_pet.id}" %>
       <%= form.hidden_field :status, value: :approved %>
       <%= form.submit 'Approve Pet' %>
+      <% end %>
+      <%= form_with url:"/admin/applications/#{@application.id}", method: :patch, local: true do |form| %>
+      <%= form.hidden_field :ap_id, value: "#{application_pet.id}" %>
+      <%= form.hidden_field :status, value: :rejected %>
+      <%= form.submit 'Reject Pet' %>
       <% end %>
     <% end %>
   </section>

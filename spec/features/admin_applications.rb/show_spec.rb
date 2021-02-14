@@ -34,6 +34,51 @@ RSpec.describe 'Admin Application show page' do
           end
         end
       end
+      describe "For every pet that the application is for, I see a button to reject the application for that specific pet" do
+        describe "When I click that button then I'm taken back to the admin application show page" do
+          it "next to the pet that I rejected, I do not see a button to reject or approve this pet,instead I see an indicator next to the pet that they have been rejected" do
+            visit "/admin/applications/#{@application.id}"
+            within "#pet-#{@pet1.id}" do
+              expect(page).to have_content(@pet1.name)
+              expect(page).to have_button("Reject Pet")
+              click_button "Reject Pet"
+
+              expect(page).to_not have_button("Reject Pet")
+              expect(page).to have_content("Rejected!")
+            end
+            within "#pet-#{@pet2.id}" do
+              expect(page).to have_content(@pet2.name)
+              expect(page).to have_button("Reject Pet")
+            end
+          end
+        end
+        describe "When there are two applications in the system for the same pet" do
+          describe "When I visit the admin application show page for one of the applications and I approve or reject the pet for that application" do
+            describe "When I visit the other application's admin show page" do
+              it "Then I do not see that the pet has been accepted or rejected for that application And instead I see buttons to approve or reject the pet for this specific application" do
+                visit "/admin/applications/#{@application.id}"
+                within "#pet-#{@pet1.id}" do
+                  expect(page).to have_content('Daisy')
+                  expect(page).to have_button("Reject Pet")
+                  click_button "Reject Pet"
+
+                  expect(page).to_not have_button("Reject Pet")
+                  expect(page).to have_content("Rejected!")
+                end
+                application2 = create(:application, id: 2)
+                application_pets3 = create(:application_pet, application_id: 2, pet_id: 1)
+
+                visit "/admin/applications/#{application2.id}"
+                within "#pet-#{application_pets3.pet.id}" do
+                  expect(page).to have_content('Daisy')
+                  expect(page).to have_button("Approve Pet")
+                  expect(page).to have_button("Reject Pet")
+                end
+              end
+            end
+          end
+        end
+      end
     end
   end
 end

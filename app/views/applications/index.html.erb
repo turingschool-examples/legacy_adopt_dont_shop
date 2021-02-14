@@ -1,0 +1,7 @@
+<p><a href="/applications/new">Start an Application</p>
+
+
+
+<% @applications.each do |application| %>
+<p><a href="/applications/<%=application.id%>"><%= application.name %></p>
+<% end  %>

@@ -1,0 +1,17 @@
+<p><a href="/pets">Pets listing page</a></p>
+
+<h2>Enter new application info:</h2>
+
+
+<%= form_with url: "/applications", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %><br>
+  <%= form.label :address %>
+  <%= form.text_field :address %><br>
+  <%= form.label :description %>
+  <%= form.text_field :description %><br>
+  <%= form.submit 'Submit' %><br>
+<% end %>
+<br>
+
+<h3><a href="/applications"> Cancel and return to Applications</a></h3>

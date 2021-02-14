@@ -100,7 +100,7 @@ And I see a message that I must fill in those fields.
 ```
 
 ```
-[ ] done
+[X] done
 
 Searching for Pets for an Application
 

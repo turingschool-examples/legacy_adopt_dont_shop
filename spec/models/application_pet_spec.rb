@@ -24,19 +24,19 @@ describe ApplicationPet, type: :model do
 
   it 'status can be nil by default' do
     expect(@application_pet.status).to eq(nil)
-    expect(@application_pet.accepted?).to eq(false)
+    expect(@application_pet.approved?).to eq(false)
     expect(@application_pet.rejected?).to eq(false)
   end
-  it 'status can be accepted' do
-    application_pet = create(:application_pet, application_id: 1, pet_id: 1, status: :accepted)
-    expect(application_pet.status).to eq("accepted")
-    expect(application_pet.accepted?).to eq(true)
+  it 'status can be approved' do
+    application_pet = create(:application_pet, application_id: 1, pet_id: 1, status: :approved)
+    expect(application_pet.status).to eq("approved")
+    expect(application_pet.approved?).to eq(true)
     expect(application_pet.rejected?).to eq(false)
   end
   it 'status can be rejected' do
     application_pet = create(:application_pet, application_id: 1, pet_id: 1, status: :rejected)
     expect(application_pet.status).to eq('rejected')
-    expect(application_pet.accepted?).to eq(false)
+    expect(application_pet.approved?).to eq(false)
     expect(application_pet.rejected?).to eq(true)
   end
 end

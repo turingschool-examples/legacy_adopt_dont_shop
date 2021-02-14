@@ -49,14 +49,17 @@ RSpec.describe "the Application index page", type: :feature do
     fill_in "city", with: 'Dover'
     fill_in "zip_code", with: 3
     fill_in "description", with: "idk"
-    fill_in "reviewed", with: "true"
-    fill_in "accepted", with: "true"
+    fill_in "reviewed", with: "false"
+    fill_in "accepted", with: "false"
 
     click_on 'Create Application'
 
-    expect(current_path).to eq("/applications")
+    expect(current_path).to eq("/applications/#{ApplicationForm.last.id}")
 
+    expect(page).to have_content("In Progress")
     expect(page).to have_content("jeff")
-
+    expect(page).to have_content("123 st")
+    expect(page).to have_content("Dover")
+    expect(page).to have_content("3")
   end
 end

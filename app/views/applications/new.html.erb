@@ -1,7 +1,7 @@
 <h1>Start an Application</h1>
 
 
-<%= form_with url: "/applications/:id", method: :post do |form| %>
+<%= form_with url: "/applications", method: :post, local: true do |form| %>
   <%= form.label :name, "Name:" %>
   <%= form.text_field :name, required: true %><br>
   <%= form.label :street, "Street:" %>
@@ -13,4 +13,4 @@
   <%= form.label :zip, "Zip:" %>
   <%= form.text_field :zip, required: true %><br>
   <%= form.submit "Submit" %>
-<% end %>
+<% end %> 

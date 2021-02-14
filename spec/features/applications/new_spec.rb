@@ -18,13 +18,13 @@ RSpec.describe 'Create Application from Pet Index page' do
     fill_in "city", with: "Thornton"
     fill_in "state", with: "CO"
     fill_in "zip", with: "80415"
-    fill_in "description", with: "Must love dogs"
-    fill_in "state", with: "1137"
 
-    click_on 'Submit'
+    click_button 'Submit'
+    
+    # expect(current_path).to eq("/applications/#{@application.id}")
 
-    expect(current_path).to eq('/applications/:id')
-
-    # expect(page).to have_content("Adam")
+    expect(page).to have_content("Adam")
+    expect(page).to have_content("In Progress")
+    # save_and_open_page
   end
 end

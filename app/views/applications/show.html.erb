@@ -1,0 +1,22 @@
+<h1><%= @application.name %></h1>
+
+<ul>
+  <li><%= @application.street %></li>
+  <li><%= @application.city %></li>
+  <li><%= @application.state %></li>
+  <li><%= @application.zip %></li>
+</ul>
+
+<h2>Application Status: <%= @application.status%></h2>
+
+<%= form_with url: "/applications/#{@application.id}", method: :get do |form| %>
+  <%= form.label :pet_name, "Add a Pet to this Application" %>
+  <%= form.text_field :pet_name, required: true %>
+  <%= form.submit "Submit" %>
+<% end %>
+
+<% if !@pets.nil? %>
+  <% @pets.each do |pet| %>
+  <p><%= pet.name %> </p>
+  <% end %>
+<% end %>

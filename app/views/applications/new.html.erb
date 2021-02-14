@@ -1,0 +1,16 @@
+<h1>Start an Application</h1>
+
+
+<%= form_with url: "/applications/:id", method: :post do |form| %>
+  <%= form.label :name, "Name:" %>
+  <%= form.text_field :name, required: true %><br>
+  <%= form.label :street, "Street:" %>
+  <%= form.text_field :street, required: true %><br>
+  <%= form.label :city, "City:" %>
+  <%= form.text_field :city, required: true %><br>
+  <%= form.label :state, "State:" %>
+  <%= form.text_field :state, required: true %><br>
+  <%= form.label :zip, "Zip:" %>
+  <%= form.text_field :zip, required: true %><br>
+  <%= form.submit "Submit" %>
+<% end %>

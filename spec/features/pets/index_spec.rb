@@ -58,4 +58,45 @@ RSpec.describe 'Pets index page' do
     expect(page).to have_content("Calvin")
     expect(page).to_not have_content("Thor")
   end
+
+  it "can display a link to start an application" do
+    first_name = "Katy"
+    last_name = "La Tour"
+    address = "123 Peach St."
+    city = "Chicago"
+    state = "IL"
+    zip = "60647"
+    case_for_adoption = "I am a good caretaker."
+
+    visit "/pets"
+
+    expect(page).to have_link("Start an Application")
+
+    click_link("Start an Application", match: :first)
+
+    expect(current_path).to eq("/applications/new")
+    expect(page).to have_content("New Application")
+
+    fill_in("first_name", with: first_name)
+    fill_in("last_name", with: last_name)
+    fill_in("address", with: address)
+    fill_in("city", with: city)
+    fill_in("state", with: state)
+    fill_in("zip", with: zip)
+    fill_in("case_for_adoption", with: case_for_adoption)
+
+    click_button("Submit")
+
+    application = Application.last
+
+    expect(current_path).to eq("/applications/#{application.id}")
+    expect(page).to have_content(first_name)
+    expect(page).to have_content(last_name)
+    expect(page).to have_content(address)
+    expect(page).to have_content(city)
+    expect(page).to have_content(state)
+    expect(page).to have_content(zip)
+    expect(page).to have_content(case_for_adoption)
+    expect(page).to have_content("In Progress")
+  end
 end

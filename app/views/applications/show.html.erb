@@ -5,12 +5,19 @@
 <p>State: <%= @application.state %></p>
 <p>Zip: <%= @application.zip %></p><br>
 <p>Description: <%= @application.description %></p><br>
+<br>
+<a href="/applications/<%= @application.id %>/edit">Edit Application</a>
+<%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
+
 
 <%= "Pets applied for:" %>
 <% @application.pet_applications.each do |application| %>
   <%= link_to "#{application.pet.name}", "/pets/#{application.pet.id}" %>
 <% end %>
 
-<br>
-<a href="/applications/<%= @application.id %>/edit">Edit Application</a>
-<%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
+<%= form_tag "/applications" do %>
+  <h2>Why I would make a good owner:</h2>
+  <%= label_tag :description%>
+  <%= text_field_tag :description %><br>
+  <%= submit_tag 'Submit Application' %>
+<% end %>

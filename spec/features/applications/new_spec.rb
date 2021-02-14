@@ -43,7 +43,7 @@ RSpec.describe 'Application new page' do
     fill_in "zip", with: 88678
     fill_in "description", with: "I would be a great dog mom!"
 
-    click_on('Submit Application')
+    click_on('Submit')
 
     # expect(current_path).to eq("/applications/#{@application_1.id}")
     expect(page).to have_content("Sally's application")

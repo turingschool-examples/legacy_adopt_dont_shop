@@ -39,7 +39,6 @@ RSpec.describe "the applications show page" do
       expect(page).to have_content(@pet_3.name)
       expect(page).to have_content(@pet_4.name)
       expect(page).to have_content(@pet_5.name)
-
     end
   end
 end

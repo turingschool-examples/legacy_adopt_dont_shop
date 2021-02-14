@@ -12,4 +12,8 @@
   <h4>Why I would make a good owner:</h4>
   <p><%= @application.description %></p>
   <p><%= @application.status %></p>
+  <h4>Pets I want to give a forever home:</h4>
+  <% @pets.each do |pet| %>
+  <a href="/pets/<%= pet.id %>"><%= pet.name %></a>
+  <% end %>
 </div>

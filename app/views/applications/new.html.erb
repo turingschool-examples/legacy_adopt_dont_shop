@@ -1,1 +1,16 @@
 <h2>New Application</h2>
+<%= form_with url: applications_new_path(@application), local: :true do |form| %>
+<%= form.label :name %>
+<%= form.text_field :name %> <br>
+<%= form.label :street_address %>
+<%= form.text_field :street_address %> <br>
+<%= form.label :city %>
+<%= form.text_field :city %> <br>
+<%= form.label :state %>
+<%= form.text_field :state %> <br>
+<%= form.label :zip %>
+<%= form.number_field :zip %> <br>
+<%= form.label :description %>
+<%= form.text_field :description %> <br>
+<%= form.submit %>
+<% end %>

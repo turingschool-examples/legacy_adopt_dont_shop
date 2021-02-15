@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "the applications show page" do
   before :each do
     @shelter = create(:shelter)
-    @application = create(:application, status: "Pending")
+    @application = create(:application, status: "In Progress")
     @pet_1 = create(:pet, shelter_id: @shelter.id, name: "Thor")
     @pet_2 = create(:pet, shelter_id: @shelter.id)
     @pet_3 = create(:pet, shelter_id: @shelter.id, name: "Thoraneous")
@@ -43,12 +43,12 @@ RSpec.describe "the applications show page" do
     end
   end
 
-  describe "should be able to add pets to Pending applications" do
+  describe "should be able to add pets to In Progress applications" do
     it "should be able to search pets" do
 
       visit @app_show_url
 
-      expect(page).to have_content("Pending")
+      expect(page).to have_content("In Progress")
       expect(page).to have_content("Add a Pet to this Application")
 
       fill_in(:query, with: "Thor")
@@ -74,7 +74,7 @@ RSpec.describe "the applications show page" do
 
   describe "should be able to submit an application" do
     it "submit option in view once more than 1 pet added to app" do
-      app = create(:application, status: "Pending")
+      app = create(:application, status: "In Progress")
       visit "/applications/#{app.id}"
 
       expect(page).to_not have_content("Submit Application")
@@ -83,6 +83,17 @@ RSpec.describe "the applications show page" do
 
       expect(page).to have_content("Thor")
       expect(page).to have_content("Submit Application")
+    end
+
+    it "should be able to submit an application and status change to Pending" do
+      visit @app_show_url
+
+      fill_in(:app_submission, with: "Large yard and lots of love")
+      click_on "Submit Application"
+
+      expect(current_path).to eq (@app_show_url)
+      expect(page).to have_content("Pending")
+      expect(page).to have_content("Large yard and lots of love")
     end
   end
 end

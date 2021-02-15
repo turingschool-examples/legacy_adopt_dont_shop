@@ -24,10 +24,11 @@ class ApplicationsController < ApplicationController
       status: "Pending",
     })
 
-    application.save
-
-    id = application.id
-
-    redirect_to "/applications/#{id}"
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else
+      flash[:notice] = "Application not created: Required information missing."
+      render :new 
+    end
   end
 end

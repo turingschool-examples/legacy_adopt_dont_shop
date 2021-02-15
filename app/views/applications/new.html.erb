@@ -1,5 +1,9 @@
+<% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
+
 <%= form_with(url: '/applications', method: "post", local: true) do  |form| %>
-  <h2>Create a New Shelter</h2>
+  <h2>New Application Form</h2>
   <%= form.label :first_name %>
   <%= form.text_field :first_name %><br>
   <%= form.label :last_name %>

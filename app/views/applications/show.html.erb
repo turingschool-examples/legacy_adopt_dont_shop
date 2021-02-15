@@ -2,7 +2,9 @@
 <p>Address: <%= @application.address%></p>
 <p>Description: <%= @application.description%></p>
 <p>All pets <% @application.pets.each do |pet|%></p>
+<section id="adopted-pet-<%=pet.id%>">
 <p><%= pet.name %></p>
+</section>
 <% end  %>
 <p>Application status: <%= @application.status%></p><br>
 
@@ -19,7 +21,13 @@
 
 <ul><% if @pets %>
     <% @pets.each do |pet| %>
-    <li><%=pet.name%></li>
+    <div id="pet-<%= pet.id%>">
+    <li><%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+          <%= form.label pet.name.to_sym %>
+          <%= form.hidden_field :pet_id, value: pet.id%>
+          <%= form.submit 'Adopt this Pet' %>
+        <% end %></li>
+        </div>
     <% end  %>
   <% end  %>
 </ul>

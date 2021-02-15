@@ -24,13 +24,14 @@ RSpec.describe 'As a visitor' do
       visit "/applications/#{@application_1.id}"
 
       expect(current_path).to eq("/applications/#{@application_1.id}")
-      expect(page).to have_button("Submit application")
-      expect(page).to have_content("Why you'd make a good owner:")
+      expect(page).to have_button("Submit Application")
+      expect(page).to have_content("Why you would make a good pet owner")
       fill_in "description", :with => "I'd be an awesome dog parent because i love animals"
-      click_button("Submit application")
+      click_button("Submit Application")
       expect(current_path).to eq("/applications/#{@application_1.id}")
       expect(page).to have_content("Pending")
       expect(page).to have_no_content("In Progress")
+      save_and_open_page
       expect(page).to have_content("#{@pet_1.name.capitalize}")
       expect(page).to have_content("#{@pet_2.name.capitalize}")
       expect(page).to have_no_content("add pets")

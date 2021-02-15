@@ -75,3 +75,7 @@ header {
   width: 50%;
   height: auto;
 }
+
+.application {
+  display:none;
+}

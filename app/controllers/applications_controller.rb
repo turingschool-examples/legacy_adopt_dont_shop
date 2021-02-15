@@ -23,7 +23,6 @@ class ApplicationsController < ApplicationController
 
   def submit_app
     @application = Application.find(params[:id])
-    # binding.pry
     @application.assign_attributes(status: "Pending", description: params[:description])
     @application.save
     redirect_to "/applications/#{@application.id}"

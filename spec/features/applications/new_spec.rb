@@ -9,7 +9,6 @@ RSpec.describe 'New Application Page', type: :feature do
     fill_in "City", with: 'Denver'
     fill_in "State", with: 'CO'
     fill_in "Zip", with: 80246
-    fill_in "Description", with: 'I love dogs'
 
     click_on 'Save'
     expect(current_path).to eq("/applications/#{(Application.where(name: "Trevor Suter")).ids.first}")

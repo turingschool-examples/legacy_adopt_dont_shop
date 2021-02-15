@@ -26,5 +26,7 @@
   <h3>Pet Name Matches:</h3>
   <% @searched_pets.each do |pet| %>
     <p><%= pet.name %></p>
+    <a><%= button_to "Adopt this Pet", "/applications/#{@application.id}", method: :patch, params: { pet_id: pet.id } %></a>
   <% end %>
+
 </div>

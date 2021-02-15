@@ -10,6 +10,7 @@ class ApplicationsController < ApplicationController
   def show 
     @application = Application.find(params[:id])
     @pets = @application.match_pets(params[:pet_name])
+    @pet_apps = @application.pets_on_app(params[:id])
   end
 
   private 

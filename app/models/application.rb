@@ -12,4 +12,9 @@ class Application < ApplicationRecord
   def match_pets(name)
       Pet.where("name LIKE ?", "%#{name}%")
   end
+
+  def pets_on_app(id)
+    pets_apps = PetApplication.where("application_id = #{id}")
+    pets = pets_apps.map{|pet| Pet.find(pet.pet_id)}
+  end 
 end

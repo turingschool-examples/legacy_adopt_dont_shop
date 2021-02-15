@@ -21,7 +21,9 @@ RSpec.describe 'When I visit an application show page' do
       expect(current_path).to eq("/applications/#{@application1.id}")
       expect(page).to have_content("cuatro")
       expect(page).to have_content("callie")
-      # save_and_open_page
+      
+      click_button("Adopt this Pet", match: :first)
+      
     end
   end
   describe 'before an application has been submitted' do 
@@ -35,7 +37,7 @@ RSpec.describe 'When I visit an application show page' do
       expect(current_path).to eq("/applications/#{@application1.id}")
       expect(page).to have_no_content("cuatro")
       expect(page).to have_no_content("callie")
-      save_and_open_page
+      # save_and_open_page
     end
   end
 end

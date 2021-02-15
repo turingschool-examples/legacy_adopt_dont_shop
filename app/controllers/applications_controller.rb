@@ -3,15 +3,14 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.new(application_params)
-    @application.status = "In Progress"
-    @application.save
-    redirect_to  "/applications/#{@application.id}"
+    @application = Application.create(application_params)
+    redirect_to  "/applications/#{@application.id}" 
   end
 
   def show 
     @application = Application.find(params[:id])
     @pets = @application.match_pets(params[:pet_name])
+    @pet_apps = @application.pets_on_app(params[:id])
   end
 
   private 

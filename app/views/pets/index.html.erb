@@ -1,6 +1,6 @@
 <h1>All Pets</h1>
 
-<%= link_to 'Start an Application', "/applications/new" %><br>
+<%= link_to "Start an Application", "applications/new"%><br>
 
 <% @pets.each do |pet| %>
   <% if pet.adoptable == true %>

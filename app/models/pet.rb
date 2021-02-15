@@ -13,7 +13,7 @@ class Pet < ApplicationRecord
 
   def self.search(search_terms)
     if search_terms
-      @pets = Pet.find_by(name: search_terms)
+      @pets = Pet.where("lower(name) LIKE ?", "%#{search_terms.downcase}%")
     else
       @pets = Pet.all
     end

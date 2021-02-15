@@ -11,6 +11,10 @@
     <% if params[:query] != nil %>
       <% @search_pets.each do |search_pet| %>
         <a href="/pets/<%= search_pet.id %>"><%= search_pet.name %></a><br>
+        <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+          <%= form.hidden_field :pet_id, value: search_pet.id %>
+          <%= form.submit "Adopt This Pet" %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

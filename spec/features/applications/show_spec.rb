@@ -44,7 +44,7 @@ RSpec.describe "the applications show page" do
   end
 
   describe "should be able to add pets to Pending applications" do
-    it "should be able to search and add pets" do
+    it "should be able to search pets" do
 
       visit @app_show_url
 
@@ -58,6 +58,16 @@ RSpec.describe "the applications show page" do
       expect(page).to have_content("Thor")
       expect(page).to have_content("Thoraneous")
       expect(page).to_not have_content(@pet_5.name)
+    end
+
+    it "should be able to add pets to application by clicking a link" do
+      visit @app_show_url
+      fill_in(:query, with: "Thor")
+      click_button("Search")
+
+      click_link("Adopt This Pet")
+      expect(current_path).to eq (@app_show_url)
+      expect(section: pets).to have_content("Thor")
     end
   end
 end

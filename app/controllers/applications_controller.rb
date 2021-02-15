@@ -5,9 +5,14 @@ class ApplicationsController < ApplicationController
   end
 
   def show
+    binding.pry
     @application = Application.find(params[:id])
     @pets = @application.pets
     @search_pets = Pet.search(params[:query])
+    if params[:commit] == "Adopt This Pet"
+      @pet_to_adopt = Pet.find(params[:pet_id])
+      @application.pets << @pet_to_adopt
+    end
   end
 
   def new

@@ -14,8 +14,8 @@
 @pet3 = @shelter1.pets.create!(image:'', name: 'Zeus', description: 'dog', approximate_age: 4, sex: 'male')
 
 @applicant1 = Applicant.create!(name: 'Angel', address: '123 Street', city: 'Conway', state: 'AR', zip: 72034)
-@applicant2 = Applicant.create!(name: 'Chris', address: '456 Street', city: 'Denver', state: 'CO', zip: 80011, good_home_description: 'I love dogs more.', status: 1)
-@applicant3 = Applicant.create!(name: 'Amber', address: '789 Street', city: 'Longmont', state: 'CO', zip: 80012, good_home_description: 'I love dogs 2.', status: 2)
-@applicant4 = Applicant.create!(name: 'Levi', address: '101 Street', city: 'Commerce City', state: 'CO', zip: 80022, good_home_description: 'I love ALL dogs.', status: 3)
+@applicant2 = Applicant.create!(name: 'Chris', address: '456 Street', city: 'Denver', state: 'CO', zip: 80011)
+@applicant3 = Applicant.create!(name: 'Amber', address: '789 Street', city: 'Longmont', state: 'CO', zip: 80012)
+@applicant4 = Applicant.create!(name: 'Levi', address: '101 Street', city: 'Commerce City', state: 'CO', zip: 80022)
 
 PetApplicant.create!(pet: @pet1, applicant: @applicant1)

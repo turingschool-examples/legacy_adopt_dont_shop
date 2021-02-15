@@ -28,4 +28,18 @@ RSpec.describe 'Applications show page' do
       expect(page). to have_link(@pet1.name)
     end
   end
+
+  #Story test 4
+  it "can add a pet on your application show page" do
+    pet4 = @shelter2.pets.create!(image:"", name: "Linel", description: "cat", approximate_age: 3, sex: "female")
+    visit "/applications/#{@dominic.id}"
+    expect(page).to have_content("Add a pet to your Application")
+    expect(page).to have_content("Search for your Pet")
+
+    fill_in "Search for your Pet", with: "#{pet4.name}"
+    click_on "Search"
+    expect(current_path).to eq("/applications/#{@dominic.id}")
+    expect(page).to have_content("#{pet4.name}")
+  end
+
 end

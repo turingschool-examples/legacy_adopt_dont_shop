@@ -2,24 +2,40 @@
   <section id="application-<%=@application.id%>">
     <h2>Name: <%="#{@application.name}"%></h2>
     Address: <%="#{@application.street}, #{@application.city}, #{@application.state}, #{@application.zip_code}"%> <br>
-    Description: <%= "#{@application.description}" %>
+    Description: <%= "#{@application.description}" %> <br>
     Status: <%= "#{@application.application_status}" %>
     <%= @application.pets.each do |pet|  %>
     <h3> Pet Names: <%=link_to "#{pet.name}", "/pets/#{pet.id}"%></h3>
   </section>
 <% end %>
+
+
+<section id="tell-us-why">
+  <% if @application.pets.count >= 1 %>
+  <%= form_tag "/applications/#{@application.id}/update", method: :patch do %>
+  <%= label_tag :"Tell us why you would be a good owner for these pet(s)" %>
+  <%= text_field_tag :description %>
+  <%= hidden_field_tag :application_status, :pending %>
+  <%= submit_tag 'Submit' %>
+  <% end %>
+  <% end %>
+<section>
+
+
 <section class="find-pet">
+  <% if @application.application_status == "In Progress" %>
   <%= form_with(url: "/applications/#{@application.id}", method: "patch", local: true) do |f| %>
      <h4><%= f.label "ADD A PET TO YOUR APPLICATION:" %></h4>
      <p><%= f.text_field :search, placeholder: "Search by name" %></p><br>
      <p><%= f.submit "Search Pets" %></p>
+    <% end %>
     <% end %>
     <% if @pets %>
   <% @pets.each do |pet| %>
     <div id="pet-<%= pet.id %>">
     <h4><%= pet.name %></h4>
     <%= button_to "Adopt this Pet", "/applications/#{@application.id}/adopt?pet_id=#{pet.id}", method: :patch %>
-  <%else %>
-<% end %>
+  <%end %>
+  <% else %>
+  <%end %>
 </section>
-<% end %>

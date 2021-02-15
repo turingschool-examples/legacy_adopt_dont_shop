@@ -54,4 +54,23 @@ RSpec.describe 'Applications show page' do
     click_button("Adopt this Pet")
     expect(page).to have_link(pet4.name)
   end
+
+  describe "When I am on an applications show page" do
+  describe "I add a pet and complete description section" do
+    it "Taken back to apps show page after submiting" do
+      visit "/applications/#{@jordan.id}"
+
+      expect(@jordan.pets.count).to eq 1
+      within("#tell-us-why") do
+        expect(page).to have_button("Submit")
+      end
+      fill_in "description", with: "Multiple dog owner"
+      click_button("Submit")
+      expect(current_path).to eq("/applications/#{@jordan.id}")
+      expect(page).to have_content("Multiple dog owner")
+      expect(page).to have_content("Pending")
+      expect(page).to have_content(@pet1.name)
+      end
+    end
+  end
 end

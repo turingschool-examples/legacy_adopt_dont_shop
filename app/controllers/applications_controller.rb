@@ -7,9 +7,8 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     @pets = @application.pets
-    if params[:commit] == "Search"
-      @search_pets = Pet.search(params[:query])
-    end
+    @search_pets = Pet.search(params[:query])
+  
     if params[:commit] == "Adopt This Pet"
       @pet_to_adopt = Pet.find(params[:pet_id])
       @application.pets << @pet_to_adopt

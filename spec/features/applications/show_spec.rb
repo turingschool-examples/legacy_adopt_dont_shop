@@ -78,10 +78,8 @@ RSpec.describe "the applications show page" do
       visit "/applications/#{app.id}"
 
       expect(page).to_not have_content("Submit Application")
-      fill_in(:query, with: "Thor")
-      click_button("Search")
-
-      first(:button, "Adopt This Pet")
+      app.pets << @pet_1
+      visit "/applications/#{app.id}"
 
       expect(page).to have_content("Thor")
       expect(page).to have_content("Submit Application")

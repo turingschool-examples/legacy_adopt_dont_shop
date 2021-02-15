@@ -57,7 +57,7 @@ Use these guides: https://devcenter.heroku.com/articles/getting-started-with-rai
 - Create with directory that contains rails app  
   `heroku create`
 - Verify remote is running  
-  `git config --list grep | heroku`
+  `git config --list | grep heroku`
 - Deploy code **never push anything but main branch**  
   `git push heroku main`
 - If no errors, migrate database  
@@ -144,7 +144,7 @@ And under the search bar I see any Pet whose name matches my search
 ```
 
 ```
-[ ] done
+[x] done
 
 Add a Pet to an Application
 

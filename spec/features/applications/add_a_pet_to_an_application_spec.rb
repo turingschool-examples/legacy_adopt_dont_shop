@@ -12,7 +12,6 @@ RSpec.describe 'As a visitor' do
       @application_2 = create(:application)
       @application_1.pets << create(:pet)
       @application_1.pets << create(:pet)
-      @application_2.pets << create(:pet)
       @pet_1 = create(:pet)
       @pet_2 = create(:pet)
       @pet_3 = create(:pet)
@@ -24,41 +23,93 @@ RSpec.describe 'As a visitor' do
 
     end
 
-    describe "And that application has not been submitted," do
-      it "" do
-        #i need if that application has not been submitted lofic in my show page or show action
-        # require "pry"; binding.pry
-        visit "/applications/#{@application_1.id}"
+    describe "And i search a pet by name" do
+      it "see the names Pets that match my search" do
 
-        expect(page).to have_content("Add a Pet to this Application")
-        expect(page).to have_content("Search pets by name")
-      end
-
-      it "When I fill in this field with a Pet's name" do
         visit "/applications/#{@application_1.id}"
 
         fill_in "pet_search", :with => "pet"
         click_button("Submit")
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_content("#{@pet_1.name.capitalize}")
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
+        expect(page).to have_content("Add a Pet to this Application")
+        expect(page).to have_content("Search pets by name")
+      end
+
+      it 'Then next to each Pets name I see a button to "Adopt this Pet"' do
+
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to have_content("Add a Pet to this Application")
+        expect(page).to have_content("Search pets by name")
+        fill_in "pet_search", :with => "pet"
+        click_button("Submit")
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_content("#{@pet_1.name.capitalize}")
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
+        # expect(page).to have_button("Adopt this Pet")
+
+      end
+
+      it 'clicks one of these buttons and takes me back to applications show page' do
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to have_content("Add a Pet to this Application")
+        expect(page).to have_content("Search pets by name")
+        fill_in "pet_search", :with => "pet"
+        click_button("Submit")
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
+        within("#pet-#{@pet_1.id}") do
+        expect(page).to have_content("#{@pet_1.name.capitalize}")
+        expect(page).to have_button("Adopt this Pet")
+        end
+        within("#pet-#{@pet_2.id}") do
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
+        expect(page).to have_button("Adopt this Pet")
+        end
+        save_and_open_page
+        within("#pet-#{@pet_1.id}") do
+          click_button ("Adopt this Pet")
+        end
+      end
+
+      it "redirects me to the application page, and the adopted pet is added to the applicant list" do
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to have_content("Add a Pet to this Application")
+        expect(page).to have_content("Search pets by name")
+        fill_in "pet_search", :with => "pet"
+        click_button("Submit")
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
+        within("#pet-#{@pet_1.id}") do
+          expect(page).to have_content("#{@pet_1.name.capitalize}")
+          expect(page).to have_button("Adopt this Pet")
+        end
+        within("#pet-#{@pet_2.id}") do
+          expect(page).to have_content("#{@pet_2.name.capitalize}")
+          expect(page).to have_button("Adopt this Pet")
+        end
+        within("#pet-#{@pet_1.id}") do
+          expect(page).to have_button("Adopt this Pet")
+          click_button ("Adopt this Pet")
+        end
         save_and_open_page
         expect(current_path).to eq("/applications/#{@application_1.id}")
-        expect(page).to have_content("#{@pet_1.name}")
-        expect(page).to have_content("#{@pet_2.name}")
-        #expect specific section of the page to have content
-        # Then I am taken back to the application show page
-        # And under the search bar I see any Pet whose name matches my search
+        within("#adopted-pet-#{@pet_1.id}") do
+          expect(page).to have_content("#{@pet_1.name}")
+        end
       end
     end
   end
 end
 
-
-# Add a Pet to an Application
-#
-# As a visitor
-# When I visit an application's show page
+# As a
+# When I visit  application's show page
 # And I search for a Pet by name
 # And I see the names Pets that match my search
-# Then next to each Pet's name I see a button to "Adopt this Pet"
 # When I click one of these buttons
 # Then I am taken back to the application show page
 # And I see the Pet I want to adopt listed on this application

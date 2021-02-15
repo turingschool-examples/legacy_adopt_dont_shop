@@ -3,10 +3,12 @@ class ApplicationsController < ApplicationController
 
   def show
     find_application
-    if !params[:pet_search].nil?
+    if params[:pet_search]
       @pets = Pet.sort(params[:pet_search])
     end
-    # require "pry"; binding.pry
+    if params[:pet_id]
+      @application.add_pet(params[:pet_id])
+    end
   end
 
   def index

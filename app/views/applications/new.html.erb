@@ -1,22 +1,22 @@
-<h1>New Application</h1>
 <%= form_tag "/applications" do %>
+  <h2>New Application</h2>
   <%= label_tag :name %>
-  <%= text_field_tag :name  %><br>
+  <%= text_field_tag :name %><br>
 
   <%= label_tag :street_address %>
-  <%= text_field_tag :street_address  %><br>
+  <%= text_field_tag :street_address %><br>
 
-  <%= label_tag "City" %>
-  <%= text_field_tag :city  %><br>
+  <%= label_tag :city %>
+  <%= text_field_tag :city%><br>
 
-  <%= label_tag "State" %>
-  <%= text_field_tag :state  %><br>
+  <%= label_tag :state %>
+  <%= text_field_tag :state %><br>
 
-  <%= label_tag "Zip Code" %>
-  <%= number_field_tag :zip  %><br>
+  <%= label_tag :zip_code %>
+  <%= number_field_tag :zip_code%><br>
+  
+  <%= label_tag :description %>
+  <%= text_field_tag :description%><br>
 
-  <%= label_tag "Description:" %>
-  <%= text_field_tag :description %><br>
-
-  <h1><%= submit_tag 'Submit Application' %></h1>
-  <% end %>
+  <%= submit_tag 'Submit' %>
+<% end %>

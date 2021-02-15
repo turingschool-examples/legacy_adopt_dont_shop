@@ -17,6 +17,8 @@ RSpec.describe 'Pets index page' do
 
   click_on("Start an Application")
   visit "/applications/new"
+
+
   click_on("Submit")
 
   end

@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_02_13_221522) do
     t.string "state"
     t.integer "zip_code"
     t.string "description"
-    t.string "status"
+    t.string "status", default: "In Progress"
   end
 
   create_table "pet_applications", force: :cascade do |t|

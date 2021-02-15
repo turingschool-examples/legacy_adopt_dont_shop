@@ -17,3 +17,8 @@
     <%= f.submit "Adopt This Pet" %>
   <% end %>
 <% end %>
+<%= form_with class: "#{'application' if @application.status != 'In Progress' || @application.pets.count == 0}", method: :patch, local: :true do |f| %>
+  <%= f.label :description, "Why would you be a good home for these pets?" %>
+  <%= f.text_field :description, required: true %>
+  <%= f.submit "Submit Application" %>
+<% end %>

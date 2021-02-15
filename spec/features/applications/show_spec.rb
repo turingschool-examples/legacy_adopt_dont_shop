@@ -56,7 +56,7 @@ RSpec.describe 'Application show page' do
       expect(page).to_not have_content(@pet1.name)
       expect(page).to_not have_content(@pet2.name)
 
-      fill_in "Search", with: @pet1.name
+      fill_in "Search", with: "Thor"
       click_on "Search"
 
       expect(page).to have_content(@pet1.name)

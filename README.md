@@ -57,7 +57,7 @@ Use these guides: https://devcenter.heroku.com/articles/getting-started-with-rai
 - Create with directory that contains rails app  
   `heroku create`
 - Verify remote is running  
-  `git config --list grep | heroku`
+  `git config --list | grep heroku`
 - Deploy code **never push anything but main branch**  
   `git push heroku main`
 - If no errors, migrate database  
@@ -144,7 +144,7 @@ And under the search bar I see any Pet whose name matches my search
 ```
 
 ```
-[ ] done
+[x] done
 
 Add a Pet to an Application
 
@@ -159,7 +159,7 @@ And I see the Pet I want to adopt listed on this application
 ```
 
 ```
-[ ] done
+[x] done
 
 Submit an Application
 
@@ -177,7 +177,7 @@ And I do not see a section to add more pets to this application
 ```
 
 ```
-[ ] done
+[x] done
 
 No Pets on an Application
 
@@ -188,7 +188,7 @@ Then I do not see a section to submit my application
 ```
 
 ```
-[ ] done
+[x] done
 
 Partial Matches for Pet Names
 
@@ -200,7 +200,7 @@ For example, if I search for "fluff", my search would match pets with names "flu
 ```
 
 ```
-[ ] done
+[x] done
 
 Case Insensitive Matches for Pet Names
 

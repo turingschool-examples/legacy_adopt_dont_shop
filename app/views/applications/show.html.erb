@@ -1,7 +1,7 @@
 <a href="/applications">All Applications</a>
 
 <div class="Application Pet Search">
-  <% if @application.status == "Pending" %>
+  <% if @application.status == "In Progress" %>
     <h4>Add a Pet to this Application</h4>
     <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
       <%= form.label :query, "Search for pets by name:" %>
@@ -20,6 +20,17 @@
   <% end %>
 </div>
 
+<div class="app_info" id="submit_app">
+  <% if @application.pets.count > 0 && @application.status == "In Progress"%>
+  <h3>Submit Application</h3>
+    <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
+      <%= form.label :app_submission, "Why I would make a good owner for these pets:" %>
+      <%= form.text_field :app_submission %>
+      <%= form.submit "Submit Application" %>
+    <% end %>
+  <% end %>
+</div>
+
 <div class="app_info" id="personal_info">
   <h3>Name</h3>
   <p><%= @application.first_name %>
@@ -33,6 +44,7 @@
   <h4>Why I would make a good owner:</h4>
   <p><%= @application.description %></p>
 </div>
+
 <div class="app_info" id="app_pets">
   <h4>Pets I want to give a forever home:</h4>
   <% @pets.each do |pet| %>

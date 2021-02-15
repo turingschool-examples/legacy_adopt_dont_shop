@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
   def create
     application = Application.new(application_params)
     if application.save
-      application[:status] == 'In Progress' # not working.
+      # application[:status] == 'In Progress' # not working.
       redirect_to "/applications/#{application.id}"
     else
       flash[:alert] = "Form must be completed in order to submit the application. Please complete every field in the form."

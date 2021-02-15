@@ -1,7 +1,11 @@
-<h3><%= @application.name %></h3>
-  <p><%= @application.address %></p>
-    <p><%= @application.city %></p>
-    <p><%= @application.state %></p>
-    <p><%= @application.zip %></p>
-    <p><%= @application.description %></p>
-    <p><%= @application.status %></p>
+<h3>Here is the information you've provided</h3>
+  <p>NAME: <%= @application.name %></p>
+  <p>STREET ADDRESS: <%= @application.address %></p>
+  <p>CITY: <%= @application.city %></p>
+  <p>STATE: <%= @application.state %></p>
+  <p>ZIP: <%= @application.zip %></p>
+  <p>WHY DO YOU WANT TO ADOPT?<br>
+    <%= @application.description %></p>
+  <!-- <p>PETS YOU WANT TO APPLY FOR:<br> -->
+<!-- @application.pet_names -->
+  <p>YOUR APPLICATION STATUS: <%= @application.status %></p>

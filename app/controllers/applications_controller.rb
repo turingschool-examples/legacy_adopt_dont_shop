@@ -2,7 +2,11 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    @search = Pet.where(name: params[:search_pets])
+    if params.include?(:search_pets)
+      @search = Pet.where("lower(name) LIKE ?", "%#{params[:search_pets].downcase}%")
+    else
+      @search = []
+    end
   end
 
   def new
@@ -23,7 +27,6 @@ class ApplicationsController < ApplicationController
 
   def submit_app
     @application = Application.find(params[:id])
-    # binding.pry
     @application.assign_attributes(status: "Pending", description: params[:description])
     @application.save
     redirect_to "/applications/#{@application.id}"

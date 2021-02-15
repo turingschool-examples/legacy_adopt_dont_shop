@@ -28,16 +28,14 @@ RSpec.describe "Applications Show page", type: :feature do
         street_address: "1275 Birch Lane",
         city: "Denver",
         state: "CO",
-        zip: 80220,
-        description: "I love dogs",
+        zip: 80220
       )
       maddie = Application.create!(
         name: "Maddie Suter",
         street_address: "12 Birch Lane",
         city: "Denver",
         state: "CO",
-        zip: 80246,
-        description: "I love cats",
+        zip: 80246
       )
       ApplicationPet.create!(application: trevor, pet: rico)
       ApplicationPet.create!(application: trevor, pet: saki)
@@ -48,7 +46,6 @@ RSpec.describe "Applications Show page", type: :feature do
       expect(page).to have_content(trevor.city)
       expect(page).to have_content(trevor.state)
       expect(page).to have_content(trevor.zip)
-      expect(page).to have_content(trevor.description)
       expect(page).to have_content(rico.name)
       expect(page).to have_content(saki.name)
       expect(page).to have_content(trevor.status)
@@ -59,7 +56,6 @@ RSpec.describe "Applications Show page", type: :feature do
       expect(page).to have_content(maddie.city)
       expect(page).to have_content(maddie.state)
       expect(page).to have_content(maddie.zip)
-      expect(page).to have_content(maddie.description)
       expect(page).to have_content(saki.name)
       expect(page).to have_content(maddie.status)
     end
@@ -89,9 +85,7 @@ RSpec.describe "Applications Show page", type: :feature do
         street_address: "1275 Birch Lane",
         city: "Denver",
         state: "CO",
-        zip: 80220,
-        description: "I love dogs",
-        status: "In Progress"
+        zip: 80220
       )
       ApplicationPet.create!(application: trevor, pet: rico)
       ApplicationPet.create!(application: trevor, pet: saki)
@@ -119,9 +113,7 @@ RSpec.describe "Applications Show page", type: :feature do
         street_address: "1275 Birch Lane",
         city: "Denver",
         state: "CO",
-        zip: 80220,
-        description: "I love dogs",
-        status: "In Progress"
+        zip: 80220
       )
 
       visit "/applications/#{trevor.id}"
@@ -155,9 +147,7 @@ RSpec.describe "Applications Show page", type: :feature do
         street_address: "1275 Birch Lane",
         city: "Denver",
         state: "CO",
-        zip: 80220,
-        description: "I love dogs",
-        status: "In Progress"
+        zip: 80220
       )
 
       visit "/applications/#{trevor.id}"
@@ -167,6 +157,116 @@ RSpec.describe "Applications Show page", type: :feature do
       expect(trevor.pets).to include(rico)
       expect(page).to have_link("#{rico.name}", href: "/pets/#{rico.id}")
     end
+
+    it 'can submit an application' do
+      ddfl = Shelter.create!(
+        name: "Denver Dumb Friends League",
+        address: "123 Doggie Lane",
+        city: "Denver",
+        state: "CO",
+        zip: 80246
+      )
+      rico = ddfl.pets.create!(
+        name: "Rico",
+        approximate_age: 4,
+        description: "Staffordshire Terrier",
+        sex: "male"
+      )
+      saki = ddfl.pets.create!(
+        name: "Saki",
+        approximate_age: 5,
+        description: "mutt",
+        sex: "female"
+      )
+      trevor = Application.create!(
+        name: "Trevor Suter",
+        street_address: "1275 Birch Lane",
+        city: "Denver",
+        state: "CO",
+        zip: 80220
+      )
+
+      visit "/applications/#{trevor.id}"
+      fill_in "Search pets", with: "Rico"
+      click_on("search")
+      click_on("Adopt This Pet")
+      visit "/applications/#{trevor.id}"
+      fill_in "description", with: "I love Dogs"
+      click_on("submit")
+      expect(page).to_not have_selector("submit")
+      expect(page).to have_content(trevor.name)
+      expect(page).to have_content("Pending")
+      expect(page).to_not have_content("In Progress")
+    end
   end
 
+  it 'can find partial pet name matches' do
+    ddfl = Shelter.create!(
+      name: "Denver Dumb Friends League",
+      address: "123 Doggie Lane",
+      city: "Denver",
+      state: "CO",
+      zip: 80246
+    )
+    rico = ddfl.pets.create!(
+      name: "Rico",
+      approximate_age: 4,
+      description: "Staffordshire Terrier",
+      sex: "male"
+    )
+    ricoboy = ddfl.pets.create!(
+      name: "Ricoboy",
+      approximate_age: 4,
+      description: "Staffordshire Terrier",
+      sex: "male"
+    )
+    trevor = Application.create!(
+      name: "Trevor Suter",
+      street_address: "1275 Birch Lane",
+      city: "Denver",
+      state: "CO",
+      zip: 80220
+    )
+
+    visit "/applications/#{trevor.id}"
+    fill_in "Search pets", with: "Rico"
+    click_on("search")
+    expect(page).to have_content(rico.name)
+    expect(page).to have_content(ricoboy.name)
+  end
+
+  it 'can find a pet without being case sensitive' do
+    ddfl = Shelter.create!(
+      name: "Denver Dumb Friends League",
+      address: "123 Doggie Lane",
+      city: "Denver",
+      state: "CO",
+      zip: 80246
+    )
+    rico = ddfl.pets.create!(
+      name: "Rico",
+      approximate_age: 4,
+      description: "Staffordshire Terrier",
+      sex: "male"
+    )
+    ricoboy = ddfl.pets.create!(
+      name: "Ricoboy",
+      approximate_age: 4,
+      description: "Staffordshire Terrier",
+      sex: "male"
+    )
+    trevor = Application.create!(
+      name: "Trevor Suter",
+      street_address: "1275 Birch Lane",
+      city: "Denver",
+      state: "CO",
+      zip: 80220
+    )
+
+    visit "/applications/#{trevor.id}"
+    fill_in "Search pets", with: "RiCo"
+    click_on("search")
+    expect(page).to have_content(rico.name)
+    expect(page).to have_content(ricoboy.name)
+  end
 end

@@ -85,4 +85,15 @@ RSpec.describe 'Applications show page' do
       expect(page).not_to have_button("Submit Application")
     end
   end
+  it "I can search for pets by partial names" do
+    david = Application.create!({name: 'David', street: "101 new street", city: 'Aurora', state: 'CO', zip_code: 80017,
+                                        description: 'I love kittens', application_status: 'In Progress'})
+    pet4 = @shelter2.pets.create!(image:"", name: "Linel", description: "cat", approximate_age: 3, sex: "female")
+    visit "/applications/#{david.id}"
+    fill_in "search", with: "Lin"
+    click_button("Search Pets")
+    expect(page).to have_button("Adopt this Pet")
+    click_button("Adopt this Pet")
+    expect(page).to have_link(pet4.name)
+  end 
 end

@@ -46,14 +46,11 @@ RSpec.describe 'Application new page' do
     click_on('Submit')
 
     # expect(current_path).to eq("/applications/#{@application_1.id}")
-    expect(page).to have_content("Sally's application")
     expect(page).to have_content("Sally")
     expect(page).to have_content("234 Third Ave")
     expect(page).to have_content("Dallas")
     expect(page).to have_content("TX")
     expect(page).to have_content(88678)
-    expect(page).to have_content("I would be a great dog mom!")
-    # expect(page).to have_content("In Progress")
   end
 
   it 'gives error for incomplete application' do
@@ -66,7 +63,7 @@ RSpec.describe 'Application new page' do
     fill_in "zip", with: 88678
     fill_in "description", with: "I would be a great dog mom!"
 
-    click_on('Submit Application')
+    click_on('Submit')
 
     expect(current_path).to eq('/applications/new')
     expect(page).to have_content('Your application was not saved. Please fill in all application fields.')

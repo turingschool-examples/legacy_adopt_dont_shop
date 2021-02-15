@@ -9,4 +9,17 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
+
+  def self.search(search)
+    if search
+      pet = Pet.where("name ILIKE ?", "%#{search[:search]}%")
+      if pet
+        pet
+      else
+        Pet.all
+      end
+    else
+      Pet.all
+    end
+  end
 end

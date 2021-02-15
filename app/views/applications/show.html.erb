@@ -3,21 +3,39 @@
 <p>Address: <%= @application.address %></p>
 <p>City: <%= @application.city %></p>
 <p>State: <%= @application.state %></p>
-<p>Zip: <%= @application.zip %></p><br>
-<p>Description: <%= @application.description %></p><br>
-<br>
-<a href="/applications/<%= @application.id %>/edit">Edit Application</a>
+<p>Zip: <%= @application.zip %></p>
+
+<h4><a href="/applications/<%= @application.id %>/edit">Edit Application</a></h4>
 <%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
 
+<p>I would make a good home because: <%= @application.description %></p>
 
 <%= "Pets applied for:" %>
-<% @application.pet_applications.each do |application| %>
-  <%= link_to "#{application.pet.name}", "/pets/#{application.pet.id}" %>
+<% @application.pets.each do |pet| %>
+  <section id="pet-<%= pet.id %>">
+    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+  </section>
 <% end %>
 
-<%= form_tag "/applications" do %>
-  <h2>Why I would make a good owner:</h2>
-  <%= label_tag :description%>
-  <%= text_field_tag :description %><br>
-  <%= submit_tag 'Submit Application' %>
-<% end %>
+<!-- <p>Application status:  @application.pet_applications[status] %></p> -->
+<section id='add-a-pet'>
+  <h4>Add a pet to this application</h4>
+
+    <%= form_tag "/applications/#{@application.id}", method: :get, local: true do %>
+    <%= label_tag :search %>
+    <%= text_field_tag :search %><br>
+    <%= submit_tag "Search by Name" %>
+    <% end %>
+
+    <% if params[:search] %>
+      <h3>All pets matching search:</h3>
+      <ul>
+      <% @pets.each do |pet| %>
+        <li><%= link_to pet.name, "/pets/#{pet.id}"%>
+        <%= button_to 'Adopt this pet', "/pet_applications", method: :post, params:{pet_id: pet.id, application_id: @application.id} %>
+        </li><br>
+      <% end %>
+      </ul>
+    <% end %>
+
+</section>

@@ -1,0 +1,14 @@
+<h1> Admin Approval for Applications </h1>
+<h2>Applicant</h2>
+<ul>
+  <li>Name: <%= @application.name %></li>
+  <li>Address: <%= @application.street %></li>
+  <p><%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %> </p>
+  <li>Reason for Adoption: <%= @application.description %></li>
+  <li>Application Status: <%= @application.application_status %></li>
+</ul>
+
+<div class="adoption">Pets status
+<% @application.pets.each do |pet| %>
+  <p><%= pet.name %></p>
+<%end  %>

@@ -4,10 +4,10 @@ RSpec.describe "application new page" do
   before :each do
     @shelter = create(:shelter)
     @application = create(:application)
-    @pet_1 = create(:pet, shelter_id: @shelter.id)
+    @pet_1 = create(:pet, shelter_id: @shelter.id, name: "Thor")
     @pet_5 = create(:pet, shelter_id: @shelter.id)
     @pet_5 = create(:pet, shelter_id: @shelter.id)
-    @pet_5 = create(:pet, shelter_id: @shelter.id)
+    @pet_5 = create(:pet, shelter_id: @shelter.id, name "Thoraneous")
     @pet_5 = create(:pet, shelter_id: @shelter.id)
 
     @webpage = "/applications/new"
@@ -17,7 +17,7 @@ RSpec.describe "application new page" do
     describe  "should have a form to begin a new application" do
       it "should be able to fill out and submit the form" do
 
-        visit "/applications/new"
+        visit @webpage
 
         fill_in "first_name", with: "Mark"
         fill_in "last_name", with: "Germ"

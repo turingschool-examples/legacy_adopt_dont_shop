@@ -15,11 +15,13 @@ RSpec.describe "the applications show page" do
     @application.pets << @pet_3
     @application.pets << @pet_4
     @application.pets << @pet_5
+
+    @app_show_url = "/applications/#{@application.id}"
   end
 
   describe "should show the application and attributes" do
     it "name, address, description, and status " do
-      visit "/applications/#{@application.id}"
+      visit @app_show_url
 
       expect(page).to have_content(@application.first_name)
       expect(page).to have_content(@application.last_name)
@@ -32,7 +34,7 @@ RSpec.describe "the applications show page" do
     end
 
     it "should list and link to all pets associated with the application" do
-      visit "/applications/#{@application.id}"
+      visit @app_show_url
 
       expect(page).to have_content(@pet_1.name)
       expect(page).to have_content(@pet_2.name)
@@ -43,6 +45,23 @@ RSpec.describe "the applications show page" do
       click_on("#{@pet_1.name}")
 
       expect(current_path).to eq("/pets/#{@pet_1.id}")
+    end
+  end
+
+  describe "should be able to add pets to Pending applications" do
+    it "should be able to search and add pets" do
+
+      visit @app_show_url
+
+      expect(page).to have_content("In Progress")
+      expect(page).to have_content("Add a Pet to this Application")
+
+      fill_in("pet_search", with: "Thor")
+      click_button("submit")
+
+      expect(current_path).to eq (@app_show_url)
+      expect(page).to have_content("Thor")
+      expect(page).to have_content("Thoraneous")
     end
   end
 end

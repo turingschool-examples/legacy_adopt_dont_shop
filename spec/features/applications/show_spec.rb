@@ -37,10 +37,61 @@ RSpec.describe 'Application show page' do
     expect(page).to have_content("City: #{@application_1.city}")
     expect(page).to have_content("State: #{@application_1.state}")
     expect(page).to have_content("Zip: #{@application_1.zip}")
-    expect(page).to have_content("Description: #{@application_1.description}")
     expect(page).to have_content("Pets applied for:")
     @application_1.pets.each do |pet|
       expect(page).to have_content(pet.name)
+    end
+
+    expect(page).to have_content("I would be a great dog mom!")
+
+    # expect(page).to have_content("Application status: Pending")
+  end
+
+  it 'has search for pet feature and brings me to their page' do
+    visit "/applications/#{@application_1.id}"
+
+    within('#add-a-pet') do
+      expect(page).to have_content('Add a pet to this application')
+      expect(page).to have_button('Search')
+      expect(page).to_not have_content(@pet1.name)
+      expect(page).to_not have_content(@pet2.name)
+
+      fill_in "Search", with: @pet1.name
+      click_on "Search"
+
+      expect(page).to have_content(@pet1.name)
+      expect(page).to_not have_content(@pet2.name)
+    end
+  end
+
+  it 'can search for pet and add it to application' do
+    visit "/applications/#{@application_1.id}"
+
+    within('#add-a-pet') do
+      fill_in "Search", with: @pet1.name
+      click_on "Search"
+
+      expect(page).to have_content(@pet1.name)
+      expect(page).to have_button("Adopt this pet")
+
+      click_on "Adopt this pet"
+    end
+
+    expect(current_path).to eq("/applications/#{@application_1.id}")
+
+    within("#pet-#{@pet1.id}") do
+      expect(page).to have_content(@pet1.name)
+    end
+  end
+
+  it 'can search through pets with partial name' do
+    visit "/applications/#{@application_1.id}"
+
+    within('#add-a-pet') do
+      fill_in "Search", with: "Tho"
+      click_on "Search"
+
+      expect(page).to have_content(@pet1.name)
     end
   end
 end

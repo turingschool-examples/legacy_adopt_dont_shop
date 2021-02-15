@@ -1,3 +1,8 @@
+<% flash.each do |name, msg| %>
+  <h2><%= msg %></h2>
+<% end %>
+
+
 <%= form_tag "/applications" do %>
   <h2>Create a New Application</h2>
   <%= label_tag :name %>
@@ -12,5 +17,5 @@
   <%= text_field_tag :zip%><br>
   <%= label_tag :description%>
   <%= text_field_tag :description %><br>
-  <%= submit_tag 'Submit Application' %>
+  <%= submit_tag 'Submit' %>
 <% end %>

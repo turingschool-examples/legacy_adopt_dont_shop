@@ -5,12 +5,20 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @pets = Pet.search(params[:search])
+    
   end
 
   def create
-    # @application = Application.find(params[:application_id])
     @application = Application.create(application_params)
-    redirect_to "/applications/#{@application.id}"
+    if !@application.save
+      flash[:notice] = "Your application was not saved. Please fill in all application fields."
+      # render :new
+      redirect_to '/applications/new'
+    else @application.save
+      flash[:notice] = "Your has been saved!"
+      redirect_to "/applications/#{@application.id}"
+    end
   end
 
   private

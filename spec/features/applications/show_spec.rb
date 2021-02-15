@@ -22,7 +22,7 @@ RSpec.describe 'Application show page' do
                                          city: "Dallas",
                                          state: "TX",
                                          zip: 88678,
-                                         description: "I would be a great dog mom!", status: "Pending")
+                                         description: "I would be a great dog mom!", status: "In Progress")
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
   end
@@ -81,6 +81,28 @@ RSpec.describe 'Application show page' do
     within("#pet-section") do
       expect(page).to have_content(@pet1.name)
     end
+  end
+
+  it 'fill in description section and submit application' do
+    visit "/applications/#{@application_1.id}"
+
+    expect(@application_1.pets.length).to eq(2)
+
+    within('#add-description') do
+      expect(page).to have_button("Submit Application")
+      fill_in "description", with: "I would be a great dog mom!"
+      click_on("Submit Application")
+    end
+
+    expect(current_path).to eq("/applications/#{@application_1.id}")
+    expect(page).to have_content("Pending")
+
+    within("#pet-section") do
+      expect(page).to have_content(@pet1.name)
+      expect(page).to have_content(@pet2.name)
+    end
+
+    expect(page).to have_selector('#add-a-pet', visible: false)
   end
 
   it 'can search through pets with partial name' do

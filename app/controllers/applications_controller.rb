@@ -11,14 +11,22 @@ class ApplicationsController < ApplicationController
 
   def create
     @application = Application.create(application_params)
+    @application.update(status: "In Progress")
     if !@application.save
       flash[:notice] = "Your application was not saved. Please fill in all application fields."
-      # render :new
       redirect_to '/applications/new'
     else @application.save
-      flash[:notice] = "Your has been saved!"
       redirect_to "/applications/#{@application.id}"
     end
+  end
+
+  def update
+    @application = Application.find(params[:id])
+    @application.update({
+      description: params[:description],
+      status: "Pending"})
+
+    redirect_to "/applications/#{@application.id}"
   end
 
   private

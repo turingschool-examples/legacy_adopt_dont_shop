@@ -19,7 +19,8 @@
 </section>
 
 <section id='add-a-pet'>
-  <h4>Add a pet to this application</h4>
+  <% if @application.status == "In Progress" %>
+    <h4>Add a pet to this application</h4>
 
     <%= form_tag "/applications/#{@application.id}", method: :get, local: true do %>
     <%= label_tag :search %>
@@ -37,5 +38,15 @@
       <% end %>
       </ul>
     <% end %>
+  <% end %>
+</section>
 
+<section id='add-description'
+  <h4>How would you make a good home?</h4>
+  <%= form_tag "/applications/#{@application.id}", method: :patch, local: true do %>
+    <h5>Decription:</h5>
+    <%= label_tag :description%>
+    <%= text_field_tag :description %><br>
+    <%= submit_tag 'Submit Application' %>
+  <% end %>
 </section>

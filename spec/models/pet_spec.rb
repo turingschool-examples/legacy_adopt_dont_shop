@@ -41,4 +41,22 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  describe "class methods" do
+    describe "::search(search_terms)" do
+      it "should search all pets' names for the matching term" do
+        shelter = create(:shelter)
+        pet_1 = create(:pet, name: "Thor")
+        pet_2 = create(:pet, name: "Zues")
+        pet_3 = create(:pet, name: "Athena")
+        pet_4 = create(:pet, name: "Helena")
+        binding.pry
+
+        search_result = Pet.search("Thor")
+        binding.pry
+        expect(search_result).to eq(pet_1)
+        # expect(Pet.search("Ze")).to eq(pet_2)
+      end
+    end
+  end
 end

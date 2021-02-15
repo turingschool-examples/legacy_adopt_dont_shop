@@ -6,6 +6,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @pets = @application.pets
   end
 
   def new
@@ -25,6 +26,8 @@ class ApplicationsController < ApplicationController
 
     application.save
 
-    redirect_to "/applications/#{application.id}"
+    id = application.id
+
+    redirect_to "/applications/#{id}"
   end
 end

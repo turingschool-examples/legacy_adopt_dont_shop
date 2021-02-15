@@ -94,6 +94,8 @@ RSpec.describe "the applications show page" do
       expect(current_path).to eq (@app_show_url)
       expect(page).to have_content("Pending")
       expect(page).to have_content("Large yard and lots of love")
+      expect(page).to_not have_content("Add a Pet to this Application")
+      expect(page).to_not have_content("Submit Application")
     end
   end
 end

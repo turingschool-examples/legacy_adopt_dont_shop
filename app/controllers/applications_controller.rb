@@ -12,10 +12,16 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    Application.create(applications_params)
+    application = Application.new(applications_params)
 
-    redirect_to "/applications"
+    if application.save
+      redirect_to "/applications"
+    else
+      flash[:notice] = "Error: Required information missing."
+      render :new
+    end
   end
+
 
   private
   def applications_params

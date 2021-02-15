@@ -55,6 +55,7 @@ RSpec.describe 'Applications show page' do
     expect(page).to have_link(pet4.name)
   end
 
+# story test 7
   describe "When I am on an applications show page" do
   describe "I add a pet and complete description section" do
     it "Taken back to apps show page after submiting" do
@@ -62,15 +63,26 @@ RSpec.describe 'Applications show page' do
 
       expect(@jordan.pets.count).to eq 1
       within("#tell-us-why") do
-        expect(page).to have_button("Submit")
+        expect(page).to have_button("Submit Application")
       end
       fill_in "description", with: "Multiple dog owner"
-      click_button("Submit")
+      click_button("Submit Application")
       expect(current_path).to eq("/applications/#{@jordan.id}")
       expect(page).to have_content("Multiple dog owner")
       expect(page).to have_content("Pending")
       expect(page).to have_content(@pet1.name)
       end
+    end
+  end
+
+  #story test 8
+  it "I don't see any button to submit application or description if no pets are adopted" do
+    david = Application.create!({name: 'David', street: "101 new street", city: 'Aurora', state: 'CO', zip_code: 80017,
+                                          description: 'I love kittens', application_status: 'In Progress'})
+      visit "/applications/#{david.id}"
+      expect(david.pets.count).to eq 0
+      within("#tell-us-why") do
+      expect(page).not_to have_button("Submit Application")
     end
   end
 end

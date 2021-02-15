@@ -1,14 +1,14 @@
 <%= form_with model: @application, action:"/applications",local: true do |form| %>
   <p> Name: </p>
-  <%= form.text_field :name %>
+  <%= form.text_field :name, placeholder: "Enter Name" %>
     <p> Street: </p>
-  <%= form.text_field :street %>
+  <%= form.text_field :street, placeholder: "Enter Street Address" %>
     <p> City: </p>
-  <%= form.text_field :city %>
+  <%= form.text_field :city, placeholder: "Enter City" %>
     <p> State: </p>
-  <%= form.text_field :state %>
+  <%= form.text_field :state, placeholder: "Enter State"%>
     <p> ZipCode: </p>
-  <%= form.text_field :zip_code %>
+  <%= form.text_field :zip_code , placeholder: "Enter Zipcode" %>
   <p>Tell us why you would make a good home for these pets?</p>
     <p> Description: </p>
   <%= form.text_area :description, size: "70x5" %>

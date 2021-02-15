@@ -6,6 +6,21 @@
   <p>ZIP: <%= @application.zip %></p>
   <p>WHY DO YOU WANT TO ADOPT?<br>
     <%= @application.description %></p>
-  <!-- <p>PETS YOU WANT TO APPLY FOR:<br> -->
-<!-- @application.pet_names -->
   <p>YOUR APPLICATION STATUS: <%= @application.status %></p>
+
+  <section id='add_pets' style="<%= 'display:none' if !@application.pets.empty? %>" >
+
+    <h2>Add a Pet to this Application</h2>
+    <%= form_with url: "/applications/#{@application.id}/pets", local: true do |form| %>
+      <%= form.label "search pets by name:" %>
+      <%= form.search_field :pet_name %>
+      <%= form.submit "search" %>
+    <% end %>
+
+  </section>
+
+  <section>
+    <% @application.pets.each do |pet| %>
+      <%= pet.name %>
+    <% end  %>
+  </section>

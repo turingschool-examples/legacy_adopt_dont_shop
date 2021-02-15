@@ -35,11 +35,9 @@ RSpec.describe 'Applications show page' do
                                           description: 'I love kittens', application_status: 'In Progress'})
     pet4 = @shelter2.pets.create!(image:"", name: "Linel", description: "cat", approximate_age: 3, sex: "female")
     visit "/applications/#{david.id}"
-    expect(page).to have_content("Add a pet to your Application")
-    expect(page).to have_content("Search for your Pet by Name")
-
-    fill_in "Search for your Pet by Name", with: "#{pet4.name}"
-    click_on "Search"
+    expect(page).to have_content("Add a pet to your application:")
+    fill_in "search", with: "#{pet4.name}"
+    click_on "Search Pets"
 
     expect(current_path).to eq("/applications/#{david.id}")
     expect(page).to have_content("#{pet4.name}")

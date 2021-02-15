@@ -10,7 +10,7 @@ RSpec.describe "application new page" do
     @pet_5 = create(:pet, shelter_id: @shelter.id)
     @pet_5 = create(:pet, shelter_id: @shelter.id)
 
-    webpage = "/applications/new"
+    @webpage = "/applications/new"
   end
 
   describe "as a visitor" do
@@ -40,13 +40,12 @@ RSpec.describe "application new page" do
 
       it "should not be able to create an application with missing info" do
 
-        visit webpage
+        visit @webpage
 
         click_on "Submit"
 
-        expect(page).to have_content("Application not created: Require information missing.")
+        expect(page).to have_content("Application not created: Required information missing.")
         expect(page).to have_content("New Application Form")
-
       end
     end
   end

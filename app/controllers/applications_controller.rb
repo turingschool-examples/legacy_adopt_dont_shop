@@ -19,7 +19,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    new_params = application_params.merge({status: "Pending"})
+    new_params = application_params.merge({status: "In Progress"})
     application = Application.new(new_params)
     if application.save
       redirect_to "/applications/#{application.id}"
@@ -31,10 +31,9 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    application.update(application_params)
-binding.pry
+    application.update(description: params[:app_submission])
     if params[:commit] == "Submit Application"
-      application.update({status: "In Progress"})
+      application.update({status: "Pending"})
       redirect_to "/applications/#{application.id}"
     else
       redirect_to "/applications/#{application.id}"

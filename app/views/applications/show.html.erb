@@ -4,4 +4,16 @@
 <b>Pets on Application:</b> <% @application.pets.each do |pet| %>
   <a href="/pets/<%= pet.id %>"><%= pet.name %></a> ///
 <% end %> <br>
-<b>Status:</b> <%= @application.status %>
+<b>Status:</b> <%= @application.status %> <br><br>
+<%= form_with url: "/applications/#{@application.id}", method: :get, local: :true do |f| %>
+  <%= f.label :search_pets %>
+  <%= f.text_field :search_pets %>
+  <%= f.submit :search %>
+<% end %>
+<% @search.each do |pets| %>
+  <%= form_with url: "/applications/#{@application.id}", local: :true do |f|%>
+    <%= f.label "#{pets.name}" %>
+    <%= f.hidden_field :pet_id, value: "#{pets.id}" %>
+    <%= f.submit "Adopt This Pet" %>
+  <% end %>
+<% end %>

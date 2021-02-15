@@ -67,8 +67,24 @@ RSpec.describe "the applications show page" do
 
       first(:button, "Adopt This Pet")
       expect(current_path).to eq (@app_show_url)
-  
+
       expect(page).to have_content("Thor")
+    end
+  end
+
+  describe "should be able to submit an application" do
+    it "submit option in view once more than 1 pet added to app" do
+      app = create(:application, status: "Pending")
+      visit "/applications/#{app.id}"
+
+      expect(page).to_not have_content("Submit Application")
+      fill_in(:query, with: "Thor")
+      click_button("Search")
+
+      first(:button, "Adopt This Pet")
+
+      expect(page).to have_content("Thor")
+      expect(page).to have_content("Submit Application")
     end
   end
 end

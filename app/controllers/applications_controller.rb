@@ -30,10 +30,11 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    @application = Application.find(params[:id])
-    @application.update(application_params)
+    application = Application.find(params[:id])
+    application.update(application_params)
+binding.pry
     if params[:commit] == "Submit Application"
-      @application.update({status: "In Progress"})
+      application.update({status: "In Progress"})
       redirect_to "/applications/#{application.id}"
     else
       redirect_to "/applications/#{application.id}"

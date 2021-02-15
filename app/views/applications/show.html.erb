@@ -4,20 +4,20 @@
 <p>City: <%= @application.city %></p>
 <p>State: <%= @application.state %></p>
 <p>Zip: <%= @application.zip %></p>
+<p>Application status: <%= @application.status %></p>
 
 <h4><a href="/applications/<%= @application.id %>/edit">Edit Application</a></h4>
 <%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
 
 <p>I would make a good home because: <%= @application.description %></p>
 
+<section id="pet-section">
 <%= "Pets applied for:" %>
 <% @application.pets.each do |pet| %>
-  <section id="pet-<%= pet.id %>">
     <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-  </section>
 <% end %>
+</section>
 
-<!-- <p>Application status:  @application.pet_applications[status] %></p> -->
 <section id='add-a-pet'>
   <h4>Add a pet to this application</h4>
 

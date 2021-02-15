@@ -22,9 +22,9 @@ RSpec.describe 'Application show page' do
                                          city: "Dallas",
                                          state: "TX",
                                          zip: 88678,
-                                         description: "I would be a great dog mom!")
-    PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id, status: "Pending")
-    PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id, status: "Pending")
+                                         description: "I would be a great dog mom!", status: "Pending")
+    PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
+    PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
   end
 
   it 'displays application w/ id and all attributes' do
@@ -37,14 +37,13 @@ RSpec.describe 'Application show page' do
     expect(page).to have_content("City: #{@application_1.city}")
     expect(page).to have_content("State: #{@application_1.state}")
     expect(page).to have_content("Zip: #{@application_1.zip}")
+    expect(page).to have_content("Application status: #{@application_1.status}")
     expect(page).to have_content("Pets applied for:")
     @application_1.pets.each do |pet|
       expect(page).to have_content(pet.name)
     end
 
     expect(page).to have_content("I would be a great dog mom!")
-
-    # expect(page).to have_content("Application status: Pending")
   end
 
   it 'has search for pet feature and brings me to their page' do
@@ -68,7 +67,7 @@ RSpec.describe 'Application show page' do
     visit "/applications/#{@application_1.id}"
 
     within('#add-a-pet') do
-      fill_in "Search", with: @pet1.name
+      fill_in "Search", with: "Thor"
       click_on "Search"
 
       expect(page).to have_content(@pet1.name)
@@ -79,7 +78,7 @@ RSpec.describe 'Application show page' do
 
     expect(current_path).to eq("/applications/#{@application_1.id}")
 
-    within("#pet-#{@pet1.id}") do
+    within("#pet-section") do
       expect(page).to have_content(@pet1.name)
     end
   end
@@ -89,6 +88,17 @@ RSpec.describe 'Application show page' do
 
     within('#add-a-pet') do
       fill_in "Search", with: "Tho"
+      click_on "Search"
+
+      expect(page).to have_content(@pet1.name)
+    end
+  end
+
+  it 'can search through pets with case insensitive' do
+    visit "/applications/#{@application_1.id}"
+
+    within('#add-a-pet') do
+      fill_in "Search", with: "THO"
       click_on "Search"
 
       expect(page).to have_content(@pet1.name)

@@ -22,9 +22,10 @@ RSpec.describe 'Application new page' do
                                          city: "Dallas",
                                          state: "TX",
                                          zip: 88678,
-                                         description: "I would be a great dog mom!")
-    PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id, status: "Pending")
-    PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id, status: "Pending")
+                                         description: "I would be a great dog mom!",
+                                         status: "Pending")
+    PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
+    PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
   end
 
   it "can create new application from pets index" do

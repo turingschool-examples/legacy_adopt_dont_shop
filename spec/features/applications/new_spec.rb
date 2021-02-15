@@ -26,6 +26,12 @@ RSpec.describe "the Application's New page" do
         expect(page).to have_content("CO")
         expect(page).to_not have_content("123 Main St")
       end
+      it "can redirect to new page if form empty" do
+        visit "/applications/new"
+
+        click_on "Submit"
+        expect(current_path).to eq("/applications")
+      end
     end
   end
 end

@@ -199,4 +199,39 @@ RSpec.describe "Applications Show page", type: :feature do
       expect(page).to_not have_content("In Progress")
     end
   end
+
+  it 'can find partial pet name matches' do
+    ddfl = Shelter.create!(
+      name: "Denver Dumb Friends League",
+      address: "123 Doggie Lane",
+      city: "Denver",
+      state: "CO",
+      zip: 80246
+    )
+    rico = ddfl.pets.create!(
+      name: "Rico",
+      approximate_age: 4,
+      description: "Staffordshire Terrier",
+      sex: "male"
+    )
+    ricoboy = ddfl.pets.create!(
+      name: "Ricoboy",
+      approximate_age: 4,
+      description: "Staffordshire Terrier",
+      sex: "male"
+    )
+    trevor = Application.create!(
+      name: "Trevor Suter",
+      street_address: "1275 Birch Lane",
+      city: "Denver",
+      state: "CO",
+      zip: 80220
+    )
+
+    visit "/applications/#{trevor.id}"
+    fill_in "Search pets", with: "Rico"
+    click_on("search")
+    expect(page).to have_content(rico.name)
+    expect(page).to have_content(ricoboy.name)
+  end
 end

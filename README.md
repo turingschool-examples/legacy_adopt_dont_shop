@@ -115,7 +115,7 @@ And I see an indicator that this application is "In Progress"
 ```
 
 ```
-[ ] done
+[x] done
 
 Starting an Application, Form not Completed
 

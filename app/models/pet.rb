@@ -10,4 +10,9 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
+
+  def self.search(input)
+    where(name: input)
+    # require "pry"; binding.pry
+  end
 end

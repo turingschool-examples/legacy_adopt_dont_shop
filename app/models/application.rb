@@ -5,7 +5,6 @@ class Application < ApplicationRecord
                         :state,
                         :zip_code,
                         :description_of_applicant,
-                        :pet_name,
                         :application_status
 
   has_many :application_pets

@@ -1,7 +1,9 @@
 class ApplicationsController < ApplicationController
   def show
+    # require "pry"; binding.pry
+    @pets = Pet.search(params[:search]) if params[:search]
     @application = Application.find(params[:id])
-    @applications = Application.all
+    # @applications = Application.all
   end
 
   def new

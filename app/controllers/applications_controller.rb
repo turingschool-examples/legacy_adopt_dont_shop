@@ -13,10 +13,14 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.new(application_params)
-    application.application_status = "In Progress"
-    application.save
-    redirect_to "/applications/#{application.id}"
+    @application = Application.new(application_params)
+    @application.application_status = "In Progress"
+      if @application.save
+        redirect_to "/applications/#{@application.id}"
+      else
+        flash[:error] = "Application not Accepted: Missing Required Information"
+        redirect_to '/applications/new'
+    end
   end
 
   private

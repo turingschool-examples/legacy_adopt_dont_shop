@@ -7,6 +7,13 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     @pets = @application.pets
+    if params[:commit] == "Search"
+      @search_pets = Pet.search(params[:query])
+    end
+    if params[:commit] == "Adopt This Pet"
+      @pet_to_adopt = Pet.find(params[:pet_id])
+      @application.pets << @pet_to_adopt
+    end
   end
 
   def new
@@ -21,14 +28,12 @@ class ApplicationsController < ApplicationController
       state: params[:state],
       zip: params[:zip],
       description: "",
-      status: "Pending",
-    })
-
+      status: "Pending"})
     if application.save
       redirect_to "/applications/#{application.id}"
     else
       flash[:notice] = "Application not created: Required information missing."
-      render :new 
+      render :new
     end
   end
 end

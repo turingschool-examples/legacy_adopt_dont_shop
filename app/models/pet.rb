@@ -10,4 +10,12 @@ class Pet < ApplicationRecord
             }
 
   enum sex: [:female, :male]
+
+  def self.search(search_terms)
+    if search_terms
+      @pets = Pet.where("lower(name) LIKE ?", "%#{search_terms.downcase}%")
+    else
+      @pets = Pet.all
+    end
+  end
 end

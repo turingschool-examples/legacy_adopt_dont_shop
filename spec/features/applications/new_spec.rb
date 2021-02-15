@@ -5,10 +5,6 @@ RSpec.describe "application new page" do
     @shelter = create(:shelter)
     @application = create(:application)
     @pet_1 = create(:pet, shelter_id: @shelter.id, name: "Thor")
-    @pet_5 = create(:pet, shelter_id: @shelter.id)
-    @pet_5 = create(:pet, shelter_id: @shelter.id)
-    @pet_5 = create(:pet, shelter_id: @shelter.id, name "Thoraneous")
-    @pet_5 = create(:pet, shelter_id: @shelter.id)
 
     @webpage = "/applications/new"
   end

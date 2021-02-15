@@ -8,3 +8,18 @@
     <h3> Pet Names: <%=link_to "#{pet.name}", "/pets/#{pet.id}"%></h3>
   </section>
 <% end %>
+<section class="find-pet">
+  <%= form_with(url: "/applications/#{@application.id}", method: "patch", local: true) do |f| %>
+     <h4><%= f.label "ADD A PET TO YOUR APPLICATION:" %></h4>
+     <p><%= f.text_field :search, placeholder: "Search by name" %></p><br>
+     <p><%= f.submit "Search Pets" %></p>
+    <% end %>
+    <% if @pets %>
+  <% @pets.each do |pet| %>
+    <div id="pet-<%= pet.id %>">
+    <h4><%= pet.name %></h4>
+    <%= button_to "Adopt this Pet", "/applications/#{@application.id}/adopt?pet_id=#{pet.id}", method: :patch %>
+  <%else %>
+<% end %>
+</section>
+<% end %>

@@ -41,4 +41,13 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  it 'Can search by name for pets' do
+     shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+     pet = shelter.pets.create!(sex: :female, name: "Fluffy", approximate_age: 3, description: 'super cute')
+     pet2 = shelter.pets.create!(sex: :female, name: "Doge", approximate_age: 3, description: 'super cute')
+     search = {search: "Fluffy"}
+     expected = Pet.search(search)
+     expect(expected.first.name).to eq("Fluffy")
+  end
 end

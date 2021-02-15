@@ -1,7 +1,7 @@
 <a href="/applications">All Applications</a>
 
 <div class="Application Pet Search">
-  <% if @application.status == "Pending" %>
+  <% if @application.status == "In Progress" %>
     <h4>Add a Pet to this Application</h4>
     <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
       <%= form.label :query, "Search for pets by name:" %>

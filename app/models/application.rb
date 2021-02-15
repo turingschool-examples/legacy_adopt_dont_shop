@@ -10,7 +10,7 @@ class Application < ApplicationRecord
   end
 
   def match_pets(name)
-      Pet.where("name LIKE ?", "%#{name}%")
+      Pet.where("lower(name) LIKE ?", "%#{name.downcase}%")
   end
 
   def pets_on_app(id)

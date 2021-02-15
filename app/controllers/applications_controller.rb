@@ -13,6 +13,12 @@ class ApplicationsController < ApplicationController
     @pet_apps = @application.pets_on_app(params[:id])
   end
 
+  def submit 
+    @application = Application.find(params[:id])
+    @application.update(description: params[:description], status: "Pending")
+    redirect_to  "/applications/#{params[:id]}"
+  end
+
   private 
   def application_params 
     params.permit(:name, :street, :city, :state, :zip)

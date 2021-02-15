@@ -20,7 +20,7 @@
   <% end %>
 </div>
 
-<div class="Application Info Show">
+<div class="app_info" id="personal_info">
   <h3>Name</h3>
   <p><%= @application.first_name %>
   <%= @application.last_name %></p>
@@ -32,6 +32,8 @@
   <%= @application.zip %></p>
   <h4>Why I would make a good owner:</h4>
   <p><%= @application.description %></p>
+</div>
+<div class="app_info" id="app_pets">
   <h4>Pets I want to give a forever home:</h4>
   <% @pets.each do |pet| %>
   <a href="/pets/<%= pet.id %>"><%= pet.name %></a>

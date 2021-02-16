@@ -4,27 +4,28 @@
 <p>City: <%= @application.city %></p>
 <p>State: <%= @application.state %></p>
 <p>Zip: <%= @application.zip %></p>
+<p>Application status: <%= @application.status %></p>
 
 <h4><a href="/applications/<%= @application.id %>/edit">Edit Application</a></h4>
 <%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
 
 <p>I would make a good home because: <%= @application.description %></p>
 
+<section id="pet-section">
 <%= "Pets applied for:" %>
 <% @application.pets.each do |pet| %>
-  <section id="pet-<%= pet.id %>">
     <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-  </section>
 <% end %>
+</section>
 
-<!-- <p>Application status:  @application.pet_applications[status] %></p> -->
 <section id='add-a-pet'>
-  <h4>Add a pet to this application</h4>
+  <% if @application.status == "In Progress" %>
+    <h4>Add a pet to this application</h4>
 
-    <%= form_tag "/applications/#{@application.id}", method: :get, local: true do %>
-    <%= label_tag :search %>
-    <%= text_field_tag :search %><br>
-    <%= submit_tag "Search by Name" %>
+    <%= form_with(url: "/applications/#{@application.id}", method: :get, local: true) do |f| %>
+    <%= f.label :search %>
+    <%= f.text_field :search %><br>
+    <%= f.submit "Search by Name" %>
     <% end %>
 
     <% if params[:search] %>
@@ -37,5 +38,18 @@
       <% end %>
       </ul>
     <% end %>
+  <% end %>
+</section>
 
+<section id='add-description'
+<% if !@application.pets.empty? %>
+  <h4>How would you make a good home?</h4>
+  <%= form_with(url: "/applications/#{@application.id}", method: :patch, local: true) do |f| %>
+    <h5>Description:</h5>
+    <%= f.label :description%>
+    <%= f.text_field :description %><br>
+    <%= f.submit 'Submit Application' %>
+  <% end %>
+  <% else %>
+<% end %>
 </section>

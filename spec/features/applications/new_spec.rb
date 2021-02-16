@@ -22,9 +22,9 @@ RSpec.describe 'Application new page' do
                                          city: "Dallas",
                                          state: "TX",
                                          zip: 88678,
-                                         description: "I would be a great dog mom!")
-    PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id, status: "Pending")
-    PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id, status: "Pending")
+                                         status: "In Progress")
+    PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
+    PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
   end
 
   it "can create new application from pets index" do
@@ -41,16 +41,15 @@ RSpec.describe 'Application new page' do
     fill_in "city", with: "Dallas"
     fill_in "state", with: "TX"
     fill_in "zip", with: 88678
-    fill_in "description", with: "I would be a great dog mom!"
 
     click_on('Submit')
 
-    # expect(current_path).to eq("/applications/#{@application_1.id}")
     expect(page).to have_content("Sally")
     expect(page).to have_content("234 Third Ave")
     expect(page).to have_content("Dallas")
     expect(page).to have_content("TX")
     expect(page).to have_content(88678)
+    expect(page).to have_content("In Progress")
   end
 
   it 'gives error for incomplete application' do
@@ -61,7 +60,6 @@ RSpec.describe 'Application new page' do
     fill_in "city", with: ""
     fill_in "state", with: "TX"
     fill_in "zip", with: 88678
-    fill_in "description", with: "I would be a great dog mom!"
 
     click_on('Submit')
 

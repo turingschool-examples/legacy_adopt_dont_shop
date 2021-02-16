@@ -3,23 +3,26 @@ class Pet < ApplicationRecord
   has_many :pet_applications
   has_many :applications, through: :pet_applications
   validates_presence_of :name, :description, :approximate_age, :sex
-
   validates :approximate_age, numericality: {
               greater_than_or_equal_to: 0
             }
-
   enum sex: [:female, :male]
 
   def self.search(search)
-    if search
-      pet = Pet.where("name ILIKE ?", "%#{search[:search]}%")
-      if pet
-        pet
-      else
-        Pet.all
-      end
-    else
-      Pet.all
-    end
+    # if search
+    key = "%#{search}%".downcase
+    where("LOWER(name) ILIKE :search", search: key)
+    #   if pet
+    #     pet
+    #   else
+    #     Pet.all
+    #   end
+    # else
+    #   Pet.all
+    # end
+  end
+
+  def self.average_age
+    average(:approximate_age)
   end
 end

@@ -4,4 +4,5 @@ class Shelter < ApplicationRecord
   def self.sort_alpha
     order(:name).reverse
   end
+
 end

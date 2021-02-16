@@ -1,5 +1,22 @@
 <h1><%= @application.name %></h1>
-
+<article class="">
+  <h3>Add a Pet to this Application</h3>
+  <%= form_with url: "/applications/#{@application.id}", local: true, method: :get do |form| %>
+  <%= form.label :pet_name %>
+  <%= form.text_field :pet_name %>
+  <%= form.submit 'Submit' %>
+  <% end %>
+</article>
+<article>
+  <% if @pets_search %>
+    <% @pets_search.each do |pet| %>
+      <h4>Names Found :</h4>
+      <p><%= pet.name %></p>
+      <h4>Pet ID :</h4>
+      <p><%= pet.id %></p>
+    <% end %>
+  <% end %>
+</article>
 <article class="">
   <h3>Address :</h3>
   <p><%= @application.address %></p>

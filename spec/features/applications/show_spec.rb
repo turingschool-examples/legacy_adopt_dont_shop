@@ -20,5 +20,21 @@ RSpec.describe "Application show page", type: :feature do
         expect(page).to have_content(@application1.status)
       end
     end
+
+    describe "it has section to add pet to application" do
+      it "returns a list of pets by searching a name" do
+        visit "/applications/#{@application1.id}"
+        shelter = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
+        pet = shelter.pets.create!(image:"", name: "Sparky", description: "dog", approximate_age: 2, sex: "male")
+
+        expect(page).to have_content("Add a Pet to this Application")
+        fill_in "pet_name", with: "Sparky"
+        click_on "Submit"
+        expect(current_path).to eq("/applications/#{@application1.id}")
+        expect(page).to have_content("Sparky")
+        expect(page).to_not have_content("Thor")
+      end
+    end
+
   end
 end

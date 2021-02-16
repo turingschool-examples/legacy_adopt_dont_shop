@@ -41,4 +41,15 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  describe "class methods" do
+    describe "::application_search" do
+      it "returns list of pets with matching name" do
+        shelter = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
+        pet = shelter.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
+
+        expect(Pet.application_search("Thor").first).to eq(pet)
+      end
+    end
+  end
 end

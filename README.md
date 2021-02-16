@@ -32,6 +32,7 @@ During your Check In, you should be prepared to review your database schema for 
 During your evaluation, you will present your project and discuss each of the categories in the rubric above. Specifically, you should be prepared to:
 
 1. Show your fully updated project board and discuss what your were able to complete on the project.
+1. Show your app working on Heroku
 1. Show your routes file, discuss the RESTfulness of your routes, and defend any non-restful routes
 1. Show examples of where you used ActionView Helpers to create a form, a link, and a button.
 1. Show an example of using a partial to DRY up your views

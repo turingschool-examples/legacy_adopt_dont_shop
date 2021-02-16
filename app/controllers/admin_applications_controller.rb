@@ -11,6 +11,7 @@ class AdminApplicationsController < ApplicationController
     if params[:commit] == "Approve this Pet"
       @pet_approved = Pet.find(params[:pet_id])
       ApplicationPet.approve(@pet_approved.id, @application.id)
+      @pet_approved.update(adoptable: false)
     end
     if params[:commit] == "Reject this Pet"
       @pet_approved = Pet.find(params[:pet_id])

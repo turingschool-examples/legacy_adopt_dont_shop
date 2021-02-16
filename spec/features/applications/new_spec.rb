@@ -13,4 +13,12 @@ RSpec.describe 'New Application Page', type: :feature do
     click_on 'Save'
     expect(current_path).to eq("/applications/#{(Application.where(name: "Trevor Suter")).ids.first}")
   end
+
+  it 'cant create a new application without all required fields' do
+    visit '/applications/new'
+
+    click_on 'Save'
+    expect(page).to have_content("Application not created: Required information missing.")
+    expect(page).to have_button('Save')
+  end
 end

@@ -1,0 +1,3 @@
+class UserApplication < ApplicationRecord
+
+end  

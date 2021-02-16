@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_174915) do
+ActiveRecord::Schema.define(version: 2021_02_12_201734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2020_11_09_174915) do
     t.string "city"
     t.string "state"
     t.integer "zip"
+  end
+
+  create_table "user_applications", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.text "description"
+    t.string "status"
+    t.integer "zip_code"
   end
 
   add_foreign_key "pets", "shelters"

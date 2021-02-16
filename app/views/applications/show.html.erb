@@ -1,7 +1,29 @@
 <h1>Name: <%= @application.name %></h1>
 <h3>Address: <%= "#{@application.street}, #{@application.city}, #{@application.state}, #{@application.zip}" %></h3>
 <h3>Description:</h3>
-<p> <%= @application.description %></p>
 <h3>Pets:</h3>
-<p>List of Pet names (with links) goes here</p>
+<div class="application_pets"> <% @application_pets.each do |ap| %>
+<% pet = Pet.find(ap.pet_id) %>
+  <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h3>
+  <%end%></div>
 <h3>Status: <%= @application.status %></h3>
+
+<% if @application_pets.count >= 1 && @application.status == "Pending" %>
+<%= form_with url: "/" %>
+
+<% end %>
+
+
+<% if @application.status == "Pending" %>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+    <h3><%= form.label :Search_pets %> <%= form.text_field :search %></h3>
+    <%= form.submit :Search %>
+  <%end%>
+
+  <% if @available_pets %>
+    <% @available_pets.each do |pet|%>
+
+      <h3><%= pet.name %> <%= link_to "Adopt this Pet", "/applications/#{@application.id}/add_pet?search=#{params[:search]};pet_id=#{pet.id}", id: "add_pet_#{pet.id}", method: :post %></h3>
+    <%end%>
+  <%end%>
+<%end%>

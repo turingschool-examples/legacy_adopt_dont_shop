@@ -11,4 +11,9 @@
 <div class="adoption">Pets status
 <% @application.pets.each do |pet| %>
   <p><%= pet.name %></p>
-<%end  %>
+  <% if pet.adoptable == true %>
+  <p> <%= button_to "Approve Application", "/admin/applications/#{@application.id}?approve=#{pet.id}", method: :post %></p>
+  <% else %>
+    <p><%= @application.application_status %></p>
+  <%end  %>
+<%end %>

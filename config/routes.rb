@@ -35,4 +35,5 @@ Rails.application.routes.draw do
 
   # admin applications routes
   get "/admin/applications/:id", to: "admin_applications#show"
+  post "/admin/applications/:id", to: "admin_applications#status"
 end

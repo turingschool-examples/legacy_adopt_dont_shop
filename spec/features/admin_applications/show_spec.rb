@@ -14,7 +14,7 @@ RSpec.describe "the ADMIN applications show page" do
     @application.pets << @pet_2
     @application.pets << @pet_4
 
-    @admin_app_show = "admin/applications/#{@application.id}"
+    @admin_app_show = "/admin/applications/#{@application.id}"
   end
 
   describe "should show the application and attributes" do
@@ -43,25 +43,25 @@ RSpec.describe "the ADMIN applications show page" do
     end
   end
 
-  describe "should be able to approve an application" do
-    it "should be able to approve a pet on the application" do
-      visit @admin_app_show
+  describe "should be able to change the pet status on an application" do
+    it "can approve a pet on the application" do
+      visit "/admin/applications/#{@application.id}"
 
-      expect(page).to have_content("Approve for Adoption")
-      first(:link).click_link("Approve for Adoption")
+      expect(page).to have_button("Approve this Pet")
+      first(:button, "Approve this Pet").click
 
-      expect(current_pathpage).to eq(@admin_app_show)
+      expect(current_path).to eq(@admin_app_show)
       expect(page).to have_content("APPROVED!")
     end
 
-    it "should be able to reject a pet on the application" do
-      visit @admin_app_show
+    it "can reject a pet on the application" do
+      visit "/admin/applications/#{@application.id}"
 
-      expect(page).to have_content("Approve for Adoption")
-      first(:link).click_link("Reject")
+      expect(page).to have_button("Approve this Pet")
+      first(:button, "Reject this Pet").click
 
       expect(current_path).to eq(@admin_app_show)
-      expect(page).to have_content("Rejected!")
+      expect(page).to have_content("Rejected")
     end
   end
 end

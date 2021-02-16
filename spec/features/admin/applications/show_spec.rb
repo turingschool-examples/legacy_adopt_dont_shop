@@ -23,6 +23,7 @@ RSpec.describe 'When I visit an admin application show page' do
         expect(page).to have_content(@pet1.name)
         expect(page).to have_content(@pet2.name)
         expect(page).to have_content(@pet3.name)
+        expect(page).to have_button("approve")
       end
     end
   end

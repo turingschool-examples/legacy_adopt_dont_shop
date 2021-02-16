@@ -14,6 +14,7 @@
   <% @application.pets.each do |pet| %>
     <%= link_to pet.name, "/pets/#{pet.id}" %>
   <% end %>
+
   <% if @application.application_status == "In Progress" %>
     <section id='<%= "application-#{@application.id}" %>'>
       <h3>Add a Pet to this Application</h3>
@@ -23,7 +24,7 @@
         <%= form.submit "Search" %>
       <% end %>
     </section>
-    
+
     <%if @searched_pets %>
       <h3>Pet Name Matches:</h3>
       <% @searched_pets.each do |pet| %>
@@ -34,14 +35,14 @@
   <% end %>
 
   <% if @application.pets.length > 0 %>
-  <section id='submit'>
-    <h3>Why I would make a good owner for these pet(s):</h3>
-    <%= form_with url:"/applications/#{@application.id}", method: :patch, local: true do |form| %>
-      <%= form.label :case_for_adoption %>
-      <%= form.text_area :case_for_adoption %>
-      <%= form.hidden_field :application_status, value: :pending  %>
-      <%= form.submit "Submit" %>
-    <% end %>
+    <section id='submit'>
+      <h3>Why I would make a good owner for these pet(s):</h3>
+      <%= form_with url:"/applications/#{@application.id}", method: :patch, local: true do |form| %>
+        <%= form.label :case_for_adoption %>
+        <%= form.text_area :case_for_adoption %>
+        <%= form.hidden_field :application_status, value: :pending  %>
+        <%= form.submit "Submit" %>
+      <% end %>
+    </section>
   <% end %>
-  </section>
 </div>

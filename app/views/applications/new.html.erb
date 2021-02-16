@@ -1,0 +1,9 @@
+<%= form_with url: "/applications/create", method: :post, local: true do |form|%>
+  <p><%= form.label :Name %> <%= form.text_field :name %><br>
+    <%= form.label :Street_address %> <%= form.text_field :street %><br>
+    <%= form.label :City %> <%= form.text_field :city %><br>
+    <%= form.label :State %> <%= form.text_field :state %><br>
+    <%= form.label :Zipcode %> <%= form.text_field :zip %><br>
+    Please provide a breif description of why you would be a good home: <%= form.text_field :description %> </p>
+  <p><%= form.submit :submit %></p>
+<%end%>

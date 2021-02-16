@@ -1,0 +1,8 @@
+class AddClumnsToApplications < ActiveRecord::Migration[5.2]
+  def change
+    add_column :applications, :city, :string
+    add_column :applications, :state, :string
+    add_column :applications, :zip, :string
+    rename_column :applications, :address, :street
+  end
+end

@@ -95,4 +95,14 @@ RSpec.describe "the Application show page" do
     expect(page).to_not have_content(@pet_3.name)
     expect(page).to_not have_content("Add a Pet to this Application")
   end
+
+  it "cannot submit an application with no pets added to the application" do
+    @application.pets.destroy_all
+    visit "/applications/#{@application.id}"
+
+
+    expect(page).to_not have_content("Why I would make a good owner for these pet(s)")
+    expect(page).to_not have_button("Submit")
+    expect(page).to have_content("In Progress")
+  end
 end

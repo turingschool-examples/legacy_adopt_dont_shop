@@ -9,23 +9,14 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    if request.path == "/admin/applications"
-      @application = Application.find(params[:id])
-      @pets = @application.pets
+    @application = Application.find(params[:id])
+    @pets = @application.pets
+    @search_pets = Pet.search(params[:query])
 
-      if params[:commit] == "Approve This Pet"
-        @pet_approved = Pet.find(params[:pet_id])
-        ApplicationPet.approve(@pet_approved.id, @application.id)
-      end
-    else
-      @application = Application.find(params[:id])
-      @pets = @application.pets
-      @search_pets = Pet.search(params[:query])
-
-      if params[:commit] == "Adopt This Pet"
-        @pet_to_adopt = Pet.find(params[:pet_id])
-        @application.pets << @pet_to_adopt
-      end
+    if params[:commit] == "Adopt This Pet"
+      @pet_to_adopt = Pet.find(params[:pet_id])
+      @application.pets << @pet_to_adopt
+    end
   end
 
   def new

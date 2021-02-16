@@ -22,7 +22,6 @@ RSpec.describe 'Application new page' do
                                          city: "Dallas",
                                          state: "TX",
                                          zip: 88678,
-                                         description: "I would be a great dog mom!",
                                          status: "In Progress")
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
@@ -50,7 +49,6 @@ RSpec.describe 'Application new page' do
     expect(page).to have_content("Dallas")
     expect(page).to have_content("TX")
     expect(page).to have_content(88678)
-    expect(page).to have_content("I would be a great dog mom!")
     expect(page).to have_content("In Progress")
   end
 
@@ -62,7 +60,6 @@ RSpec.describe 'Application new page' do
     fill_in "city", with: ""
     fill_in "state", with: "TX"
     fill_in "zip", with: 88678
-    fill_in "description", with: "I would be a great dog mom!"
 
     click_on('Submit')
 

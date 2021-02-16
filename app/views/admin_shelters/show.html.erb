@@ -6,3 +6,7 @@
 <%= link_to "#{@shelter.name}'s Pets", "/shelters/#{@shelter.id}/pets" %>
 <a href="/shelters/<%= @shelter.id %>/edit">Edit Shelter</a>
 <%= button_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete %>
+
+<section id="statistics">
+  <h3> Average age: <%= @shelter.pets.average_age %> years old </h3>
+</section>

@@ -2,10 +2,10 @@ class Application < ApplicationRecord
   has_many :pet_applications
   has_many :pets, through: :pet_applications
 
-  validates :name, presence: true, length: {minimum: 3, maximum: 50}
-  validates :address, presence: true, length: {minimum: 3, maximum: 50}
-  validates :city, presence: true, length: {minimum: 3, maximum: 50}
-  validates :state, presence: true, length: {minimum: 2, maximum: 2}
-  validates :zip, presence: true, :numericality => { :length => 5 }
-  validates :description, presence: true, length: {minimum: 3, maximum: 50}
+  validates_presence_of :name, :address, :city, :state, :zip
+  validates_length_of :name, {minimum: 3, maximum: 50}
+  validates_length_of :address, {minimum: 3, maximum: 50}
+  validates_length_of :city, {minimum: 3, maximum: 50}
+  validates_length_of :state, {minimum: 2, maximum: 2}
+  validates_numericality_of :zip, equal_to: 5
 end

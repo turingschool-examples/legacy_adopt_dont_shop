@@ -22,7 +22,7 @@ RSpec.describe 'Application show page' do
                                          city: "Dallas",
                                          state: "TX",
                                          zip: 88678,
-                                         description: "I would be a great dog mom!", status: "In Progress")
+                                         status: "In Progress")
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
   end
@@ -43,7 +43,7 @@ RSpec.describe 'Application show page' do
       expect(page).to have_content(pet.name)
     end
 
-    expect(page).to have_content("I would be a great dog mom!")
+    expect(page).to have_selector('#add-a-pet')
   end
 
   it 'has search for pet feature and brings me to their page' do

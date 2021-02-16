@@ -10,7 +10,7 @@
   <h3>Reason for Adopting:</h3>
   <p><%= @application.case_for_adoption %></p>
   <h3>Application Status:</h3>
-  <p><%= @application.application_status %></p>
+  <p><%= @application.application_status.titleize %></p>
   <% @application.pets.each do |pet| %>
     <%= link_to pet.name, "/pets/#{pet.id}" %>
   <% end %>

@@ -13,7 +13,7 @@ RSpec.describe 'Applications show page' do
     describe 'When I visit the applications show page' do
       it 'displays application w/ corresponding name' do
         visit "/applications/#{@application_1.id}"
-save_and_open_page
+
         expect(page).to have_content("Name: #{@application_1.name}")
       end
       it 'displays application w/ full address' do
@@ -50,6 +50,17 @@ save_and_open_page
         expect(current_path).to eq("/applications/#{@application_1.id}")
 
         expect(page).to have_content(@pet1.name)
+      end
+      it "adds pets to an application" do
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to have_button("Adopt this pet")
+
+        click_button "Adopt this pet"
+
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+
+        expect(page).to have_content("All pets applied for: #{@pet1.name}")
       end
     end
   end

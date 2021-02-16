@@ -7,7 +7,7 @@
   <p>State: <%= @application.state %></p>
   <p>Zip Code: <%= @application.zip_code %></p>
   <p>Applicant Description: <%= @application.description_of_applicant %></p>
-  <p>All pets applied for: <%= @application.pet_name ? "Please search for pet" : "You have applied for a pet"%></p>
+  <p>All pets applied for: <%= @application.pet_name ? "You have applied for #{@application.pet_name}" : "Please search for pet"%></p>
   <p>Application Status: <%= @application.application_status %></p>
   <% if @application.application_status ="In Progress"%>
     <h1>Search for a Pet</h1>
@@ -17,9 +17,10 @@
     <p><%= f.submit "Search Pets" %></p>
   <% end %>
   </section>
-  <%end%>
+  <% end %>
   <% if @pets %>
     <% @pets.each do |pet| %>
       <%= pet.name %>
+      <%= button_to "Adopt this pet", "/applications/#{@application.id}", method: :patch, :params[:pet_id] => @pet.id%>
     <% end %>
   <% end %>

@@ -22,10 +22,10 @@
   <% if @application.status == "In Progress" %>
     <h4>Add a pet to this application</h4>
 
-    <%= form_tag "/applications/#{@application.id}", method: :get, local: true do %>
-    <%= label_tag :search %>
-    <%= text_field_tag :search %><br>
-    <%= submit_tag "Search by Name" %>
+    <%= form_with(url: "/applications/#{@application.id}", method: :get, local: true) do |f| %>
+    <%= f.label :search %>
+    <%= f.text_field :search %><br>
+    <%= f.submit "Search by Name" %>
     <% end %>
 
     <% if params[:search] %>
@@ -42,11 +42,14 @@
 </section>
 
 <section id='add-description'
+<% if !@application.pets.empty? %>
   <h4>How would you make a good home?</h4>
-  <%= form_tag "/applications/#{@application.id}", method: :patch, local: true do %>
-    <h5>Decription:</h5>
-    <%= label_tag :description%>
-    <%= text_field_tag :description %><br>
-    <%= submit_tag 'Submit Application' %>
+  <%= form_with(url: "/applications/#{@application.id}", method: :patch, local: true) do |f| %>
+    <h5>Description:</h5>
+    <%= f.label :description%>
+    <%= f.text_field :description %><br>
+    <%= f.submit 'Submit Application' %>
   <% end %>
+  <% else %>
+<% end %>
 </section>

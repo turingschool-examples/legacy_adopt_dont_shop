@@ -7,5 +7,5 @@ class Application < ApplicationRecord
   validates_length_of :address, {minimum: 3, maximum: 50}
   validates_length_of :city, {minimum: 3, maximum: 50}
   validates_length_of :state, {minimum: 2, maximum: 2}
-  validates_numericality_of :zip, equal_to: 5
+  validates_length_of :zip, {minimum: 5, maximum: 5}
 end

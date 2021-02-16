@@ -23,6 +23,12 @@ RSpec.describe 'Application show page' do
                                          state: "TX",
                                          zip: 88678,
                                          status: "In Progress")
+    @application_2 = Application.create!(name: "Joe",
+                                         address: "234 Third Ave",
+                                         city: "Dallas",
+                                         state: "TX",
+                                         zip: 88678,
+                                         status: "In Progress")
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet1.id)
     PetApplication.create!(application_id: @application_1.id, pet_id: @pet2.id)
   end
@@ -105,6 +111,14 @@ RSpec.describe 'Application show page' do
     expect(page).to have_selector('#add-a-pet', visible: false)
   end
 
+  it 'do not see submit app if no pets added' do
+    visit "/applications/#{@application_2.id}"
+
+    within('#add-description') do
+      expect(page).to_not have_button('Submit Application')
+    end
+  end
+
   it 'can search through pets with partial name' do
     visit "/applications/#{@application_1.id}"
 
@@ -126,4 +140,5 @@ RSpec.describe 'Application show page' do
       expect(page).to have_content(@pet1.name)
     end
   end
+
 end

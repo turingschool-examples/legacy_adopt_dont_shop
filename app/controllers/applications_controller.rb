@@ -18,6 +18,10 @@ class ApplicationsController < ApplicationController
   end
 
   def update
+    application = Application.find_by(application_status: "In Progress")
+    application.application_status = "Pending"
+    application.save
+    redirect_to "/applications/#{application.id}"
   end
 
   private

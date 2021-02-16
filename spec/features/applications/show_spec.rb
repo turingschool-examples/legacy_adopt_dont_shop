@@ -49,7 +49,7 @@ RSpec.describe "the Application show page" do
       fill_in("pet_name", with: @pet_3.name)
     end
 
-    click_button("Submit")
+    click_button("Search")
 
     expect(current_path).to eq("/applications/#{@application.id}")
     expect(page).to have_content(@pet_3.name)
@@ -63,7 +63,7 @@ RSpec.describe "the Application show page" do
 
     fill_in("pet_name", with: @pet_3.name)
 
-    click_button("Submit")
+    click_button("Search")
 
     expect(page).to have_content(@pet_3.name)
     expect(page).to have_button("Adopt this Pet")
@@ -72,5 +72,27 @@ RSpec.describe "the Application show page" do
 
     expect(current_path).to eq("/applications/#{@application.id}")
     expect(page).to have_content(@pet_3.name)
+  end
+
+  it "can submit an application" do
+    visit "/applications/#{@application.id}"
+
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_2.name)
+
+    within("#submit") do
+      expect(page).to have_content("Why I would make a good owner for these pet(s)")
+
+      fill_in("case_for_adoption", with: :case_for_adoption)
+
+      click_button("Submit", match: :first)
+    end
+
+    expect(current_path).to eq("/applications/#{@application.id}")
+    expect(page).to have_content("Pending")
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_2.name)
+    expect(page).to_not have_content(@pet_3.name)
+    expect(page).to_not have_content("Add a Pet to this Application")
   end
 end

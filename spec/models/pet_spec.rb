@@ -49,6 +49,8 @@ describe Pet, type: :model do
         pet = shelter.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
 
         expect(Pet.application_search("Thor").first).to eq(pet)
+        expect(Pet.application_search("Thor").length).to eq(1)
+        expect(Pet.application_search("Sparky").first).to eq(nil)
       end
     end
   end

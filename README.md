@@ -48,7 +48,7 @@ During your evaluation, you will present your project and discuss each of the ca
 ## Deploy
 
 ```
-[ ] done
+[x] done
 
 Deploy your application to Heroku
 
@@ -61,12 +61,40 @@ the application must be hosted on Heroku.
 Use these guides: https://devcenter.heroku.com/articles/getting-started-with-rails5
 ```
 
+### [Heroku notes](https://devcenter.heroku.com/articles/getting-started-with-rails5)
+#### Heroku-18 is needed to work with `Rails 5.4.3`
+- Specify stack when creating app:  
+  `heroku create --stack heroku-18`
+- To change the stack on an existing app  
+  `heroku stack:set heroku-18`
+- [Heroku-18 Stack](https://devcenter.heroku.com/articles/heroku-18-stack)
+
+#### Steps to Deploy App
+- Create with directory that contains rails app  
+  `heroku create`
+- Verify remote is running  
+  `git config --list | grep heroku`
+- Deploy code **never push anything but main branch**  
+  `git push heroku main`
+- If no errors, migrate database  
+  `heroku run rails db:migrate`
+
+#### Visit App
+- Assign one **dyno** running the app  
+  `heroku ps:scale web=1`
+- Check the state of app's dynos  
+  `heroku ps`
+- Open the app in browser  
+`heroku open`
+
+
+
 ## Apply for Pet(s)
 
 Visitors to the site will be able to create applications to adopt pets. An application has many pets. Pets can have many applications.
 
 ```
-[ ] done
+[x] done
 
 Application Show Page
 
@@ -81,7 +109,7 @@ Then I can see the following:
 ```
 
 ```
-[ ] done
+[x] done
 
 Starting an Application
 
@@ -103,7 +131,7 @@ And I see an indicator that this application is "In Progress"
 ```
 
 ```
-[ ] done
+[x] done
 
 Starting an Application, Form not Completed
 
@@ -116,7 +144,7 @@ And I see a message that I must fill in those fields.
 ```
 
 ```
-[ ] done
+[x] done
 
 Searching for Pets for an Application
 
@@ -132,7 +160,7 @@ And under the search bar I see any Pet whose name matches my search
 ```
 
 ```
-[ ] done
+[x] done
 
 Add a Pet to an Application
 
@@ -147,7 +175,7 @@ And I see the Pet I want to adopt listed on this application
 ```
 
 ```
-[ ] done
+[x] done
 
 Submit an Application
 
@@ -165,7 +193,7 @@ And I do not see a section to add more pets to this application
 ```
 
 ```
-[ ] done
+[x] done
 
 No Pets on an Application
 
@@ -176,7 +204,7 @@ Then I do not see a section to submit my application
 ```
 
 ```
-[ ] done
+[x] done
 
 Partial Matches for Pet Names
 
@@ -188,7 +216,7 @@ For example, if I search for "fluff", my search would match pets with names "flu
 ```
 
 ```
-[ ] done
+[x] done
 
 Case Insensitive Matches for Pet Names
 
@@ -206,7 +234,7 @@ Pets on an application can either be accepted or rejected. Once all pets on an a
 For this set of stories, we will be making routes that begin with '/admin'. This is to indicate that only a user with special privileges should be able to accept or reject pets on an application. Normally, we would want to make sure that a user is logged into an admin account before being able complete any of this workflow, but we will not add any log in or authorization functionality to this project.
 
 ```
-[ ] done
+[x] done
 
 Approving a Pet for Adoption
 
@@ -220,7 +248,7 @@ And instead I see an indicator next to the pet that they have been approved
 ```
 
 ```
-[ ] done
+[x] done
 
 Rejecting a Pet for Adoption
 
@@ -234,6 +262,8 @@ And instead I see an indicator next to the pet that they have been rejected
 ```
 
 ```
+[x] done
+
 Approved/Rejected Pets on one Application do not affect other Applications
 
 As a visitor

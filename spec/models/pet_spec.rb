@@ -3,6 +3,8 @@ require 'rails_helper'
 describe Pet, type: :model do
   describe 'relationships' do
     it { should belong_to :shelter }
+    it { should have_many :application_pets }
+    it { should have_many(:applications).through(:application_pets) }
   end
 
   describe 'validations' do
@@ -37,6 +39,26 @@ describe Pet, type: :model do
       expect(pet.sex).to eq('female')
       expect(pet.female?).to be(true)
       expect(pet.male?).to be(false)
+    end
+  end
+
+  describe "class methods" do
+    describe "::search(search_terms)" do
+      it "should search all pets' names for the matching term" do
+        shelter = create(:shelter)
+        pet_1 = create(:pet, name: "Thor")
+        pet_2 = create(:pet, name: "Zues")
+        pet_3 = create(:pet, name: "Athena")
+        pet_4 = create(:pet, name: "Helena")
+
+        search_result_thor = Pet.search("Thor")
+        search_result_ze = Pet.search("Zu")
+        search_result_th = Pet.search("Th")
+
+        expect(search_result_thor).to eq([pet_1])
+        expect(search_result_ze).to eq([pet_2])
+        expect(search_result_th).to eq([pet_1, pet_3])
+      end
     end
   end
 end

@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Shelters index page' do
   before :each do
-    @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
-    @shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Denver", state: "CO", zip: 80012)
+    @shelter1 = create(:shelter, name: "Shady Shelter")
+    @shelter2 = create(:shelter, name: "Silly Shelter")
   end
 
   it "displays names of all shelters" do
@@ -68,5 +68,6 @@ RSpec.describe 'Shelters index page' do
         click_link "Delete Shelter"
       end
       expect(page).to_not have_content("Poo and Paws")
+
   end
 end

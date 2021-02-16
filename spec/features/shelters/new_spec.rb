@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Create Shelter from index page' do
   before :each do
-    @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
-    @shelter2 = Shelter.create!(name: "Silly Shelter", address: "123 Silly Ave", city: "Denver", state: "CO", zip: 80012)
+    @shelter1 = create(:shelter)
+    @shelter2 = create(:shelter)
   end
 
   it "Visitor can create a new shelter" do

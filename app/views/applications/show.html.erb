@@ -25,7 +25,7 @@
       <% end %>
     </section>
 
-    <%if @searched_pets %>
+    <% if @searched_pets %>
       <h3>Pet Name Matches:</h3>
       <% @searched_pets.each do |pet| %>
         <p><%= pet.name %></p>

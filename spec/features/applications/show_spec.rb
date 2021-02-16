@@ -105,4 +105,19 @@ RSpec.describe "the Application show page" do
     expect(page).to_not have_button("Submit")
     expect(page).to have_content("In Progress")
   end
+
+  it "can see any pet whose name partially matches a search" do
+    @application.pets << [@pet_3, @pet_4]
+
+    visit "/applications/#{@application.id}"
+
+    within("#application-#{@application.id}") do
+      expect(page).to have_content("Add a Pet to this Application")
+      expect(page).to have_css("input#pet_name")
+      fill_in("pet_name", with: "Kas")
+      click_button("Search")
+    end
+
+    expect(page).to have_content(@pet_3.name)
+  end
 end

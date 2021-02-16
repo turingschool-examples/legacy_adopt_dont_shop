@@ -8,11 +8,11 @@ class AdminApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @pets = @application.pets
 
-    if params[:commit] == "Approve This Pet"
+    if params[:commit] == "Approve this Pet"
       @pet_approved = Pet.find(params[:pet_id])
       ApplicationPet.approve(@pet_approved.id, @application.id)
     end
-    if params[:commit] == "Reject This Pet"
+    if params[:commit] == "Reject this Pet"
       @pet_approved = Pet.find(params[:pet_id])
       ApplicationPet.reject(@pet_approved.id, @application.id)
     end

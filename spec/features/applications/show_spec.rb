@@ -120,4 +120,19 @@ RSpec.describe "the Application show page" do
 
     expect(page).to have_content(@pet_3.name)
   end
+
+  it "can check that a search is case insensitive" do
+    @application.pets << [@pet_3, @pet_4]
+
+    visit "/applications/#{@application.id}"
+
+    within("#application-#{@application.id}") do
+      expect(page).to have_content("Add a Pet to this Application")
+      expect(page).to have_css("input#pet_name")
+      fill_in("pet_name", with: "BELLA")
+      click_button("Search")
+    end
+
+    expect(page).to have_content("Bella")
+  end
 end

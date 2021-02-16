@@ -11,7 +11,5 @@ describe Application, type: :model do
 
   describe 'relationships' do
     it { should have_many(:pets).through(:application_pets) }
-    # it { should have_many :pets }
-    # it { is_expected_to.belong_to(:application_pets).optional }
   end
 end

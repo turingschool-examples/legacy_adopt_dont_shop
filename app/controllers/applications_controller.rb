@@ -1,9 +1,7 @@
 class ApplicationsController < ApplicationController
   def show
-    # require "pry"; binding.pry
     @pets = Pet.search(params[:search]) if params[:search]
     @application = Application.find(params[:id])
-    # @applications = Application.all
   end
 
   def new
@@ -20,6 +18,12 @@ class ApplicationsController < ApplicationController
       flash[:warning] = "Create New Application failed, Please complete all fields"
       redirect_to :action => "new"
     end
+  end
+
+  def update
+    application = Application.find(params[:id])
+    application.update(params[:pet_id])
+    redirect_to "/applications/#{application.id}"
   end
 
   private

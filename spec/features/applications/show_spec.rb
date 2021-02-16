@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "application show page" do
   before :each do
-    @app = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
+    @app = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "In Progress")
     @app2 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Submitted")
 
     @shelter = Shelter.create!(name: "Good Home")
@@ -83,6 +83,27 @@ RSpec.describe "application show page" do
           within(".application_pets") do
             expect(page).to have_link(@pet4.name)
           end
+        end
+      end
+
+      describe "when the application has one or more pet" do
+        it "has a from to discribe why would make a good owner for these pet(s)" do
+          visit "/applications/#{@app.id}"
+
+          expect(page).to have_field("description")
+        end
+
+        it "has a link to submit the form" do
+          visit "/applications/#{@app.id}"
+
+          expect(page).to have_button("Submit Application")
+        end
+
+        it "does not have a form or submit button once the form is submitted" do
+          visit "/applications/#{@app2.id}"
+
+          expect(page).to_not have_field("description")
+          expect(page).to_not have_button("Submit Application")
         end
       end
     end

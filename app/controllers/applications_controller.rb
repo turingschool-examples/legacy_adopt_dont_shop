@@ -19,7 +19,8 @@ class ApplicationsController < ApplicationController
       city: params[:city],
       state: params[:state],
       zip: params[:zip],
-      description: params[:description]
+      description: params[:description],
+      status: "In Progress"
       })
 
     application.save

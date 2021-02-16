@@ -1,6 +1,11 @@
 class ApplicationsController < ApplicationController
   def show
-    @application = Application.find(params[:id])
+    if params[:pet_name]
+      @application = Application.find(params[:id])
+      @pets_search = Pet.application_search(params[:pet_name])
+    else
+      @application = Application.find(params[:id])
+    end
   end
 
   def new
@@ -15,9 +20,9 @@ class ApplicationsController < ApplicationController
       render "/applications/new"
     end
   end
-end
 
-private
-def application_params
-  params[:application].permit(:name, :address, :city, :state, :zip, :description)
+  private
+    def application_params
+      params[:application].permit(:name, :address, :city, :state, :zip, :description)
+    end
 end

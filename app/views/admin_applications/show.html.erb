@@ -1,0 +1,17 @@
+<h1>Application Approval Page for Admin</h1>
+<h3>Applicant Name:</h3>
+<p><%= @application.first_name %></p>
+<p><%= @application.last_name %></p>
+<h3>Application Status:</h3>
+<p><%= @application.application_status.titleize %></p>
+<h3>Pets on This Application:</h3>
+<% @application.pets.each do |pet| %>
+  <section id="pet-<%= pet.id%>">
+    <h4>Pet:<%= pet.name %></h4>
+    <% if pet.adoptable == true %>
+      <%= button_to "Approve", "/pets/#{pet.id}/edit", method: :patch, params: { pet_id: pet.id, application_id: @application.id } %>
+    <% else %>
+        <p>Pet Approved</p>
+    <% end %>
+  </section>
+<% end %>

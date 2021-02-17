@@ -10,9 +10,11 @@
 
 <div class="adoption">Pets status
 <% @application.pets.each do |pet| %>
+ <div id="admin-pet-<%= pet.id %>">
   <p><%= pet.name %></p>
-  <% if pet.adoptable == true %>
-  <p> <%= button_to "Approve Application", "/admin/applications/#{@application.id}?approve=#{pet.id}", method: :post %></p>
+  <% if pet.adoptable == true%>
+  <p> <%= button_to "Approve Application", "/admin/applications/#{@application.id}?approve=#{pet.id}", method: :post,  params:{status: :approved} %></p>
+  <p> <%= button_to "Reject Application", "/admin/applications/#{@application.id}?reject=#{pet.id}", method: :post,  params:{status: :rejected} %></p>
   <% else %>
     <p><%= @application.application_status %></p>
   <%end  %>

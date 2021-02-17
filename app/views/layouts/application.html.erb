@@ -15,12 +15,16 @@
           <%= link_to "Go to Shelters", "/shelters" %>
           <%= link_to 'Go to Pets', "/pets" %>
           <%= link_to 'Go to Applications', "/applications" %>
-  </head><br>
+  </header><br>
 
   <body>
-    <%= flash.each do |type, message| %>
-    <p><%= message %> </p>
+    <ul id='errors'>
+    <%= flash.each do |type, messages| %>
+    <p <%= messages.each do |message| %> </p>
+    <li><%= message %></li>
+        <%end  %>
     <%end %>
+    </ul> 
     <%= yield %>
   </body>
 </html>

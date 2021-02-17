@@ -11,6 +11,6 @@ class Pet < ApplicationRecord
   enum sex: [:female, :male]
 
   def self.match(query)
-    where(name: query)
+    where('name ILIKE ?', "%#{query}%")
   end
 end

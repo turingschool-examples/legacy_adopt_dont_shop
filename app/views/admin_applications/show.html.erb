@@ -1,0 +1,61 @@
+<h2><%= @application.name %>'s application</h2>
+<p>Name: <%= @application.name %></p>
+<p>Address: <%= @application.address %></p>
+<p>City: <%= @application.city %></p>
+<p>State: <%= @application.state %></p>
+<p>Zip: <%= @application.zip %></p>
+<p>Application status: <%= @application.status %></p>
+
+<h4><a href="/applications/<%= @application.id %>/edit">Edit Application</a></h4>
+<%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
+
+<p>I would make a good home because: <%= @application.description %></p>
+
+<section id='pet-section'>
+<%= "Pets applied for:" %>
+<% @application.pets.each do |pet| %>
+    <div id="pet-<%= pet.id %>">
+    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    <% if pet.adoptable? %>
+      <%= button_to 'Approve Application', "/pet_applications", method: :post, params:{pet_id: pet.id, application_id: @application.id} %>
+    <% else %>
+      <%= pet.name %>'s adoption is pending.
+    <% end %>
+<% end %>
+</section>
+
+<section id='add-a-pet'>
+  <% if @application.status == "In Progress" %>
+    <h4>Add a pet to this application</h4>
+
+    <%= form_with(url: "/applications/#{@application.id}", method: :get, local: true) do |f| %>
+    <%= f.label :search %>
+    <%= f.text_field :search %><br>
+    <%= f.submit "Search by Name" %>
+    <% end %>
+
+    <% if params[:search] %>
+      <h3>All pets matching search:</h3>
+      <ul>
+      <% @pets.each do |pet| %>
+        <li><%= link_to pet.name, "/pets/#{pet.id}"%>
+        <%= button_to 'Adopt this pet', "/pet_applications", method: :post, params:{pet_id: pet.id, application_id: @application.id} %>
+        </li><br>
+      <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</section>
+
+<section id='add-description'
+<% if !@application.pets.empty? %>
+  <h4>How would you make a good home?</h4>
+  <%= form_with(url: "/applications/#{@application.id}", method: :patch, local: true) do |f| %>
+    <h5>Description:</h5>
+    <%= f.label :description%>
+    <%= f.text_field :description %><br>
+    <%= f.submit 'Submit Application' %>
+  <% end %>
+  <% else %>
+<% end %>
+</section>

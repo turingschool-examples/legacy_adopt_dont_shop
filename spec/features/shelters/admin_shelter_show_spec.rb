@@ -33,4 +33,5 @@ RSpec.describe 'Admin Shelters Show page' do
       expect(page).to have_content("Average age: 4.25 years old")
     end
   end
+
 end

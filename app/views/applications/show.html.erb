@@ -9,7 +9,7 @@
 
   <section>
     <% if @pet_application %>
-    <p> PETS ADDED TO YOUR APPLICATION: <%= @pet_application.pet.name %></p>
+    <p> PETS ADDED TO YOUR APPLICATION: <%= link_to "#{@pet_application.pet.name}", pet_application_path(@pet_application.pet.id) %></p>
   </section>
     <% end  %>
 

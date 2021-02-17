@@ -32,13 +32,13 @@ RSpec.describe 'Pets index page' do
   it "can delete a pet from pet index page" do
     visit "/pets"
 
-    within "#pet-#{@pet1.id}" do
-      expect(page).to have_content("Thor")
+    within "#pet-#{@pet2.id}" do
+      expect(page).to have_content("Athena")
       click_link "Delete Pet"
     end
 
     expect(current_path).to eq("/pets")
-    expect(page).to_not have_content("Thor")
+    expect(page).to_not have_content("Athena")
   end
 
   it "can edit a pet from pets index page" do

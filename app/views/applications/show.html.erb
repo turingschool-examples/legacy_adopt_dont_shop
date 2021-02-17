@@ -1,20 +1,24 @@
 <h1>Name: <%= @application.name %></h1>
 <h3>Address: <%= "#{@application.street}, #{@application.city}, #{@application.state}, #{@application.zip}" %></h3>
-<h3>Description:</h3>
+<h3>Status: <%= @application.status %></h3>
+<% if @application.submitted? %>
+  <h3>Description: <%= @application.description %></h3>
+<%end%>
 <h3>Pets:</h3>
-<div class="application_pets"> <% @application_pets.each do |ap| %>
-<% pet = Pet.find(ap.pet_id) %>
+<div class="application_pets"> <% @application.pets.each do |pet| %>
   <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h3>
   <%end%></div>
-<h3>Status: <%= @application.status %></h3>
 
-<% if @application_pets.count >= 1 && @application.status == "Pending" %>
-<%= form_with url: "/" %>
-
+<% if @application.ready_to_submit? %>
+  <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
+    <p>Please enter why you would make a good owner for these pet(s)</p>
+    <% form.hidden_field :status, value: "Pending" %>
+    <%= form.text_field :description %>
+    <%= form.submit "Submit Application" %>
+  <% end %>
 <% end %>
 
-
-<% if @application.status == "In Progress" %>
+<% if @application.in_progress? %>
   <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
     <h3><%= form.label :Search_pets %> <%= form.text_field :search %></h3>
     <%= form.submit :Search %>

@@ -3,10 +3,10 @@ Pet.destroy_all
 Shelter.destroy_all
 Application.destroy_all
 
-@app1 = Application.create!(name: "John Smith", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
-@app2 = Application.create!(name: "Betty Ross", street: "234 abc st.", city: "city", state: "state", zip: "92018", description: "Something Nice", status: "Pending")
-@app3 = Application.create!(name: "Phil Parker", street: "345 abc st.", city: "city", state: "state", zip: "92018", description: "I could do it", status: "Submitted")
-@app4 = Application.create!(name: "Patty Collens", street: "456 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Submitted")
+@app1 = Application.create!(name: "John Smith", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "In Progress")
+@app2 = Application.create!(name: "Betty Ross", street: "234 abc st.", city: "city", state: "state", zip: "92018", description: "Something Nice", status: "In Progress")
+@app3 = Application.create!(name: "Phil Parker", street: "345 abc st.", city: "city", state: "state", zip: "92018", description: "I could do it", status: "Pending")
+@app4 = Application.create!(name: "Patty Collens", street: "456 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
 
 @shelter = Shelter.create!(name: "Good Home")
 

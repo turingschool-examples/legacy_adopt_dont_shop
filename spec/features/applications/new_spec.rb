@@ -22,7 +22,6 @@ RSpec.describe "Application new page" do
       expect(page).to have_field("city")
       expect(page).to have_field("state")
       expect(page).to have_field("zip")
-      expect(page).to have_field("description")
       expect(page).to have_button("submit")
     end
 
@@ -37,6 +36,19 @@ RSpec.describe "Application new page" do
       click_button "submit"
 
       # expect(current_path).to eq("")  ###### NEED TO FIGURE OUT WAY TO TEST PATH #######
+    end
+
+    it "will render errors when all fields are not filled out" do
+      visit "/applications/new"
+      click_button "submit"
+
+      within(".errors") do
+        expect(page).to have_content("name can't be blank")
+        expect(page).to have_content("street can't be blank")
+        expect(page).to have_content("city can't be blank")
+        expect(page).to have_content("state can't be blank")
+        expect(page).to have_content("zip can't be blank")
+      end
     end
   end
 end

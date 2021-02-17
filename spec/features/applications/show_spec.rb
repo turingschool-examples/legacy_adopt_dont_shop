@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "application show page" do
   before :each do
     @app = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "In Progress")
-    @app2 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Submitted")
+    @app2 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
+    @app3 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "In Progess")
 
     @shelter = Shelter.create!(name: "Good Home")
 
@@ -47,7 +48,6 @@ RSpec.describe "application show page" do
       end
 
       describe "when a search is submitted" do
-
         it "shows a list of pets under the search bar" do
           visit "/applications/#{@app.id}"
 
@@ -99,11 +99,39 @@ RSpec.describe "application show page" do
           expect(page).to have_button("Submit Application")
         end
 
-        it "does not have a form or submit button once the form is submitted" do
+      end
+
+      describe "when the application is 'In Progress' but has no pets" do
+        it "doesn't show the submit application button" do
+          visit "/applications/#{@app3.id}"
+
+          expect(page).to_not have_button("Submit Application")
+        end
+      end
+
+      describe "when the submit application form is clicked" do
+        it "changes the status of the form to 'Pending'" do
+          visit "/applications/#{@app.id}"
+          fill_in "description", with: "why I would be a good home"
+          click_button "Submit Application"
+
+          expect(current_path).to eq("/applications/#{@app.id}")
+          expect(page).to have_content("why I would be a good home")
+          expect(page).to have_content("Status: Submitted")
+        end
+
+        it "does not have a form or submit button" do
           visit "/applications/#{@app2.id}"
 
           expect(page).to_not have_field("description")
           expect(page).to_not have_button("Submit Application")
+        end
+
+        it "no longer alows me to add pets" do
+          visit "/applications/#{@app2.id}"
+
+          expect(page).to_not have_field("search")
+          expect(page).to_not have_button("Search")
         end
       end
     end

@@ -10,10 +10,11 @@
 <article>
   <% if @pets_search %>
     <% @pets_search.each do |pet| %>
-      <h4>Names Found :</h4>
+      <h6>Names Found :</h6>
       <p><%= pet.name %></p>
-      <h4>Pet ID :</h4>
+      <h6>Pet ID :</h6>
       <p><%= pet.id %></p>
+      <%= link_to "Adopt this Pet", application_show_path(adopt_pet_id: pet.id), method: :get %>
     <% end %>
   <% end %>
 </article>
@@ -30,4 +31,10 @@
   <p><%= @application.description %></p>
   <h3>Status :</h3>
   <p><%= @application.status %></p>
+  <% if @pet %>
+  <h3>Pets to Adopt :</h3>
+  <ul>
+    <li>ID: <%= @pet.id %> Name: <%= @pet.name %></li>
+  </ul>
+  <% end %>
 </article>

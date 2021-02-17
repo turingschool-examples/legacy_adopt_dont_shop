@@ -4,11 +4,20 @@
 <ul>
   <% @application.pets.each do |pet| %>
   <%= pet.name %><br>
-  <%= "Status: " %>
   <% this_pet = PetApplication.where(pet_id: pet.id).where(application_id: @application.id) %>
+  <%= "Status for this pet on this application: " %>
   <%= this_pet[0].status %>
+  <section> 
+    <% if pet.adoptable == false && @application.status != "Approved" %>
+    <h3>Sorry, this pet has been approved for adoption on a seperate application.</h3>
+    <%= form_with url: "/admin/applications/#{@application.id}", method: :post, local: true do |f| %>
+    <%= f.hidden_field :pet_id, value: pet.id %>
+    <%= f.submit "Reject" %>
+    <% end %>
+    <% end %>
+  </section>
   <section>
-    <% if this_pet[0].status == "In Progress" %>
+    <% if this_pet[0].status == "In Progress" && pet.adoptable == true %>
     <%= form_with url: "/admin/applications/#{@application.id}", method: :post, local: true do |f| %>
     <%= f.hidden_field :pet_id, value: pet.id %>
     <%= f.submit "Approve" %>

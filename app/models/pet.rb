@@ -12,7 +12,6 @@ class Pet < ApplicationRecord
 
   def self.change_adopt_status(app_id)
     application = Application.find(app_id)
-    binding.pry
     if application.status == "Approved"
       application.pets.update_all(adoptable: false)
     end

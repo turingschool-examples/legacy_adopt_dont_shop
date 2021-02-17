@@ -1,12 +1,14 @@
 <h1><%= @application.name %></h1>
-<article class="">
-  <h3>Add a Pet to this Application</h3>
-  <%= form_with url: "/applications/#{@application.id}", local: true, method: :get do |form| %>
-  <%= form.label :pet_name %>
-  <%= form.text_field :pet_name %>
-  <%= form.submit 'Submit' %>
-  <% end %>
-</article>
+<% if @application.status != "Pending" %>
+  <article class="">
+    <h3>Add a Pet to this Application</h3>
+    <%= form_with url: "/applications/#{@application.id}", local: true, method: :get do |form| %>
+    <%= form.label :pet_name %>
+    <%= form.text_field :pet_name %>
+    <%= form.submit 'Submit' %>
+    <% end %>
+  </article>
+<% end %>
 <article>
   <% if @pets_search %>
     <% @pets_search.each do |pet| %>
@@ -31,12 +33,22 @@
   <p><%= @application.description %></p>
   <h3>Status :</h3>
   <p><%= @application.status %></p>
-  <% if @application_pet %>
-  <h3>Pets to Adopt :</h3>
-    <% @application.pets.each do |pet| %>
+  <% if !@application.pets.empty? %>
+    <div id="pets-on-application">
+      <h3>Pets to Adopt :</h3>
+      <% @application.pets.each do |pet| %>
       <ul>
         <li>ID: <%= pet.id %> Name: <%= pet.name %></li>
       </ul>
-    <% end %>
+      <% end %>
+    </div>
+    <article id="">
+      <h3>Submit Application</h3>
+      <%= form_with url: "/applications/#{@application.id}", local: true, method: :patch do |form| %>
+      <%= form.label :description %>
+      <%= form.text_area :description, size: "70 x 5", required: true %>
+      <%= form.submit 'Submit' %>
+      <% end %>
+    </article>
   <% end %>
 </article>

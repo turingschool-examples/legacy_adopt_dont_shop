@@ -34,7 +34,30 @@ RSpec.describe "Application show page", type: :feature do
         expect(page).to have_content("Sparky")
         expect(page).to_not have_content("Thor")
       end
-    end
 
+      it "has link to add pet after searching for pet name" do
+        visit "/applications/#{@application1.id}"
+        shelter = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
+        pet = shelter.pets.create!(image:"", name: "Sparky", description: "dog", approximate_age: 2, sex: "male")
+
+        fill_in "pet_name", with: "Sparky"
+        click_on "Submit"
+        expect(page).to have_content("Sparky")
+        expect(page).to have_link("Adopt this Pet")
+      end
+      it "can adopt pets by clicking the adopt link" do
+        visit "/applications/#{@application1.id}"
+        shelter = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
+        pet = shelter.pets.create!(image:"", name: "Sparky", description: "dog", approximate_age: 2, sex: "male")
+
+        fill_in "pet_name", with: "Sparky"
+        click_on "Submit"
+
+        expect(page).to have_link("Adopt this Pet")
+        click_on "Adopt this Pet"
+        expect(current_path).to eq("/applications/#{@application1.id}")
+        expect(page).to have_content("Pets to Adopt")
+      end
+    end
   end
 end

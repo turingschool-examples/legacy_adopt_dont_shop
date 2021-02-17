@@ -8,14 +8,20 @@
   <li>Application Status: <%= @application.application_status %></li>
 </ul>
 
-<div class="adoption">Pets status
+
+<h3>Pets:</h3>
+<ul>
 <% @application.pets.each do |pet| %>
- <div id="admin-pet-<%= pet.id %>">
-  <p><%= pet.name %></p>
-  <% if pet.adoptable == true%>
-  <p> <%= button_to "Approve Application", "/admin/applications/#{@application.id}?approve=#{pet.id}", method: :post,  params:{status: :approved} %></p>
-  <p> <%= button_to "Reject Application", "/admin/applications/#{@application.id}?reject=#{pet.id}", method: :post,  params:{status: :rejected} %></p>
-  <% else %>
-    <p><%= @application.application_status %></p>
-  <%end  %>
-<%end %>
+  <li><%= pet.name %>
+    <% if pet.application_result(@application.id) %>
+      <%= pet.application_result(@application.id) %>
+    <% elsif pet.adoptable %>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Approved", method: :post %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %>
+    <% else %>
+      <%= button_to "Adopted", "", method: :post, disabled: true %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %>
+    <% end %></li>
+<% end %>
+
+</ul>

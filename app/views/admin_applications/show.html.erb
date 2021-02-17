@@ -3,7 +3,7 @@
 <p>Description: <%=@application.description%></p>
 <p>Application status: <%= @application.status %></p>
 <ul>
-<p>All pets: <% @application.application_pets.each do |application_pet|%></p>
+  <p>All pets: <% @application.application_pets.each do |application_pet|%></p>
   <div id="application_pet-<%= application_pet.id%>">
   <li>
     <% if application_pet.status.nil? %>
@@ -24,7 +24,7 @@
       <%= application_pet.pet.name%>:
       <%= application_pet.status %>
     <% end  %>
-  <% end  %>
   </li>
-  </div>
+</div>
+  <% end  %>
 </ul>

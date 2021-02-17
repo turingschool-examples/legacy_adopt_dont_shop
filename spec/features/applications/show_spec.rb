@@ -57,6 +57,10 @@ RSpec.describe "Application show page", type: :feature do
         click_on "Adopt this Pet"
         expect(current_path).to eq("/applications/#{@application1.id}")
         expect(page).to have_content("Pets to Adopt")
+        within "#pets-on-application" do
+          expect(page).to have_content(pet.name)
+          expect(page).to have_content(pet.id)
+        end
       end
     end
   end

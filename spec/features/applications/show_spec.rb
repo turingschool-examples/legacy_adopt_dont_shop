@@ -54,6 +54,22 @@ RSpec.describe 'the application show page' do
       expect(page).to have_content('Applying for the following pets:')
       expect(page).to have_content('Tunar')
     end
+    it 'displays results from partial and cased pet names' do
+      pet5 = @shelter1.pets.create!(image:"", name: "Tunar", description: "cat", approximate_age: 3, sex: "male")
+      pet5 = @shelter1.pets.create!(image:"", name: "Lunar", description: "cat", approximate_age: 4, sex: "female")
+
+      visit "/applications/#{@jenn.id}"
+
+      fill_in 'pet_name', with: 'NAR'
+
+      click_button 'Find Pets by Name'
+      within('.pet-find') do
+        expect(page).to have_content('Tunar')
+        expect(page).to have_content('Age: 3')
+        expect(page).to have_content('Lunar')
+        expect(page).to have_content('Age: 4')
+      end
+    end
   end
   describe 'the app submission section' do
     it 'does not display when no pets are associated' do

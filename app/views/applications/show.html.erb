@@ -11,6 +11,7 @@
   <p><%= @application.case_for_adoption %></p>
   <h3>Application Status:</h3>
   <p><%= @application.application_status.titleize %></p>
+  <h3>Adoptable Pets:</h3>
   <% @application.pets.each do |pet| %>
     <%= link_to pet.name, "/pets/#{pet.id}" %>
   <% end %>
@@ -34,7 +35,7 @@
     <% end %>
   <% end %>
 
-  <% if @application.pets.length > 0 %>
+  <% if @application.pets.length > 0 && @application.application_status == "In Progress" %>
     <section id='submit'>
       <h3>Why I would make a good owner for these pet(s):</h3>
       <%= form_with url:"/applications/#{@application.id}", method: :patch, local: true do |form| %>

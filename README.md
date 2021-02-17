@@ -267,7 +267,7 @@ Then I see that those pets are no longer "adoptable"
 ```
 Pets can only have one approved application on them at any time
 
-[ ] done
+[X] done
 
 As a visitor
 When a pet has an "Approved" application on them

@@ -23,6 +23,19 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    application = Application.find(params[:id])
+    if params[:applicant_description].length > 0
+      application.update(
+        description: params[:applicant_description],
+        status: 1
+      )
+    else
+      flash[:notice] = 'Submission requires a description'
+    end
+    redirect_to "/applications/#{application.id}"
+  end
+
   private
   def application_params
     # params.require(:exhibit)

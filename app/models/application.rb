@@ -25,7 +25,7 @@ class Application < ApplicationRecord
     pet_app = PetApplication.where(pet_id: pet_id).where(application_id: app_id).first
     if commit == "Approve"
       pet_app.update!(status: "Approved")  
-    else commit == "Rejected"
+    else commit == "Reject"
       pet_app.update!(status: "Rejected")
     end
   end

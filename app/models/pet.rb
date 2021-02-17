@@ -13,4 +13,8 @@ class Pet < ApplicationRecord
   def self.search(input)
    where("name ILIKE ?", "%#{input[:search]}%")
  end
+
+  def application_result(app_id)
+    ApplicationPet.where(pet_id: id, application_id: app_id).first.status
+  end
 end

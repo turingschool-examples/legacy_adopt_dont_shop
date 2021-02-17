@@ -13,31 +13,43 @@ RSpec.describe 'When I visit an admin application show page' do
     ApplicationPet.create!(application: @dominic, pet: @pet2)
     ApplicationPet.create!(application: @dominic, pet: @pet3)
     ApplicationPet.create!(application: @jordan, pet: @pet1)
+    visit "/admin/applications/#{@dominic.id}"
   end
 
   #story test 11
-  describe "When I'm on the admin applications show page" do
-    describe "I see a button to approve all specific pets" do
-      it "and when I click that button I'm returned without the button" do
-        visit "admin/applications/#{@dominic.id}"
-           within("#admin-pet-#{@pet1.id}") do
-            expect(page).to have_content(@pet1.name)
-            expect(page).to have_button("Approve Application")
-        end
-      end
-    end
-  end
+  it "has a button to approve or reject pets" do
+     expect(page).to have_button("Approve")
+     expect(page).to have_button("Reject")
+   end
 
-  #story test 12
-  describe "When 1 pet is approved 1 waiting" do
-    it "shows a button to approve and reject applications" do
-      visit "admin/applications/#{@dominic.id}"
-        within("#admin-pet-#{@pet1.id}") do
-      expect(page).to have_content(@pet1.name)
-      click_button "Reject Application"
-      expect(page).not_to have_button("Approve Application")
-      expect(page).not_to have_button("Reject Application")
-      end
-    end
+   it "updates page and displays new result after button click" do
+     approve = first(:button, "Approve")
+     approve.click
+     expect(page).to have_content("Approved")
+     expect(first(:button, "Approve")).to_not eq(approve) #if the same button is still on the page, there is an issue
+     first(:button, "Approve").click
+     expect(page).to have_content("Status: Approved")
+
+     visit "/admin/applications/#{@jordan.id}"
+
+     reject = first(:button, "Reject")
+     reject.click
+     expect(page).to have_content("Rejected")
+     expect(first(:button, "Reject")).to_not eq(reject)
+     first(:button, "Reject").click
+
+     expect(page).to have_content("Status: Rejected")
+   end
+
+
+  it "sets pet adoptable? to false when approved" do
+    approve = first(:button, "Approve")
+    approve.click
+    approve = first(:button, "Approve")
+    approve.click
+
+    visit "/admin/applications/#{@jordan.id}"
+
+    expect(page).to have_button("Adopted", disabled: true)
   end
 end

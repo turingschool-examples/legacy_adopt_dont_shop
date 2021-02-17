@@ -1,6 +1,8 @@
 class ApplicationsController < ApplicationController
   def show
     if params[:adopt_pet_id]
+      @application_pet = ApplicationPet.new(pet_id: params[:adopt_pet_id], application_id: params[:id])
+      @application_pet.save
       @application = Application.find(params[:id])
       @pet = Pet.find(params[:adopt_pet_id])
     elsif params[:pet_name]

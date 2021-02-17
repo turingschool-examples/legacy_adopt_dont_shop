@@ -31,10 +31,12 @@
   <p><%= @application.description %></p>
   <h3>Status :</h3>
   <p><%= @application.status %></p>
-  <% if @pet %>
+  <% if @application_pet %>
   <h3>Pets to Adopt :</h3>
-  <ul>
-    <li>ID: <%= @pet.id %> Name: <%= @pet.name %></li>
-  </ul>
+    <% @application.pets.each do |pet| %>
+      <ul>
+        <li>ID: <%= pet.id %> Name: <%= pet.name %></li>
+      </ul>
+    <% end %>
   <% end %>
 </article>

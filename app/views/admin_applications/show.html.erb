@@ -11,14 +11,15 @@
 
 <p>I would make a good home because: <%= @application.description %></p>
 
+
 <%= "Pets applied for:" %>
 <% @application.pet_applications.each do |app| %>
-    <section id="pet-<%= app.pet.id %>">
+<section id="admin-pet-<%= app.pet.id %>">
     <p><%= app.pet.name %></p>
     <% if app.pet.adoptable? %>
-      <%= button_to 'Approve Application', "/pet_applications/#{@application.id}", method: :patch, params:{status: :approved} %>
+      <%= button_to 'Approve Application', "/admin/applications/#{@application.id}", method: :patch, local: true %>
     <% else %>
       <%= app.pet.name %>'s adoption is pending.
     <% end %>
 <% end %>
-    </section>
+</section>

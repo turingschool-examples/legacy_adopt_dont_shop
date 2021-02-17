@@ -89,6 +89,27 @@ RSpec.describe "Admin application show page" do
           end
         end
       end
+
+      describe "pet approval or rejection on an applicvation" do
+        it "does not effect other applications" do
+          visit "/admin/applications/#{@app1.id}"
+
+          within(".application_pets") do
+            within("#pet-#{@pet2.id}") do
+              click_button("Reject")
+            end
+          end
+
+          visit "/admin/applications/#{@app2.id}"
+
+          within(".application_pets") do
+            within("#pet-#{@pet2.id}") do
+              expect(page).to have_button("Approve")
+              expect(page).to have_button("Reject")
+            end
+          end
+        end
+      end
     end
   end
 end

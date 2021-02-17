@@ -20,7 +20,6 @@ RSpec.describe 'As a visitor' do
       expect(current_path).to eq("/applications/new")
       fill_in "name", :with => "Shrewsbury Heights"
       fill_in "address", :with => "123 fake st."
-      fill_in "description", :with => "I'd be a good dog dad because i love dogs!!"
       click_button("Submit")
     end
 
@@ -28,10 +27,9 @@ RSpec.describe 'As a visitor' do
 
       visit "/applications/new"
       fill_in "address", :with => "123 fake st"
-      fill_in "description", :with => "I'd be a good dog dad because i love dogs!!"
       click_button("Submit")
       save_and_open_page
-      expect(current_path).to eq("/applications/new")
+      expect(current_path).to eq("/applications")
       expect(page).to have_content("You're missing vital information!")
 
     end
@@ -40,19 +38,8 @@ RSpec.describe 'As a visitor' do
       visit "/applications/new"
 
       fill_in "name", :with => "Shrewsbury Heights"
-      fill_in "description", :with => "I'd be a good dog dad because i love dogs!!"
       click_button("Submit")
-      expect(current_path).to eq("/applications/new")
-      expect(page).to have_content("You're missing vital information!")
-    end
-
-    it "And I see a message that I must fill in description" do
-      visit "/applications/new"
-
-      fill_in "name", :with => "Shrewsbury Heights"
-      fill_in "address", :with => "123 fake st"
-      click_button("Submit")
-      expect(current_path).to eq("/applications/new")
+      expect(current_path).to eq("/applications")
       expect(page).to have_content("You're missing vital information!")
     end
   end

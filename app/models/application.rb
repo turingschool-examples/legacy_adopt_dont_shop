@@ -17,4 +17,14 @@ class Application < ApplicationRecord
     self.status = "Pending"
   end
 
+  def check_status
+    # require "pry"; binding.pry
+    # nil_values = application_pets.any? do |application_pet|
+    #   application_pet.status == nil
+    # end
+    # status =  nil_values = true
+    #
+    # end
+  end
+
 end

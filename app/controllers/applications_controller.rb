@@ -2,21 +2,13 @@ class ApplicationsController < ApplicationController
 # require "pry"; binding.pry
 
   def show
+    # require "pry"; binding.pry
     find_application
     if params[:pet_search]
       @pets = Pet.sort(params[:pet_search])
     end
-    if params[:pet_id]
-      @application.add_pet(params[:pet_id])
-    end
-    if params[:submit] && !params[:description]
-      flash[:notice] = "Missing vital information!"
-    elsif params[:submit] && params[:description]
-      @application.submit
-      @application.add_description(params[:description])
-      flash[:notice] = "Appplication successfully submitted!"
-    else
-    end
+    # require "pry"; binding.pry
+
   end
 
   def index
@@ -28,7 +20,6 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    # require "pry"; binding.pry
     if params[:status].nil?
       params[:status] = "In Progress"
     end
@@ -38,7 +29,18 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{@application.id}"
     else
       flash[:notice] = "You're missing vital information!"
-      redirect_to "/applications/new"
+      render 'new'
+    end
+  end
+
+  def update
+    find_application
+    if @application.update(application_params)
+      flash[:notice] = "Appplication successfully submitted!"
+      redirect_to "/applications/#{@application.id}"
+    else
+      flash[:notice] = "You're missing vital information!"
+      render 'new'
     end
   end
 
@@ -49,6 +51,6 @@ class ApplicationsController < ApplicationController
   end
 
   def application_params
-    params.permit(:name, :address, :description, :status)
+    params.permit(:name, :address, :description, :status, :submit)
   end
 end

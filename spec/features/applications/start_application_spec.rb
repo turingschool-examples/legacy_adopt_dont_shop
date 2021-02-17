@@ -14,49 +14,33 @@ RSpec.describe 'As a visitor' do
     it "And I fail to fill in any of the form fields" do
 
       visit "/pets"
-      click_button("Start an Application")
+      click_link("Start an Application")
 
 
       expect(current_path).to eq("/applications/new")
-      fill_in "application[name]", :with => "Shrewsbury Heights"
-      fill_in "application[address]", :with => "123 fake st."
-      fill_in "application[description]", :with => "I'd be a good dog dad because i love dogs!!"
+      fill_in "name", :with => "Shrewsbury Heights"
       click_button("Submit")
     end
 
-    it "And I see a message that I must fill in name" do
+    it "And I see a message that i'm missing vital information" do
 
       visit "/applications/new"
-      save_and_open_page
-      fill_in "application[address]", :with => "123 fake st"
-      fill_in "application[description]", :with => "I'd be a good dog dad because i love dogs!!"
-      find_field('submit', type: :hidden)
-      click_link("Submit")
-      expect(current_path).to eq("/applications/new")
-      expect(page).to have_content("must include name")
+      # save_and_open_page
+      fill_in "address", :with => "123 fake st"
+      click_button("Submit")
+      expect(current_path).to eq("/applications")
+      expect(page).to have_content("You're missing vital information!")
 
     end
 
     it "And I see a message that I must fill in address" do
       visit "/applications/new"
 
-      fill_in "application[name]", :with => "Shrewsbury Heights"
-      fill_in "application[description]", :with => "I'd be a good dog dad because i love dogs!!"
-      find_field('submit', type: :hidden)
+      fill_in "name", :with => "Shrewsbury Heights"
       click_button("Submit")
-      expect(current_path).to eq("/applications/new")
-      expect(page).to have_content("must include valid address")
-    end
-
-    it "And I see a message that I must fill in description" do
-      visit "/applications/new"
-
-      fill_in "application[name]", :with => "Shrewsbury Heights"
-      fill_in "application[address]", :with => "123 fake st"
-      find_field('submit', type: :hidden)
-      click_button("Submit")
-      expect(current_path).to eq("/applications/new")
-      expect(page).to have_content("description must be at least 255 characters")
+      save_and_open_page
+      expect(current_path).to eq("/applications")
+      expect(page).to have_content("You're missing vital information!")
     end
   end
 end

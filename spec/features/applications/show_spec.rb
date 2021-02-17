@@ -14,7 +14,7 @@ RSpec.describe 'As a visitor' do
       @application_2.pets << create(:pet)
 
     end
-    it "Then I can see the following:name, full address, description, name of all pets, application status" do
+    it "Then I can see the following:name, full address, name of all pets, application status" do
 
       visit "/applications/#{@application_1.id}"
       save_and_open_page
@@ -23,7 +23,6 @@ RSpec.describe 'As a visitor' do
 
       expect(page).to have_content("Name: #{@application_1.name}")
       expect(page).to have_content("Address: #{@application_1.address}")
-      expect(page).to have_content("Description: #{@application_1.description}")
       expect(page).to have_content(@application_1.pets.first.name)
       expect(page).to have_content(@application_1.pets.last.name)
       expect(page).to have_content("Application status: #{@application_1.status}")
@@ -36,11 +35,9 @@ RSpec.describe 'As a visitor' do
       expect(current_path).to eq("/applications/#{@application_2.id}")
       expect(page).to have_content("Name: #{@application_2.name}")
       expect(page).to have_content("Address: #{@application_2.address}")
-      expect(page).to have_content("Description: #{@application_2.description}")
       expect(page).to have_content(@application_2.pets.first.name)
       expect(page).to have_content(@application_2.pets.last.name)
       expect(page).to have_content("Application status: #{@application_2.status}")
-
     end
   end
 end

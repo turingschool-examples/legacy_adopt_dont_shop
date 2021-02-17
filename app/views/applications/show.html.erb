@@ -26,9 +26,10 @@
   <ul><% if @pets %>
       <% @pets.each do |pet| %>
       <div id="pet-<%= pet.id%>">
-      <li><%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+      <li><%= form_with url: "/applications/#{@application.id}/pets/#{pet.id}", method: :post, local: true do |form| %>
             <%= form.label pet.name.to_sym %>
             <%= form.hidden_field :pet_id, value: pet.id%>
+            <%= form.hidden_field :application_id, value: @application.id%>
             <%= form.submit 'Adopt this Pet' %>
           <% end %></li>
           </div>
@@ -36,10 +37,10 @@
     <% end  %>
   </ul>
     <% if @application.pets != [] %>
-      <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+      <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
         <%= form.label :Why_you_would_make_a_good_pet_owner %>
-        <%= form.text_field :description %><br>
-        <%= form.hidden_field :submit, value: 'submitted'%>
+        <%= form.text_field :description, required: true%><br>
+        <%= form.hidden_field :status, value: 'Pending'%>
         <%= form.submit 'Submit Application' %>
       <% end %></li>
     <% end  %>

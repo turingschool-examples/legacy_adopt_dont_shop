@@ -29,7 +29,7 @@ RSpec.describe 'As a visitor' do
         #i need if that application has not been submitted lofic in my show page or show action
         # require "pry"; binding.pry
         visit "/applications/#{@application_1.id}"
-
+save_and_open_page
         expect(page).to have_content("Add a Pet to this Application")
         expect(page).to have_content("Search pets by name")
       end

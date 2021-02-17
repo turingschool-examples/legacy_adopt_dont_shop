@@ -13,6 +13,7 @@ class Pet < ApplicationRecord
 
   def self.sort(search)
     search_params = "%#{search.downcase}%"
-    where("LOWER(name) LIKE :search", search: search_params)
+
+    where("LOWER(name) LIKE(?)", search_params)
   end
 end

@@ -4,9 +4,13 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    if params[:search_pets] #it's finding the pet...
-      @matching_pets = Pet.search(params[:search_pets]) # try on live server now.
-      # binding.pry
+    if params[:search_pets] && params[:id]
+      @matching_pets = Pet.search(params[:search_pets])
+      @application = Application.find(params[:id])
+      ### This part seems to be working fine
+    elsif params[:want_pet] && params[:id]
+      @pet_application = PetApplication.create!(pet_id: params[:want_pet],application_id: params[:id])
+      ### check the view!
       @application = Application.find(params[:id])
     else
       @application = Application.find(params[:id])
@@ -23,7 +27,7 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     else
       flash.now[:alert] = "Form must be completed in order to submit the application. Please complete every field in the form."
-      render :new #changed to this line and added .now above from lesson today 2/16.
+      render :new
     end
   end
 

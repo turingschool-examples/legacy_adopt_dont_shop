@@ -25,6 +25,5 @@ Rails.application.routes.draw do
   get "/applications", to: "applications#index"
   get "/applications/new", to: "applications#new"
   post "/applications/new", to: "applications#create" #path can't be right...
-  get "/applications/:id", to: "applications#show" #try to keep this at the bottom for now (fixed id = new)
-  # get '/applications/:status', to: 'applications#index', status: 'In Progress'
+  get "/applications/:id", to: "applications#show", as: "applications_show" #try to keep this at the bottom for now (fixed id = new)
 end

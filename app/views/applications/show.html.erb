@@ -6,24 +6,30 @@
   <p>ZIP: <%= @application.zip %></p>
   <p>WHY DO YOU WANT TO ADOPT?<br>
     <%= @application.description %></p>
+
+  <section>
+    <% if @pet_application %>
+    <p> PETS ADDED TO YOUR APPLICATION: <%= @pet_application.pet.name %></p>
+  </section>
+    <% end  %>
+
   <p>YOUR APPLICATION STATUS: <%= @application.status %></p>
 
   <section>
-
     <h2>Add a Pet to this Application</h2>
     <%= form_with url: "/applications/#{@application.id}", local: true, method: :get do |form| %>
       <%= form.label "search pets by name:" %>
       <%= form.search_field :search_pets %>
       <%= form.submit "search" %>
     <% end %>
-
   </section>
 
-  <% if @application %>
+  <% if @matching_pets %>
       <section>
         <% @matching_pets.each do |pet| %>
-          Name: <%= pet.name %><br>
-          Pet ID: <%= pet.id %><br>
+          Name: <%= pet.name %> <%= link_to "adopt this pet!", applications_show_path(want_pet: pet.id) %>
+
+          Pet ID: <%= pet.id %>
           Approximate Age: <%= pet.approximate_age %><br>
         <% end  %>
       </section>

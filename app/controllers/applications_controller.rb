@@ -35,7 +35,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @application.update({
       description: params[:description],
-      status: "Submitted"
+      status: "Pending"
       })
 
     redirect_to "/applications/#{params[:id]}"

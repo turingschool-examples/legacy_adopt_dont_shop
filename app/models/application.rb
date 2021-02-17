@@ -16,6 +16,6 @@ class Application < ApplicationRecord
   end
 
   def submitted?
-    status == "Submitted"
+    status == "Pending"
   end
 end

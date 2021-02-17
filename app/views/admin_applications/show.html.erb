@@ -1,8 +1,12 @@
 <%= render "applications/basic_info" %>
 <h3>Pets:</h3>
-<div class="application_pets"> <% @application.pets.each do |pet| %>
+<section class="application_pets"> <% @application.pets.each do |pet| %>
   <div id="pet-<%= pet.id %>"><h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
     <% if pet.not_reviewed?(@application.id) %>
-    <%= button_to "Approve", "/admi/applications/#{@application.id}", method: :patch %>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}/update_pet?pet_id=#{pet.id};application_id=#{@application.id};approved=true", method: :patch %>
+    <% elsif pet.approved?(@application.id) %>
+      <%= "Approved" %>
+    <% else %>
+      <%= "Rejected" %>
     <%end%></h3></div>
-  <%end%></div>
+  <%end%></section>

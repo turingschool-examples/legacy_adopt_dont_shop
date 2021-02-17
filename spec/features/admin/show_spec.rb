@@ -43,16 +43,17 @@ RSpec.describe "Admin application show page" do
       it "changes the pets status to approved when clicked" do
         visit "/admin/applications/#{@app1.id}"
 
-        within(".application_pets") do
-          within("#pet-#{@pet1.id}") do
-            click_button("Approve")
-            expect(page).to_not have_button("Approve")
-            expect(page).to have_content("Approved")
-          end
+        within("#pet-#{@pet1.id}") do
+          click_button("Approve")
+        end
 
-          within("#pet-#{@pet2.id}") do
-            expect(page).to have_button("Approve")
-          end
+        within("#pet-#{@pet1.id}") do
+          expect(page).to_not have_button("Approve")
+          expect(page).to have_content("Approved")
+        end
+
+        within("#pet-#{@pet2.id}") do
+          expect(page).to have_button("Approve")
         end
       end
     end

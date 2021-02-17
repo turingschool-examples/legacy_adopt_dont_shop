@@ -4,7 +4,7 @@
     Address: <%="#{@application.street}, #{@application.city}, #{@application.state}, #{@application.zip_code}"%> <br>
     Description: <%= "#{@application.description}" %> <br>
     Status: <%= "#{@application.application_status}" %>
-    <%= @application.pets.each do |pet|  %>
+    <% @application.pets.each do |pet|  %>
     <h3> Pet Names: <%=link_to "#{pet.name}", "/pets/#{pet.id}"%></h3>
   </section>
 <% end %>
@@ -15,7 +15,7 @@
   <%= form_tag "/applications/#{@application.id}/update", method: :patch do %>
   <%= label_tag :"Tell us why you would be a good owner for these pet(s)" %>
   <%= text_field_tag :description %>
-  <%= hidden_field_tag :application_status, :pending %>
+  <% hidden_field_tag :application_status, :pending %>
   <%= submit_tag 'Submit Application' %>
   <% end %>
   <% end %>
@@ -30,6 +30,7 @@
      <p><%= f.submit "Search Pets" %></p>
     <% end %>
     <% end %>
+
     <% if @pets %>
   <% @pets.each do |pet| %>
     <div id="pet-<%= pet.id %>">

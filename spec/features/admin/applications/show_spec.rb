@@ -20,10 +20,23 @@ RSpec.describe 'When I visit an admin application show page' do
     describe "I see a button to approve all specific pets" do
       it "and when I click that button I'm returned without the button" do
         visit "admin/applications/#{@dominic.id}"
-        expect(page).to have_content(@pet1.name)
-        expect(page).to have_content(@pet2.name)
-        expect(page).to have_content(@pet3.name)
-        expect(page).to have_button("approve")
+           within("#admin-pet-#{@pet1.id}") do
+            expect(page).to have_content(@pet1.name)
+            expect(page).to have_button("Approve Application")
+        end
+      end
+    end
+  end
+
+  #story test 12
+  describe "When 1 pet is approved 1 waiting" do
+    it "shows a button to approve and reject applications" do
+      visit "admin/applications/#{@dominic.id}"
+        within("#admin-pet-#{@pet1.id}") do
+      expect(page).to have_content(@pet1.name)
+      click_button "Reject Application"
+      expect(page).not_to have_button("Approve Application")
+      expect(page).not_to have_button("Reject Application")
       end
     end
   end

@@ -1,10 +1,9 @@
 class PetApplicationsController < ApplicationController
   def index
-    # binding.pry
     @pet_application = PetApplication.all
   end
 
-  def create
-
-  end
+  # def show
+  #   Pet.where("name like ?", "%#{params[:search_pets]}%")
+  # end
 end

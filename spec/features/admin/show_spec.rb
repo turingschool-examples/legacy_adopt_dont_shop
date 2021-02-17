@@ -26,34 +26,67 @@ RSpec.describe "Admin application show page" do
 
   describe "when I visit the admin application show page" do
     describe "for each pet on the application" do
-      it "shows a approve button" do
-        visit "/admin/applications/#{@app1.id}"
+      describe "Approve funtionality" do
+        it "shows an approve button" do
+          visit "/admin/applications/#{@app1.id}"
 
-        within(".application_pets") do
-          within("#pet-#{@pet1.id}") do
-            expect(page).to have_button("Approve")
+          within(".application_pets") do
+            within("#pet-#{@pet1.id}") do
+              expect(page).to have_button("Approve")
+            end
+
+            within("#pet-#{@pet2.id}") do
+              expect(page).to have_button("Approve")
+            end
           end
+        end
 
-          within("#pet-#{@pet2.id}") do
-            expect(page).to have_button("Approve")
+        it "changes the pets status to approved when clicked" do
+          visit "/admin/applications/#{@app1.id}"
+
+          within(".application_pets") do
+            within("#pet-#{@pet1.id}") do
+              click_button("Approve")
+              expect(page).to_not have_button("Approve")
+              expect(page).to have_content("Approved")
+            end
+
+            within("#pet-#{@pet2.id}") do
+              expect(page).to have_button("Approve")
+            end
           end
         end
       end
 
-      it "changes the pets status to approved when clicked" do
-        visit "/admin/applications/#{@app1.id}"
+      describe "Reject funtionality" do
+        it "shows a reject button" do
+          visit "/admin/applications/#{@app1.id}"
 
-        within("#pet-#{@pet1.id}") do
-          click_button("Approve")
+          within(".application_pets") do
+            within("#pet-#{@pet1.id}") do
+              expect(page).to have_button("Reject")
+            end
+
+            within("#pet-#{@pet2.id}") do
+              expect(page).to have_button("Reject")
+            end
+          end
         end
 
-        within("#pet-#{@pet1.id}") do
-          expect(page).to_not have_button("Approve")
-          expect(page).to have_content("Approved")
-        end
+        it "changes the pets status to rejected when clicked" do
+          visit "/admin/applications/#{@app1.id}"
 
-        within("#pet-#{@pet2.id}") do
-          expect(page).to have_button("Approve")
+          within(".application_pets") do
+            within("#pet-#{@pet1.id}") do
+              click_button("Reject")
+              expect(page).to_not have_button("Reject")
+              expect(page).to have_content("Rejected")
+            end
+
+            within("#pet-#{@pet2.id}") do
+              expect(page).to have_button("Reject")
+            end
+          end
         end
       end
     end

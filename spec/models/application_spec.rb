@@ -18,7 +18,7 @@ RSpec.describe Application, type: :model do
 
   before :each do
     @app1 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "In Progress")
-    @app2 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Submitted")
+    @app2 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
 
     @shelter = Shelter.create!(name: "Good Home")
 

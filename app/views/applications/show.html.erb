@@ -1,9 +1,4 @@
-<h1>Name: <%= @application.name %></h1>
-<h3>Address: <%= "#{@application.street}, #{@application.city}, #{@application.state}, #{@application.zip}" %></h3>
-<h3>Status: <%= @application.status %></h3>
-<% if @application.submitted? %>
-  <h3>Description: <%= @application.description %></h3>
-<%end%>
+<%= render "basic_info" %>
 <h3>Pets:</h3>
 <div class="application_pets"> <% @application.pets.each do |pet| %>
   <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h3>

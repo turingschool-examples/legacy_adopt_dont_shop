@@ -9,4 +9,16 @@ class Pet < ApplicationRecord
   enum sex: [:female, :male]
   has_many :pet_applications
   has_many :applications, through: :pet_applications
+
+  def not_reviewed?(application_id)
+    record = PetApplication.where(pet_id: id, application_id: application_id).first
+    record.approved == nil
+  end
+
+  def approved?(application_id)
+    record = PetApplication.where(pet_id: id, application_id: application_id).first
+    record.approved == true
+  end
+
+
 end

@@ -117,7 +117,7 @@ RSpec.describe "application show page" do
 
           expect(current_path).to eq("/applications/#{@app.id}")
           expect(page).to have_content("why I would be a good home")
-          expect(page).to have_content("Status: Submitted")
+          expect(page).to have_content("Status: Pending")
         end
 
         it "does not have a form or submit button" do

@@ -50,6 +50,18 @@ describe Pet, type: :model do
 
         expect(Pet.match('Jimmy')).to eq([pet])
       end
+      it 'returns partial matches' do
+        shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+        pet = shelter.pets.create!(sex: :female, name: "Jimmy", approximate_age: 4, description: 'super cute')
+
+        expect(Pet.match('Jim')).to eq([pet])
+      end
+      it 'returns case-insensitive matches' do
+        shelter = Shelter.create!(name: 'Pet Rescue', address: '123 Adoption Ln.', city: 'Denver', state: 'CO', zip: '80222')
+        pet = shelter.pets.create!(sex: :female, name: "Jimmy", approximate_age: 4, description: 'super cute')
+
+        expect(Pet.match('IMM')).to eq([pet])
+      end
     end
   end
 end

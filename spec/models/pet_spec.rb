@@ -1,6 +1,28 @@
 require 'rails_helper'
 
-describe Pet, type: :model do
+RSpec.describe Pet, type: :model do
+  before :each do 
+    @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
+    @shelter2 = Shelter.create!(name: "Homeless Animals", address: "789 Silly Ave", city: "Longmont", state: "AZ", zip: 78495)
+    @shelter3 = Shelter.create!(name: "Pet Paradise", address: "954 Shelter Dr.", city: "Commerce City", state: "NM", zip: 24897)
+
+    @pet1 = @shelter1.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
+    @pet2 = @shelter2.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
+    @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
+    @pet4 = @shelter1.pets.create!(image:"", name: "Cuatro", description: "cat", approximate_age: 7, sex: "male")
+    @pet5 = @shelter3.pets.create!(image:"", name: "Callie", description: "cat", approximate_age: 10, sex: "female")
+    @pet6 = @shelter3.pets.create!(image:"", name: "Anna", description: "dog", approximate_age: 5, sex: "female")
+    
+    @application1 = Application.create!(name: "Jake", street: "123 Main St", city: "Denver", state: "CO", zip: "80210", description: "I love animals", status: "In Progress")
+    @application2 = Application.create!(name: "Bri", street: "456 Adams St", city: "Boulder", state: "CO", zip: "80235", description: "Cats rule", status: "In Progress")
+
+    @PetApp1 = PetApplication.create!(pet_id: @pet1.id, application_id: @application1.id)
+    @PetApp2 = PetApplication.create!(pet_id: @pet2.id, application_id: @application1.id)
+    @PetApp3 = PetApplication.create!(pet_id: @pet5.id, application_id: @application1.id)
+    @PetApp4 = PetApplication.create!(pet_id: @pet1.id, application_id: @application2.id)
+    @PetApp5 = PetApplication.create!(pet_id: @pet3.id, application_id: @application2.id)
+    @PetApp6 = PetApplication.create!(pet_id: @pet4.id, application_id: @application2.id)
+end
   describe 'relationships' do
     it { should belong_to :shelter }
     it { should have_many :pet_applications }
@@ -39,6 +61,23 @@ describe Pet, type: :model do
       expect(pet.sex).to eq('female')
       expect(pet.female?).to be(true)
       expect(pet.male?).to be(false)
+    end
+  end
+  describe 'class methods' do 
+    describe '.change_adopt_status' do 
+      it 'changes the pet adotaple boolean to false if applicaiton is approved' do
+      @PetApp1.update!(status: "Approved")
+      @PetApp2.update!(status: "Approved")
+      @PetApp3.update!(status: "Approved")
+      expect(Pet.find(@pet1.id).adoptable).to eq (true)
+      expect(Pet.find(@pet2.id).adoptable).to eq (true)
+      expect(Pet.find(@pet5.id).adoptable).to eq (true)
+      @application1.change_status(@application1.id)
+      expect(Pet.change_adopt_status(@application1.id)).to eq (3)
+      expect(Pet.find(@pet1.id).adoptable).to eq (false)
+      expect(Pet.find(@pet2.id).adoptable).to eq (false)
+      expect(Pet.find(@pet5.id).adoptable).to eq (false)
+      end
     end
   end
 end

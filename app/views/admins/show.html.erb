@@ -1,0 +1,24 @@
+<h1>Admin page for <%= @application.name %>'s application</h1>
+<h2>Application Status: <%= @application.status  %></h2>
+<h3>Pets on App</h3>
+<ul>
+  <% @application.pets.each do |pet| %>
+  <%= pet.name %><br>
+  <%= "Status: " %>
+  <% this_pet = PetApplication.where(pet_id: pet.id).where(application_id: @application.id) %>
+  <%= this_pet[0].status %>
+  <section>
+    <% if this_pet[0].status == "In Progress" %>
+    <%= form_with url: "/admin/applications/#{@application.id}", method: :post, local: true do |f| %>
+    <%= f.hidden_field :pet_id, value: pet.id %>
+    <%= f.submit "Approve" %>
+    <% end %>
+    <%= form_with url: "/admin/applications/#{@application.id}", method: :post, local: true do |f| %>
+    <%= f.hidden_field :pet_id, value: pet.id %>
+    <%= f.submit "Reject" %>
+    <% end %>
+    <% end %>
+  </section>
+  <br>
+  <% end %>
+</ul>

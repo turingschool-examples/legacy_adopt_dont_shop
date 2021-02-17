@@ -4,6 +4,7 @@
   <div id="pet-<%= pet.id %>"><h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
     <% if pet.not_reviewed?(@application.id) %>
       <%= button_to "Approve", "/admin/applications/#{@application.id}/update_pet?pet_id=#{pet.id};application_id=#{@application.id};approved=true", method: :patch %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}/update_pet?pet_id=#{pet.id};application_id=#{@application.id};approved=false", method: :patch %>
     <% elsif pet.approved?(@application.id) %>
       <%= "Approved" %>
     <% else %>

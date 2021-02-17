@@ -128,11 +128,9 @@ RSpec.describe "the Application show page" do
 
     within("#application-#{@application.id}") do
       expect(page).to have_content("Add a Pet to this Application")
-      expect(page).to have_css("input#pet_name")
       fill_in("pet_name", with: "BELLA")
       click_button("Search")
     end
-
     expect(page).to have_content("Bella")
   end
 end

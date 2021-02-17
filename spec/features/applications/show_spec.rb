@@ -62,6 +62,29 @@ RSpec.describe "Application show page", type: :feature do
           expect(page).to have_content(pet.id)
         end
       end
+      it "I can not submit the application if no pets are added" do
+          visit "/applications/#{@application1.id}"
+
+          expect(page).to_not have_link("Adopt this Pet")
+          expect(page).to_not have_content("Pets to Adopt")
+          expect(page).to have_content("In Progress")
+          expect(page).to_not have_content("Pending")
+      end
+      it "I can submit a descripion why I am a good candidate for adopting pets" do
+        visit "/applications/#{@application1.id}"
+        shelter = Shelter.create!(name: "Shell Shelter", address: "102 Shelter Dr.", city: "Commerce City", state: "CO", zip: 80022)
+        pet = shelter.pets.create!(image:"", name: "Sparky", description: "dog", approximate_age: 2, sex: "male")
+
+        fill_in "pet_name", with: "Sparky"
+        click_on "Submit"
+        click_on "Adopt this Pet"
+        expect(page).to have_content("Description")
+        expect(page).to have_button("Submit_application")
+
+        fill_in "description", with: "I love pets"
+        click_on "Submit_application"
+        expect(page).to have_content("I love pets")
+      end
     end
   end
 end

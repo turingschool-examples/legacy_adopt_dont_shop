@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Admin application show page" do
   before :each do
-    @app1 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "pending")
+    @app1 = Application.create!(name: "name1", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
     @app2 = Application.create!(name: "name2", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
-    @app3 = Application.create!(name: "name3", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "pending")
+    @app3 = Application.create!(name: "name3", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "Pending")
     @app4 = Application.create!(name: "name4", street: "123 abc st.", city: "city", state: "state", zip: "92018", description: "Some words", status: "pending")
 
     @shelter = Shelter.create!(name: "Good Home")
@@ -108,6 +108,50 @@ RSpec.describe "Admin application show page" do
               expect(page).to have_button("Reject")
             end
           end
+        end
+      end
+
+      describe "When all pets an an applicastion are approved" do
+        it "changes status to Approved" do
+          visit "/admin/applications/#{@app1.id}"
+
+          within(".application_pets") do
+            within("#pet-#{@pet1.id}") do
+              click_button("Approve")
+            end
+          end
+
+          expect(page).to have_content("Status: Pending")
+
+          within(".application_pets") do
+            within("#pet-#{@pet2.id}") do
+              click_button("Approve")
+            end
+          end
+
+          expect(page).to have_content("Status: Approved")
+        end
+      end
+
+      describe "When one or more pets are rejected and all others are approved" do
+        it "changed the application status to rejected" do
+          visit "/admin/applications/#{@app1.id}"
+
+          within(".application_pets") do
+            within("#pet-#{@pet1.id}") do
+              click_button("Reject")
+            end
+          end
+
+          expect(page).to have_content("Status: Pending")
+
+          within(".application_pets") do
+            within("#pet-#{@pet2.id}") do
+              click_button("Approve")
+            end
+          end
+
+          expect(page).to have_content("Status: Rejected")
         end
       end
     end

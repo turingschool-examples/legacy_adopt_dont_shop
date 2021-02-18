@@ -9,20 +9,15 @@ class Pet < ApplicationRecord
   enum sex: [:female, :male]
 
   def self.search(search)
-    # if search
     key = "%#{search}%".downcase
     where("LOWER(name) ILIKE :search", search: key)
-    #   if pet
-    #     pet
-    #   else
-    #     Pet.all
-    #   end
-    # else
-    #   Pet.all
-    # end
   end
 
   def self.average_age
     average(:approximate_age)
+  end
+
+  def self.adoptable_count
+    where(adoptable: true).count
   end
 end

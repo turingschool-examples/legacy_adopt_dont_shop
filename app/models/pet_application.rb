@@ -3,4 +3,8 @@ class PetApplication < ApplicationRecord
   belongs_to :pet
   validates_presence_of :pet_id, :application_id
 
+
+  def approved?
+    status == "Approved"
+  end  
 end

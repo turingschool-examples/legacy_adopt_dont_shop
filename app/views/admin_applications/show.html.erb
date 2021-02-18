@@ -17,9 +17,9 @@
 <section id="admin-pet-<%= app.pet.id %>">
     <p><%= app.pet.name %></p>
     <% if app.pet.adoptable? %>
-      <%= button_to 'Approve Application', "/admin/applications/#{@application.id}", method: :patch, local: true %>
+      <%= button_to 'Approve Application', "/admin/pet_applications/#{app.id}", method: :patch, local: true %>
     <% else %>
-      <%= app.pet.name %>'s adoption is pending.
+      <%= "Approved" %>
     <% end %>
 <% end %>
 </section>

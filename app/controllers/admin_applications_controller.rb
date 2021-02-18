@@ -2,6 +2,9 @@ class AdminApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    if @application.status == "Pending"
+      @application.approved?
+    end
   end
 
   def update_pet

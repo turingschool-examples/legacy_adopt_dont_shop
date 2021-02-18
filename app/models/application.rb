@@ -16,6 +16,16 @@ class Application < ApplicationRecord
   end
 
   def submitted?
-    status == "Pending"
+    status != "In Progress"
+  end
+
+  def approved?
+    @records = PetApplication.where(application_id: id)
+    if @records.all? {|record| record.approved}
+      update(status: "Approved")
+    elsif @records.any? {|record| record.approved == nil}
+    else
+      update(status: "Rejected")
+    end
   end
 end

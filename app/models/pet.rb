@@ -16,4 +16,8 @@ class Pet < ApplicationRecord
   def self.average_age
     average(:approximate_age)
   end
+
+  def self.adoptable_count
+    where(adoptable: true).count
+  end
 end

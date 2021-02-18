@@ -63,7 +63,7 @@ RSpec.describe 'Application new page' do
 
     click_on('Submit')
 
-    expect(current_path).to eq('/applications/new')
     expect(page).to have_content('Your application was not saved. Please fill in all application fields.')
+    expect(current_path).to eq('/applications/new')
   end
 end

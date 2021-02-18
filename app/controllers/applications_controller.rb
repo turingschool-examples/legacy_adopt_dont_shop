@@ -2,13 +2,10 @@ class ApplicationsController < ApplicationController
 # require "pry"; binding.pry
 
   def show
-    # require "pry"; binding.pry
     find_application
     if params[:pet_search]
       @pets = Pet.sort(params[:pet_search])
     end
-    # require "pry"; binding.pry
-
   end
 
   def index

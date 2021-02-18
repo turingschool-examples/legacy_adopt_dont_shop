@@ -7,6 +7,9 @@
   <div id="application_pet-<%= application_pet.id%>">
   <li>
     <% if application_pet.status.nil? %>
+    <p> Name: <%=application_pet.pet.name  %></p>
+    <p> still adoptable: <%=application_pet.pet.adoptable  %></p>
+    <% if application_pet.pet.adoptable != false %>
       <%= form_with url: "/admin/applications/#{@application.id}", method: :patch, local: true do |form| %>
         <%= form.label application_pet.pet.name.to_sym %>
         <%= form.hidden_field :status, value: :approved%>
@@ -14,6 +17,7 @@
         <%= form.hidden_field :application_pet_id, value: application_pet.id%>
         <%= form.submit "Approve" %>
       <% end %>
+    <% end %>
       <%= form_with url: "/admin/applications/#{@application.id}", method: :patch, local: true do |form| %>
       <%= form.hidden_field :status, value: :rejected%>
         <%= form.hidden_field :pet_id, value: application_pet.pet_id%>

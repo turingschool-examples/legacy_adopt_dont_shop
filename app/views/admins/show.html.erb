@@ -1,0 +1,17 @@
+<h1><%= @application.name %></h1>
+<h2>Applicant Address:</h2>
+<h3><%= @application.address %>, <%= @application.city %>, <%= @application.state %>, <%= @application.zip %></h3>
+<h2>Applicant Description</h2>
+<h3><%= @application.description %></h3>
+<h2>Application Status:</h2>
+<h3><%= @application.status %></h3>
+
+<section id="approval">
+  <h2>Approve Pets</h2>
+  <% @application.pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+      <p><%= pet.name %></p>
+      <%= button_to "Approve #{pet.name}", "/admin/applications", method: :patch, params: { app_id: "@application.id", pet_id: pet.id } %>
+    </section>
+  <% end %>
+</section>

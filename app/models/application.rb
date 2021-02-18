@@ -16,7 +16,6 @@ class Application < ApplicationRecord
   end
 
   def pets_on_app(id)
-    # Application.pets.where("application_id = #{id}")
     pets_apps = PetApplication.where("application_id = #{id}")
     pets = pets_apps.map{|pet| Pet.find(pet.pet_id)}
   end 

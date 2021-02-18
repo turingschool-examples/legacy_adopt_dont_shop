@@ -37,7 +37,34 @@ RSpec.describe 'When I visit an application show page' do
       expect(current_path).to eq("/applications/#{@application1.id}")
       expect(page).to have_no_content("cuatro")
       expect(page).to have_no_content("callie")
-      # save_and_open_page
+    end
+    describe 'there is a space to add a descriptioon as to why youd be a good pet owner' do
+      it 'takes away that description box after submitted' do 
+        
+        visit "/applications/#{@application1.id}"
+
+        expect(current_path).to eq("/applications/#{@application1.id}")
+        fill_in "pet_name", with: "c"
+
+        click_button 'Submit'
+
+        expect(page).to have_content("cuatro")
+        expect(page).to have_content("callie")
+        
+        click_button("Adopt this Pet", match: :first)
+        expect(current_path).to eq("/applications/#{@application1.id}")
+        
+        expect(page).to have_content("cuatro")
+        
+        within "#descriptionForm" do 
+          expect(page).to have_content("Please add a description")
+          fill_in "description", with: "Because I love cats!"
+          click_button 'Submit Application'
+        end
+        expect(current_path).to eq("/applications/#{@application1.id}")
+
+        expect(page).to have_content("Application Status: Pending")
+      end
     end
   end
 end

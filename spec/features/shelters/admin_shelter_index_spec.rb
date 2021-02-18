@@ -23,4 +23,15 @@ RSpec.describe 'Admin Shelters Index page' do
     end
   end
 
+  it 'every shelter name is a link that goes to their show page' do
+    visit '/admin/shelters'
+
+    within("#shelter-#{@shelter1.id}") do
+      expect(page).to have_link("#{@shelter1.name}")
+
+      click_on("#{@shelter1.name}")
+
+      expect(current_path).to eq("/admin/shelters/#{@shelter1.id}")
+    end 
+  end
 end

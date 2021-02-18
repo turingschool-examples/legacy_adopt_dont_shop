@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   patch '/applications/:id', to: 'applications#update'
 
   post '/applications/:app_id/:pet_id', to: 'pet_applications#create'
-
+  # not ReSTful; no resource
   get '/admin/applications/:id', to: 'admins#show'
   patch '/admin/applications', to: 'admins#update'
 end

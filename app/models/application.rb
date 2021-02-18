@@ -18,13 +18,11 @@ class Application < ApplicationRecord
   end
 
   def check_status
-    # require "pry"; binding.pry
-    # nil_values = application_pets.any? do |application_pet|
-    #   application_pet.status == nil
-    # end
-    # status =  nil_values = true
-    #
-    # end
+    if (application_pets.all?  { |application_pet| application_pet.status == "approved"})
+      update(status: "approved")
+    elsif (application_pets.any?  { |application_pet| application_pet.status == "rejected"})
+      update(status: "rejected")
+    else
+    end
   end
-
 end

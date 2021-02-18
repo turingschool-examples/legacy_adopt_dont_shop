@@ -49,6 +49,7 @@ RSpec.describe 'As a visitor' do
         end
 
         visit "/pets/#{@pet_1.id}"
+        save_and_open_page
         expect(page).to have_content("Available for adoption: false")
         visit "/pets/#{@pet_2.id}"
         expect(page).to have_content("Available for adoption: false")

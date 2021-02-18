@@ -14,3 +14,4 @@ pet = Pet.create!(name: "fluff", description: "Fluff ball pup", approximate_age:
 pet = Pet.create!(name: "fluf", description: "sheeba enu", approximate_age: 7, sex: "male", shelter_id: shelter.id)
 pet = Pet.create!(name: "Mr. Fluff", description: "weimerhiner", approximate_age: 9, sex: "male", shelter_id: shelter.id)
 pet = Pet.create!(name: "fluftastic", description: "Collie", approximate_age: 16, sex: "female", shelter_id: shelter.id)
+pet = Pet.create!(name: "estupio perro", description: "Collie", approximate_age: 16, sex: "female", shelter_id: shelter.id)

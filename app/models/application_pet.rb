@@ -4,4 +4,11 @@ class ApplicationPet < ApplicationRecord
 
   enum status: [:approved, :rejected]
 
+
+  def update_pet_status
+    if status == "approved"
+      pet.update(adoptable: false)
+    end
+  end
+
 end

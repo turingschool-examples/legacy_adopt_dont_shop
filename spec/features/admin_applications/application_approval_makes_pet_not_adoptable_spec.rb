@@ -17,10 +17,6 @@ RSpec.describe 'As a visitor' do
     end
 
     describe "And I approve all pets on the application" do
-      it "And when I visit the show pages for those pets" do
-        visit "/admin/applications/#{@application_1.id}"
-      end
-
       it "Then I see that those pets are no longer 'adoptable'" do
         visit "/admin/applications/#{@application_1.id}"
 
@@ -30,19 +26,19 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_button("Reject")
         click_button('Approve')
         end
+
         within("#application_pet-#{@application_1.application_pets[1].id}") do
-        expect(page).to have_content("#{@pet_1.name.capitalize}")
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
         expect(page).to have_button("Approve")
         expect(page).to have_button("Reject")
         click_button('Approve')
-
         end
+
         within("#application_pet-#{@application_1.application_pets[2].id}") do
-        expect(page).to have_content("#{@pet_1.name.capitalize}")
+        expect(page).to have_content("#{@pet_3.name.capitalize}")
         expect(page).to have_button("Approve")
         expect(page).to have_button("Reject")
         click_button('Approve')
-
         end
 
         within("#application_pet-#{@application_1.application_pets[3].id}") do
@@ -50,53 +46,59 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_button("Approve")
         expect(page).to have_button("Reject")
         click_button('Approve')
+        end
+
+        visit "/pets/#{@pet_1.id}"
+        save_and_open_page
+        expect(page).to have_content("Available for adoption: false")
+        visit "/pets/#{@pet_2.id}"
+        expect(page).to have_content("Available for adoption: false")
+        visit "/pets/#{@pet_3.id}"
+        expect(page).to have_content("Available for adoption: false")
+        visit "/pets/#{@pet_4.id}"
+        expect(page).to have_content("Available for adoption: false")
+      end
+
+      it "Then I see that those pets are no longer 'adoptable'" do
+        visit "/admin/applications/#{@application_1.id}"
+
+        within("#application_pet-#{@application_1.application_pets[0].id}") do
+        expect(page).to have_content("#{@pet_1.name.capitalize}")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
+        click_button('Reject')
+        end
+        within("#application_pet-#{@application_1.application_pets[1].id}") do
+        expect(page).to have_content("#{@pet_2.name.capitalize}")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
+        click_button('Reject')
+
+        end
+        within("#application_pet-#{@application_1.application_pets[2].id}") do
+        expect(page).to have_content("#{@pet_3.name.capitalize}")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
+        click_button('Reject')
+
+        end
+
+        within("#application_pet-#{@application_1.application_pets[3].id}") do
+        expect(page).to have_content("#{@pet_4.name.capitalize}")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
+        click_button('Reject')
 
       end
         visit "/pets/#{@pet_1.id}"
-        expect(page).to have_content("")
+        expect(page).to have_content("Available for adoption: true")
         visit "/pets/#{@pet_2.id}"
+        expect(page).to have_content("Available for adoption: true")
         visit "/pets/#{@pet_3.id}"
+        expect(page).to have_content("Available for adoption: true")
         visit "/pets/#{@pet_4.id}"
-
-      end
-
-      it "And next to the pet that I approved, I do not see a button to approve this pet" do
-        visit "/admin/applications/#{@application_1.id}"
-
-        within("#application_pet-#{@application_1.application_pets.first.id}") do
-          expect(page).to have_content("#{@pet_1.name.capitalize}")
-          expect(page).to have_button("Approve")
-          expect(page).to have_button("Reject")
-          click_button("Reject")
-          expect(current_path).to eq("/admin/applications/#{@application_1.id}")
-          expect(page).to have_content("rejected")
-          expect(page).to have_no_button("Reject")
-          expect(page).to have_no_button("Approve")
-        end
-        save_and_open_page
-      end
-
-      it "And instead I see an indicator next to the pet that they have been rejected" do
-        visit "/admin/applications/#{@application_1.id}"
-        within("#application_pet-#{@application_1.application_pets.last.id}") do
-          expect(page).to have_content("#{@pet_4.name.capitalize}")
-          expect(page).to have_button("Approve")
-          expect(page).to have_button("Reject")
-          click_button("Reject")
-          expect(current_path).to eq("/admin/applications/#{@application_1.id}")
-          expect(page).to have_content("rejected")
-          expect(page).to have_no_button("Approve")
-          expect(page).to have_no_button("Reject")
-        end
+        expect(page).to have_content("Available for adoption: true")
       end
     end
   end
 end
-
-Application Approval makes Pets not adoptable
-
-As a visitor
-When I visit an admin application show page
-And I approve all pets on the application
-And when I visit the show pages for those pets
-Then I see that those pets are no longer "adoptable"

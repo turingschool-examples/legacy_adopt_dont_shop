@@ -22,6 +22,15 @@ RSpec.describe 'the Application show page' do
     expect(page).to have_content(@application1.state)
     expect(page).to have_content(@application1.zip)
     expect(page).to have_content(@application1.description)
-    # expect(page).to have_content(@application1.status) # still need to work on this one.
+    expect(page).to have_content(@application1.status)
   end
+
+  # it 'displays a section to add pets to the application when not submitted' do
+  #     # it 'can search for Pets by name' do
+  #
+  #       visit "/applications/#{@application1.id}"
+  #
+  #       find_field("Add a Pet to this Application")
+  #     # end
+  # end
 end

@@ -1,5 +1,5 @@
 <h2>Start a New Application</h2>
-<%= form_with url: applications_new_path, local: true do |form| %>
+<%= form_with url: "/applications", local: true, method: :post do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
 
@@ -15,7 +15,7 @@
   <%= form.label :zip %>
   <%= form.number_field :zip %>
 
-  <%= form.label :description %>
+  <%= form.label "why do you want to adopt?" %>
   <%= form.text_field :description %>
 
   <%= form.submit "Submit" %>

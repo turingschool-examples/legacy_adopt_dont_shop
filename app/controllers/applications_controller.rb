@@ -7,10 +7,8 @@ class ApplicationsController < ApplicationController
     if params[:search_pets] && params[:id]
       @matching_pets = Pet.search(params[:search_pets])
       @application = Application.find(params[:id])
-      ### This part seems to be working fine
     elsif params[:want_pet] && params[:id]
       @pet_application = PetApplication.create!(pet_id: params[:want_pet],application_id: params[:id])
-      ### check the view!
       @application = Application.find(params[:id])
     else
       @application = Application.find(params[:id])
@@ -25,6 +23,10 @@ class ApplicationsController < ApplicationController
     application = Application.new(application_params)
     if application.save
       redirect_to "/applications/#{application.id}"
+      if @pet_application
+        params[:pet_names] = [@pet_application.pet.name]
+        # As the 'Adopt this pet' button is clicked, i must collect those names and add them to an array that will belong to the pet_names section of a newly created application that has not been submitted yet.
+      end
     else
       flash.now[:alert] = "Form must be completed in order to submit the application. Please complete every field in the form."
       render :new

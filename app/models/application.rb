@@ -18,10 +18,11 @@ class Application < ApplicationRecord
   end
 
   def check_status
-    if (application_pets.all?  { |application_pet| application_pet.status == :approved}) == false
-      update(status: :approved)
-    elsif (application_pets.any?  { |application_pet| application_pet.status == :rejected}) == false
-      update(status: :rejected)
+    if (application_pets.all?  { |application_pet| application_pet.status == "approved"})
+      update(status: "approved")
+    elsif (application_pets.any?  { |application_pet| application_pet.status == "rejected"})
+      update(status: "rejected")
+    else
     end
   end
 end

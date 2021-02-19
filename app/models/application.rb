@@ -4,7 +4,7 @@ class Application < ApplicationRecord
 
  validates_presence_of :name, :address, :city, :state, :zip, :description
 
- def status
-   "In Progress" 
+ def new_status
+   "In Progress"
  end
 end

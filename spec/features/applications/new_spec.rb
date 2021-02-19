@@ -26,7 +26,7 @@ RSpec.describe 'From pets index page start new application' do
     fill_in "zip", with: 58736
     fill_in "description", with: "I love dogs!"
 
-    click_on 'Submit' # visually works with saop but submit does not work properly in local server. SOLVED. Had to add local : true.
+    click_on 'Submit'
 
     expect(current_path).to eq("/applications/#{Application.first.id}")
     expect(page).to have_content("Kreg")
@@ -37,11 +37,11 @@ RSpec.describe 'From pets index page start new application' do
     expect(Application.all.count).to eq(1)
   end
 
-#   it 'can assing an In Progress status to a new application' do
-#     visit "/applications/#{@application1.id}"
-# binding.pry
-#     expect(page).to have_content("In Progress")
-#   end
+  it 'can assing an In Progress status to a new application' do
+    visit "/applications/#{@application1.id}"
+
+    expect(page).to have_content("In Progress")
+  end
 
   it 'displays notice when all fields are NOT filled in' do
     Application.destroy_all
@@ -60,6 +60,6 @@ RSpec.describe 'From pets index page start new application' do
     click_on 'Submit'
 
     expect(page).to have_content(notice)
-    expect(current_path).to eq('/applications/new')
+    expect(current_path).to eq('/applications')
   end
 end

@@ -26,7 +26,7 @@ RSpec.describe 'Update pet from pet show page' do
 
     expect(current_path).to eq("/pets/#{@pet1.id}")
 
-    expect(page).to have_content("Name: Thora")
+    expect(page).to have_content("Pet name: Thora")
     expect(page).to have_content("Approx Age: 5")
     expect(page).to_not have_content("Approx Age: 2")
     expect(page).to have_content("Sex: female")

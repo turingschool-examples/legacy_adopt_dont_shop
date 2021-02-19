@@ -73,7 +73,7 @@ describe Pet, type: :model do
 
   describe 'class methods' do
     it 'can search for a name' do
-      search = {search: "Fluffy"}
+      search = {search: "fluffy"}
       expected = Pet.search(search)
       expect(expected.first.name).to eq("Fluffy")
     end

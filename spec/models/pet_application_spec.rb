@@ -31,12 +31,4 @@ describe PetApplication, type: :model do
     @pet_application = PetApplication.create!(application_id: @application_1.id,
                                               pet_id: @pet1.id)
   end
-
-  describe 'methods' do
-    it 'can see if application is approved' do
-      expect(@pet_application.approved?).to eq(false)
-      @pet_application.update(status: "Approved")
-      expect(@pet_application.approved?).to eq(true)
-    end
-  end 
 end

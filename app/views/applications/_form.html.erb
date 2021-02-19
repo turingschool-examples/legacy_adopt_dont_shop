@@ -1,0 +1,21 @@
+<%= form_with url: "/applications", local: true, method: :post do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field(:name, size:30) %><br>
+
+  <%= form.label :address %>
+  <%= form.text_field(:address, size:25) %>
+
+  <%= form.label :city %>
+  <%= form.text_field :city %>
+
+  <%= form.label :state %>
+  <%= form.text_field :state %>
+
+  <%= form.label :zip %>
+  <%= form.number_field :zip %><br>
+
+  <%= form.label "why do you want to adopt?" %><br>
+  <%= form.text_area(:description, size: "60x10") %><br>
+
+  <%= form.submit "Submit" %>
+<% end %>

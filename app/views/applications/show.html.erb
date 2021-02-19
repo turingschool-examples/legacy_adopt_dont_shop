@@ -6,14 +6,17 @@
   <p>ZIP: <%= @application.zip %></p>
   <p>WHY DO YOU WANT TO ADOPT?<br>
     <%= @application.description %></p>
+  <p>YOUR APPLICATION STATUS: <%= @application.new_status %></p>
 
   <section>
     <% if @pet_application %>
-    <p> PETS ADDED TO YOUR APPLICATION: <%= link_to "#{@pet_application.pet.name}", pet_application_path(@pet_application.pet.id) %></p>
+    <p>PETS ADDED TO YOUR APPLICATION:</p>
+      <% @application.pets.each do |pet| %>
+          <%= link_to "#{pet.name}", pet_application_path(pet.id) %>
+      <% end %><br>
+      <h3><%= link_to "submit application", "/applications/#{@application.id}" %></h3>
+    <% end %>
   </section>
-    <% end  %>
-
-  <p>YOUR APPLICATION STATUS: <%= @application.status %></p>
 
   <section>
     <h2>Add a Pet to this Application</h2>
@@ -27,12 +30,7 @@
   <% if @matching_pets %>
       <section>
         <% @matching_pets.each do |pet| %>
-          Name: <%= pet.name %> <%= link_to "adopt this pet!", applications_show_path(want_pet: pet.id) %>
-
-          Pet ID: <%= pet.id %>
-          Approximate Age: <%= pet.approximate_age %><br>
+          Name: <%= pet.name %> <%= link_to "adopt this pet!", applications_show_path(want_pet: pet.id) %><br>
         <% end  %>
       </section>
     <% end  %>
-
-    

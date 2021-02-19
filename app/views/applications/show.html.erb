@@ -1,0 +1,36 @@
+<h3>Here is the information you've provided</h3>
+  <p>NAME: <%= @application.name %></p>
+  <p>STREET ADDRESS: <%= @application.address %></p>
+  <p>CITY: <%= @application.city %></p>
+  <p>STATE: <%= @application.state %></p>
+  <p>ZIP: <%= @application.zip %></p>
+  <p>WHY DO YOU WANT TO ADOPT?<br>
+    <%= @application.description %></p>
+  <p>YOUR APPLICATION STATUS: <%= @application.new_status %></p>
+
+  <section>
+    <% if @pet_application %>
+    <p>PETS ADDED TO YOUR APPLICATION:</p>
+      <% @application.pets.each do |pet| %>
+          <%= link_to "#{pet.name}", pet_application_path(pet.id) %>
+      <% end %><br>
+      <h3><%= link_to "submit application", "/applications/#{@application.id}" %></h3>
+    <% end %>
+  </section>
+
+  <section>
+    <h2>Add a Pet to this Application</h2>
+    <%= form_with url: "/applications/#{@application.id}", local: true, method: :get do |form| %>
+      <%= form.label "search pets by name:" %>
+      <%= form.search_field :search_pets %>
+      <%= form.submit "search" %>
+    <% end %>
+  </section>
+
+  <% if @matching_pets %>
+      <section>
+        <% @matching_pets.each do |pet| %>
+          Name: <%= pet.name %> <%= link_to "adopt this pet!", applications_show_path(want_pet: pet.id) %><br>
+        <% end  %>
+      </section>
+    <% end  %>

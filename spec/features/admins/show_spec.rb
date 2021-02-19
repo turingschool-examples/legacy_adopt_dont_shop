@@ -43,5 +43,24 @@ RSpec.describe 'the admin app show page' do
         end
       end
     end
+    it 'updates button to rejected on rejection' do
+      visit "/admin/applications/#{@chaz.id}"
+      within('#approval') do
+        expect(page).to have_content('Approve Pets')
+        within("#pet-#{@pet1.id}") do
+          expect(page).to have_content('Lunar')
+          expect(page).to have_button("Reject Lunar")
+          click_button 'Reject Lunar'
+          expect(current_path).to eq("/admin/applications/#{@chaz.id}")
+          expect(page).to_not have_button("Reject Lunar")
+          expect(page).to have_content('Rejected')
+        end
+        within("#pet-#{@pet2.id}") do
+          expect(page).to have_content('Tunar')
+          expect(page).to have_button("Approve Tunar")
+          expect(page).to have_button("Reject Tunar")
+        end
+      end
+    end
   end
 end

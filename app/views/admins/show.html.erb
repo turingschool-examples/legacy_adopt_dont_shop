@@ -5,7 +5,16 @@
   <% @application.pets.each do |pet| %>
     <section id="pet-<%= pet.id %>">
       <p><%= pet.name %></p>
-      <%= button_to "Approve #{pet.name}", "/admin/applications", method: :patch, params: { app_id: "@application.id", pet_id: pet.id } %>
+      <% if @pet_app_hash[pet.name].status == 'Pending' %>
+        <%= button_to "Approve #{pet.name}", "/admin/applications", method: :patch, params: { app_id: @application.id,
+                                                                                              pet_id: pet.id,
+                                                                                              update_type: 'approve'} %>
+        <%= button_to "Reject #{pet.name}", "/admin/applications", method: :patch, params: { app_id: @application.id,
+                                                                                              pet_id: pet.id,
+                                                                                              update_type: 'reject'} %>
+      <% else %>
+        <p>Status: <%= @pet_app_hash[pet.name].status %></p>
+      <% end %>
     </section>
   <% end %>
 </section>

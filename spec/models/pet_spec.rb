@@ -72,10 +72,10 @@ describe Pet, type: :model do
   end
 
   describe 'class methods' do
-    it 'can search partial name' do
-      part_search = {search: "Flu"}
-      expected = Pet.search(part_search)
-      expect(expected[0]).to eq("Fluffy")
+    it 'can search for a name' do
+      search = {search: "Fluffy"}
+      expected = Pet.search(search)
+      expect(expected.first.name).to eq("Fluffy")
     end
 
     it 'can find average age of pets' do

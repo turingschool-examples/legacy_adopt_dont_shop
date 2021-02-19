@@ -5,14 +5,10 @@
 <p>State: <%= @application.state %></p>
 <p>Zip: <%= @application.zip %></p>
 <p>Application status: <%= @application.status %></p>
-
-<h4><a href="/applications/<%= @application.id %>/edit">Edit Application</a></h4>
-<%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
-
 <p>I would make a good home because: <%= @application.description %></p>
 
 <section id="pet-section">
-<%= "Pets applied for:" %>
+<h3><%= "Pets applied for:" %></h3>
 <% @application.pets.each do |pet| %>
     <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
 <% end %>

@@ -5,21 +5,16 @@
 <p>State: <%= @application.state %></p>
 <p>Zip: <%= @application.zip %></p>
 <p>Application status: <%= @application.status %></p>
-
-<h4><a href="/applications/<%= @application.id %>/edit">Edit Application</a></h4>
-<%= button_to "Delete Application", "/applications/#{@application.id}", method: :delete %>
-
 <p>I would make a good home because: <%= @application.description %></p>
 
-
-<%= "Pets applied for:" %>
+<h3><%= "Pets applied for:" %></h3>
 <% @application.pet_applications.each do |app| %>
 <section id="admin-pet-<%= app.pet.id %>">
     <p><%= app.pet.name %></p>
     <% if app.pet.adoptable? %>
       <%= button_to 'Approve Application', "/admin/pet_applications/#{app.id}", method: :patch, local: true %>
     <% else %>
-      <%= "Approved" %>
+      <h2 style="color:green"><%= "Approved" %></h2>
     <% end %>
+  </section>
 <% end %>
-</section>

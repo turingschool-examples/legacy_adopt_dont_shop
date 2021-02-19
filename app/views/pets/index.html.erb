@@ -3,7 +3,7 @@
 <% @pets.each do |pet| %>
   <% if pet.adoptable == true %>
   <section id="pet-<%=pet.id%>">
-      <h2>name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
+      <h2>Pet name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
       <%= image_tag "#{pet.image}" %><br>
       approx age: <%= pet.approximate_age %><br>
       sex: <%= pet.sex%><br>
